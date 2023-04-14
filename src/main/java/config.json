@@ -1,0 +1,7 @@
+{
+  "port": 5432,
+  "ip": "localhost",
+  "nom": "bbddSpotyfai",
+  "user": "admin",
+  "password": 1234
+}

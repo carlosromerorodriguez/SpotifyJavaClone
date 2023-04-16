@@ -46,8 +46,8 @@ public class DDBBAccess {
         throw new MaxConnectionsReachedException();
     }
 
-    private synchronized void releaseConnectionHandler(int handler) {
-        this.connectionsInUse[handler] = false;
+    private synchronized void releaseConnectionHandler(int connectionId) {
+        this.connectionsInUse[connectionId] = false;
     }
 
     public ResultSet executeQuery(String sql, Object @NotNull ... params) throws SQLException, MaxConnectionsReachedException {

@@ -1,5 +1,7 @@
 package src.main.presentation.view;
 
+import src.main.presentation.controller.LogOutController;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -52,7 +54,8 @@ public class LogOutView {
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //codido llamado al controler para eliminar info
+                LogOutController logOutController = new LogOutController();
+                logOutController.removeUser(userText.getText(), passwordText.getText());
             }
         });
 

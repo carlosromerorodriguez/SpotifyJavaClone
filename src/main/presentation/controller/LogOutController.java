@@ -5,7 +5,7 @@ import src.main.business.entities.User;
 import java.util.ArrayList;
 
 public class LogOutController {
-    public void removeUser(String userToRemove, String password){
+    public static void removeUser(String userToRemove, String password){
         User user = new User();
         ArrayList<User> arrayUser = new ArrayList<>();
         for (User u : arrayUser) {

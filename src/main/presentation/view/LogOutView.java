@@ -1,4 +1,4 @@
-package main.presentation.view;
+package src.main.presentation.view;
 
 import src.main.presentation.controller.LogOutController;
 
@@ -54,8 +54,7 @@ public class LogOutView {
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                LogOutController logOutController = new LogOutController();
-                logOutController.removeUser(userText.getText(), passwordText.getText());
+                LogOutController.removeUser(userText.getText(), passwordText.getText());
             }
         });
 

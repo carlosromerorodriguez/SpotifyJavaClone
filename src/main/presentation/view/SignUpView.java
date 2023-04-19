@@ -1,5 +1,7 @@
 package main.presentation.view;
 
+import main.presentation.controller.SignUpController;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -40,14 +42,14 @@ public class SignUpView {
         JLabel contrasenya = new JLabel("CONTRASENYA");
         contrasenya.setFont(fuente_petit);
 
-        JTextField jTF_contrasenya = new JTextField();
+        JPasswordField jTF_contrasenya = new JPasswordField();
         jTF_contrasenya.setPreferredSize(new Dimension(120, 30));
         jTF_contrasenya.setFont(fuente_petit);
 
         JLabel conf_contrasenya = new JLabel("CONFIRMACIÓ CONTRASENYA");
         conf_contrasenya.setFont(fuente_petit);
 
-        JTextField jTF_conf_contrasenya = new JTextField();
+        JPasswordField jTF_conf_contrasenya = new JPasswordField();
         jTF_conf_contrasenya.setMaximumSize(new Dimension(200, 7));
         jTF_conf_contrasenya.setFont(fuente_petit);
 
@@ -55,6 +57,12 @@ public class SignUpView {
         JButton bRegistre = new JButton();
         bRegistre.setText("REGISTRARSE");
         bRegistre.setPreferredSize(new Dimension(120, 30));
+        bRegistre.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SignUpController.registerButtonPressed();
+            }
+        });
         panelBoto.add(bRegistre);
 
         panel_signup.add(registrarse);
@@ -67,6 +75,7 @@ public class SignUpView {
         panel_signup.add(conf_contrasenya);
         panel_signup.add(jTF_conf_contrasenya);
         panel_signup.add(panelBoto);
+
 
         return panel_signup;
     }

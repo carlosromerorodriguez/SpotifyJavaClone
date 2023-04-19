@@ -1,4 +1,4 @@
-package src.main.presentation.view;
+package main.presentation.view;
 
 import src.main.presentation.controller.LogOutController;
 
@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LogOutView {
-    public JPanel ventanaEmergenteLogOut(){
+    private JPanel ventanaEmergenteLogOut(){
         GridLayout gridLayout = new GridLayout(12, 1);
         gridLayout.setVgap(10); // indica los gaps entre las filas
 
@@ -83,5 +83,21 @@ public class LogOutView {
 
 
         return panelLogOut;
+    }
+
+    public JPanel logOutButton (JFrame frame) {
+        final JPanel[] panel = {new JPanel()};
+        JButton button = new JButton(new ImageIcon("src/main/resources/default_user.png"));
+        button.setSize(120, 30);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panel[0] = ventanaEmergenteLogOut();
+            }
+        });
+        frame.add(button);
+        frame.setSize(500, 700);
+        frame.setVisible(true);
+        return panel[0];
     }
 }

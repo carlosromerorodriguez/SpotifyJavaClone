@@ -60,7 +60,7 @@ public class SignUpView {
         bRegistre.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SignUpController.registerButtonPressed();
+                SignUpController.registerButtonPressed(jTF_Correu.getText(), jTF_nom_usuari.getText(), jTF_contrasenya.getPassword(), jTF_conf_contrasenya.getPassword());
             }
         });
         panelBoto.add(bRegistre);

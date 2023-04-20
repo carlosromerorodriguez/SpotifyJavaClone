@@ -66,7 +66,28 @@ public class UserDatabaseDAO implements UserDAO {
     }
 
     @Override
-    public boolean existsEmail(String email) {
-        return false;
+    public Boolean existsEmail(String email) {
+        try {
+            ResultSet resultSet = this.ddbbAccess.getQuery("SELECT user_mail FROM usuario WHERE email = ?;", email);
+            if (!resultSet.next()) {
+                return false; // no existing user in database
+            }
+            return (resultSet.getInt(1) > 0);
+        } catch (SQLException | MaxConnectionsReachedException ex) {
+            return null;
+        }
+    }
+
+    @Override
+    public Boolean checkCombination(String email_user, String password){
+        try {
+            ResultSet resultSet = this.ddbbAccess.getQuery("SELECT * FROM user WHERE user_name = " + email_user +" AND user_password = "+ password);
+            if (!resultSet.next()) {
+                return false; // no existing user in database
+            }
+            return (resultSet.getInt(1) > 0);
+        } catch (SQLException | MaxConnectionsReachedException ex) {
+            return null;
+        }
     }
 }

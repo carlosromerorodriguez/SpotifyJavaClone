@@ -7,5 +7,7 @@ public interface UserDAO {
     User getUser(String userName, String pwd);
     boolean deleteUser(String user);
     Boolean existsUser(String username);
-    boolean existsEmail(String email);
+    Boolean existsEmail(String email);
+
+    Boolean checkCombination(String email_user, String password);
 }

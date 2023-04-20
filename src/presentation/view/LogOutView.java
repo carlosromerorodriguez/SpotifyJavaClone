@@ -1,6 +1,7 @@
 package presentation.view;
 
 import presentation.controller.LogOutController;
+import presentation.controller.SignInController;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -9,7 +10,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LogOutView {
-    private JPanel ventanaEmergenteLogOut(){
+
+    private final LogOutController controller;
+
+    public LogOutView(LogOutController controller) {
+        this.controller = controller;
+    }
+    public JPanel ventanaEmergenteLogOut(){
         GridLayout gridLayout = new GridLayout(12, 1);
         gridLayout.setVgap(10); // indica los gaps entre las filas
 

@@ -1,6 +1,7 @@
 package presentation.view;
 
 import presentation.controller.SignInController;
+import presentation.controller.SignUpController;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -9,7 +10,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SignInView {
-    public static JPanel ventanaSignIn() {
+
+    private final SignInController controller;
+
+    public SignInView(SignInController controller) {
+        this.controller = controller;
+    }
+
+    public JPanel ventanaSignIn() {
 
         JPanel panel_signin = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -74,7 +82,7 @@ public class SignInView {
         bIniciarSessio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SignInController.signInButtonPressed(jTF_nom_correu.getText(), jTF_contrasenya.getPassword());
+                controller.signInButtonPressed(jTF_nom_correu.getText(), jTF_contrasenya.getPassword());
             }
         });
         c.ipady = 0;

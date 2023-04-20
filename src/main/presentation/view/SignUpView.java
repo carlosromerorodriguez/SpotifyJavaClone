@@ -77,6 +77,8 @@ public class SignUpView {
         panel_signup.add(panelBoto);
 
 
+
+
         return panel_signup;
     }
 

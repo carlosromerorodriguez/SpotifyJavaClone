@@ -1,6 +1,6 @@
 package main.persistance;
 
-import main.business.entities.User;
+import src.main.business.entities.User;
 
 public class UserDatabaseDAO implements UserDAO {
     @Override
@@ -26,5 +26,10 @@ public class UserDatabaseDAO implements UserDAO {
     @Override
     public boolean existsEmail(String email) {
         return false;
+    }
+
+    @Override
+    public User getUserMail(String email, String pwd) {
+        return null;
     }
 }

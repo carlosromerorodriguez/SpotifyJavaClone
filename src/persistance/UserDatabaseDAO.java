@@ -9,9 +9,19 @@ import java.sql.SQLException;
 public class UserDatabaseDAO implements UserDAO {
     private final DDBBAccess ddbbAccess;
 
+    /**
+     * Constructor
+     * @param ddbbAccess Database access
+     */
     public UserDatabaseDAO(DDBBAccess ddbbAccess) {
         this.ddbbAccess = ddbbAccess;
     }
+
+    /**
+     *
+     * @param user User to add
+     * @return true if the user has been added successfully
+     */
     @Override
     public boolean addUser(User user) {
         if (this.existsUser(user.getUser()) != null) {
@@ -30,6 +40,11 @@ public class UserDatabaseDAO implements UserDAO {
         }
     }
 
+    /**
+     * Adds a new user to the database and returns the new id
+     * @param username Username to add
+     * @return New id
+     */
     private synchronized Integer addNewUserAndReturnNewId(String username) {
         try {
             if (this.ddbbAccess.runQuery("INSERT INTO usuario(user_name) VALUES (?);", username) > 0) {

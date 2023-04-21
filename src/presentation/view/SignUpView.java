@@ -1,16 +1,14 @@
 package presentation.view;
 
-import presentation.controller.SignUpController;
 import presentation.view.Utilities.TemplateField;
 import presentation.view.Utilities.UIPalette;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SignUpView extends JFrame implements ActionListener, SignUpObserver {
+public class SignUpView extends JFrame implements SignUpObserver {
     /**
      * Window width size
      */
@@ -20,17 +18,23 @@ public class SignUpView extends JFrame implements ActionListener, SignUpObserver
      * Window height size
      */
     private static final int WINDOW_HEIGHT = 350;
-    private GridLayout gridLayout;
+
+    /**
+     * TAG to register a user
+     */
+    public static final String REGISTER_COMMAND = "REGISTER_COMMAND";
+
+    /**
+     * TAG to go back to the login view
+     */
     private TemplateField tfEmail, tfUsername, tfFirstPassword, tfSecondPassword;
+
+    /**
+     * Button to register a user
+     */
     private JButton bRegister;
-    private JLabel jlRegister, jlEmail, jlUsername, jlPassword, jlPasswordConfirmation;
-    private JPanel jpButton, panelSignup;
-    private Font fTitle, fLowerText;
-    private final SignUpController controller;
 
-    public SignUpView(SignUpController signUpController) {
-        this.controller = signUpController;
-
+    public SignUpView() {
         this.setTitle("Sign Up");
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,7 +44,7 @@ public class SignUpView extends JFrame implements ActionListener, SignUpObserver
     }
 
     public JPanel windowSignUp() {
-        panelSignup = new JPanel();
+        JPanel panelSignup = new JPanel();
         panelSignup.setLayout(new BoxLayout(panelSignup, BoxLayout.Y_AXIS));
         panelSignup.setBackground(UIPalette.APP_BACKGROUND.getColor());
         panelSignup.setBorder(new EmptyBorder(50, 50, 50, 50));
@@ -48,17 +52,18 @@ public class SignUpView extends JFrame implements ActionListener, SignUpObserver
         Font fTitle = new Font("Sans-Serif", Font.PLAIN, 35);
         Font fLowerText = new Font("Sans-Serif", Font.PLAIN, 15);
 
-        JLabel registrarse = createLabel(fTitle);
+        JLabel registerTitle = createLabel(fTitle);
         tfEmail = createTemplateField("Email", false, fLowerText);
         tfUsername = createTemplateField("Username", false, fLowerText);
         tfFirstPassword = createTemplateField("Password", true, fLowerText);
         tfSecondPassword = createTemplateField("Password", true, fLowerText);
-        jpButton = createButtonPanel();
+        JPanel jpButton = createButtonPanel();
 
-        panelSignup.add(registrarse);
+        panelSignup.add(registerTitle);
         panelSignup.add(Box.createRigidArea(new Dimension(0, 10))); // Add spacing
-        panelSignup.add(tfEmail);
+
         panelSignup.add(tfUsername);
+        panelSignup.add(tfEmail);
         panelSignup.add(tfFirstPassword);
         panelSignup.add(tfSecondPassword);
         panelSignup.add(jpButton);
@@ -66,6 +71,11 @@ public class SignUpView extends JFrame implements ActionListener, SignUpObserver
         return panelSignup;
     }
 
+    /**
+     * Creates a label
+     * @param font Font to use
+     * @return JLabel
+     */
     private JLabel createLabel(Font font) {
         JLabel label = new JLabel("REGISTRARSE");
         label.setFont(font);
@@ -73,19 +83,30 @@ public class SignUpView extends JFrame implements ActionListener, SignUpObserver
         return label;
     }
 
+    /**
+     * Creates a template field
+     * @param labelText Text to display in the field
+     * @param isPassword True if the field is a password field
+     * @param font Font to use
+     * @return TemplateField
+     */
     private TemplateField createTemplateField(String labelText, boolean isPassword, Font font) {
         TemplateField field = new TemplateField(labelText, isPassword);
         field.setFont(font);
         return field;
     }
 
+    /**
+     * Creates the button panel
+     * @return JPanel with the buttons
+     */
     private JPanel createButtonPanel() {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.setBackground(UIPalette.APP_BACKGROUND.getColor());
 
         bRegister = new JButton("REGISTRARSE");
         bRegister.setPreferredSize(new Dimension(120, 30));
-        bRegister.addActionListener(this);
+        bRegister.setActionCommand(REGISTER_COMMAND);
 
         buttonPanel.add(bRegister);
 
@@ -93,52 +114,49 @@ public class SignUpView extends JFrame implements ActionListener, SignUpObserver
     }
 
     /**
-     * Checks if the email input by the user complies with the requirements
-     * @return True if the email complies with the format specifications
+     * Registers a listener to the register button
+     * @param actionListener Controller to register
      */
-    private boolean checkMail() {
-        return (tfEmail.getFieldInput() != null &&
-                tfEmail.getFieldInput().matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$"));
+    public void registerController(ActionListener actionListener) {
+        bRegister.addActionListener(actionListener);
     }
 
     /**
-     * Checks if the password is valid
-     * @return True if the password complies with MIT password policies
+     * Gets the email from the email field
+     * @return String with the email
      */
-    private boolean checkPassword() {
-        return !String.valueOf(tfFirstPassword.getFieldInput()).equals("") &&
-                String.valueOf(tfFirstPassword.getFieldInput()).matches("(^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$)");
+    public String getEmail() {
+        return tfEmail.getFieldInput();
     }
 
     /**
-     * Checks if both passwords are equal
-     * @return True if they are equal
+     * Gets the username from the username field
+     * @return String with the username
      */
-    private boolean checkPasswords() {
-        return (tfFirstPassword.getFieldInput().equals(tfSecondPassword.getFieldInput()));
+    public String getUsername() {
+        return tfUsername.getFieldInput();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == bRegister) {
-            if (tfUsername.getFieldInput().isBlank()) {
-                wrongUser();
-            } else if (!checkMail()) {
-                wrongEmail();
-            } else if (!checkPassword()) {
-                wrongPassword();
-            } else if (!checkPasswords()) {
-                wrongPasswords();
-            } else {
-                controller.registerButtonPressed(tfUsername.getFieldInput(), tfEmail.getFieldInput(), tfFirstPassword.getFieldInput());
-            }
-        }
+    /**
+     * Gets the first password from the password field
+     * @return String with the password
+     */
+    public String getFirstPassword() {
+        return tfFirstPassword.getFieldInput();
+    }
+
+    /**
+     * Gets the second password from the password field
+     * @return String with the password
+     */
+    public String getSecondPassword() {
+        return tfSecondPassword.getFieldInput();
     }
 
     /**
      * Shows incorrect password requirements & error message
      */
-    private void wrongPassword() {
+    public void wrongPasswordError() {
         JOptionPane.showMessageDialog(this,
                 "<html><body><p style='width: 250px;'>Invalid password! Your password must:<br>" +
                         "<ul>" +
@@ -154,7 +172,7 @@ public class SignUpView extends JFrame implements ActionListener, SignUpObserver
     /**
      * Shows incorrect password error message
      */
-    private void wrongPasswords() {
+    public void passwordsMismatchError() {
         JOptionPane.showMessageDialog(this,
                 "The passwords entered do not match. Please ensure both passwords are identical and try again.",
                 "Password Mismatch", JOptionPane.ERROR_MESSAGE);
@@ -163,7 +181,7 @@ public class SignUpView extends JFrame implements ActionListener, SignUpObserver
     /**
      * Shows incorrect email error message
      */
-    private void wrongEmail() {
+    public void wrongEmailError() {
         JOptionPane.showMessageDialog(this,
                 "The email address you entered is not valid. Please ensure the email format is correct and try again.",
                 "Invalid Email Address", JOptionPane.ERROR_MESSAGE);
@@ -172,7 +190,7 @@ public class SignUpView extends JFrame implements ActionListener, SignUpObserver
     /**
      * Shows incorrect user error message
      */
-    private void wrongUser() {
+    public void wrongUserError() {
         JOptionPane.showMessageDialog(this,
                 "The username you entered is not valid. Please ensure it meets the requirements and try again.",
                 "Invalid Username", JOptionPane.ERROR_MESSAGE);

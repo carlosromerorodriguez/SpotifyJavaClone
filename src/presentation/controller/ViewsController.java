@@ -31,8 +31,6 @@ public class ViewsController {
         cardPanel.add(logOutView.ventanaEmergenteLogOut(), "logut");
 
         cardLayout.next(cardPanel);
-        cardLayout.next(cardPanel);
-        cardLayout.next(cardPanel);
 
         ventana.add(cardPanel);
         ventana.setSize(500, 700);

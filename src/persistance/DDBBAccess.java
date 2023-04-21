@@ -31,7 +31,7 @@ public class DDBBAccess {
         this.connectionsInUse = new boolean[maxConnections];
 
         for (int i = 0; i < this.connections.length; i++) {
-           // this.connections[i] = DriverManager.getConnection(String.format(URL + ddbbInfo.getHost() + "/" + ddbbInfo.getName() + ddbbInfo.getUser() + ddbbInfo.getPassword()));
+            //this.connections[i] = DriverManager.getConnection(String.format(URL + ddbbInfo.getHost() + "/" + ddbbInfo.getName() + ddbbInfo.getUser() + ddbbInfo.getPassword()));
             this.connectionsInUse[i] = false;
         }
     }

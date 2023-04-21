@@ -1,4 +1,4 @@
-package presentation.controller;
+package presentation.view;
 
 import presentation.view.LogOutView;
 import presentation.view.SignInView;
@@ -30,12 +30,15 @@ public class ViewsController {
         cardPanel.add(signUpView.windowSignUp(), "signUp");
         cardPanel.add(logOutView.ventanaEmergenteLogOut(), "logut");
 
-        cardLayout.next(cardPanel);
+
 
         ventana.add(cardPanel);
         ventana.setSize(500, 700);
         ventana.setLocationRelativeTo(null);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setVisible(true);
+
+        cardLayout.show(ventana, "signUp");
+
     }
 }

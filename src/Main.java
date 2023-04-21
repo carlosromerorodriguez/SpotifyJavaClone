@@ -1,19 +1,15 @@
 import business.BusinessLogicUser;
 import business.entities.DDBBInfo;
 import persistance.DDBBAccess;
-import persistance.UserDAO;
 import persistance.UserDatabaseDAO;
 import presentation.controller.LogOutController;
 import presentation.controller.SignInController;
 import presentation.controller.SignUpController;
-import presentation.controller.ViewsController;
+import presentation.view.ViewsController;
 import presentation.view.LogOutView;
 import presentation.view.SignInView;
 import presentation.view.SignUpView;
-import presentation.view.Utilities.TemplateField;
 
-import javax.swing.*;
-import java.awt.*;
 import java.sql.SQLException;
 
 public class Main {

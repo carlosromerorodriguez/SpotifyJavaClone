@@ -17,6 +17,7 @@ public class LogOutView {
         this.controller = controller;
     }
     public JPanel ventanaEmergenteLogOut(){
+
         GridLayout gridLayout = new GridLayout(12, 1);
         gridLayout.setVgap(10); // indica los gaps entre las filas
 
@@ -81,11 +82,6 @@ public class LogOutView {
         panelLogOut.add(password);
         panelLogOut.add(passwordText);
         panelLogOut.add(buttonsPanel);
-
-        JFrame frame_prueba = new JFrame();
-        frame_prueba.setSize(500,700);
-        frame_prueba.getContentPane().add(panelLogOut);
-        frame_prueba.setVisible(true);
 
 
         return panelLogOut;

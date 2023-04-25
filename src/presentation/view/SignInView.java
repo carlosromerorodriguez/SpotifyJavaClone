@@ -2,6 +2,7 @@ package presentation.view;
 
 import presentation.controller.SignInController;
 import presentation.controller.SignUpController;
+import presentation.view.Utilities.TemplateField;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -9,17 +10,36 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SignInView {
+import static presentation.view.Utilities.UIPalette.APP_BACKGROUND;
 
-    private final SignInController controller;
+public class SignInView extends JFrame {
 
-    public SignInView(SignInController controller) {
-        this.controller = controller;
+
+    public static final String LOGIN_COMMAND = "LOGIN_COMMAND";
+
+    private JTextField jTF_nom_correu;
+    private JPasswordField jTF_contrasenya;
+
+    private JPanel panel_signin;
+
+    private JButton bIniciarSessio;
+
+    public String getLoginUserMail() {
+        return jTF_nom_correu.getText();
     }
 
-    public JPanel ventanaSignIn() {
+    public String getLoginUserPassword() {
+        return jTF_contrasenya.getPassword().toString();
+    }
 
-        JPanel panel_signin = new JPanel(new GridBagLayout());
+    public JPanel getPanel_signin() {
+        return panel_signin;
+    }
+
+    public SignInView() {
+
+        panel_signin = new JPanel(new GridBagLayout());
+        panel_signin.setBackground(APP_BACKGROUND.getColor());
         GridBagConstraints c = new GridBagConstraints();
 
         Font fuente_titol = new Font("Sans-Serif", Font.PLAIN, 35);
@@ -47,7 +67,7 @@ public class SignInView {
         c.insets = new Insets(0, 0, 10, 0);
         panel_signin.add(nom_correu, c);
 
-        JTextField jTF_nom_correu = new JTextField();
+        jTF_nom_correu = new JTextField();
         jTF_nom_correu.setPreferredSize(new Dimension(120, 30));
         jTF_nom_correu.setFont(fuente_petit);
         c.ipady = 0;
@@ -66,7 +86,7 @@ public class SignInView {
         c.insets = new Insets(0, 0, 10, 0);
         panel_signin.add(contrasenya, c);
 
-        JPasswordField jTF_contrasenya = new JPasswordField();
+        jTF_contrasenya = new JPasswordField();
         jTF_contrasenya.setPreferredSize(new Dimension(120, 30));
         jTF_contrasenya.setFont(fuente_petit);
         c.ipady = 0;
@@ -77,14 +97,9 @@ public class SignInView {
         panel_signin.add(jTF_contrasenya, c);
 
 
-        JButton bIniciarSessio = new JButton("INICIAR SESSIO");
+        bIniciarSessio = new JButton("INICIAR SESSIO");
         bIniciarSessio.setPreferredSize(new Dimension(50, 30));
-        bIniciarSessio.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controller.signInButtonPressed(jTF_nom_correu.getText(), jTF_contrasenya.getPassword());
-            }
-        });
+        bIniciarSessio.setActionCommand(LOGIN_COMMAND);
         c.ipady = 0;
         c.gridx = 0;
         c.gridy = 10;
@@ -99,8 +114,50 @@ public class SignInView {
         c.gridy = 11;
         c.anchor = GridBagConstraints.CENTER;
         panel_signin.add(new JLabel(), c);
+    }
 
-        return panel_signin;
+    public void registerController(ActionListener actionListener) {
+        bIniciarSessio.addActionListener(actionListener);
+    }
+
+    public void wrongPasswordError() {
+        JOptionPane.showMessageDialog(this,
+                "<html><body><p style='width: 250px;'>Invalid password! Your password must:<br>" +
+                        "<ul>" +
+                        "<li>Be at least 8 characters long</li>" +
+                        "<li>Contain at least one lowercase and one uppercase letter</li>" +
+                        "<li>Include at least one numeric character</li>" +
+                        "<li>Not contain any whitespaces</li>" +
+                        "</ul>" +
+                        "Please try again.</p></body></html>",
+                "Invalid Password", JOptionPane.ERROR_MESSAGE);
+    }
+
+    /**
+     * Shows incorrect password error message
+     */
+    public void passwordsMismatchError() {
+        JOptionPane.showMessageDialog(this,
+                "The passwords entered do not match. Please ensure both passwords are identical and try again.",
+                "Password Mismatch", JOptionPane.ERROR_MESSAGE);
+    }
+
+    /**
+     * Shows incorrect email error message
+     */
+    public void wrongEmailError() {
+        JOptionPane.showMessageDialog(this,
+                "The email address you entered is not valid. Please ensure the email format is correct and try again.",
+                "Invalid Email Address", JOptionPane.ERROR_MESSAGE);
+    }
+
+    /**
+     * Shows incorrect user error message
+     */
+    public void wrongUserError() {
+        JOptionPane.showMessageDialog(this,
+                "The username you entered is not valid. Please ensure it meets the requirements and try again.",
+                "Invalid Username", JOptionPane.ERROR_MESSAGE);
     }
 
 }

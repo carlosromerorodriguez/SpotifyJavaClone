@@ -26,9 +26,9 @@ public class ViewsController {
         CardLayout cardLayout = new CardLayout();
         JPanel cardPanel = new JPanel(cardLayout);
 
-        cardPanel.add(signInView.ventanaSignIn(), "signIn");
-        cardPanel.add(signUpView.windowSignUp(), "signUp");
-        cardPanel.add(logOutView.ventanaEmergenteLogOut(), "logut");
+        //cardPanel.add(signInView.getPanel_signin(), "signIn");
+        cardPanel.add(signUpView.getPanelSignup(), "signUp");
+        //cardPanel.add(logOutView.ventanaEmergenteLogOut(), "logut");
 
 
 
@@ -37,8 +37,6 @@ public class ViewsController {
         ventana.setLocationRelativeTo(null);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setVisible(true);
-
-        cardLayout.show(ventana, "signUp");
 
     }
 }

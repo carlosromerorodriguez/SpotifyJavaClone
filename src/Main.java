@@ -3,9 +3,10 @@ import persistance.ConfigDatabaseDAO;
 import persistance.DDBBAccess;
 import persistance.UserDatabaseDAO;
 import persistance.exceptions.ConfigFileNotFoundException;
+import presentation.controller.LogOutController;
+import presentation.controller.SignInController;
 import presentation.controller.SignUpController;
-import presentation.view.ErrorHandler;
-import presentation.view.SignUpView;
+import presentation.view.*;
 
 import javax.swing.*;
 import java.io.File;
@@ -24,11 +25,20 @@ public class Main {
             BusinessLogicUser businessLogicUser = new BusinessLogicUser(userDatabaseDAO);
 
             SignUpView signUpView = new SignUpView();
-            SignUpController signUpController = new SignUpController(signUpView, businessLogicUser);
-            signUpView.registerController(signUpController);
+            LogOutView logOutView = new LogOutView();
+            SignInView signInView = new SignInView();
 
-            // TODO: Hacer la view creada visible
-            signUpView.setVisible(true);
+            LogOutController logOutController = new LogOutController(businessLogicUser);
+            SignUpController signUpController = new SignUpController(signUpView, businessLogicUser);
+            SignInController signInController = new SignInController(signInView, businessLogicUser);
+
+            signUpView.registerController(signUpController);
+            signInView.registerController(signInController);
+
+
+            ViewsController viewsController = new ViewsController(signInView, signUpView, logOutView);
+            viewsController.createView();
+
         } catch (SQLException e) {
             ErrorHandler.showErrorOnScreen("SQL error", "SQL ERROR");
         } catch (ConfigFileNotFoundException e) {

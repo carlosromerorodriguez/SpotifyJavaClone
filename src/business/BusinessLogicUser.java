@@ -27,7 +27,11 @@ public class BusinessLogicUser {
         }
     }
 
-    public void loginUser(String email_user, String password){
+    public void loginUser(String email_user, String password) throws UsernameException, PasswordException {
+
+        if (email_user.isEmpty() || email_user.isBlank()) { throw new UsernameException(); }
+        if (!checkPassword(password)) { throw new PasswordException(); }
+
         if(userDao.existsUser(email_user) || userDao.existsEmail(email_user)){
             if(userDao.checkCombination(email_user, password)){
                 System.out.println("User exists");

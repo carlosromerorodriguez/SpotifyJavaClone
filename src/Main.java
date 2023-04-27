@@ -4,8 +4,10 @@ import persistance.DDBBAccess;
 import persistance.UserDatabaseDAO;
 import persistance.exceptions.ConfigFileNotFoundException;
 import presentation.controller.SignUpController;
+import presentation.controller.WelcomeController;
 import presentation.view.ErrorHandler;
 import presentation.view.SignUpView;
+import presentation.view.WelcomeView;
 
 import javax.swing.*;
 import java.io.File;
@@ -27,8 +29,12 @@ public class Main {
             SignUpController signUpController = new SignUpController(signUpView, businessLogicUser);
             signUpView.registerController(signUpController);
 
+            WelcomeView welcomeView = new WelcomeView();
+
             // TODO: Hacer la view creada visible
-            signUpView.setVisible(true);
+            //signUpView.setVisible(true);
+            welcomeView.setVisible(true);
+
         } catch (SQLException e) {
             ErrorHandler.showErrorOnScreen("SQL error", "SQL ERROR");
         } catch (ConfigFileNotFoundException e) {

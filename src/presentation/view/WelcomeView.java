@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Spliterators;
 
 import static presentation.view.SignUpView.REGISTER_COMMAND;
 
@@ -38,7 +39,7 @@ public class WelcomeView extends JFrame {
 
     public WelcomeView() {
         this.setTitle("Welcome");
-        this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        this.setSize(WINDOW_WIDTH, 700);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -46,24 +47,42 @@ public class WelcomeView extends JFrame {
     }
 
     public JPanel ventanaWelcome() {
-        JPanel panelWelcome = new JPanel();
-        panelWelcome.setLayout(new BoxLayout(panelWelcome, BoxLayout.Y_AXIS));
+        JPanel panelWelcome = new JPanel(new GridBagLayout());
         panelWelcome.setBackground(UIPalette.APP_BACKGROUND.getColor());
-        panelWelcome.setBorder(new EmptyBorder(50, 50, 50, 50));
 
-        Font fTitle = new Font("Sans-Serif", Font.PLAIN, 35);
-        Font fLowerText = new Font("Sans-Serif", Font.PLAIN, 15);
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridwidth = 3;
+        c.anchor = GridBagConstraints.CENTER;
 
-        JLabel welcomeTitle = createLabel(fTitle);
-        JPanel jpButton = createButtonPanel();
+        Font fuente_titol = new Font("Sans-Serif", Font.PLAIN, 35);
+        JLabel welcomeTitle = createLabel(fuente_titol);
+        panelWelcome.add(welcomeTitle, c);
 
-        panelWelcome.add(welcomeTitle);
-        panelWelcome.add(Box.createRigidArea(new Dimension(0, 10))); // Add spacing
+        c.gridx = 0;
+        c.gridy = 1;
+        panelWelcome.add(Box.createRigidArea(new Dimension(0, 30)), c);
 
-        panelWelcome.add(jpButton);
+        c.gridx = 0;
+        c.gridy = 2;
+        c.gridwidth = 3;
+        c.fill = GridBagConstraints.BOTH;
+        c.anchor = GridBagConstraints.CENTER;
+        bRegister = new JButton("Register");
+        panelWelcome.add(bRegister, c);
+        c.gridx = 0;
+        c.gridy = 3;
+        panelWelcome.add(Box.createRigidArea(new Dimension(0, 30)), c);
+        c.gridx = 0;
+        c.gridy = 4;
+        bSignIn = new JButton("Sign In");
+        panelWelcome.add(bSignIn, c);
 
         return panelWelcome;
     }
+
+
 
     /**
      * Creates a label
@@ -78,39 +97,4 @@ public class WelcomeView extends JFrame {
         return label;
     }
 
-
-    /**
-     * Creates the button panel
-     *
-     * @return JPanel with the buttons
-     */
-    private JPanel createButtonPanel() {
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        buttonPanel.setBackground(UIPalette.APP_BACKGROUND.getColor());
-
-        bRegister = new JButton("REGISTRARSE");
-        bRegister.setPreferredSize(new Dimension(120, 30));
-        bRegister.setActionCommand(REGISTER_COMMAND);
-
-        bSignIn = new JButton("INICIAR SESIÓN");
-        bSignIn.setPreferredSize(new Dimension(120, 30));
-        bSignIn.setActionCommand(REGISTER_COMMAND);
-
-        buttonPanel.add(bRegister);
-        buttonPanel.add(bSignIn);
-
-        bRegister.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-
-        bSignIn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-
-        return buttonPanel;
-    }
 }

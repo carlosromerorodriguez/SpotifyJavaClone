@@ -30,21 +30,19 @@ public class Main {
             BusinessLogicUser businessLogicUser = new BusinessLogicUser(userDatabaseDAO);
 
             SignUpView signUpView = new SignUpView();
-            //LogOutView logOutView = new LogOutView();
-            //SignInView signInView = new SignInView();
+            LogOutView logOutView = new LogOutView();
+            SignInView signInView = new SignInView();
 
             LogOutController logOutController = new LogOutController(businessLogicUser);
             SignUpController signUpController = new SignUpController(signUpView, businessLogicUser);
-            //SignInController signInController = new SignInController(signInView, businessLogicUser);
-            
+            SignInController signInController = new SignInController(signInView, businessLogicUser);
+
             signUpView.registerController(signUpController);
-            //signInView.registerController(signInController);
+            signInView.registerController(signInController);
 
-            WelcomeView welcomeView = new WelcomeView();
 
-            // TODO: Hacer la view creada visible
-            //signUpView.setVisible(true);
-            welcomeView.setVisible(true);
+            ViewsController viewsController = new ViewsController(signInView, signUpView, logOutView);
+            viewsController.createView();
 
         } catch (SQLException e) {
             ErrorHandler.showErrorOnScreen("SQL error", "SQL ERROR");

@@ -11,10 +11,9 @@ import java.awt.event.ActionListener;
 
 public class LogOutView {
 
-    private final LogOutController controller;
 
-    public LogOutView(LogOutController controller) {
-        this.controller = controller;
+    public LogOutView() {
+
     }
     public JPanel ventanaEmergenteLogOut(){
 

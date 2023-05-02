@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.EmptyBorder;
 
+import static presentation.view.Utilities.UIPalette.INPUT_TEXT;
+
 public class TemplateField extends JPanel {
     /**
      * Width of the window
@@ -45,10 +47,10 @@ public class TemplateField extends JPanel {
         // Align the label to the left
         text.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        text.setBorder(new EmptyBorder(0, 0, 2, 0)); // Add spacing below the text label
+        text.setBorder(new EmptyBorder(0, 0, 10, 0)); // Add spacing below the text label
 
         jtfInput = (isPassword ? new JPasswordField() : new JTextField());
-        jtfInput.setPreferredSize(new Dimension(adjustedWidth, PREFERRED_LABEL_HEIGHT));
+        //jtfInput.setPreferredSize(new Dimension(adjustedWidth, PREFERRED_LABEL_HEIGHT));
         // Align the input field to the left
         jtfInput.setAlignmentX(Component.LEFT_ALIGNMENT);
 

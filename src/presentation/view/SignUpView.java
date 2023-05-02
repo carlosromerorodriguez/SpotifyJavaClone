@@ -9,15 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class SignUpView extends JFrame implements SignUpObserver {
-    /**
-     * Window width size
-     */
-    private static final int WINDOW_WIDTH = 350;
-
-    /**
-     * Window height size
-     */
-    private static final int WINDOW_HEIGHT = 350;
 
     /**
      * TAG to register a user
@@ -34,20 +25,14 @@ public class SignUpView extends JFrame implements SignUpObserver {
      */
     private JButton bRegister;
 
-    public SignUpView() {
-        this.setTitle("Sign Up");
-        this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.setContentPane(windowSignUp());
-    }
+    private JPanel panelSignup;
 
-    public JPanel windowSignUp() {
-        JPanel panelSignup = new JPanel();
-        panelSignup.setLayout(new BoxLayout(panelSignup, BoxLayout.Y_AXIS));
+    public SignUpView() {
+
+        panelSignup = new JPanel(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
         panelSignup.setBackground(UIPalette.APP_BACKGROUND.getColor());
-        panelSignup.setBorder(new EmptyBorder(50, 50, 50, 50));
+        panelSignup.setBorder(new EmptyBorder(0, 0, 0, 0));
 
         Font fTitle = new Font("Sans-Serif", Font.PLAIN, 35);
         Font fLowerText = new Font("Sans-Serif", Font.PLAIN, 15);
@@ -56,18 +41,59 @@ public class SignUpView extends JFrame implements SignUpObserver {
         tfEmail = createTemplateField("Email", false, fLowerText);
         tfUsername = createTemplateField("Username", false, fLowerText);
         tfFirstPassword = createTemplateField("Password", true, fLowerText);
-        tfSecondPassword = createTemplateField("Password", true, fLowerText);
-        JPanel jpButton = createButtonPanel();
+        tfSecondPassword = createTemplateField("Password Confirmation", true, fLowerText);
 
-        panelSignup.add(registerTitle);
-        panelSignup.add(Box.createRigidArea(new Dimension(0, 10))); // Add spacing
+        c.ipadx = 100;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridwidth = 2;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(20, 0, 20, 0);
+        panelSignup.add(registerTitle, c);
 
-        panelSignup.add(tfUsername);
-        panelSignup.add(tfEmail);
-        panelSignup.add(tfFirstPassword);
-        panelSignup.add(tfSecondPassword);
-        panelSignup.add(jpButton);
+        c.ipady = 0;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.gridwidth = 6;
+        c.insets = new Insets(0, 0, 10, 0);
+        panelSignup.add(tfUsername, c);
 
+        c.ipady = 0;
+        c.gridx = 0;
+        c.gridy = 2;
+        c.gridwidth = 6;
+        c.insets = new Insets(0, 0, 10, 0);
+        panelSignup.add(tfEmail, c);
+
+        c.ipady = 0;
+        c.gridx = 0;
+        c.gridy = 3;
+        c.gridwidth = 6;
+        c.insets = new Insets(0, 0, 10, 0);
+        panelSignup.add(tfFirstPassword, c);
+
+        c.ipady = 0;
+        c.gridx = 0;
+        c.gridy = 4;
+        c.gridwidth = 6;
+        c.insets = new Insets(0, 0, 10, 0);
+        panelSignup.add(tfSecondPassword,c );
+
+        bRegister = new JButton("REGISTRARSE");
+        bRegister.setPreferredSize(new Dimension(50, 30));
+        bRegister.setActionCommand(REGISTER_COMMAND);
+
+        c.ipady = 0;
+        c.gridx = 0;
+        c.gridy = 10;
+        c.gridwidth = 1;
+        c.anchor = GridBagConstraints.EAST;
+        c.insets = new Insets(20, 220, 0, 0);
+        panelSignup.add(bRegister, c);
+
+    }
+
+    public JPanel getPanelSignup() {
         return panelSignup;
     }
 
@@ -79,8 +105,11 @@ public class SignUpView extends JFrame implements SignUpObserver {
     private JLabel createLabel(Font font) {
         JLabel label = new JLabel("REGISTRARSE");
         label.setFont(font);
-        label.setAlignmentX(Component.CENTER_ALIGNMENT);
         return label;
+    }
+
+    public void registerController(ActionListener actionListener) {
+        bRegister.addActionListener(actionListener);
     }
 
     /**
@@ -100,26 +129,7 @@ public class SignUpView extends JFrame implements SignUpObserver {
      * Creates the button panel
      * @return JPanel with the buttons
      */
-    private JPanel createButtonPanel() {
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        buttonPanel.setBackground(UIPalette.APP_BACKGROUND.getColor());
 
-        bRegister = new JButton("REGISTRARSE");
-        bRegister.setPreferredSize(new Dimension(120, 30));
-        bRegister.setActionCommand(REGISTER_COMMAND);
-
-        buttonPanel.add(bRegister);
-
-        return buttonPanel;
-    }
-
-    /**
-     * Registers a listener to the register button
-     * @param actionListener Controller to register
-     */
-    public void registerController(ActionListener actionListener) {
-        bRegister.addActionListener(actionListener);
-    }
 
     /**
      * Gets the email from the email field

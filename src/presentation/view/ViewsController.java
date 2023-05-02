@@ -38,5 +38,7 @@ public class ViewsController {
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setVisible(true);
 
+        cardLayout.show(ventana, "signUp");
+
     }
 }

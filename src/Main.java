@@ -6,6 +6,11 @@ import persistance.exceptions.ConfigFileNotFoundException;
 import presentation.controller.LogOutController;
 import presentation.controller.SignInController;
 import presentation.controller.SignUpController;
+import presentation.controller.WelcomeController;
+import presentation.view.ErrorHandler;
+import presentation.view.SignUpView;
+import presentation.view.WelcomeView;
+import presentation.controller.WelcomeController;
 import presentation.view.*;
 
 import javax.swing.*;

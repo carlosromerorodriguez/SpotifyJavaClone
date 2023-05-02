@@ -11,7 +11,7 @@ public class SignInController {
     }
 
     public void signInButtonPressed(String nom_correu, char[] password) {
-        businessLogicUser.loginUser(nom_correu, password.toString());
+        //businessLogicUser.loginUser(nom_correu, password.toString());
     }
 
 }

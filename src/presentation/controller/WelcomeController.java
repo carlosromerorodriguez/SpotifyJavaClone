@@ -1,4 +1,4 @@
 package presentation.controller;
 
-public class WelcomeController {
+public class WelcomeController{
 }

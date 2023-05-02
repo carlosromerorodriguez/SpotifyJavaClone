@@ -26,10 +26,10 @@ public class ViewsController {
         CardLayout cardLayout = new CardLayout();
         JPanel cardPanel = new JPanel(cardLayout);
 
-        cardPanel.add(signInView.ventanaSignIn(), "signIn");
-        cardPanel.add(signUpView.windowSignUp(), "signUp");
-        cardPanel.add(logOutView.ventanaEmergenteLogOut(), "logut");
-
+        // cardPanel.add(signInView.getPanel_signin(), "signIn");
+        //cardPanel.add(signUpView.getPanelSignup(), "signUp");
+        //cardPanel.add(logOutView.ventanaEmergenteLogOut(), "logut");
+        //cardPanel.add(welcomeView.getWelcomeView(), "welcome");
 
 
         ventana.add(cardPanel);

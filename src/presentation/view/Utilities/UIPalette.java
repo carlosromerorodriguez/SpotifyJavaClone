@@ -10,7 +10,8 @@ public enum UIPalette {
     /**
      * The main background color of the application
      */
-    APP_BACKGROUND(0, 204, 102),
+    TEXT_COLOR(213,225,219),
+    APP_BACKGROUND(45,106,79),
 
     INPUT_TEXT(51, 255, 153),
 

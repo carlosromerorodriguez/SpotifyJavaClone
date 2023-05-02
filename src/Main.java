@@ -32,16 +32,21 @@ public class Main {
             SignUpView signUpView = new SignUpView();
             LogOutView logOutView = new LogOutView();
             SignInView signInView = new SignInView();
+            WelcomeView welcomeView = new WelcomeView();
+            ViewsController viewsController = new ViewsController(signInView, signUpView, logOutView, welcomeView);
 
             LogOutController logOutController = new LogOutController(businessLogicUser);
-            SignUpController signUpController = new SignUpController(signUpView, businessLogicUser);
-            SignInController signInController = new SignInController(signInView, businessLogicUser);
+            SignUpController signUpController = new SignUpController(signUpView, businessLogicUser, viewsController);
+            SignInController signInController = new SignInController(signInView, businessLogicUser, viewsController);
+            WelcomeController welcomeController = new WelcomeController(welcomeView, businessLogicUser, viewsController);
 
             signUpView.registerController(signUpController);
+            signUpView.backController(signUpController);
             signInView.registerController(signInController);
+            signInView.backController(signInController);
+            welcomeView.registerController(welcomeController);
+            welcomeView.signinController(welcomeController);
 
-
-            ViewsController viewsController = new ViewsController(signInView, signUpView, logOutView);
             viewsController.createView();
 
         } catch (SQLException e) {

@@ -5,6 +5,7 @@ import java.awt.*;
 import javax.swing.border.EmptyBorder;
 
 import static presentation.view.Utilities.UIPalette.INPUT_TEXT;
+import static presentation.view.Utilities.UIPalette.TEXT_COLOR;
 
 public class TemplateField extends JPanel {
     /**
@@ -42,6 +43,7 @@ public class TemplateField extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         JLabel text = new JLabel(s.toUpperCase()); // Convert the text to uppercase
+        text.setForeground(TEXT_COLOR.getColor());
         int adjustedWidth = PREFERRED_LABEL_WIDTH - 50; // Adjust the width
         text.setPreferredSize(new Dimension(adjustedWidth, PREFERRED_LABEL_HEIGHT));
         // Align the label to the left

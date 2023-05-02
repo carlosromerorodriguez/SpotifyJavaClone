@@ -15,6 +15,8 @@ public class SignUpView extends JFrame implements SignUpObserver {
      */
     public static final String REGISTER_COMMAND = "REGISTER_COMMAND";
 
+    public static final String BACK_FROM_SIGNUP_COMMAND = "BACK_FROM_SIGNUP_COMMAND";
+
     /**
      * TAG to go back to the login view
      */
@@ -27,6 +29,8 @@ public class SignUpView extends JFrame implements SignUpObserver {
 
     private JPanel panelSignup;
 
+    private JButton bBack;
+
     public SignUpView() {
 
         panelSignup = new JPanel(new GridBagLayout());
@@ -38,10 +42,15 @@ public class SignUpView extends JFrame implements SignUpObserver {
         Font fLowerText = new Font("Sans-Serif", Font.PLAIN, 15);
 
         JLabel registerTitle = createLabel(fTitle);
+        registerTitle.setForeground(UIPalette.TEXT_COLOR.getColor());
         tfEmail = createTemplateField("Email", false, fLowerText);
+        tfEmail.setForeground(UIPalette.TEXT_COLOR.getColor());
         tfUsername = createTemplateField("Username", false, fLowerText);
+        tfUsername.setForeground(UIPalette.TEXT_COLOR.getColor());
         tfFirstPassword = createTemplateField("Password", true, fLowerText);
+        tfFirstPassword.setForeground(UIPalette.TEXT_COLOR.getColor());
         tfSecondPassword = createTemplateField("Password Confirmation", true, fLowerText);
+        tfSecondPassword.setForeground(UIPalette.TEXT_COLOR.getColor());
 
         c.ipadx = 100;
         c.gridx = 0;
@@ -91,6 +100,16 @@ public class SignUpView extends JFrame implements SignUpObserver {
         c.insets = new Insets(20, 220, 0, 0);
         panelSignup.add(bRegister, c);
 
+        bBack = new JButton("<");
+        bBack.setActionCommand(BACK_FROM_SIGNUP_COMMAND);
+        c.ipady = 0;
+        c.gridx = 0;
+        c.gridy = 10;
+        c.gridwidth = 1;
+        c.anchor = GridBagConstraints.WEST;
+        c.insets = new Insets(20, 0, 0, 220);
+        panelSignup.add(bBack, c);
+
     }
 
     public JPanel getPanelSignup() {
@@ -105,11 +124,16 @@ public class SignUpView extends JFrame implements SignUpObserver {
     private JLabel createLabel(Font font) {
         JLabel label = new JLabel("REGISTRARSE");
         label.setFont(font);
+        label.setForeground(UIPalette.TEXT_COLOR.getColor());
         return label;
     }
 
     public void registerController(ActionListener actionListener) {
         bRegister.addActionListener(actionListener);
+    }
+
+    public void backController(ActionListener actionListener) {
+        bBack.addActionListener(actionListener);
     }
 
     /**
@@ -122,6 +146,7 @@ public class SignUpView extends JFrame implements SignUpObserver {
     private TemplateField createTemplateField(String labelText, boolean isPassword, Font font) {
         TemplateField field = new TemplateField(labelText, isPassword);
         field.setFont(font);
+        field.setForeground(UIPalette.TEXT_COLOR.getColor());
         return field;
     }
 

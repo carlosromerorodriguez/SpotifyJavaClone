@@ -1,86 +1,180 @@
 package persistance;
 
-import business.entities.DDBBInfo;
-import persistance.exceptions.MaxConnectionsReachedException;
-import org.jetbrains.annotations.NotNull;
-
+import javax.management.MBeanAttributeInfo;
 import java.sql.*;
 
+/**
+ * The SQLConnector class will abstract the specifics of the connection to a MySQL database.
+ *
+ * This class follows the Singleton design pattern to facilitate outside access while maintaining
+ * a single instance, as having multiple connectors to a database is generally discouraged.
+ *
+ * Be aware that this class presents a simplified approach. Configuration parameters SHOULD NOT be
+ * hardcoded and the use of Statements COULD be replaced by PreparedStatements to avoid SQL Injection.
+ */
 public class DDBBAccess {
-    /*  Descargar el driver aquí: "https://jdbc.postgresql.org/download/"
-        Descargar el driver para Java 8
-        Se añade de la siguiente manera al proyecto:
 
-        1. Open your IntelliJ IDEA project and select "File" from the menu bar.
-        2. Select "Project Structure" from the drop-down menu.
-        3. In the Project Structure dialog box, select "Modules" from the left-hand menu.
-        4. Select your module from the list of modules on the right-hand side.
-        5. Select the "Dependencies" tab.
-        6. Click the "+" button at the bottom of the window and select "JARs or directories".
-        7. Navigate to the directory where you saved the JDBC driver JAR file and select it.
-        8. Click "OK" to close the dialog box.
-     */
-    private static final String DRIVER = "org.postgresql.Driver";
-    private static final String URL = "jdbc:postgresql://";
-    private final Connection[] connections;
-    private final boolean[] connectionsInUse;
+    // MAIN DE PRUEBA PARA TESTEAR LA CONEXIÓN CON LA BASE DE DATOS
+    public static void main(String[] args) {
+        // Obtén la instancia de DDBBAccess y conecta a la base de datos
+        DDBBAccess db = DDBBAccess.getInstance();
 
-    public DDBBAccess(DDBBInfo ddbbInfo, int maxConnections) throws SQLException, ClassNotFoundException {
-        //Class.forName(DRIVER);
-        this.connections = new Connection[maxConnections];
-        this.connectionsInUse = new boolean[maxConnections];
+        // Insertar un nuevo usuario
+        String insertQuery = "INSERT INTO usuario (nom, email, password) VALUES ('John Doe', 'john.doe@example.com', 'password123')";
+        db.insertQuery(insertQuery);
+        String insertQuery2 = "INSERT INTO usuario (nom, email, password) VALUES ('Aniol Gilipollas', 'aniol.gay@pornhub.com', 'soyaniol')";
+        db.insertQuery(insertQuery2);
 
-        for (int i = 0; i < this.connections.length; i++) {
-            //this.connections[i] = DriverManager.getConnection(String.format(URL + ddbbInfo.getHost() + "/" + ddbbInfo.getName() + ddbbInfo.getUser() + ddbbInfo.getPassword()));
-            this.connectionsInUse[i] = false;
-        }
-    }
+        // Actualizar un usuario
+        String updateQuery = "UPDATE usuario SET nom='Jane Doe', email='jane.doe@example.com' WHERE id=1";
+        db.updateQuery(updateQuery);
 
-    private synchronized int getAvailableConnectionHandler() throws MaxConnectionsReachedException {
-        for (int i = 0; i < this.connectionsInUse.length; i++) {
-            if (!this.connectionsInUse[i]) {
-                this.connectionsInUse[i] = true;
-                return i;
+        // Eliminar un usuario
+        String deleteQuery = "DELETE FROM usuario WHERE id=2";
+        db.deleteQuery(deleteQuery);
+
+        // Seleccionar todos los usuarios
+        String selectQuery = "SELECT * FROM usuario";
+        ResultSet resultSet = db.selectQuery(selectQuery);
+
+        // Imprimir los resultados
+        try {
+            System.out.println("Usuarios:");
+            while (resultSet.next()) {
+                System.out.println("ID: " + resultSet.getInt("id") + ", Nombre: " + resultSet.getString("nom") + ", Email: " + resultSet.getString("email") + ", Contraseña: " + resultSet.getString("password"));
             }
-        }
-        throw new MaxConnectionsReachedException();
-    }
-
-    private synchronized void releaseConnectionHandler(int connectionId) {
-        this.connectionsInUse[connectionId] = false;
-    }
-
-    public int runQuery(String sql, Object @NotNull ... params) throws SQLException, MaxConnectionsReachedException {
-        int connectionId = this.getAvailableConnectionHandler();
-        int i = 0;
-
-        try {
-            PreparedStatement preparedStatement = this.connections[connectionId].prepareStatement(sql);
-            for (i = 0; i < params.length; i++) { preparedStatement.setObject(i+1, params[i]); }
-            i = preparedStatement.executeUpdate();
-            preparedStatement.close();
-            this.releaseConnectionHandler(connectionId);
-            return i;
         } catch (SQLException e) {
-            this.releaseConnectionHandler(connectionId);
-            throw e;
+            e.printStackTrace();
+        }
+
+        // Desconectar de la base de datos
+        db.disconnect();
+    }
+
+
+
+    // The static attribute to implement the singleton design pattern.
+    private static DDBBAccess instance = null;
+
+
+    /**
+     * Static method that returns the shared instance managed by the singleton.
+     *
+     * @return The shared SQLConnector instance.
+     */
+    public static DDBBAccess getInstance(){
+        if (instance == null ){
+            // NOT a good practice to hardcode connection data! Be aware of this for your project delivery ;)
+            instance = new DDBBAccess("root", "", "localhost", 3306, "spotifai_db");
+            instance.connect();
+        }
+        return instance;
+    }
+
+    // Attributes to connect to the database.
+    private final String username;
+    private final String password;
+    private final String url;
+    private Connection conn;
+
+    // Parametrized constructor
+    private DDBBAccess(String username, String password, String ip, int port, String database) {
+        this.username = username;
+        this.password = password;
+        this.url = "jdbc:mysql://" + ip + ":" + port + "/" + database;
+    }
+
+
+    /**
+     * Method that starts the inner connection to the database. Ideally, users would disconnect after
+     * using the shared instance.
+     */
+    public void connect() {
+        try {
+            conn = DriverManager.getConnection(url, username, password);
+        } catch(SQLException e) {
+            System.err.println("Couldn't connect to --> " + url + " (" + e.getMessage() + ")");
         }
     }
 
-    public ResultSet getQuery(String sql, Object @NotNull ... params) throws SQLException, MaxConnectionsReachedException {
-        int connectionId = this.getAvailableConnectionHandler();
-        int i = 0;
 
+    /**
+     * Method that executes an insertion query to the connected database.
+     *
+     * @param query String representation of the query to execute.
+     */
+    public void insertQuery(String query){
         try {
-            PreparedStatement preparedStatement = this.connections[connectionId].prepareStatement(sql);
-            for (i = 0; i < params.length; i++) preparedStatement.setObject(i + 1, params[i]);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            preparedStatement.close();
-            this.releaseConnectionHandler(connectionId);
-            return resultSet;
+            Statement s = conn.createStatement();
+            s.executeUpdate(query);
         } catch (SQLException e) {
-            this.releaseConnectionHandler(connectionId);
-            throw e;
+            System.err.println(query);
+            System.err.println("Problem when inserting --> " + e.getSQLState() + " (" + e.getMessage() + ")");
+        }
+    }
+
+
+    /**
+     * Method that executes an update query to the connected database.
+     *
+     * @param query String representation of the query to execute.
+     */
+    public void updateQuery(String query){
+        try {
+            Statement s = conn.createStatement();
+            s.executeUpdate(query);
+        } catch (SQLException e) {
+            System.err.println(query);
+            System.err.println("Problema when updating --> " + e.getSQLState() + " (" + e.getMessage() + ")");
+        }
+    }
+
+
+    /**
+     * Method that executes a deletion query to the connected database.
+     *
+     * @param query String representation of the query to execute.
+     */
+    public void deleteQuery(String query){
+        try {
+            Statement s = conn.createStatement();
+            s.executeUpdate(query);
+        } catch (SQLException e) {
+            System.err.println(query);
+            System.err.println("Problem when deleting --> " + e.getSQLState() + " (" + e.getMessage() + ")");
+        }
+
+    }
+
+
+    /**
+     * Method that executes a selection query to the connected database.
+     *
+     * @param query String representation of the query to execute.
+     * @return The results of the selection.
+     */
+    public ResultSet selectQuery(String query){
+        ResultSet rs = null;
+        try {
+            Statement s = conn.createStatement();
+            rs = s.executeQuery(query);
+        } catch (SQLException e) {
+            System.err.println(query);
+            System.err.println("Problem when selecting data --> " + e.getSQLState() + " (" + e.getMessage() + ")");
+        }
+        return rs;
+    }
+
+
+    /**
+     * Method that closes the inner connection to the database. Ideally, users would disconnect after
+     * using the shared instance.
+     */
+    public void disconnect(){
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            System.err.println("Problem when closing the connection --> " + e.getSQLState() + " (" + e.getMessage() + ")");
         }
     }
 }

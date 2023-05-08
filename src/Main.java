@@ -20,7 +20,7 @@ import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) {
-        try {
+        /*try {
             // TODO: Esto SIEMPRE es igual, no hay que cambiarlo
             ConfigDatabaseDAO configDatabaseDAO = new ConfigDatabaseDAO("data/config.json");
             DDBBAccess ddBBAccess = new DDBBAccess(configDatabaseDAO.readConfigJson(), 5);
@@ -57,6 +57,7 @@ public class Main {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
+        }*/
+        System.out.println(DDBBAccess.getInstance());
     }
 }

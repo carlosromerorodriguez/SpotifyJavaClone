@@ -28,7 +28,7 @@ public class UserDatabaseDAO implements UserDAO {
             return false; // User already exists or error
         }
 
-        try {
+        /*try {
             Integer id = this.addNewUserAndReturnNewId(user.getUser());
             if (id == null) {
                 return false; // Error while adding user
@@ -37,7 +37,8 @@ public class UserDatabaseDAO implements UserDAO {
             return (this.ddbbAccess.runQuery(query, id, user.getEmail(), user.getPassword()) > 0);
         } catch (SQLException | MaxConnectionsReachedException ex) {
             return false;
-        }
+        }*/
+        return false;
     }
 
     /**
@@ -46,14 +47,14 @@ public class UserDatabaseDAO implements UserDAO {
      * @return New id
      */
     private synchronized Integer addNewUserAndReturnNewId(String username) {
-        try {
+        /*try {
             if (this.ddbbAccess.runQuery("INSERT INTO usuario(user_name) VALUES (?);", username) > 0) {
                 ResultSet resultSet = this.ddbbAccess.getQuery("SELECT MAX(id) FROM usuario WHERE user_name = ?;", username);
                 return resultSet.next() ? resultSet.getInt(1) : null;
             }
         } catch (SQLException ignored) { } catch (MaxConnectionsReachedException e) {
             throw new RuntimeException(e);
-        }
+        }*/
         return null;
     }
 
@@ -69,7 +70,7 @@ public class UserDatabaseDAO implements UserDAO {
 
     @Override
     public Boolean existsUser(String username) {
-        try {
+        /*try {
             ResultSet resultSet = this.ddbbAccess.getQuery("SELECT user_name FROM usuario WHERE username = ?;", username);
             if (!resultSet.next()) {
                 return false; // no existing user in database
@@ -77,12 +78,13 @@ public class UserDatabaseDAO implements UserDAO {
             return (resultSet.getInt(1) > 0);
         } catch (SQLException | MaxConnectionsReachedException ex) {
             return null;
-        }
+        }*/
+        return null;
     }
 
     @Override
     public Boolean existsEmail(String email) {
-        try {
+        /*try {
             ResultSet resultSet = this.ddbbAccess.getQuery("SELECT user_mail FROM usuario WHERE email = ?;", email);
             if (!resultSet.next()) {
                 return false; // no existing user in database
@@ -90,12 +92,13 @@ public class UserDatabaseDAO implements UserDAO {
             return (resultSet.getInt(1) > 0);
         } catch (SQLException | MaxConnectionsReachedException ex) {
             return null;
-        }
+        }*/
+        return null;
     }
 
     @Override
     public Boolean checkCombination(String email_user, String password){
-        try {
+        /*try {
             ResultSet resultSet = this.ddbbAccess.getQuery("SELECT * FROM user WHERE user_name = " + email_user +" AND user_password = "+ password);
             if (!resultSet.next()) {
                 return false; // no existing user in database
@@ -103,6 +106,7 @@ public class UserDatabaseDAO implements UserDAO {
             return (resultSet.getInt(1) > 0);
         } catch (SQLException | MaxConnectionsReachedException ex) {
             return null;
-        }
+        }*/
+        return null;
     }
 }

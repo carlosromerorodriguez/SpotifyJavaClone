@@ -20,44 +20,32 @@ import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) {
-        /*try {
-            // TODO: Esto SIEMPRE es igual, no hay que cambiarlo
-            ConfigDatabaseDAO configDatabaseDAO = new ConfigDatabaseDAO("data/config.json");
-            DDBBAccess ddBBAccess = new DDBBAccess(configDatabaseDAO.readConfigJson(), 5);
+        // TODO: Esto SIEMPRE es igual, no hay que cambiarlo
+        ConfigDatabaseDAO configDatabaseDAO = new ConfigDatabaseDAO("data/config.json");
+        DDBBAccess ddBBAccess = new DDBBAccess();
 
-            // TODO: Esto se puede modificar
-            UserDatabaseDAO userDatabaseDAO = new UserDatabaseDAO(ddBBAccess);
-            BusinessLogicUser businessLogicUser = new BusinessLogicUser(userDatabaseDAO);
+        // TODO: Esto se puede modificar
+        UserDatabaseDAO userDatabaseDAO = new UserDatabaseDAO(ddBBAccess);
+        BusinessLogicUser businessLogicUser = new BusinessLogicUser(userDatabaseDAO);
 
-            SignUpView signUpView = new SignUpView();
-            LogOutView logOutView = new LogOutView();
-            SignInView signInView = new SignInView();
-            WelcomeView welcomeView = new WelcomeView();
-            ViewsController viewsController = new ViewsController(signInView, signUpView, logOutView, welcomeView);
+        SignUpView signUpView = new SignUpView();
+        LogOutView logOutView = new LogOutView();
+        SignInView signInView = new SignInView();
+        WelcomeView welcomeView = new WelcomeView();
+        ViewsController viewsController = new ViewsController(signInView, signUpView, logOutView, welcomeView);
 
-            LogOutController logOutController = new LogOutController(businessLogicUser);
-            SignUpController signUpController = new SignUpController(signUpView, businessLogicUser, viewsController);
-            SignInController signInController = new SignInController(signInView, businessLogicUser, viewsController);
-            WelcomeController welcomeController = new WelcomeController(welcomeView, businessLogicUser, viewsController);
+        LogOutController logOutController = new LogOutController(businessLogicUser);
+        SignUpController signUpController = new SignUpController(signUpView, businessLogicUser, viewsController);
+        SignInController signInController = new SignInController(signInView, businessLogicUser, viewsController);
+        WelcomeController welcomeController = new WelcomeController(welcomeView, businessLogicUser, viewsController);
 
-            signUpView.registerController(signUpController);
-            signUpView.backController(signUpController);
-            signInView.registerController(signInController);
-            signInView.backController(signInController);
-            welcomeView.registerController(welcomeController);
-            welcomeView.signinController(welcomeController);
+        signUpView.registerController(signUpController);
+        signUpView.backController(signUpController);
+        signInView.registerController(signInController);
+        signInView.backController(signInController);
+        welcomeView.registerController(welcomeController);
+        welcomeView.signinController(welcomeController);
 
-            viewsController.createView();
-
-        } catch (SQLException e) {
-            ErrorHandler.showErrorOnScreen("SQL error", "SQL ERROR");
-        } catch (ConfigFileNotFoundException e) {
-            ErrorHandler.showErrorOnScreen("Config file not found", "CONFIG FILE ERROR");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }*/
-        System.out.println(DDBBAccess.getInstance());
+        viewsController.createView();
     }
 }

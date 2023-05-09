@@ -4,10 +4,7 @@ import business.entities.User;
 
 public interface UserDAO {
     boolean addUser(User user);
-    User getUser(String userName, String pwd);
-    boolean deleteUser(String user);
-    Boolean existsUser(String username);
-    Boolean existsEmail(String email);
+    boolean checkUserByName(String nom, String password);
 
-    Boolean checkCombination(String email_user, String password);
+    boolean checkUserByEmail(String email, String password);
 }

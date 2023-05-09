@@ -34,7 +34,7 @@ public class SignInView extends JFrame {
     }
 
     public String getLoginUserPassword() {
-        return jTF_contrasenya.getPassword().toString();
+        return new String(jTF_contrasenya.getPassword());
     }
 
     public JPanel getPanel_signin() {

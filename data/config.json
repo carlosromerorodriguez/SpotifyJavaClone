@@ -1,7 +1,7 @@
 {
-  "port": 5432,
+  "port": 3306,
   "ip": "localhost",
-  "name": "bbddSpotyfai",
+  "name": "spotifai_db",
   "user": "admin",
-  "password": "1234"
+  "password": ""
 }

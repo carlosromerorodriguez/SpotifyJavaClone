@@ -29,13 +29,22 @@ public class BusinessLogicUser {
 
     public void loginUser(String email_user, String password) throws UsernameException, PasswordException {
 
+        boolean exists = false;
         if (email_user.isEmpty() || email_user.isBlank()) { throw new UsernameException(); }
         if (!checkPassword(password)) { throw new PasswordException(); }
 
-        if(userDao.existsUser(email_user) || userDao.existsEmail(email_user)){
-            if(userDao.checkCombination(email_user, password)){
-                System.out.println("User exists");
-            }
+        if(email_user.contains("@")){
+            exists = userDao.checkUserByEmail(email_user, password);
+        }
+        else{
+            exists = userDao.checkUserByName(email_user, password);
+        }
+
+        if(exists){
+            System.out.println("User exists");
+        }
+        else{
+            System.out.println("User does not exist");
         }
     }
 

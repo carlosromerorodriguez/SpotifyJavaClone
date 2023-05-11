@@ -39,6 +39,11 @@ public class UserDatabaseDAO implements UserDAO {
         return false;
     }
 
+    /**
+     * @param nom User name to delete
+     * @param password User password to delete
+     * @return true if the user has been deleted successfully
+     */
     public boolean checkUserByName(String nom, String password) {
         String query = "SELECT * FROM usuario WHERE nom = ? AND password = ?";
         try {
@@ -55,9 +60,11 @@ public class UserDatabaseDAO implements UserDAO {
         return false; // El usuario no existe
     }
 
-
-
-
+    /**
+     * @param email Email to check
+     * @param password Password to check
+     * @return true if the user exists
+     */
     public boolean checkUserByEmail(String email, String password){
         String query = "SELECT * FROM usuario WHERE email = ? AND password = ?";
         try {

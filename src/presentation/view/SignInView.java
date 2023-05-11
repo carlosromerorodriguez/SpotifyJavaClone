@@ -139,48 +139,8 @@ public class SignInView extends JFrame {
         bIniciarSessio.addActionListener(actionListener);
     }
 
-
     public void backController(ActionListener actionListener) {
         bBack.addActionListener(actionListener);
-    }
-    public void wrongPasswordError() {
-        JOptionPane.showMessageDialog(this,
-                "<html><body><p style='width: 250px;'>Invalid password! Your password must:<br>" +
-                        "<ul>" +
-                        "<li>Be at least 8 characters long</li>" +
-                        "<li>Contain at least one lowercase and one uppercase letter</li>" +
-                        "<li>Include at least one numeric character</li>" +
-                        "<li>Not contain any whitespaces</li>" +
-                        "</ul>" +
-                        "Please try again.</p></body></html>",
-                "Invalid Password", JOptionPane.ERROR_MESSAGE);
-    }
-
-    /**
-     * Shows incorrect password error message
-     */
-    public void passwordsMismatchError() {
-        JOptionPane.showMessageDialog(this,
-                "The passwords entered do not match. Please ensure both passwords are identical and try again.",
-                "Password Mismatch", JOptionPane.ERROR_MESSAGE);
-    }
-
-    /**
-     * Shows incorrect email error message
-     */
-    public void wrongEmailError() {
-        JOptionPane.showMessageDialog(this,
-                "The email address you entered is not valid. Please ensure the email format is correct and try again.",
-                "Invalid Email Address", JOptionPane.ERROR_MESSAGE);
-    }
-
-    /**
-     * Shows incorrect user error message
-     */
-    public void wrongUserError() {
-        JOptionPane.showMessageDialog(this,
-                "The username you entered is not valid. Please ensure it meets the requirements and try again.",
-                "Invalid Username", JOptionPane.ERROR_MESSAGE);
     }
 
 }

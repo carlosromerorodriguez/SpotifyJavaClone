@@ -17,16 +17,6 @@ import static presentation.view.SignUpView.REGISTER_COMMAND;
 public class WelcomeView extends JFrame {
 
 
-    /**
-     * Window width size
-     */
-    private static final int WINDOW_WIDTH = 350;
-
-    /**
-     * Window height size
-     */
-    private static final int WINDOW_HEIGHT = 350;
-
     private JPanel welcomePanel;
     public static final String REGISTER_VIEW_COMMAND = "REGISTER_VIEW_COMMAND";
 

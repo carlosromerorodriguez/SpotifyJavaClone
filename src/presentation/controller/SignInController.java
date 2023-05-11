@@ -33,7 +33,10 @@ public class SignInController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(signInView.LOGIN_COMMAND)) {
             try {
-                businessLogicUser.loginUser(signInView.getLoginUserMail(), signInView.getLoginUserPassword());
+                if(businessLogicUser.loginUser(signInView.getLoginUserMail(), signInView.getLoginUserPassword())){
+                    System.out.println("Login correcte");
+                    viewsController.createViewReproductor();
+                }
             } catch (UsernameException ex) {
                 throw new RuntimeException(ex);
             } catch (PasswordException ex) {

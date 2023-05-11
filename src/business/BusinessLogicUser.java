@@ -27,7 +27,7 @@ public class BusinessLogicUser {
         }
     }
 
-    public void loginUser(String email_user, String password) throws UsernameException, PasswordException {
+    public boolean loginUser(String email_user, String password) throws UsernameException, PasswordException {
 
         boolean exists = false;
         if (email_user.isEmpty() || email_user.isBlank()) { throw new UsernameException(); }
@@ -41,10 +41,10 @@ public class BusinessLogicUser {
         }
 
         if(exists){
-            System.out.println("User exists");
+            return true;
         }
         else{
-            System.out.println("User does not exist");
+            return false;
         }
     }
 

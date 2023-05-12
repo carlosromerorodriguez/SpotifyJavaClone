@@ -81,4 +81,8 @@ public class MPlayer {
     public int getPausePosition() {
         return pausePosition;
     }
+
+    public boolean isPlaying() {
+        return playerThread != null && playerThread.isAlive();
+    }
 }

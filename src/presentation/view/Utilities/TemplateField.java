@@ -1,7 +1,10 @@
 package presentation.view.Utilities;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.border.EmptyBorder;
 
 import static presentation.view.Utilities.UIPalette.INPUT_TEXT;
@@ -32,6 +35,10 @@ public class TemplateField extends JPanel {
      * JPanel's input
      */
     private final JTextField jtfInput;
+    /**
+     * JPanel's toggle visibility button
+     */
+    private final JToggleButton jtbToggleVisibility;
 
     /**
      * It specifies a text and if the input should be hidden
@@ -44,33 +51,63 @@ public class TemplateField extends JPanel {
 
         JLabel text = new JLabel(s.toUpperCase()); // Convert the text to uppercase
         text.setForeground(TEXT_COLOR.getColor());
-        int adjustedWidth = PREFERRED_LABEL_WIDTH - 50; // Adjust the width
-        text.setPreferredSize(new Dimension(adjustedWidth, PREFERRED_LABEL_HEIGHT));
+        text.setPreferredSize(new Dimension(PREFERRED_LABEL_WIDTH, PREFERRED_LABEL_HEIGHT));
         // Align the label to the left
         text.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        text.setBorder(new EmptyBorder(0, 0, 10, 0)); // Add spacing below the text label
+        text.setBorder(new EmptyBorder(0, 0, 10, 0));
 
-        jtfInput = (isPassword ? new JPasswordField() : new JTextField());
-        //jtfInput.setPreferredSize(new Dimension(adjustedWidth, PREFERRED_LABEL_HEIGHT));
-        // Align the input field to the left
-        jtfInput.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jtfInput = new JPasswordField();
+        ((JPasswordField) jtfInput).setEchoChar(isPassword ? '•' : (char) 0);
+
+        JPanel innerPanel = new JPanel(new BorderLayout());
+        innerPanel.add(jtfInput, BorderLayout.CENTER);
+
+        if (isPassword) {
+            jtbToggleVisibility = new JToggleButton();
+
+            // Cargamos las imágenes desde un archivo
+            ImageIcon eyeOpenIcon = null;
+            ImageIcon eyeClosedIcon = null;
+            try {
+                Image eyeOpenImage = ImageIO.read(new File("data/img/contra_ojo_cerrado.png"));
+                eyeOpenIcon = new ImageIcon(eyeOpenImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH)); // Cambia el tamaño de la imagen
+                Image eyeClosedImage = ImageIO.read(new File("data/img/contra_ojo_abierto.png"));
+                eyeClosedIcon = new ImageIcon(eyeClosedImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH)); // Cambia el tamaño de la imagen
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
+            jtbToggleVisibility.setIcon(eyeOpenIcon); // Establece la imagen inicial del botón
+            jtbToggleVisibility.setPreferredSize(new Dimension(20, 20)); // El tamaño que prefieras para el botón
+            ImageIcon finalEyeOpenIcon = eyeOpenIcon;
+            ImageIcon finalEyeClosedIcon = eyeClosedIcon;
+            jtbToggleVisibility.addActionListener(e -> {
+                if (jtbToggleVisibility.isSelected()) {
+                    ((JPasswordField) jtfInput).setEchoChar((char) 0); // Muestra la contraseña
+                    jtbToggleVisibility.setIcon(finalEyeClosedIcon); // Cambia la imagen del botón
+                } else {
+                    ((JPasswordField) jtfInput).setEchoChar('•'); // Oculta la contraseña
+                    jtbToggleVisibility.setIcon(finalEyeOpenIcon); // Cambia la imagen del botón
+                }
+            });
+            innerPanel.add(jtbToggleVisibility, BorderLayout.EAST);
+        } else {
+            jtbToggleVisibility = null;
+        }
 
         add(text);
-        add(jtfInput);
+        add(innerPanel);
 
         setBackground(UIPalette.APP_BACKGROUND.getColor());
         setMaximumSize(new Dimension(DEFAULT_WINDOW_WIDTH, DEFAULT_INPUT_HEIGHT));
     }
-
-
 
     /**
      * It returns the input
      * @return Input
      */
     public String getFieldInput() {
-        return (jtfInput instanceof JPasswordField) ? String.valueOf(((JPasswordField) jtfInput).getPassword()) : jtfInput.getText();
+        return new String(((JPasswordField) jtfInput).getPassword());
     }
-
 }

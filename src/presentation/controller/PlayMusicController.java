@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 public class PlayMusicController implements ActionListener {
 
     private final PlayMusicView playMusicView;
-    private BusinessLogicMPlayer businessLogicMPlayer;
+    private final BusinessLogicMPlayer businessLogicMPlayer;
     private ViewsController viewsController;
     private int iconIndex = 1;
     private int iconIndexRepeat = 0;
@@ -26,38 +26,52 @@ public class PlayMusicController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         ImageIcon[] imageIcons = new ImageIcon[2];
-        imageIcons[0] = imageResize("data/img/pause.png", 25, 25);
-        imageIcons[1] = imageResize("data/img/play.png", 25, 25);
-
+        imageIcons[0] = imageResize("data/img/pause.png");
+        imageIcons[1] = imageResize("data/img/play.png");
 
         ImageIcon[] imageRepeat = new ImageIcon[3];
-        imageRepeat[0] = imageResize("data/img/repeat.png", 25, 25);
-        imageRepeat[1] = imageResize("data/img/repeat_global.png", 25, 25);
-        imageRepeat[2] = imageResize("data/img/repeat_unic.png", 25, 25);
+        imageRepeat[0] = imageResize("data/img/repeat.png");
+        imageRepeat[1] = imageResize("data/img/repeat_individual.png");
+        imageRepeat[2] = imageResize("data/img/repeat_global.png");
 
         if (e.getActionCommand().equals(PlayMusicView.PLAY_PAUSE_MUSIC_COMMAND)) {
             iconIndex = (iconIndex + 1) % 2;
             playMusicView.getbPlay().setIcon(imageIcons[iconIndex]);
-            System.out.println("Play music");
-        }
-        if(e.getActionCommand().equals(playMusicView.PREVIOUS_MUSIC_COMMAND)){
+            System.out.println("Play Pause music");
+            businessLogicMPlayer.playPauseMusic();
+        } else if (e.getActionCommand().equals(PlayMusicView.PREVIOUS_MUSIC_COMMAND)){
             System.out.println("Previous music");
-        }
-        if(e.getActionCommand().equals(playMusicView.NEXT_MUSIC_COMMAND)){
+            businessLogicMPlayer.previousMusic();
+        } else if (e.getActionCommand().equals(PlayMusicView.NEXT_MUSIC_COMMAND)){
             System.out.println("Next music");
-        }
-        if (e.getActionCommand().equals(playMusicView.REPEAT_MUSIC_COMMAND)) {
+            businessLogicMPlayer.nextMusic();
+        } else if (e.getActionCommand().equals(PlayMusicView.REPEAT_MUSIC_COMMAND)) {
             iconIndexRepeat = (iconIndexRepeat + 1) % 3;
             playMusicView.getbRepeat().setIcon(imageRepeat[iconIndexRepeat]);
-            System.out.println("Repeat music");
+            switch (iconIndexRepeat) {
+                case 0 -> {
+                    System.out.println("No repetition");
+                }
+                case 1 -> {
+                    System.out.println("Individual repetition");
+                }
+                case 2 -> {
+                    System.out.println("Global repetition");
+                }
+            }
+            businessLogicMPlayer.repeatMusic(iconIndex);
+        } else if (e.getActionCommand().equals(PlayMusicView.STOP_MUSIC_COMMAND)) {
+            iconIndex = 1;
+            playMusicView.getbPlay().setIcon(imageIcons[iconIndex]);
+            System.out.println("Stop music");
+            businessLogicMPlayer.stopMusic();
         }
     }
 
-    private ImageIcon imageResize(String ruta, int width, int height){
-
+    private ImageIcon imageResize(String ruta){
         ImageIcon imagenIcono = new ImageIcon(ruta);
         Image imagenOriginal = imagenIcono.getImage();
-        Image nuevaImagen = imagenOriginal.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        Image nuevaImagen = imagenOriginal.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
         return new ImageIcon(nuevaImagen);
     }
 

@@ -2,6 +2,6 @@
   "port": 3306,
   "ip": "localhost",
   "name": "spotifai_db",
-  "user": "admin",
+  "user": "root",
   "password": ""
 }

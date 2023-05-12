@@ -1,125 +1,105 @@
 package business;
 
 import business.entities.MPlayer;
+import business.entities.Song;
 import presentation.view.Utilities.UIPalette;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BusinessLogicMPlayer {
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("MPlayer");
-        frame.setContentPane(new BusinessLogicMPlayer().mPlayerPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    private final JPanel mPlayerPanel;
+    //TODO: Lista de prueba eliminar luego
+    private final List<Song> songs;
     private MPlayer player;
-    private Button bPlayPause, bStop, bIndividualRepetition, bGlobalRepetition;
     private boolean isIndividualRepetition;
     private boolean isGlobalRepetition;
+    private int whichSong;
 
     public BusinessLogicMPlayer() {
-        mPlayerPanel = createMPlayerPanel();
-        checkWhichButtonWasPressed();
         isIndividualRepetition = false;
         isGlobalRepetition = false;
+        songs = new ArrayList<>();
+        songs.add(new Song("Skrillex", "Dubstep", "Bangarang", "Skrillex", "data/music/skrillex.mp3"));
+        songs.add(new Song("20SECONDS", "20", "20", "20", "data/music/snap.mp3"));
+        whichSong = 0;
     }
 
-    private void checkWhichButtonWasPressed() {
-        if (bPlayPause != null) {
-            bPlayPause.addActionListener(e -> {
-                if (player == null) {
-                    System.out.println("Play");
-                    player = new MPlayer("data/music/skrillex.mp3");
-                    player.play(0); // Reproduce desde el principio
-                    bPlayPause.setLabel("Pause");
-                } else if (player.isPaused()) {
-                    System.out.println("Play");
-                    player.play(player.getPausePosition());
-                    bPlayPause.setLabel("Pause");
-                } else {
-                    System.out.println("Pause");
-                    player.pause();
-                    bPlayPause.setLabel("Play");
+    public void playPauseMusic() {
+        if (player == null) {
+            // TODO: Adaptarlo con la base de datos
+            player = new MPlayer(songs.get(whichSong).getUrl());
+            player.play(0);
+            new Thread(() -> {
+                while (player.isPlaying()) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-            });
+                onSongEnd();
+            }).start();
+        } else if (player.isPaused()) {
+            player.play(player.getPausePosition());
+        } else {
+            player.pause();
         }
-        if (bStop != null) {
-            bStop.addActionListener(e -> {
-                System.out.println("Stop");
-                if (player != null) {
-                    player.stop();
-                    player = null;
-                    bPlayPause.setLabel("Play");
-                }
-            });
-        }
-        if (bIndividualRepetition != null) {
-            bIndividualRepetition.addActionListener(e -> {
-                System.out.println("Individual Repetition");
+    }
+
+    public void repeatMusic(int index) {
+        switch (index) {
+            case 0 -> {
+                System.out.println("No repeat");
+                isIndividualRepetition = false;
+                isGlobalRepetition = false;
+            }
+            case 1 -> {
+                System.out.println("Individual repeat");
                 isIndividualRepetition = !isIndividualRepetition;
-                System.out.println("Individual Repetition: " + isIndividualRepetition);
-            });
-        }
-        if (bGlobalRepetition != null) {
-            bGlobalRepetition.addActionListener(e -> {
-                System.out.println("Global Repetition");
+                isGlobalRepetition = false;
+            }
+            default -> {
+                System.out.println("Global repeat");
                 isGlobalRepetition = !isGlobalRepetition;
-                System.out.println("Global Repetition: " + isGlobalRepetition);
-            });
+                isIndividualRepetition = false;
+            }
         }
     }
 
-    private JPanel createMPlayerPanel() {
-        JPanel panelMPlayer = new JPanel();
-        panelMPlayer.setLayout(new BoxLayout(panelMPlayer, BoxLayout.Y_AXIS));
-        panelMPlayer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        panelMPlayer.setBackground(UIPalette.APP_BACKGROUND.getColor());
-        panelMPlayer.add(createPauseContinueStopButton());
-        panelMPlayer.add(Box.createRigidArea(new Dimension(0, 10)));
-        panelMPlayer.add(createIndividualRepetition());
-        panelMPlayer.add(Box.createRigidArea(new Dimension(0, 10)));
-        panelMPlayer.add(createGlobalRepetition());
-        return panelMPlayer;
+    public void stopMusic() {
+        if (player != null) {
+            player.stop();
+            player = null;
+        }
     }
 
-    private Component createGlobalRepetition() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-        panel.setBackground(UIPalette.APP_BACKGROUND.getColor());
-        bGlobalRepetition = createButton("Global Repetition");
-        panel.add(bGlobalRepetition);
-        return panel;
+    public void previousMusic() {
+        // TODO: Tener la lista de canciones y avanzar a la anterior
+        this.stopMusic();
+        whichSong = ((whichSong-1) + songs.size()) % songs.size();
+        player = new MPlayer(songs.get(whichSong).getUrl());
+        player.play(0);
     }
 
-    private Component createIndividualRepetition() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-        panel.setBackground(UIPalette.APP_BACKGROUND.getColor());
-        bIndividualRepetition = createButton("Individual Repetition");
-        panel.add(bIndividualRepetition);
-        return panel;
+    public void nextMusic() {
+        // TODO: Tener la lista de canciones y avanzar a la siguiente
+        this.stopMusic();
+        whichSong = (whichSong+1) % songs.size();
+        player = new MPlayer(songs.get(whichSong).getUrl());
+        player.play(0);
     }
 
-    private Component createPauseContinueStopButton() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-        panel.setBackground(UIPalette.APP_BACKGROUND.getColor());
-        bPlayPause = createButton("Play");
-        bStop = createButton("Stop");
-        panel.add(bPlayPause);
-        panel.add(Box.createRigidArea(new Dimension(10, 0)));
-        panel.add(bStop);
-        return panel;
+    public void onSongEnd() {
+        if (isIndividualRepetition) {
+            player = new MPlayer(songs.get(whichSong).getUrl());
+            player.play(0);
+        } else if (isGlobalRepetition) {
+            nextMusic();
+        } else {
+            stopMusic();
+        }
     }
 
-    private Button createButton(String pause) {
-        Button button = new Button(pause);
-        button.setBackground(UIPalette.APP_BACKGROUND.getColor());
-        button.setFont(new Font("Arial", Font.PLAIN, 20));
-        return button;
-    }
 }

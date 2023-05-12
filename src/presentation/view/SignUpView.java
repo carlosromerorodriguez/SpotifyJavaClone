@@ -16,20 +16,19 @@ public class SignUpView extends JFrame implements SignUpObserver {
     public static final String REGISTER_COMMAND = "REGISTER_COMMAND";
 
     public static final String BACK_FROM_SIGNUP_COMMAND = "BACK_FROM_SIGNUP_COMMAND";
-
-    /**
-     * TAG to go back to the login view
-     */
-    private TemplateField tfEmail, tfUsername, tfFirstPassword, tfSecondPassword;
+    private final TemplateField tfEmail;
+    private final TemplateField tfUsername;
+    private final TemplateField tfFirstPassword;
+    private final TemplateField tfSecondPassword;
 
     /**
      * Button to register a user
      */
-    private JButton bRegister;
+    private final JButton bRegister;
 
-    private JPanel panelSignup;
+    private final JPanel panelSignup;
 
-    private JButton bBack;
+    private final JButton bBack;
 
     public SignUpView() {
 

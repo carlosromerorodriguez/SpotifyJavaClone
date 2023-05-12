@@ -1,8 +1,5 @@
 package presentation.view;
 
-import presentation.controller.SignInController;
-import presentation.controller.SignUpController;
-import presentation.view.Utilities.TemplateField;
 import presentation.view.Utilities.UIPalette;
 
 import javax.swing.*;
@@ -20,14 +17,14 @@ public class SignInView extends JFrame {
 
     public static final String BACK_FROM_SIGNIN = "BACK_FROM_SIGNIN";
 
-    private JTextField jTF_nom_correu;
-    private JPasswordField jTF_contrasenya;
+    private final JTextField jTF_nom_correu;
+    private final JPasswordField jTF_contrasenya;
 
-    private JPanel panel_signin;
+    private final JPanel panel_signin;
 
-    private JButton bIniciarSessio;
+    private final JButton bIniciarSessio;
 
-    private JButton bBack;
+    private final JButton bBack;
 
     public String getLoginUserMail() {
         return jTF_nom_correu.getText();
@@ -37,7 +34,7 @@ public class SignInView extends JFrame {
         return new String(jTF_contrasenya.getPassword());
     }
 
-    public JPanel getPanel_signin() {
+    public JPanel getPanelSignIn() {
         return panel_signin;
     }
 
@@ -97,13 +94,39 @@ public class SignInView extends JFrame {
         jTF_contrasenya = new JPasswordField();
         jTF_contrasenya.setPreferredSize(new Dimension(120, 30));
         jTF_contrasenya.setFont(fuente_petit);
+        char defaultEchoChar = jTF_contrasenya.getEchoChar();
         c.ipady = 0;
         c.gridx = 0;
         c.gridy = 4;
         c.gridwidth = 7;
         c.insets = new Insets(0, 0, 10, 0);
-        panel_signin.add(jTF_contrasenya, c);
 
+        JPanel passwordFieldPanel = new JPanel(new BorderLayout());
+        passwordFieldPanel.add(jTF_contrasenya, BorderLayout.CENTER);
+
+        JToggleButton showPasswordToggle = new JToggleButton();
+        ImageIcon eyeClosedIcon = new ImageIcon(new ImageIcon("data/img/contra_ojo_cerrado.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+        showPasswordToggle.setIcon(eyeClosedIcon);
+        showPasswordToggle.setBorder(new EmptyBorder(0, 0, 0, 10));
+        showPasswordToggle.setContentAreaFilled(false);
+        showPasswordToggle.setFocusable(false);
+        ImageIcon eyeOpenIcon = new ImageIcon(new ImageIcon("data/img/contra_ojo_abierto.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+
+        showPasswordToggle.addActionListener(e -> {
+            if (showPasswordToggle.isSelected()) {
+                jTF_contrasenya.setEchoChar((char) 0);
+                showPasswordToggle.setIcon(eyeOpenIcon);
+            } else {
+                jTF_contrasenya.setEchoChar(defaultEchoChar);
+                showPasswordToggle.setIcon(eyeClosedIcon);
+            }
+        });
+
+        passwordFieldPanel.add(showPasswordToggle, BorderLayout.EAST);
+        panel_signin.add(passwordFieldPanel, c);
+
+        passwordFieldPanel.add(showPasswordToggle, BorderLayout.EAST);
+        panel_signin.add(passwordFieldPanel, c);
 
         bIniciarSessio = new JButton("INICIAR SESSIO");
         bIniciarSessio.setPreferredSize(new Dimension(50, 30));
@@ -135,7 +158,7 @@ public class SignInView extends JFrame {
 
     }
 
-    public void registerController(ActionListener actionListener) {
+    public void logInController(ActionListener actionListener) {
         bIniciarSessio.addActionListener(actionListener);
     }
 

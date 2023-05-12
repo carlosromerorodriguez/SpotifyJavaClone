@@ -1,44 +1,39 @@
 package presentation.view;
 
+import business.BusinessLogicMusic;
+import business.BusinessLogicSong;
+import com.sun.tools.javac.Main;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class ViewsController {
+    private final CardLayout cardLayout;
 
-    SignInView signInView;
-    SignUpView signUpView;
-    LogOutView logOutView;
+    private final JFrame window;
 
-    WelcomeView welcomeView;
+    private final JPanel cardPanelInici;
 
-    PlayMusicView playMusicView;
+    private final JPanel panelPrincipal;
 
-    CardLayout cardLayout;
+    public ViewsController(SignInView signInView, SignUpView signUpView, LogOutView logOutView, WelcomeView welcomeView,
+                           AddMusicView addMusicView, ListMusicView listMusicView, DeleteMusicView deleteMusicView,
+                           MainMenuView mainMenuView, PlayMusicView playMusicView){
 
-    JFrame ventana = new JFrame("Spotifai");
 
-    private JPanel cardPanelInici;
-
-    private JPanel panelPrincipal;
-
-    public ViewsController(SignInView signInView, SignUpView signUpView, LogOutView logOutView, WelcomeView welcomeView
-    , PlayMusicView playMusicView, MainMenuView mainMenuView){
-
-        ImageIcon imagenIcono = new ImageIcon("src/resources.img/spotify.png");
-
-        ventana.setIconImage(imagenIcono.getImage());
-        this.signInView = signInView;
-        this.signUpView = signUpView;
-        this.logOutView = logOutView;
-        this.welcomeView = welcomeView;
-        this.playMusicView = playMusicView;
+        ImageIcon spotifyIcon = new ImageIcon("data/img/spotify.png");
+        this.window = new JFrame("Espotifai");
+        this.window.setIconImage(spotifyIcon.getImage());
 
         cardLayout = new CardLayout();
         cardPanelInici = new JPanel(cardLayout);
-        cardPanelInici.add(signInView.getPanel_signin(), "signIn");
+        cardPanelInici.add(signInView.getPanelSignIn(), "signIn");
         cardPanelInici.add(signUpView.getPanelSignup(), "signUp");
         cardPanelInici.add(logOutView.ventanaEmergenteLogOut(), "logout");
         cardPanelInici.add(welcomeView.getWelcomePanel(), "welcome");
+        cardPanelInici.add(addMusicView.getPanel_add_song(), "addSong");
+        cardPanelInici.add(listMusicView.getPanel_list(), "listMusic");
+        cardPanelInici.add(deleteMusicView.getPanel_delete_song(), "deleteSong");
 
         panelPrincipal = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -66,18 +61,49 @@ public class ViewsController {
         gbc.gridy = 1;
         gbc.gridwidth = 2;
         gbc.weighty = 0.2;
-        panelPrincipal.add(playMusicView.getPanel_reproductor(), gbc);
+        panelPrincipal.add(playMusicView.getPanelReproductor(), gbc);
     }
 
     public void createViewPrincipal(){
-
-        ventana.add(this.cardPanelInici);
-        ventana.setSize(500, 700);
-        ventana.setLocationRelativeTo(null);
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ventana.setResizable(false);
+        window.add(this.cardPanelInici);
+        window.setSize(500, 700);
+        window.setLocationRelativeTo(null);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setResizable(false);
         cardLayout.show(cardPanelInici, "welcome");
-        ventana.setVisible(true);
+        window.setVisible(true);
+    }
+
+    public void createViewAddSong(){
+
+        window.add(this.cardPanelInici);
+        window.setSize(500, 700);
+        window.setLocationRelativeTo(null);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setResizable(false);
+        cardLayout.show(cardPanelInici, "addSong");
+        window.setVisible(true);
+    }
+
+    public void createViewListSong(){
+        window.add(this.cardPanelInici);
+        window.setSize(500, 700);
+        window.setLocationRelativeTo(null);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setResizable(false);
+        cardLayout.show(cardPanelInici, "listMusic");
+        window.setVisible(true);
+    }
+
+    public void createViewDeleteSong(){
+
+        window.add(this.cardPanelInici);
+        window.setSize(500, 700);
+        window.setLocationRelativeTo(null);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setResizable(false);
+        cardLayout.show(cardPanelInici, "deleteSong");
+        window.setVisible(true);
     }
 
     public void setSignInView(){
@@ -92,17 +118,20 @@ public class ViewsController {
         cardLayout.show(cardPanelInici, "welcome");
     }
 
+    public void setAddMusicView(){cardLayout.show(cardPanelInici, "addSong");}
+    public void setDeleteMusicView(){cardLayout.show(cardPanelInici, "deleteSong");}
+
     public void createViewReproductor(){
 
-        ventana.add(panelPrincipal);
-        ventana.remove(cardPanelInici);
-        ventana.pack();
-        ventana.setSize(1300, 800);
-        ventana.setLocationRelativeTo(null);
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ventana.setResizable(false);
+        window.add(panelPrincipal);
+        window.remove(cardPanelInici);
+        window.pack();
+        window.setSize(1300, 800);
+        window.setLocationRelativeTo(null);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setResizable(false);
         cardLayout.show(cardPanelInici, "welcome");
-        ventana.setVisible(true);
+        window.setVisible(true);
 
     }
 }

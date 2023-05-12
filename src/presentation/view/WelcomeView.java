@@ -1,35 +1,29 @@
 package presentation.view;
 
-import presentation.controller.SignInController;
-import presentation.controller.WelcomeController;
-import presentation.view.Utilities.TemplateField;
 import presentation.view.Utilities.UIPalette;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Spliterators;
-
-import static presentation.view.SignUpView.REGISTER_COMMAND;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class WelcomeView extends JFrame {
 
 
-    private JPanel welcomePanel;
+    private final JPanel welcomePanel;
     public static final String REGISTER_VIEW_COMMAND = "REGISTER_VIEW_COMMAND";
 
     public static final String SIGNUP_VIEW_COMMAND = "SIGNUP_VIEW_COMMAND";
     /**
      * Button to register a user
      */
-    private JButton bRegister;
+    private final JButton bRegister;
 
     /**
      * Button to sign in a user
      */
-    private JButton bSignIn;
+    private final JButton bSignIn;
 
     public WelcomeView() {
         welcomePanel = new JPanel(new GridBagLayout());
@@ -57,6 +51,15 @@ public class WelcomeView extends JFrame {
         c.anchor = GridBagConstraints.CENTER;
         bRegister = new JButton("Register");
         bRegister.setActionCommand(REGISTER_VIEW_COMMAND);
+        bRegister.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                bRegister.setBackground(UIPalette.BUTTON_HOVER.getColor());
+            }
+            public void mouseExited(MouseEvent evt) {
+                bRegister.setBackground(UIPalette.TEXT_COLOR.getColor());
+            }
+        });
+
         welcomePanel.add(bRegister, c);
         c.gridx = 0;
         c.gridy = 3;
@@ -65,9 +68,16 @@ public class WelcomeView extends JFrame {
         c.gridy = 4;
         bSignIn = new JButton("Sign In");
         bSignIn.setActionCommand(SIGNUP_VIEW_COMMAND);
+        bSignIn.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                bSignIn.setBackground(UIPalette.BUTTON_HOVER.getColor());
+            }
+            public void mouseExited(MouseEvent evt) {
+                bSignIn.setBackground(UIPalette.TEXT_COLOR.getColor());
+            }
+        });
         welcomePanel.add(bSignIn, c);
     }
-
 
     private JLabel createLabel(Font font) {
         JLabel label = new JLabel("WELCOME");
@@ -84,8 +94,7 @@ public class WelcomeView extends JFrame {
         bRegister.addActionListener(actionListener);
     }
 
-    public void signinController(ActionListener actionListener) {
+    public void welcomeController(ActionListener actionListener) {
         bSignIn.addActionListener(actionListener);
     }
-
 }

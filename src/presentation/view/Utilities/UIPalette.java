@@ -6,7 +6,7 @@ import java.awt.*;
  * Defines a palette of colors used in the application's UI
  */
 public enum UIPalette {
-
+    ADD_SONG_COLOR(20, 92, 109),
     /**
      * The main background color of the application
      */
@@ -58,7 +58,11 @@ public enum UIPalette {
     /**
      * A custom color used for error messages
      */
-    ERROR_COLOR(150, 50, 50);
+    ERROR_COLOR(150, 50, 50),
+
+    BUTTON_HOVER(100, 255, 153),
+
+    BUTTON_COLOR(0, 255, 153);
 
     /**
      * The RGB values for the color

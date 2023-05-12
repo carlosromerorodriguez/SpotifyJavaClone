@@ -5,9 +5,9 @@ import business.entities.Song;
 import business.entities.User;
 
 public interface SongDAO {
-    public boolean addSong(Song song);
+    boolean addSong(Song song);
     Music readSongList();
     boolean updateSong(Song song);
-    boolean deleteSong(Song song);
+    boolean deleteSong(String title);
     String readLyrics(Song song);
 }

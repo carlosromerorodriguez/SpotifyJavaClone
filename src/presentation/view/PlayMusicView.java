@@ -4,22 +4,19 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 
 public class PlayMusicView {
-
-
-    public static final String PLAY_MUSIC_COMMAND = "PLAY_MUSIC_COMMAND";
+    public static final String PLAY_PAUSE_MUSIC_COMMAND = "PLAY_MUSIC_COMMAND";
     public static final String PREVIOUS_MUSIC_COMMAND = "PREVIOUS_MUSIC_COMMAND";
     public static final String NEXT_MUSIC_COMMAND = "NEXT_MUSIC_COMMAND";
     public static final String REPEAT_MUSIC_COMMAND = "REPEAT_MUSIC_COMMAND";
 
-    private JPanel contentPane;
-    private JButton bPrev;
-    private JButton bPlay;
-    private JButton bNext;
-    private JProgressBar progressBar;
-    private JButton bRepeat;
+    private final JPanel contentPane;
+    private final JButton bPrev;
+    private final JButton bPlay;
+    private final JButton bNext;
+    private final JProgressBar progressBar;
+    private final JButton bRepeat;
 
     public JPanel getContentPane() {
         return contentPane;
@@ -46,54 +43,61 @@ public class PlayMusicView {
     }
 
     public PlayMusicView() {
-
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setLayout(new GridBagLayout());
 
-        bPrev = new JButton(imageResize("src/img/previous.png", 25, 25));
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        bPrev = new JButton(imageResize("data/img/previous.png", 25, 25));
         bPrev.setContentAreaFilled(false);
         bPrev.setBorderPainted(false);
-        bPrev.setBounds(690, 30, 30, 23);
         bPrev.setActionCommand(PREVIOUS_MUSIC_COMMAND);
-        contentPane.setLayout(null);
-        contentPane.add(bPrev);
+        gbc.gridx = 0; // posición X
+        gbc.gridy = 0; // posición Y
+        gbc.insets = new Insets(0, 750, 0, 0);
+        contentPane.add(bPrev, gbc);
 
-        bPlay = new JButton(imageResize("src/img/play.png", 25, 25));
+        gbc.insets = new Insets(0, 0, 0, 0);
+        bPlay = new JButton(imageResize("data/img/play.png", 25, 25));
         bPlay.setContentAreaFilled(false);
         bPlay.setBorderPainted(false);
-        bPlay.setBounds(750, 27, 30, 28);
-        bPlay.setActionCommand(PLAY_MUSIC_COMMAND);
-        contentPane.add(bPlay);
+        bPlay.setActionCommand(PLAY_PAUSE_MUSIC_COMMAND);
+        gbc.gridx = 1;
+        contentPane.add(bPlay, gbc);
 
-        bNext = new JButton(imageResize("src/img/next.png",30, 25));
+        bNext = new JButton(imageResize("data/img/next.png",30, 25));
         bNext.setContentAreaFilled(false);
         bNext.setBorderPainted(false);
-        bNext.setBounds(810, 30, 30, 23);
         bNext.setActionCommand(NEXT_MUSIC_COMMAND);
-        contentPane.add(bNext);
+        gbc.gridx = 2;
+        gbc.insets = new Insets(0, -350, 0, 0);
+        contentPane.add(bNext, gbc);
 
-        bRepeat = new JButton(imageResize("src/img/repeat.png", 20, 20));
+        bRepeat = new JButton(imageResize("data/img/repeat.png", 20, 20));
         bRepeat.setContentAreaFilled(false);
         bRepeat.setBorderPainted(false);
-        bRepeat.setBounds(1140, 30, 47, 23);
         bRepeat.setActionCommand(REPEAT_MUSIC_COMMAND);
-        contentPane.add(bRepeat);
+        gbc.gridx = 3;
+        contentPane.add(bRepeat, gbc);
 
         progressBar = new JProgressBar();
-        progressBar.setBounds(390, 70, 800, 14);
         progressBar.setValue(40);
         progressBar.setMaximum(200);
-        contentPane.add(progressBar);
-
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 3; // La barra de progreso se extenderá sobre las 4 columnas
+        gbc.weightx = 1.0; // Asigna más espacio a la barra de progreso
+        gbc.fill = GridBagConstraints.HORIZONTAL; // Hace que la barra de progreso se expanda horizontalmente
+        gbc.insets = new Insets(0, 500, 0, 0); // Añade margen a la izquierda para centrar la barra
+        contentPane.add(progressBar, gbc);
     }
 
     private ImageIcon imageResize(String ruta, int width, int height){
-
         ImageIcon imagenIcono = new ImageIcon(ruta);
         Image imagenOriginal = imagenIcono.getImage();
         Image nuevaImagen = imagenOriginal.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        ImageIcon iconoRedimensionado = new ImageIcon(nuevaImagen);
-        return iconoRedimensionado;
+        return new ImageIcon(nuevaImagen);
     }
 
     public JPanel getPanel_reproductor() {

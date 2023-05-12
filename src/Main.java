@@ -1,19 +1,13 @@
+import business.BusinessLogicMPlayer;
 import business.BusinessLogicUser;
 import persistance.ConfigDatabaseDAO;
 import persistance.DDBBAccess;
 import persistance.UserDatabaseDAO;
-import persistance.exceptions.ConfigFileNotFoundException;
 import presentation.controller.*;
-import presentation.view.ErrorHandler;
 import presentation.view.SignUpView;
 import presentation.view.WelcomeView;
 import presentation.controller.WelcomeController;
 import presentation.view.*;
-
-import javax.swing.*;
-import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) {
@@ -24,19 +18,21 @@ public class Main {
         // TODO: Esto se puede modificar
         UserDatabaseDAO userDatabaseDAO = new UserDatabaseDAO(ddBBAccess);
         BusinessLogicUser businessLogicUser = new BusinessLogicUser(userDatabaseDAO);
+        BusinessLogicMPlayer businessLogicMPlayer = new BusinessLogicMPlayer();
 
         SignUpView signUpView = new SignUpView();
         LogOutView logOutView = new LogOutView();
         SignInView signInView = new SignInView();
         WelcomeView welcomeView = new WelcomeView();
         PlayMusicView playMusicView = new PlayMusicView();
-        ViewsController viewsController = new ViewsController(signInView, signUpView, logOutView, welcomeView, playMusicView);
+        MainMenuView mainMenuView = new MainMenuView();
+        ViewsController viewsController = new ViewsController(signInView, signUpView, logOutView, welcomeView, playMusicView, mainMenuView);
 
         //LogOutController logOutController = new LogOutController(businessLogicUser);
         SignUpController signUpController = new SignUpController(signUpView, businessLogicUser, viewsController);
         SignInController signInController = new SignInController(signInView, businessLogicUser, viewsController);
         WelcomeController welcomeController = new WelcomeController(welcomeView, businessLogicUser, viewsController);
-        PlayMusicController playMusicController = new PlayMusicController(playMusicView, businessLogicUser, viewsController);
+        PlayMusicController playMusicController = new PlayMusicController(playMusicView, businessLogicMPlayer, viewsController);
 
         signUpView.registerController(signUpController);
         signUpView.backController(signUpController);
@@ -46,6 +42,7 @@ public class Main {
         welcomeView.signinController(welcomeController);
         playMusicView.addController(playMusicController);
 
-        viewsController.createViewPrincipal();
+        //viewsController.createViewPrincipal();
+        viewsController.createViewReproductor();
     }
 }

@@ -1,9 +1,5 @@
 package presentation.view;
 
-import presentation.view.LogOutView;
-import presentation.view.SignInView;
-import presentation.view.SignUpView;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -26,9 +22,9 @@ public class ViewsController {
     private JPanel panelPrincipal;
 
     public ViewsController(SignInView signInView, SignUpView signUpView, LogOutView logOutView, WelcomeView welcomeView
-    , PlayMusicView playMusicView){
+    , PlayMusicView playMusicView, MainMenuView mainMenuView){
 
-        ImageIcon imagenIcono = new ImageIcon("src/img/spotify.png");
+        ImageIcon imagenIcono = new ImageIcon("src/resources.img/spotify.png");
 
         ventana.setIconImage(imagenIcono.getImage());
         this.signInView = signInView;
@@ -48,7 +44,7 @@ public class ViewsController {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
 
-        JPanel panelSuperiorIzquierda = new JPanel();
+        JPanel panelSuperiorIzquierda = mainMenuView.getMenuPanel();
         panelSuperiorIzquierda.setBackground(Color.BLUE);
         JPanel panelSuperiorDerecha = new JPanel();
         panelSuperiorDerecha.setBackground(Color.RED);

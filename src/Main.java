@@ -57,7 +57,7 @@ public class Main {
         deleteMusicView.deleteMusicController(deleteMusicController);
 
         //viewsController.createViewPrincipal();
-        viewsController.createViewAddSong();
+        //viewsController.createViewAddSong();
         //viewsController.createViewListSong();
         //viewsController.createViewDeleteSong();
         viewsController.createViewReproductor();

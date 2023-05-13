@@ -1,5 +1,6 @@
 package presentation.view;
 
+import presentation.view.Utilities.Fonts;
 import presentation.view.Utilities.UIPalette;
 
 import javax.swing.*;
@@ -35,7 +36,7 @@ public class WelcomeView extends JFrame {
         c.gridwidth = 3;
         c.anchor = GridBagConstraints.CENTER;
 
-        Font fuente_titol = new Font("Sans-Serif", Font.PLAIN, 35);
+        Font fuente_titol = Fonts.getMediumFont(50f);
         JLabel welcomeTitle = createLabel(fuente_titol);
         welcomeTitle.setForeground(UIPalette.TEXT_COLOR.getColor());
         welcomePanel.add(welcomeTitle, c);
@@ -47,16 +48,22 @@ public class WelcomeView extends JFrame {
         c.gridx = 0;
         c.gridy = 2;
         c.gridwidth = 3;
-        c.fill = GridBagConstraints.BOTH;
         c.anchor = GridBagConstraints.CENTER;
-        bRegister = new JButton("Register");
+        bRegister = new JButton("Registrar-se !");
         bRegister.setActionCommand(REGISTER_VIEW_COMMAND);
+        bRegister.setFont(Fonts.getBoldFont(25f));
+        bRegister.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
+        bRegister.setOpaque(true);
+        bRegister.setFocusPainted(true);
+        bRegister.setContentAreaFilled(true);
+        bRegister.setBorderPainted(false);
+        bRegister.setForeground(UIPalette.TEXT_COLOR.getColor());
         bRegister.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent evt) {
-                bRegister.setBackground(UIPalette.BUTTON_HOVER.getColor());
+                bRegister.setBackground(UIPalette.COLOR_SECUNDARIO.getColor());
             }
             public void mouseExited(MouseEvent evt) {
-                bRegister.setBackground(UIPalette.TEXT_COLOR.getColor());
+                bRegister.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
             }
         });
 
@@ -66,21 +73,31 @@ public class WelcomeView extends JFrame {
         welcomePanel.add(Box.createRigidArea(new Dimension(0, 30)), c);
         c.gridx = 0;
         c.gridy = 4;
-        bSignIn = new JButton("Sign In");
+        bSignIn = new JButton("Ja tinc un compte");
+        bSignIn.setForeground(UIPalette.COLOR_SECUNDARIO.getColor());
+        bSignIn.setOpaque(false);
+        bSignIn.setFocusPainted(false);
+        bSignIn.setContentAreaFilled(false);
+        bSignIn.setBorderPainted(false);
+        bSignIn.setFont(Fonts.getBoldFont(15f));
         bSignIn.setActionCommand(SIGNUP_VIEW_COMMAND);
+        welcomePanel.add(bSignIn, c);
+
+
         bSignIn.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent evt) {
-                bSignIn.setBackground(UIPalette.BUTTON_HOVER.getColor());
+                bSignIn.setForeground(UIPalette.TEXT_COLOR.getColor());
             }
             public void mouseExited(MouseEvent evt) {
-                bSignIn.setBackground(UIPalette.TEXT_COLOR.getColor());
+                bSignIn.setForeground(UIPalette.COLOR_SECUNDARIO.getColor());
             }
         });
+
         welcomePanel.add(bSignIn, c);
     }
 
     private JLabel createLabel(Font font) {
-        JLabel label = new JLabel("WELCOME");
+        JLabel label = new JLabel("Benvingut.");
         label.setFont(font);
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
         return label;

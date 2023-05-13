@@ -10,10 +10,19 @@ public enum UIPalette {
     /**
      * The main background color of the application
      */
-    TEXT_COLOR(213,225,219),
-    APP_BACKGROUND(45,106,79),
+    TEXT_COLOR(236, 243, 158),
+    APP_BACKGROUND(49, 87, 44),
+
+    COLOR_PRIMARIO_CLARO(79, 119, 45),
+
+    COLOR_REPRODUCTOR(19, 42, 19),
 
     INPUT_TEXT(51, 255, 153),
+
+    COLOR_PRIMARIO(49, 87, 44),
+
+    COLOR_SECUNDARIO(144, 169, 85),
+
 
     /**
      * The background color of menus

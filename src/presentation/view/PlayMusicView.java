@@ -1,5 +1,8 @@
 package presentation.view;
 
+import presentation.view.Utilities.Fonts;
+import presentation.view.Utilities.UIPalette;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -19,6 +22,9 @@ public class PlayMusicView {
     private JButton bStop;
     private JProgressBar progressBar;
     private JButton bRepeat;
+
+    private JLabel titleArtist;
+    private JLabel titleSong;
 
     public JButton getbStop() {
         return bStop;
@@ -52,8 +58,13 @@ public class PlayMusicView {
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new GridBagLayout());
+        contentPane.setBackground(UIPalette.COLOR_REPRODUCTOR.getColor());
 
         GridBagConstraints gbc = new GridBagConstraints();
+        addTitleArtist(gbc);
+        addBlankSpace(gbc);
+        addBlankSpace2(gbc);
+        gbc.weightx = 0.0;
         addPreviousButton(gbc);
         addPlayButton(gbc);
         addNextButton(gbc);
@@ -62,47 +73,71 @@ public class PlayMusicView {
         addProgressBar(gbc);
     }
 
+    private void addBlankSpace(GridBagConstraints gbc) {
+        JLabel blankLabel = new JLabel();
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.weightx = 0.2;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        contentPane.add(blankLabel, gbc);
+    }
+    private void addBlankSpace2(GridBagConstraints gbc) {
+        JLabel blankLabel = new JLabel();
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        contentPane.add(blankLabel, gbc);
+    }
+
+    private void addTitleArtist(GridBagConstraints gbc) {
+        titleSong = new JLabel("Song");
+        titleSong.setForeground(UIPalette.TEXT_COLOR.getColor());
+        titleSong.setFont(Fonts.getBoldFont(40f));
+
+        titleArtist = new JLabel("Artist");
+        titleArtist.setForeground(UIPalette.TEXT_COLOR.getColor());
+        titleArtist.setFont(Fonts.getLightFont(25f));
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(0, 50, 0, 0); // Añadir margen inferior para separar de los botones
+        contentPane.add(titleSong, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.insets = new Insets(0, 25, 0, 10); // Añadir margen inferior para separar de los botones
+        contentPane.add(titleArtist, gbc);
+    }
+
     private void addProgressBar(GridBagConstraints gbc) {
         progressBar = new JProgressBar();
         progressBar.setValue(40);
         progressBar.setMaximum(200);
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 3;
-        gbc.weightx = 1.0; // Asigna más espacio a la barra de progreso
+        progressBar.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
+        progressBar.setForeground(UIPalette.TEXT_COLOR.getColor());
+        progressBar.setBorderPainted(false);
+        gbc.gridx = 1;
+        gbc.gridy = 1; // Colocar la barra de progreso en la tercera fila
+        gbc.gridwidth = 5; // Ajustar el ancho de la barra de progreso para que ocupe todas las columnas
+        gbc.weighty = 0.0;
+        gbc.ipadx = -15;
         gbc.fill = GridBagConstraints.HORIZONTAL; // Hace que la barra de progreso se expanda horizontalmente
-        gbc.insets = new Insets(0, 500, 0, 0); // Añade margen a la izquierda para centrar la barra
+        gbc.insets = new Insets(0, 300, 0, 0); // Añade margen superior e inferior para separar de los botones
         contentPane.add(progressBar, gbc);
     }
 
-    private void addStopButton(GridBagConstraints gbc) {
-        bStop = new JButton(imageResize("data/img/stop_music.png", 25, 25));
-        bStop.setContentAreaFilled(false);
-        bStop.setBorderPainted(false);
-        bStop.setActionCommand(STOP_MUSIC_COMMAND);
-        gbc.gridx = 4;
-        gbc.insets = new Insets(0, -400, 0, 0);
-        contentPane.add(bStop, gbc);
-    }
 
-    private void addRepeatButton(GridBagConstraints gbc) {
-        bRepeat = new JButton(imageResize("data/img/repeat.png", 20, 20));
-        bRepeat.setContentAreaFilled(false);
-        bRepeat.setBorderPainted(false);
-        bRepeat.setActionCommand(REPEAT_MUSIC_COMMAND);
-        gbc.gridx = 3;
-        gbc.insets = new Insets(0, -950, 0, 0);
-        contentPane.add(bRepeat, gbc);
-    }
-
-    private void addNextButton(GridBagConstraints gbc) {
-        bNext = new JButton(imageResize("data/img/next.png",30, 25));
-        bNext.setContentAreaFilled(false);
-        bNext.setBorderPainted(false);
-        bNext.setActionCommand(NEXT_MUSIC_COMMAND);
-        gbc.gridx = 2;
-        gbc.insets = new Insets(0, -250, 0, 0);
-        contentPane.add(bNext, gbc);
+    private void addPreviousButton(GridBagConstraints gbc) {
+        bPrev = new JButton(imageResize("data/img/previous.png", 25, 25));
+        bPrev.setContentAreaFilled(false);
+        bPrev.setBorderPainted(false);
+        bPrev.setActionCommand(PREVIOUS_MUSIC_COMMAND);
+        gbc.gridx = 2; // Cambiar el valor de gridx a 2
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.LINE_END; // Alinear a la derecha
+        gbc.insets = new Insets(0, 0, 0, 100); // Añadir margen derecho
+        contentPane.add(bPrev, gbc);
     }
 
     private void addPlayButton(GridBagConstraints gbc) {
@@ -110,21 +145,45 @@ public class PlayMusicView {
         bPlay.setContentAreaFilled(false);
         bPlay.setBorderPainted(false);
         bPlay.setActionCommand(PLAY_PAUSE_MUSIC_COMMAND);
-        gbc.gridx = 1;
+        gbc.gridx = 3; // Cambiar el valor de gridx a 3
+        gbc.anchor = GridBagConstraints.LINE_END; // Alinear a la derecha
+        gbc.insets = new Insets(0, 0, 0, 100); // Añadir margen derecho
         contentPane.add(bPlay, gbc);
     }
 
-    private void addPreviousButton(GridBagConstraints gbc) {
-        bPrev = new JButton(imageResize("data/img/previous.png", 25, 25));
-        bPrev.setContentAreaFilled(false);
-        bPrev.setBorderPainted(false);
-        bPrev.setActionCommand(PREVIOUS_MUSIC_COMMAND);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.insets = new Insets(0, 850, 0, 0);
-        contentPane.add(bPrev, gbc);
-        gbc.insets = new Insets(0, 0, 0, 0);
+    private void addNextButton(GridBagConstraints gbc) {
+        bNext = new JButton(imageResize("data/img/next.png", 30, 25));
+        bNext.setContentAreaFilled(false);
+        bNext.setBorderPainted(false);
+        bNext.setActionCommand(NEXT_MUSIC_COMMAND);
+        gbc.gridx = 4; // Cambiar el valor de gridx a 4
+        gbc.anchor = GridBagConstraints.LINE_END; // Alinear a la derecha
+        gbc.insets = new Insets(0, 0, 0, 100); // Añadir margen derecho
+        contentPane.add(bNext, gbc);
     }
+
+    private void addRepeatButton(GridBagConstraints gbc) {
+        bRepeat = new JButton(imageResize("data/img/repeat.png", 25, 25));
+        bRepeat.setContentAreaFilled(false);
+        bRepeat.setBorderPainted(false);
+        bRepeat.setActionCommand(REPEAT_MUSIC_COMMAND);
+        gbc.gridx = 5; // Cambiar el valor de gridx a 5
+        gbc.anchor = GridBagConstraints.LINE_END; // Alinear a la derecha
+        gbc.insets = new Insets(0, 0, 0, 100); // Añadir margen derecho
+        contentPane.add(bRepeat, gbc);
+    }
+
+    private void addStopButton(GridBagConstraints gbc) {
+        bStop = new JButton(imageResize("data/img/stop_music.png", 25, 25));
+        bStop.setContentAreaFilled(false);
+        bStop.setBorderPainted(false);
+        bStop.setActionCommand(STOP_MUSIC_COMMAND);
+        gbc.gridx = 6; // Cambiar el valor de gridx a 6
+        gbc.anchor = GridBagConstraints.LINE_END; // Alinear a la derecha
+        contentPane.add(bStop, gbc);
+    }
+
+
 
     private ImageIcon imageResize(String ruta, int width, int height){
         ImageIcon imagenIcono = new ImageIcon(ruta);

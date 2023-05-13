@@ -1,5 +1,6 @@
 package presentation.view;
 
+import presentation.view.Utilities.Fonts;
 import presentation.view.Utilities.TemplateField;
 import presentation.view.Utilities.UIPalette;
 
@@ -37,8 +38,9 @@ public class SignUpView extends JFrame implements SignUpObserver {
         panelSignup.setBackground(UIPalette.APP_BACKGROUND.getColor());
         panelSignup.setBorder(new EmptyBorder(0, 0, 0, 0));
 
-        Font fTitle = new Font("Sans-Serif", Font.PLAIN, 35);
-        Font fLowerText = new Font("Sans-Serif", Font.PLAIN, 15);
+
+        Font fTitle = Fonts.getBoldFont(30f);
+        Font fLowerText = Fonts.getLightFont(15f);
 
         JLabel registerTitle = createLabel(fTitle);
         registerTitle.setForeground(UIPalette.TEXT_COLOR.getColor());
@@ -87,7 +89,7 @@ public class SignUpView extends JFrame implements SignUpObserver {
         c.insets = new Insets(0, 0, 10, 0);
         panelSignup.add(tfSecondPassword,c );
 
-        bRegister = new JButton("REGISTRARSE");
+        bRegister = new JButton("Entrar");
         bRegister.setPreferredSize(new Dimension(50, 30));
         bRegister.setActionCommand(REGISTER_COMMAND);
 
@@ -121,7 +123,7 @@ public class SignUpView extends JFrame implements SignUpObserver {
      * @return JLabel
      */
     private JLabel createLabel(Font font) {
-        JLabel label = new JLabel("REGISTRARSE");
+        JLabel label = new JLabel("Registrar-se.");
         label.setFont(font);
         label.setForeground(UIPalette.TEXT_COLOR.getColor());
         return label;

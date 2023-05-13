@@ -3,6 +3,7 @@ package presentation.view;
 import business.BusinessLogicMusic;
 import business.BusinessLogicSong;
 import com.sun.tools.javac.Main;
+import presentation.view.Utilities.UIPalette;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,27 +41,27 @@ public class ViewsController {
         gbc.fill = GridBagConstraints.BOTH;
 
         JPanel panelSuperiorIzquierda = mainMenuView.getMenuPanel();
-        panelSuperiorIzquierda.setBackground(Color.BLUE);
+        panelSuperiorIzquierda.setBackground(UIPalette.COLOR_PRIMARIO_CLARO .getColor());
         JPanel panelSuperiorDerecha = new JPanel();
-        panelSuperiorDerecha.setBackground(Color.RED);
+        panelSuperiorDerecha.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
         JPanel panelInferior = new JPanel();
-        panelInferior.setBackground(Color.GREEN);
+        panelInferior.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
 
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
-        gbc.weightx = 0.3;
+        gbc.weightx = 0.1;
         gbc.weighty = 1.0;
         panelPrincipal.add(panelSuperiorIzquierda, gbc);
-        gbc.weightx = 0.7;
+        gbc.weightx = 0.9;
         gbc.gridx = 1;
         panelPrincipal.add(panelSuperiorDerecha, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 2;
-        gbc.weighty = 0.2;
+        gbc.weighty = 0.1;
         panelPrincipal.add(playMusicView.getPanelReproductor(), gbc);
     }
 

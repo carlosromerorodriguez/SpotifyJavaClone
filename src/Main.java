@@ -60,6 +60,6 @@ public class Main {
         //viewsController.createViewAddSong();
         //viewsController.createViewListSong();
         //viewsController.createViewDeleteSong();
-        viewsController.createViewReproductor();
+        viewsController.createViewPrincipal();
     }
 }

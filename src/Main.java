@@ -35,7 +35,8 @@ public class Main {
         AddMusicView addMusicView = new AddMusicView();
         ListMusicView listMusicView = new ListMusicView(businessLogicMusic);
         DeleteMusicView deleteMusicView = new DeleteMusicView();
-        ViewsController viewsController = new ViewsController(signInView, signUpView, logOutView, welcomeView, addMusicView, listMusicView, deleteMusicView, mainMenuView, playMusicView);
+        PlaylistView playlistView = new PlaylistView();
+        ViewsController viewsController = new ViewsController(signInView, signUpView, logOutView, welcomeView, addMusicView, listMusicView, deleteMusicView, mainMenuView, playMusicView, playlistView);
 
         //LogOutController logOutController = new LogOutController(businessLogicUser);
         SignUpController signUpController = new SignUpController(signUpView, businessLogicUser, viewsController);
@@ -60,6 +61,6 @@ public class Main {
         //viewsController.createViewAddSong();
         //viewsController.createViewListSong();
         //viewsController.createViewDeleteSong();
-        viewsController.createViewPrincipal();
+        viewsController.createViewReproductor();
     }
 }

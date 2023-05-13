@@ -86,8 +86,9 @@ public class PlayMusicView {
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
-        gbc.weightx = 1.0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 0.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        //gbc.fill = GridBagConstraints.HORIZONTAL;
         contentPane.add(blankLabel, gbc);
     }
 
@@ -100,6 +101,7 @@ public class PlayMusicView {
         titleArtist.setForeground(UIPalette.TEXT_COLOR.getColor());
         titleArtist.setFont(Fonts.getLightFont(25f));
 
+        gbc.weightx = 0.0;
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.insets = new Insets(0, 50, 0, 0); // Añadir margen inferior para separar de los botones
@@ -121,9 +123,9 @@ public class PlayMusicView {
         gbc.gridy = 1; // Colocar la barra de progreso en la tercera fila
         gbc.gridwidth = 5; // Ajustar el ancho de la barra de progreso para que ocupe todas las columnas
         gbc.weighty = 0.0;
-        gbc.ipadx = -15;
+        gbc.ipadx = -11;
         gbc.fill = GridBagConstraints.HORIZONTAL; // Hace que la barra de progreso se expanda horizontalmente
-        gbc.insets = new Insets(0, 300, 0, 0); // Añade margen superior e inferior para separar de los botones
+        gbc.insets = new Insets(0, 300, 0, -230); // Añade margen superior e inferior para separar de los botones
         contentPane.add(progressBar, gbc);
     }
 
@@ -133,32 +135,32 @@ public class PlayMusicView {
         bPrev.setContentAreaFilled(false);
         bPrev.setBorderPainted(false);
         bPrev.setActionCommand(PREVIOUS_MUSIC_COMMAND);
-        gbc.gridx = 2; // Cambiar el valor de gridx a 2
+        gbc.gridx = 2; // Cambiar el valor de gridx a 1
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.LINE_END; // Alinear a la derecha
-        gbc.insets = new Insets(0, 0, 0, 100); // Añadir margen derecho
+        gbc.insets = new Insets(0, 10, 0, 10); // Añadir margen derecho
         contentPane.add(bPrev, gbc);
     }
+
 
     private void addPlayButton(GridBagConstraints gbc) {
         bPlay = new JButton(imageResize("data/img/play.png", 25, 25));
         bPlay.setContentAreaFilled(false);
         bPlay.setBorderPainted(false);
         bPlay.setActionCommand(PLAY_PAUSE_MUSIC_COMMAND);
-        gbc.gridx = 3; // Cambiar el valor de gridx a 3
-        gbc.anchor = GridBagConstraints.LINE_END; // Alinear a la derecha
-        gbc.insets = new Insets(0, 0, 0, 100); // Añadir margen derecho
+        gbc.gridx = 3; // Cambiar el valor de gridx a 2
+        gbc.insets = new Insets(0, 10, 0, 10); // Añadir margen derecho e izquierdo
         contentPane.add(bPlay, gbc);
     }
+
 
     private void addNextButton(GridBagConstraints gbc) {
         bNext = new JButton(imageResize("data/img/next.png", 30, 25));
         bNext.setContentAreaFilled(false);
         bNext.setBorderPainted(false);
         bNext.setActionCommand(NEXT_MUSIC_COMMAND);
-        gbc.gridx = 4; // Cambiar el valor de gridx a 4
-        gbc.anchor = GridBagConstraints.LINE_END; // Alinear a la derecha
-        gbc.insets = new Insets(0, 0, 0, 100); // Añadir margen derecho
+        gbc.gridx = 4; // Cambiar el valor de gridx a 3
+        gbc.insets = new Insets(0, 10, 0, 10); // Añadir margen derecho e izquierdo
         contentPane.add(bNext, gbc);
     }
 
@@ -167,22 +169,21 @@ public class PlayMusicView {
         bRepeat.setContentAreaFilled(false);
         bRepeat.setBorderPainted(false);
         bRepeat.setActionCommand(REPEAT_MUSIC_COMMAND);
-        gbc.gridx = 5; // Cambiar el valor de gridx a 5
-        gbc.anchor = GridBagConstraints.LINE_END; // Alinear a la derecha
-        gbc.insets = new Insets(0, 0, 0, 100); // Añadir margen derecho
+        gbc.gridx = 5; // Cambiar el valor de gridx a 4
+        gbc.insets = new Insets(0, 10, 0, 10); // Añadir margen derecho e izquierdo
         contentPane.add(bRepeat, gbc);
     }
+
 
     private void addStopButton(GridBagConstraints gbc) {
         bStop = new JButton(imageResize("data/img/stop_music.png", 25, 25));
         bStop.setContentAreaFilled(false);
         bStop.setBorderPainted(false);
         bStop.setActionCommand(STOP_MUSIC_COMMAND);
-        gbc.gridx = 6; // Cambiar el valor de gridx a 6
-        gbc.anchor = GridBagConstraints.LINE_END; // Alinear a la derecha
+        gbc.gridx = 6; // Cambiar el valor de gridx a 5
+        gbc.insets = new Insets(0, 10, 0, 250); // Añadir margen izquierdo
         contentPane.add(bStop, gbc);
     }
-
 
 
     private ImageIcon imageResize(String ruta, int width, int height){

@@ -19,7 +19,7 @@ public class ViewsController {
 
     public ViewsController(SignInView signInView, SignUpView signUpView, LogOutView logOutView, WelcomeView welcomeView,
                            AddMusicView addMusicView, ListMusicView listMusicView, DeleteMusicView deleteMusicView,
-                           MainMenuView mainMenuView, PlayMusicView playMusicView){
+                           MainMenuView mainMenuView, PlayMusicView playMusicView, PlaylistView playlistView) {
 
 
         ImageIcon spotifyIcon = new ImageIcon("data/img/spotify.png");
@@ -42,8 +42,13 @@ public class ViewsController {
 
         JPanel panelSuperiorIzquierda = mainMenuView.getMenuPanel();
         panelSuperiorIzquierda.setBackground(UIPalette.COLOR_PRIMARIO_CLARO .getColor());
-        JPanel panelSuperiorDerecha = new JPanel();
+
+        CardLayout cardLayout1 = new CardLayout();
+        JPanel panelSuperiorDerecha = new JPanel(cardLayout1);
+        cardLayout1.addLayoutComponent(playMusicView.getPanelReproductor(), "playlist");
         panelSuperiorDerecha.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
+
+
         JPanel panelInferior = new JPanel();
         panelInferior.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
 

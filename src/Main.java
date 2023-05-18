@@ -38,13 +38,14 @@ public class Main {
         PlaylistView playlistView = new PlaylistView();
         ViewsController viewsController = new ViewsController(signInView, signUpView, logOutView, welcomeView, addMusicView, listMusicView, deleteMusicView, mainMenuView, playMusicView, playlistView);
 
-        //LogOutController logOutController = new LogOutController(businessLogicUser);
+        LogOutController logOutController = new LogOutController(businessLogicUser);
         SignUpController signUpController = new SignUpController(signUpView, businessLogicUser, viewsController);
         SignInController signInController = new SignInController(signInView, businessLogicUser, viewsController);
         WelcomeController welcomeController = new WelcomeController(welcomeView, businessLogicUser, viewsController);
         PlayMusicController playMusicController = new PlayMusicController(playMusicView, businessLogicMPlayer, viewsController);
         AddMusicController addMusicController = new AddMusicController(businessLogicSong, addMusicView);
         DeleteMusicController deleteMusicController = new DeleteMusicController(deleteMusicView, businessLogicSong);
+        MainMenuController mainMenuController = new MainMenuController(mainMenuView, businessLogicUser, viewsController);
 
         signUpView.registerController(signUpController);
         signUpView.backController(signUpController);
@@ -56,6 +57,7 @@ public class Main {
         addMusicView.addMusicController(addMusicController);
         addMusicView.backSongController(addMusicController);
         deleteMusicView.deleteMusicController(deleteMusicController);
+        mainMenuView.setActionListeners(mainMenuController);
 
         //viewsController.createViewPrincipal();
         //viewsController.createViewAddSong();

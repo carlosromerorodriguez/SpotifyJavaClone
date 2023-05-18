@@ -11,11 +11,15 @@ import java.awt.*;
 public class ViewsController {
     private final CardLayout cardLayout;
 
+    private CardLayout mainPanelCardLayout;
+
     private final JFrame window;
 
     private final JPanel cardPanelInici;
 
-    private final JPanel panelPrincipal;
+    private JPanel panelSuperiorDerecha;
+
+    private JPanel panelPrincipal;
 
     public ViewsController(SignInView signInView, SignUpView signUpView, LogOutView logOutView, WelcomeView welcomeView,
                            AddMusicView addMusicView, ListMusicView listMusicView, DeleteMusicView deleteMusicView,
@@ -36,6 +40,12 @@ public class ViewsController {
         cardPanelInici.add(listMusicView.getPanel_list(), "listMusic");
         cardPanelInici.add(deleteMusicView.getPanel_delete_song(), "deleteSong");
 
+        crearPanelPrincipal(mainMenuView, playMusicView, playlistView, listMusicView, logOutView);
+    }
+
+    private void crearPanelPrincipal(MainMenuView mainMenuView, PlayMusicView playMusicView, PlaylistView playlistView, ListMusicView listMusicView,
+                                     LogOutView logOutView) {
+
         panelPrincipal = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
@@ -43,15 +53,17 @@ public class ViewsController {
         JPanel panelSuperiorIzquierda = mainMenuView.getMenuPanel();
         panelSuperiorIzquierda.setBackground(UIPalette.COLOR_PRIMARIO_CLARO .getColor());
 
-        CardLayout cardLayout1 = new CardLayout();
-        JPanel panelSuperiorDerecha = new JPanel(cardLayout1);
-        cardLayout1.addLayoutComponent(playMusicView.getPanelReproductor(), "playlist");
-        panelSuperiorDerecha.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
+        mainPanelCardLayout = new CardLayout();
+        panelSuperiorDerecha = new JPanel(mainPanelCardLayout);
+        panelSuperiorDerecha.add(playlistView.getContentPane(), "playlist");
+        panelSuperiorDerecha.add(listMusicView.getPanel_list(), "listMusic");
+        panelSuperiorDerecha.add(logOutView.ventanaEmergenteLogOut(), "logout");
+        mainPanelCardLayout.show(panelSuperiorDerecha, "listMusic");
+        //panelSuperiorDerecha.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
 
 
         JPanel panelInferior = new JPanel();
         panelInferior.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
-
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
@@ -66,7 +78,7 @@ public class ViewsController {
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 2;
-        gbc.weighty = 0.1;
+        gbc.weighty = 0.0;
         panelPrincipal.add(playMusicView.getPanelReproductor(), gbc);
     }
 
@@ -127,6 +139,14 @@ public class ViewsController {
     public void setAddMusicView(){cardLayout.show(cardPanelInici, "addSong");}
     public void setDeleteMusicView(){cardLayout.show(cardPanelInici, "deleteSong");}
 
+    public void setPlaylistView(){
+        mainPanelCardLayout.show(panelSuperiorDerecha, "playlist");
+    }
+
+    public void setListMusicView(){
+        mainPanelCardLayout.show(panelSuperiorDerecha, "listMusic");
+    }
+
     public void createViewReproductor(){
 
         window.add(panelPrincipal);
@@ -139,5 +159,9 @@ public class ViewsController {
         cardLayout.show(cardPanelInici, "welcome");
         window.setVisible(true);
 
+    }
+
+    public void setLogOutView(){
+        mainPanelCardLayout.show(panelSuperiorDerecha, "logout");
     }
 }

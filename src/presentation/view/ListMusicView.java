@@ -3,6 +3,7 @@ package presentation.view;
 import business.BusinessLogicMusic;
 import business.entities.Music;
 import business.entities.Song;
+import presentation.view.Utilities.Fonts;
 import presentation.view.Utilities.UIPalette;
 
 import javax.swing.*;
@@ -20,10 +21,10 @@ public class ListMusicView extends JFrame {
         Music music = businessLogicMusic.listMusic();
         GridBagConstraints c = new GridBagConstraints();
 
-        Font fuente_titol = new Font("Sans-Serif", Font.PLAIN, 35);
-        Font fuente_petit = new Font("Sans-Serif", Font.PLAIN, 15);
+        Font fuente_titol = Fonts.getBoldFont(50f);
+        Font fuente_petit = Fonts.getLightFont(15f);
 
-        JLabel title = new JLabel("CANCIONES");
+        JLabel title = new JLabel("Cançons");
         title.setForeground(UIPalette.TEXT_COLOR.getColor());
         title.setFont(fuente_titol);
         c.ipadx = 100;
@@ -31,12 +32,13 @@ public class ListMusicView extends JFrame {
         c.gridy = 0;
         c.gridwidth = 2;
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.insets = new Insets(100, 0, 20, 0);
+        c.insets = new Insets(50, 0, 0, 525);
         panel_list.add(title, c);
 
         int i = 1;
         //JTable
         for (Song s:music.getArraySongs()) {
+            System.out.println(s.getTitle());
             String print = s.getTitle() + " - " + s.getGenre() + " - "+s.getAuthor()+" - "+s.getAlbum();
             JLabel song = new JLabel("* "+print);
             song.setForeground(UIPalette.TEXT_COLOR.getColor());
@@ -44,6 +46,7 @@ public class ListMusicView extends JFrame {
             c.ipady = 0;
             c.gridx = 0;
             c.gridy = i;
+            c.gridheight = 1;
             c.gridwidth = 1;
             c.insets = new Insets(0, 0, 10, 0);
             panel_list.add(song, c);

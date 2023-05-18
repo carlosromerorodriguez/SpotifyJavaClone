@@ -16,10 +16,16 @@ public class MainMenuView extends JFrame {
 
     private final JPanel menuPanel;
     private final JButton bPlayMusic, bPlaylist, bMusicStatistics, bExit;
+
+    public static final String PLAY_MUSIC = "PLAY_MUSIC";
+    public static final String PLAYLIST = "PLAYLIST";
+    public static final String MUSIC_STATISTICS = "MUSIC_STATISTICS";
+    public static final String EXIT = "EXIT";
     private JLabel imageLabel;
     private final JLabel titulo;
 
     public MainMenuView() {
+
         menuPanel = new JPanel();
         menuPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -33,6 +39,8 @@ public class MainMenuView extends JFrame {
         bExit = createButton("Exit", "data/img/logout_negre.png");
         titulo = LTitulo("Spotifai");
         addImage();
+
+        assignCommands();
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -54,8 +62,13 @@ public class MainMenuView extends JFrame {
         menuPanel.add(bMusicStatistics,gbc);
         gbc.gridy = 4;
         menuPanel.add(bExit,gbc);
+    }
 
-        addListeners();
+    private void assignCommands() {
+        bPlayMusic.setActionCommand(PLAY_MUSIC);
+        bPlaylist.setActionCommand(PLAYLIST);
+        bMusicStatistics.setActionCommand(MUSIC_STATISTICS);
+        bExit.setActionCommand(EXIT);
     }
 
     private JButton createButton(String text, String url) {
@@ -111,10 +124,6 @@ public class MainMenuView extends JFrame {
         return button;
     }
 
-
-
-
-
     private void addImage() {
         imageLabel = new JLabel();
         ImageIcon imageIcon = new ImageIcon("data/img/spotify.png"); // Reemplaza "testImage.jpg" con tu imagen.
@@ -122,20 +131,6 @@ public class MainMenuView extends JFrame {
         Image newimg = image.getScaledInstance(70, 70,  java.awt.Image.SCALE_SMOOTH); // Ajusta el tamaño de la imagen.
         imageIcon = new ImageIcon(newimg);
         imageLabel.setIcon(imageIcon);
-    }
-
-    private void addListeners() {
-        ActionListener actionListener = e -> {
-            String command = e.getActionCommand();
-            System.out.println(command);
-            if ("Exit".equals(command)) {
-                System.exit(0);
-            }
-        };
-        bPlayMusic.addActionListener(actionListener);
-        bPlaylist.addActionListener(actionListener);
-        bMusicStatistics.addActionListener(actionListener);
-        bExit.addActionListener(actionListener);
     }
 
     public JLabel LTitulo(String titulo) {
@@ -153,5 +148,12 @@ public class MainMenuView extends JFrame {
         Image imagenOriginal = imagenIcono.getImage();
         Image nuevaImagen = imagenOriginal.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         return new ImageIcon(nuevaImagen);
+    }
+
+    public void setActionListeners(ActionListener actionListener) {
+        bMusicStatistics.addActionListener(actionListener);
+        bPlayMusic.addActionListener(actionListener);
+        bPlaylist.addActionListener(actionListener);
+        bExit.addActionListener(actionListener);
     }
 }

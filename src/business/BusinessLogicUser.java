@@ -41,8 +41,7 @@ public class BusinessLogicUser {
     }
 
     public boolean loginUser(String email_user, String password) throws UsernameException, PasswordException {
-
-        boolean exists = false;
+        boolean exists;
         if (email_user.isEmpty() || email_user.isBlank()) { throw new UsernameException(); }
         if (!checkPassword(password)) { throw new PasswordException(); }
 
@@ -52,19 +51,14 @@ public class BusinessLogicUser {
         else{
             exists = userDao.checkUserByName(email_user, password);
         }
-
-        if(exists){
-
+        if (exists) {
             try {
                 writeTxtFile(email_user);
             } catch (IOException e) {
                 e.printStackTrace();
             }
             return true;
-        }
-        else{
-            return false;
-        }
+        } else { return false; }
     }
 
     private static String readTxtFile() throws IOException {

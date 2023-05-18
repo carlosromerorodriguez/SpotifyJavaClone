@@ -11,6 +11,7 @@ public enum UIPalette {
      * The main background color of the application
      */
     TEXT_COLOR(236, 243, 158),
+    JTABLE_TEXT_COLOR(0,0,0),
     APP_BACKGROUND(49, 87, 44),
 
     COLOR_PRIMARIO_CLARO(79, 119, 45),

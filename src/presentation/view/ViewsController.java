@@ -79,48 +79,6 @@ public class ViewsController {
         mainPanelCardLayout.show(panelSuperiorDerecha, "musicStatistics");
     }
 
-    public void createViewPrincipal(){
-        window.add(this.cardPanelInici);
-        window.setSize(500, 700);
-        window.setLocationRelativeTo(null);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
-        cardLayout.show(cardPanelInici, "welcome");
-        window.setVisible(true);
-    }
-
-    public void createViewAddSong(){
-
-        window.add(this.cardPanelInici);
-        window.setSize(500, 700);
-        window.setLocationRelativeTo(null);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
-        cardLayout.show(cardPanelInici, "addSong");
-        window.setVisible(true);
-    }
-
-    public void createViewListSong(){
-        window.add(this.cardPanelInici);
-        window.setSize(500, 700);
-        window.setLocationRelativeTo(null);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
-        cardLayout.show(cardPanelInici, "listMusic");
-        window.setVisible(true);
-    }
-
-    public void createViewDeleteSong(){
-
-        window.add(this.cardPanelInici);
-        window.setSize(500, 700);
-        window.setLocationRelativeTo(null);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
-        cardLayout.show(cardPanelInici, "deleteSong");
-        window.setVisible(true);
-    }
-
     public void setSignInView(){
         cardLayout.show(cardPanelInici, "signIn");
     }
@@ -145,7 +103,6 @@ public class ViewsController {
     }
 
     public void createViewReproductor(){
-
         window.add(panelPrincipal);
         window.remove(cardPanelInici);
         window.pack();

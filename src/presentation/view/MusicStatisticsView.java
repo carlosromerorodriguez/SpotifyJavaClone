@@ -3,15 +3,16 @@ package presentation.view;
 import presentation.view.Utilities.Fonts;
 
 import java.awt.*;
+import java.util.HashMap;
 import javax.swing.*;
 
 public class MusicStatisticsView{
-    private int[] data;
+    private HashMap<String, Integer> data;
 
-    private JPanel contentPane;
+    private final JPanel contentPane;
 
     public MusicStatisticsView() {
-        data = new int[]{15, 10, 8, 5, 12}; // Example data
+        data = new HashMap<>();
         BarChartPanel chartPanel = new BarChartPanel(data);
 
         contentPane = new JPanel();
@@ -35,5 +36,13 @@ public class MusicStatisticsView{
 
     public JPanel getContentPane() {
         return contentPane;
+    }
+
+    public void setData(HashMap<String, Integer> statistics) {
+        data = statistics;
+        contentPane.removeAll();
+        contentPane.add(new BarChartPanel(data));
+        contentPane.revalidate();
+        contentPane.repaint();
     }
 }

@@ -2,17 +2,22 @@ package business;
 
 import business.entities.Song;
 import business.exceptions.*;
+import persistance.PlaylistDAO;
 import persistance.SongDAO;
+import persistance.StatisticsDatabaseDAO;
 import persistance.exceptions.*;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.UUID;
 
 public class BusinessLogicSong {
     SongDAO songDAO;
+    StatisticsDatabaseDAO statisticsDatabaseDAO;
 
-    public BusinessLogicSong(SongDAO songDAO) {
+    public BusinessLogicSong(SongDAO songDAO, StatisticsDatabaseDAO statisticsDatabaseDAO) {
         this.songDAO = songDAO;
+        this.statisticsDatabaseDAO = statisticsDatabaseDAO;
     }
     public void registerSong(String title, String genre, String album, String author) throws TitleException, AuthorException, AlbumException, GenreException, UrlException {
         if (title.isEmpty() || title.isBlank()) { throw new TitleException(); }
@@ -36,5 +41,9 @@ public class BusinessLogicSong {
         if (songDAO.deleteSong(title)){
             System.out.println("Cancion eliminada");
         }
+    }
+
+    public HashMap<String, Integer> getStatistics() {
+        return statisticsDatabaseDAO.getStatistics();
     }
 }

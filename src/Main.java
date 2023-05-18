@@ -12,8 +12,17 @@ import presentation.view.WelcomeView;
 import presentation.controller.WelcomeController;
 import presentation.view.*;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+
 public class Main {
     public static void main(String[] args) {
+
+        //TODO: Limpiar el fichero de informacion de usuario
+        clearTxtFile();
+
         // TODO: Esto SIEMPRE es igual, no hay que cambiarlo
         ConfigDatabaseDAO configDatabaseDAO = new ConfigDatabaseDAO("data/config.json");
         DDBBAccess ddBBAccess = new DDBBAccess(configDatabaseDAO);
@@ -36,7 +45,9 @@ public class Main {
         ListMusicView listMusicView = new ListMusicView(businessLogicMusic);
         DeleteMusicView deleteMusicView = new DeleteMusicView();
         PlaylistView playlistView = new PlaylistView();
-        ViewsController viewsController = new ViewsController(signInView, signUpView, logOutView, welcomeView, addMusicView, listMusicView, deleteMusicView, mainMenuView, playMusicView, playlistView);
+        MusicStatisticsView musicStatisticsView = new MusicStatisticsView();
+        ViewsController viewsController = new ViewsController(signInView, signUpView, logOutView, welcomeView, addMusicView,
+                listMusicView, deleteMusicView, mainMenuView, playMusicView, playlistView, musicStatisticsView);
 
         LogOutController logOutController = new LogOutController(businessLogicUser);
         SignUpController signUpController = new SignUpController(signUpView, businessLogicUser, viewsController);
@@ -59,10 +70,24 @@ public class Main {
         deleteMusicView.deleteMusicController(deleteMusicController);
         mainMenuView.setActionListeners(mainMenuController);
 
-        //viewsController.createViewPrincipal();
+
+        viewsController.createViewReproductor();
+        //musicStatisticsView.MusicStatisticsView();
+        //musicStatisticsView.BarChartExample();
         //viewsController.createViewAddSong();
         //viewsController.createViewListSong();
         //viewsController.createViewDeleteSong();
-        viewsController.createViewReproductor();
+        //viewsController.create();
+        //MusicStatisticsView musicStatisticsView = new MusicStatisticsView();
+        //musicStatisticsView.BarChartExample();
+    }
+
+    private static void clearTxtFile(){
+        try{
+            Files.write(Paths.get("data/user/userInfo"), new byte[0], StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        }catch (IOException e){
+            System.out.println("Error al limpiar el fichero de informacion de usuario");
+        }
+
     }
 }

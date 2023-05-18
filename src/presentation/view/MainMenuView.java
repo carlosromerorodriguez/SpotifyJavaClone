@@ -45,7 +45,7 @@ public class MainMenuView extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(15,60,0,0);
+        gbc.insets = new Insets(15,50,0,0);
         menuPanel.add(titulo,gbc);
         gbc.insets = new Insets(0,0,0,0);
         gbc.gridx = 1;

@@ -29,7 +29,7 @@ public class MainMenuController implements ActionListener {
             viewsController.setListMusicView();
         }
         if (e.getActionCommand().equals(MainMenuView.MUSIC_STATISTICS)) {
-
+            viewsController.setMusicStatisticsView();
         }
         if(e.getActionCommand().equals(MainMenuView.EXIT)){
             viewsController.setLogOutView();

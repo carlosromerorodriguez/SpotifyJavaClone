@@ -21,9 +21,11 @@ public class ViewsController {
 
     private JPanel panelPrincipal;
 
+    private JPanel panelSuperiorIzquierda;
+
     public ViewsController(SignInView signInView, SignUpView signUpView, LogOutView logOutView, WelcomeView welcomeView,
                            AddMusicView addMusicView, ListMusicView listMusicView, DeleteMusicView deleteMusicView,
-                           MainMenuView mainMenuView, PlayMusicView playMusicView, PlaylistView playlistView) {
+                           MainMenuView mainMenuView, PlayMusicView playMusicView, PlaylistView playlistView, MusicStatisticsView musicStatisticsView) {
 
 
         ImageIcon spotifyIcon = new ImageIcon("data/img/spotify.png");
@@ -40,46 +42,41 @@ public class ViewsController {
         cardPanelInici.add(listMusicView.getPanel_list(), "listMusic");
         cardPanelInici.add(deleteMusicView.getPanel_delete_song(), "deleteSong");
 
-        crearPanelPrincipal(mainMenuView, playMusicView, playlistView, listMusicView, logOutView);
+        crearPanelPrincipal(mainMenuView, playMusicView, playlistView, listMusicView, logOutView, musicStatisticsView);
     }
 
     private void crearPanelPrincipal(MainMenuView mainMenuView, PlayMusicView playMusicView, PlaylistView playlistView, ListMusicView listMusicView,
-                                     LogOutView logOutView) {
+                                     LogOutView logOutView, MusicStatisticsView musicStatisticsView) {
 
-        panelPrincipal = new JPanel(new GridBagLayout());
+        panelPrincipal = new JPanel(new BorderLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = 1.0; // Peso en la dirección X
+        gbc.weighty = 1.0; // Peso en la dirección Y
 
-        JPanel panelSuperiorIzquierda = mainMenuView.getMenuPanel();
+        panelSuperiorIzquierda = mainMenuView.getMenuPanel();
         panelSuperiorIzquierda.setBackground(UIPalette.COLOR_PRIMARIO_CLARO .getColor());
 
         mainPanelCardLayout = new CardLayout();
         panelSuperiorDerecha = new JPanel(mainPanelCardLayout);
         panelSuperiorDerecha.add(playlistView.getContentPane(), "playlist");
         panelSuperiorDerecha.add(listMusicView.getPanel_list(), "listMusic");
+        panelSuperiorDerecha.add(musicStatisticsView.getContentPane(), "musicStatistics");
         panelSuperiorDerecha.add(logOutView.ventanaEmergenteLogOut(), "logout");
         mainPanelCardLayout.show(panelSuperiorDerecha, "listMusic");
-        //panelSuperiorDerecha.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
+        panelSuperiorDerecha.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
 
+        panelSuperiorIzquierda.setPreferredSize(new Dimension(400, 700));
+        panelPrincipal.add(panelSuperiorIzquierda,BorderLayout.LINE_START);
+        panelSuperiorDerecha.setPreferredSize(new Dimension(900, 700));
+        panelPrincipal.add(panelSuperiorDerecha, BorderLayout.CENTER);
+        JPanel panelInferior = playMusicView.getPanelReproductor();
+        panelInferior.setPreferredSize(new Dimension(1300, 100));
+        panelPrincipal.add(panelInferior, BorderLayout.PAGE_END);
+    }
 
-        JPanel panelInferior = new JPanel();
-        panelInferior.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.weightx = 0.1;
-        gbc.weighty = 1.0;
-        panelPrincipal.add(panelSuperiorIzquierda, gbc);
-        gbc.weightx = 0.9;
-        gbc.gridx = 1;
-        panelPrincipal.add(panelSuperiorDerecha, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 2;
-        gbc.weighty = 0.0;
-        panelPrincipal.add(playMusicView.getPanelReproductor(), gbc);
+    public void setMusicStatisticsView(){
+        mainPanelCardLayout.show(panelSuperiorDerecha, "musicStatistics");
     }
 
     public void createViewPrincipal(){

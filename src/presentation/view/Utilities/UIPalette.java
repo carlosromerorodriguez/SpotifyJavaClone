@@ -92,6 +92,9 @@ public enum UIPalette {
         this.blue = b;
     }
 
+    public static Color randomColor() {
+        return new Color((int) (Math.random() * 0x1000000));
+    }
     /**
      * Returns the color represented by this constant
      * @return The color as a Color object

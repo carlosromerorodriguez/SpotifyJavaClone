@@ -7,7 +7,15 @@ import persistance.exceptions.PasswordException;
 import persistance.exceptions.PasswordMismatchException;
 import persistance.exceptions.UsernameException;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class BusinessLogicUser {
     private final UserDAO userDao;
@@ -23,6 +31,11 @@ public class BusinessLogicUser {
         if (!checkPasswords(firstPassword, secondPassword)) { throw new PasswordMismatchException(); }
 
         if (userDao.addUser(new User(UUID.randomUUID(), username, email, firstPassword))) {
+            try {
+                writeTxtFile(username);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             System.out.println("User added");
         }
     }
@@ -41,11 +54,27 @@ public class BusinessLogicUser {
         }
 
         if(exists){
+
+            try {
+                writeTxtFile(email_user);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             return true;
         }
         else{
             return false;
         }
+    }
+
+    private static String readTxtFile() throws IOException {
+        try (Stream<String> lines = Files.lines(Paths.get("data/user/userInfo"))) {
+            return lines.collect(Collectors.joining("\n"));
+        }
+    }
+
+    private static void writeTxtFile(String username) throws IOException {
+        Files.write(Paths.get("data/user/userInfo"), Collections.singletonList(username), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
     }
 
     /**

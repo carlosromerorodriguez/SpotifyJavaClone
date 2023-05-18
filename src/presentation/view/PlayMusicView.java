@@ -122,7 +122,6 @@ public class PlayMusicView {
         gbc.gridx = 1;
         gbc.gridy = 1; // Colocar la barra de progreso en la tercera fila
         gbc.gridwidth = 5; // Ajustar el ancho de la barra de progreso para que ocupe todas las columnas
-        gbc.weighty = 0.0;
         gbc.ipadx = -11;
         gbc.fill = GridBagConstraints.HORIZONTAL; // Hace que la barra de progreso se expanda horizontalmente
         gbc.insets = new Insets(0, 300, 0, -230); // Añade margen superior e inferior para separar de los botones

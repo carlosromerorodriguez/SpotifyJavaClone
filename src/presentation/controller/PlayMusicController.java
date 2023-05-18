@@ -41,25 +41,22 @@ public class PlayMusicController implements ActionListener {
             businessLogicMPlayer.playPauseMusic();
         } else if (e.getActionCommand().equals(PlayMusicView.PREVIOUS_MUSIC_COMMAND)){
             System.out.println("Previous music");
+            iconIndex = 1;
+            playMusicView.getbPlay().setIcon(imageIcons[iconIndex]);
             businessLogicMPlayer.previousMusic();
         } else if (e.getActionCommand().equals(PlayMusicView.NEXT_MUSIC_COMMAND)){
             System.out.println("Next music");
+            iconIndex = 1;
+            playMusicView.getbPlay().setIcon(imageIcons[iconIndex]);
             businessLogicMPlayer.nextMusic();
         } else if (e.getActionCommand().equals(PlayMusicView.REPEAT_MUSIC_COMMAND)) {
             iconIndexRepeat = (iconIndexRepeat + 1) % 3;
             playMusicView.getbRepeat().setIcon(imageRepeat[iconIndexRepeat]);
             switch (iconIndexRepeat) {
-                case 0 -> {
-                    System.out.println("No repetition");
-                }
-                case 1 -> {
-                    System.out.println("Individual repetition");
-                }
-                case 2 -> {
-                    System.out.println("Global repetition");
-                }
+                case 0 -> businessLogicMPlayer.noMusicRepetition();
+                case 1 -> businessLogicMPlayer.individualRepeatMusic();
+                case 2 -> businessLogicMPlayer.globalRepeatMusic();
             }
-            businessLogicMPlayer.repeatMusic(iconIndex);
         } else if (e.getActionCommand().equals(PlayMusicView.STOP_MUSIC_COMMAND)) {
             iconIndex = 1;
             playMusicView.getbPlay().setIcon(imageIcons[iconIndex]);

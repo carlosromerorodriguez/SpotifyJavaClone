@@ -7,57 +7,76 @@ import presentation.view.Utilities.Fonts;
 import presentation.view.Utilities.UIPalette;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
-
-import static presentation.view.Utilities.UIPalette.ADD_SONG_COLOR;
-
+import java.util.List;
 
 public class ListMusicView extends JFrame {
-    //JFrame ventana = new JFrame("Lista de canciones");
-    JPanel panel_list;
-    public ListMusicView (BusinessLogicMusic businessLogicMusic) {
+    private final JPanel panel_list;
+
+    public ListMusicView(BusinessLogicMusic businessLogicMusic) {
         panel_list = new JPanel(new GridBagLayout());
-        panel_list.setBackground(ADD_SONG_COLOR.getColor());
+        panel_list.setBackground(UIPalette.ADD_SONG_COLOR.getColor());
         Music music = businessLogicMusic.listMusic();
         GridBagConstraints c = new GridBagConstraints();
 
-        Font fuente_titol = Fonts.getBoldFont(50f);
-        Font fuente_petit = Fonts.getLightFont(15f);
+        Font fuente_titulo = Fonts.getBoldFont(50f);
+        Font fuente_normal = Fonts.getLightFont(15f);
 
-        JLabel title = new JLabel("Cançons");
-        title.setForeground(UIPalette.TEXT_COLOR.getColor());
-        title.setFont(fuente_titol);
-        c.ipadx = 100;
+        JLabel title = new JLabel("Canciones");
+        title.setForeground(UIPalette.JTABLE_TEXT_COLOR.getColor());
+        title.setFont(fuente_titulo);
         c.gridx = 0;
         c.gridy = 0;
         c.gridwidth = 2;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.insets = new Insets(50, 0, 0, 525);
+        c.insets = new Insets(50, 0, 0, 0);
         panel_list.add(title, c);
 
-        int i = 1;
-        //JTable
-        for (Song s:music.getArraySongs()) {
-            System.out.println(s.getTitle());
-            String print = s.getTitle() + " - " + s.getGenre() + " - "+s.getAuthor()+" - "+s.getAlbum();
-            JLabel song = new JLabel("* "+print);
-            song.setForeground(UIPalette.TEXT_COLOR.getColor());
-            song.setFont(fuente_petit);
-            c.ipady = 0;
-            c.gridx = 0;
-            c.gridy = i;
-            c.gridheight = 1;
-            c.gridwidth = 1;
-            c.insets = new Insets(0, 0, 10, 0);
-            panel_list.add(song, c);
-            i++;
-        }
-        c.ipady = 0;
-        c.weighty = 0.2;
+        // JTable
+        DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"Título", "Género", "Autor", "Álbum"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        JTable table = new JTable(tableModel);
+        table.setFont(fuente_normal);
+        table.setForeground(UIPalette.JTABLE_TEXT_COLOR.getColor());
+        table.setGridColor(UIPalette.JTABLE_TEXT_COLOR.getColor());
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        table.getTableHeader().setFont(fuente_normal);
+        table.getTableHeader().setForeground(UIPalette.INPUT_TEXT.getColor());
+        table.getTableHeader().setBackground(UIPalette.JTABLE_TEXT_COLOR.getColor());
+        table.getTableHeader().setReorderingAllowed(false);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        scrollPane.getViewport().setBackground(UIPalette.ADD_SONG_COLOR.getColor());
+
         c.gridx = 0;
-        c.gridy = 11;
-        c.anchor = GridBagConstraints.CENTER;
-        panel_list.add(new JLabel(), c);
+        c.gridy = 1;
+        c.gridwidth = 2;
+        c.insets = new Insets(10, 50, 0, 50);
+        panel_list.add(scrollPane, c);
+
+        List<Song> songs = music.getArraySongs();
+        for (Song song : songs) {
+            Object[] rowData = {song.getTitle(), song.getGenre(), song.getAuthor(), song.getAlbum()};
+            tableModel.addRow(rowData);
+        }
+
+        TableColumnModel columnModel = table.getColumnModel();
+        int columnCount = columnModel.getColumnCount();
+        for (int i = 0; i < columnCount; i++) {
+            columnModel.getColumn(i).setPreferredWidth(200);
+        }
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        table.setDefaultRenderer(Object.class, centerRenderer);
     }
 
     public JPanel getPanel_list() {

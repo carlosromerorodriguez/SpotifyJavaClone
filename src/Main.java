@@ -2,10 +2,7 @@ import business.BusinessLogicMPlayer;
 import business.BusinessLogicMusic;
 import business.BusinessLogicSong;
 import business.BusinessLogicUser;
-import persistance.ConfigDatabaseDAO;
-import persistance.DDBBAccess;
-import persistance.SongDatabaseDAO;
-import persistance.UserDatabaseDAO;
+import persistance.*;
 import presentation.controller.*;
 import presentation.view.SignUpView;
 import presentation.view.WelcomeView;
@@ -19,7 +16,6 @@ import java.nio.file.StandardOpenOption;
 
 public class Main {
     public static void main(String[] args) {
-
         //TODO: Limpiar el fichero de informacion de usuario
         clearTxtFile();
 
@@ -32,7 +28,8 @@ public class Main {
         BusinessLogicUser businessLogicUser = new BusinessLogicUser(userDatabaseDAO);
         BusinessLogicMPlayer businessLogicMPlayer = new BusinessLogicMPlayer();
         SongDatabaseDAO songDatabaseDAO = new SongDatabaseDAO(ddBBAccess);
-        BusinessLogicSong businessLogicSong = new BusinessLogicSong(songDatabaseDAO);
+        StatisticsDatabaseDAO statisticsDatabaseDAO = new StatisticsDatabaseDAO(ddBBAccess);
+        BusinessLogicSong businessLogicSong = new BusinessLogicSong(songDatabaseDAO, statisticsDatabaseDAO);
         BusinessLogicMusic businessLogicMusic = new BusinessLogicMusic(songDatabaseDAO);
 
         SignUpView signUpView = new SignUpView();
@@ -57,6 +54,7 @@ public class Main {
         AddMusicController addMusicController = new AddMusicController(businessLogicSong, addMusicView);
         DeleteMusicController deleteMusicController = new DeleteMusicController(deleteMusicView, businessLogicSong);
         MainMenuController mainMenuController = new MainMenuController(mainMenuView, businessLogicUser, viewsController);
+        MusicStatisticsController musicStatisticsController = new MusicStatisticsController(musicStatisticsView, businessLogicSong);
 
         signUpView.registerController(signUpController);
         signUpView.backController(signUpController);

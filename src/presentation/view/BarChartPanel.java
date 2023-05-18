@@ -4,52 +4,69 @@ import presentation.view.Utilities.UIPalette;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 class BarChartPanel extends JPanel {
-    private final int[] data;
-    private static final int BAR_WIDTH = 5; // Width of each bar
-    private static final int BORDER_RADIUS = 25; // Border radius for rounded corners
+    private final HashMap<String, Integer> data;
+    private static final int MAX_GENRES = 10;
+    private static final int BAR_HEIGHT = 15;
+    private static final int MAX_BAR_WIDTH = 400; // Maximum width for the bars
+    private static final int SPACING = 10; // Spacing between genre label and bar
 
-    public BarChartPanel(int[] data) {
+    public BarChartPanel(HashMap<String, Integer> data) {
         this.data = data;
         this.setPreferredSize(new Dimension(800, 500));
     }
 
     @Override
     protected void paintComponent(Graphics g) {
-
         super.paintComponent(g);
 
-        int barHeight = getHeight() / data.length - 10; // Adjusted bar height
-        int maxValue = getMaxValue();
+        int maxSongs = getMaxSongs();
+        int genresToShow = Math.min(data.size(), MAX_GENRES);
+        int barSpacing = (getHeight() - genresToShow * BAR_HEIGHT) / (genresToShow + 1);
 
-        for (int i = 0; i < data.length; i++) {
-            int value = data[i];
-            int barWidth = (int) ((double) value / maxValue * getWidth());
+        int i = 0;
+        for (Map.Entry<String, Integer> entry : data.entrySet()) {
+            if (i >= genresToShow) {
+                break;
+            }
 
-            int x = 50;
-            int y = i * (barHeight - 50); // Adjusted y-coordinate
+            String genre = entry.getKey().toUpperCase();
+            int songCount = entry.getValue();
+            int barWidth = (int) ((double) songCount / maxSongs * MAX_BAR_WIDTH);
 
-            g.setColor(Color.BLACK);
-            g.drawString(String.valueOf(value), 10, y + barHeight -80);
+            int x = barSpacing;
+            int y = barSpacing * (i + 1) + BAR_HEIGHT * i;
 
             g.setColor(UIPalette.randomColor());
-            g.fillRoundRect(x, y, barWidth - 100, barHeight -80, BORDER_RADIUS, 0);
+            g.fillRect(x, y, barWidth, BAR_HEIGHT);
 
+            g.setColor(Color.BLACK);
+            g.drawString(String.valueOf(songCount), x + barWidth + SPACING, y + BAR_HEIGHT - 5);
+
+            FontMetrics fm = g.getFontMetrics();
+            int genreLabelWidth = fm.stringWidth(genre);
+            int genreLabelHeight = fm.getHeight();
+            int genreLabelY = y + BAR_HEIGHT / 2 + genreLabelHeight / 2;
+            g.drawString(genre, x - genreLabelWidth - SPACING, genreLabelY);
+
+            i++;
         }
     }
 
-    private int getMaxValue() {
-        int maxValue = Integer.MIN_VALUE;
-        for (int value : data) {
-            if (value > maxValue) {
-                maxValue = value;
+    private int getMaxSongs() {
+        int maxSongs = Integer.MIN_VALUE;
+        for (int songCount : data.values()) {
+            if (songCount > maxSongs) {
+                maxSongs = songCount;
             }
         }
-        return maxValue;
+        return maxSongs;
     }
 
-    public JPanel getPanel(){
+    public JPanel getPanel() {
         return this;
     }
 }

@@ -5,6 +5,7 @@ import persistance.exceptions.ConfigFileNotFoundException;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.HashMap;
 
 public class DDBBAccess {
     private static String USERNAME;

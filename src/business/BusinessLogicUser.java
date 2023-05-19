@@ -12,7 +12,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -67,7 +66,7 @@ public class BusinessLogicUser {
         }
     }
 
-    private static void writeTxtFile(String username) throws IOException {
+    private void writeTxtFile(String username) throws IOException {
         Files.write(Paths.get("data/user/userInfo"), Collections.singletonList(username), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
     }
 

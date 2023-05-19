@@ -56,6 +56,7 @@ public class Main {
         DeleteMusicController deleteMusicController = new DeleteMusicController(deleteMusicView, businessLogicSong);
         MainMenuController mainMenuController = new MainMenuController(mainMenuView, businessLogicUser, viewsController);
         MusicStatisticsController musicStatisticsController = new MusicStatisticsController(musicStatisticsView, businessLogicSong);
+        ListMusicController listMusicController = new ListMusicController(listMusicView, businessLogicMusic, viewsController);
 
         signUpView.registerController(signUpController);
         signUpView.backController(signUpController);
@@ -68,6 +69,7 @@ public class Main {
         addMusicView.backSongController(addMusicController);
         deleteMusicView.deleteMusicController(deleteMusicController);
         mainMenuView.setActionListeners(mainMenuController);
+        listMusicView.actionLinker(listMusicController);
 
 
         viewsController.createViewReproductor();

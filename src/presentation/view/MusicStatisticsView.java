@@ -27,7 +27,7 @@ public class MusicStatisticsView{
 
         c.gridx = 0;
         c.gridy = 0;
-        c.weighty = 1.0;
+        c.weighty = 0.0;
         contentPane.add(titol, c);
         c.gridy = 1;
         c.weighty = 0.0;

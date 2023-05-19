@@ -34,15 +34,12 @@ public class ViewsController {
         cardPanelInici.add(logOutView.ventanaEmergenteLogOut(), "logout");
         cardPanelInici.add(welcomeView.getWelcomePanel(), "welcome");
         cardPanelInici.add(addMusicView.getPanel_add_song(), "addSong");
-        cardPanelInici.add(listMusicView.getPanel_list(), "listMusic");
-        cardPanelInici.add(deleteMusicView.getPanel_delete_song(), "deleteSong");
-        cardPanelInici.add(showMusicInfoView.getPanel_show_song_info(), "showSongInfo");
 
-        crearPanelPrincipal(mainMenuView, playMusicView, playlistView, listMusicView, logOutView, musicStatisticsView);
+        crearPanelPrincipal(mainMenuView, playMusicView, playlistView, listMusicView, logOutView, musicStatisticsView, addMusicView, showMusicInfoView);
     }
 
     private void crearPanelPrincipal(MainMenuView mainMenuView, PlayMusicView playMusicView, PlaylistView playlistView, ListMusicView listMusicView,
-                                     LogOutView logOutView, MusicStatisticsView musicStatisticsView) {
+                                     LogOutView logOutView, MusicStatisticsView musicStatisticsView, AddMusicView addMusicView, ShowMusicInfoView showMusicInfoView) {
 
         panelPrincipal = new JPanel(new BorderLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -59,6 +56,10 @@ public class ViewsController {
         panelSuperiorDerecha.add(listMusicView.getPanel_list(), "listMusic");
         panelSuperiorDerecha.add(musicStatisticsView.getContentPane(), "musicStatistics");
         panelSuperiorDerecha.add(logOutView.ventanaEmergenteLogOut(), "logout");
+        panelSuperiorDerecha.add(addMusicView.getPanel_add_song(), "addMusic");
+        panelSuperiorDerecha.add(showMusicInfoView.getPanel_show_song_info(), "showMusic");
+
+
         mainPanelCardLayout.show(panelSuperiorDerecha, "listMusic");
         panelSuperiorDerecha.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
 
@@ -74,7 +75,6 @@ public class ViewsController {
     public void setMusicStatisticsView(){
         mainPanelCardLayout.show(panelSuperiorDerecha, "musicStatistics");
     }
-
     public void createViewPrincipal(){
         window.add(this.cardPanelInici);
         window.setSize(500, 700);
@@ -84,30 +84,23 @@ public class ViewsController {
         cardLayout.show(cardPanelInici, "welcome");
         window.setVisible(true);
     }
-
     public void setSignInView(){
         cardLayout.show(cardPanelInici, "signIn");
     }
-
     public void setRegisterView(){
         cardLayout.show(cardPanelInici, "signUp");
     }
-
     public void setWelcomeView(){
         cardLayout.show(cardPanelInici, "welcome");
     }
-
     public void setAddMusicView(){cardLayout.show(cardPanelInici, "addSong");}
     public void setDeleteMusicView(){cardLayout.show(cardPanelInici, "deleteSong");}
-
     public void setPlaylistView(){
         mainPanelCardLayout.show(panelSuperiorDerecha, "playlist");
     }
-
     public void setListMusicView(){
         mainPanelCardLayout.show(panelSuperiorDerecha, "listMusic");
     }
-
     public void createViewReproductor(){
         window.add(panelPrincipal);
         window.remove(cardPanelInici);
@@ -120,7 +113,6 @@ public class ViewsController {
         window.setVisible(true);
 
     }
-
     public void setLogOutView(){
         mainPanelCardLayout.show(panelSuperiorDerecha, "logout");
     }

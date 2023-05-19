@@ -70,7 +70,7 @@ public class Main {
         mainMenuView.setActionListeners(mainMenuController);
 
 
-        viewsController.createViewPrincipal();
+        viewsController.createViewReproductor();
         //musicStatisticsView.MusicStatisticsView();
         //musicStatisticsView.BarChartExample();
         //viewsController.createViewAddSong();

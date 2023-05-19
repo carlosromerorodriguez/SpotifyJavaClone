@@ -1,5 +1,6 @@
 package presentation.view;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class ShowMusicInfoView {
@@ -8,6 +9,7 @@ public class ShowMusicInfoView {
     }
 
     public Component getPanel_show_song_info() {
-        return null;
+
+        return new JPanel();
     }
 }

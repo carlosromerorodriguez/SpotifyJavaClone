@@ -1,8 +1,5 @@
 package presentation.view;
 
-import business.BusinessLogicMusic;
-import business.BusinessLogicSong;
-import com.sun.tools.javac.Main;
 import presentation.view.Utilities.UIPalette;
 
 import javax.swing.*;
@@ -21,11 +18,9 @@ public class ViewsController {
 
     private JPanel panelPrincipal;
 
-    private JPanel panelSuperiorIzquierda;
-
     public ViewsController(SignInView signInView, SignUpView signUpView, LogOutView logOutView, WelcomeView welcomeView,
                            AddMusicView addMusicView, ListMusicView listMusicView, DeleteMusicView deleteMusicView,
-                           MainMenuView mainMenuView, PlayMusicView playMusicView, PlaylistView playlistView, MusicStatisticsView musicStatisticsView) {
+                           MainMenuView mainMenuView, PlayMusicView playMusicView, PlaylistView playlistView, MusicStatisticsView musicStatisticsView, ShowMusicInfoView showMusicInfoView) {
 
 
         ImageIcon spotifyIcon = new ImageIcon("data/img/spotify.png");
@@ -41,6 +36,7 @@ public class ViewsController {
         cardPanelInici.add(addMusicView.getPanel_add_song(), "addSong");
         cardPanelInici.add(listMusicView.getPanel_list(), "listMusic");
         cardPanelInici.add(deleteMusicView.getPanel_delete_song(), "deleteSong");
+        cardPanelInici.add(showMusicInfoView.getPanel_show_song_info(), "showSongInfo");
 
         crearPanelPrincipal(mainMenuView, playMusicView, playlistView, listMusicView, logOutView, musicStatisticsView);
     }
@@ -54,7 +50,7 @@ public class ViewsController {
         gbc.weightx = 1.0; // Peso en la dirección X
         gbc.weighty = 1.0; // Peso en la dirección Y
 
-        panelSuperiorIzquierda = mainMenuView.getMenuPanel();
+        JPanel panelSuperiorIzquierda = mainMenuView.getMenuPanel();
         panelSuperiorIzquierda.setBackground(UIPalette.COLOR_PRIMARIO_CLARO .getColor());
 
         mainPanelCardLayout = new CardLayout();

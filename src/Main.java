@@ -43,8 +43,9 @@ public class Main {
         DeleteMusicView deleteMusicView = new DeleteMusicView();
         PlaylistView playlistView = new PlaylistView();
         MusicStatisticsView musicStatisticsView = new MusicStatisticsView();
+        ShowMusicInfoView showMusicInfoView = new ShowMusicInfoView();
         ViewsController viewsController = new ViewsController(signInView, signUpView, logOutView, welcomeView, addMusicView,
-                listMusicView, deleteMusicView, mainMenuView, playMusicView, playlistView, musicStatisticsView);
+                listMusicView, deleteMusicView, mainMenuView, playMusicView, playlistView, musicStatisticsView, showMusicInfoView);
 
         LogOutController logOutController = new LogOutController(businessLogicUser);
         SignUpController signUpController = new SignUpController(signUpView, businessLogicUser, viewsController);

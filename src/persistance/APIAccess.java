@@ -9,8 +9,10 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -26,15 +28,15 @@ import java.security.cert.X509Certificate;
  */
 public final class APIAccess {
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         // Obtener la letra de una canción
-        String artist = "skrillex";
-        String song = "would%20you%20ever";
+        String artist = "ed%20sheeran";
+        String song = "shape%20of%20you";
         String apiUrl = "https://balandrau.salle.url.edu/dpoo/lyrics/";
 
-        APIAccess apiAccess;
+
         try {
-            apiAccess = new APIAccess();
+            APIAccess apiAccess = new APIAccess();
             String url = apiUrl + artist + "/" + song;
             String jsonResponse = apiAccess.getFromUrl(url);
 
@@ -51,9 +53,10 @@ public final class APIAccess {
         } catch (ApiServerException e) {
             System.err.println("Error al acceder a la API.");
         }
-    }
+    }*/
 
     private final HttpClient client;
+    private final URL url;
 
     /**
      * Default constructor, where the client used for HTTPS communication is set up
@@ -65,26 +68,32 @@ public final class APIAccess {
         // We set up the HTTPClient we will (re)use across requests, with a custom *INSECURE* SSL context
         try {
             client = HttpClient.newBuilder().sslContext(insecureContext()).build();
+            url = new URL("https://balandrau.salle.url.edu/dpoo/lyrics/");
         } catch (NoSuchAlgorithmException | KeyManagementException e) {
             // Exceptions are simplified for any classes that need to catch them
             throw new ApiServerException();
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
         }
     }
 
     /**
-     * Method that reads the contents from a URL using the HTTPS protocol. Specifically, a GET request is sent.
-     * Any parameters should be included in the URL.
+     * Sends a GET request to the specified URL, returning the body of the response as a String
      *
-     * @param url A String representation of the URL to read from, which will be assumed to use HTTP/HTTPS.
-     * @return The contents of the URL represented as text.
-     * @throws ApiServerException If the URL is malformed or the server can't be reached.
+     * @param artist The artist of the song
+     * @param song   The title of the song
+     * @return The body of the response as a String
+     * @throws ApiServerException If the server is unreachable or the request fails
      */
-    public String getFromUrl(String url) throws ApiServerException {
+    public String getFromUrl(String artist, String song) throws ApiServerException {
         try {
+            //Create the url request
+            String urlRequest = url + artist + "/" + song;
+
             // Define the request
             // The default method is GET, so we don't need to specify it (but we could do so by calling .GET() before .build()
             // The HttpRequest.Builder pattern offers a ton of customization for the request (headers, body, HTTP version...)
-            HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).build();
+            HttpRequest request = HttpRequest.newBuilder().uri(new URI(urlRequest)).build();
 
             // We use the default BodyHandler for Strings (so we can get the body of the response as a String)
             // Note we could also send the request asynchronously, but things would escalate in terms of coding complexity

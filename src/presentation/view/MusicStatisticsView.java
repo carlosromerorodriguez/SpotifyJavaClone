@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.HashMap;
 import javax.swing.*;
 
-public class MusicStatisticsView{
+public class MusicStatisticsView {
     private HashMap<String, Integer> data;
 
     private final JPanel contentPane;

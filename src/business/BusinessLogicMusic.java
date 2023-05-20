@@ -2,13 +2,30 @@ package business;
 
 import business.entities.Music;
 import business.entities.Song;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import persistance.APIAccess;
 import persistance.SongDAO;
-import persistance.exceptions.*;
+import persistance.exceptions.ApiServerException;
+
+import java.util.List;
 
 public class BusinessLogicMusic {
-    SongDAO songDAO;
+    private final SongDAO songDAO;
+    private final APIAccess apiAccess;
 
-    public BusinessLogicMusic(SongDAO songDAO) {this.songDAO = songDAO;}
+    public BusinessLogicMusic(SongDAO songDAO, APIAccess apiAccess) {
+        this.songDAO = songDAO;
+        this.apiAccess = apiAccess;
+    }
 
-    public Music listMusic(){return songDAO.readSongList();}
+    public List<Song> listMusic(){ return songDAO.readSongList(); }
+
+    public String getMusicLyricsFromApi(String nom, String artist) throws ApiServerException {
+        JsonObject jsonObject = new Gson().fromJson(apiAccess.getFromUrl(artist, nom), JsonObject.class);
+        if (jsonObject.has("lyrics")) {
+            return jsonObject.get("lyrics").getAsString();
+        }
+        return "Error: " + jsonObject.get("error").getAsString();
+    }
 }

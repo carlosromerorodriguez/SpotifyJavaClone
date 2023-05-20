@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SongDatabaseDAO implements SongDAO {
     private final DDBBAccess ddbbAccess;
@@ -42,8 +43,8 @@ public class SongDatabaseDAO implements SongDAO {
     }
 
     @Override
-    public Music readSongList() {
-        ArrayList<Song> arrayListSong = new ArrayList<>();
+    public List<Song> readSongList() {
+        List<Song> songList = new ArrayList<>();
         String query = "SELECT * FROM cancion";
         try {
             PreparedStatement statement = ddbbAccess.getConnection().prepareStatement(query);
@@ -56,13 +57,13 @@ public class SongDatabaseDAO implements SongDAO {
                 String url = results.getString("url");
 
                 Song song = new Song(titulo, genero, album, autor, url);
-                arrayListSong.add(song);
+                songList.add(song);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        return new Music(arrayListSong);
+        return songList;
     }
 
     @Override
@@ -72,9 +73,9 @@ public class SongDatabaseDAO implements SongDAO {
 
     @Override
     public boolean deleteSong(String title) {
-        Music music = readSongList();
+        List<Song> music = readSongList();
         Song remove_song = null;
-        for (Song s: music.getArraySongs()) {
+        for (Song s : music) {
             if (s.getTitle().equals(title)) {
                 remove_song = s;
                 break;
@@ -86,17 +87,13 @@ public class SongDatabaseDAO implements SongDAO {
                 PreparedStatement statement = ddbbAccess.getConnection().prepareStatement(query);
                 statement.setString(1, remove_song.getTitle());
                 statement.setString(2, remove_song.getAuthor());
-                int filas_eliminadas = statement.executeUpdate();
-                return filas_eliminadas > 0;
+                int filasEliminadas = statement.executeUpdate();
+                return filasEliminadas > 0;
             } catch (SQLException e) {
                 return false;
             }
         } else {
             return false;
         }
-    }
-    @Override
-    public String readLyrics(Song song) {
-        return null;
     }
 }

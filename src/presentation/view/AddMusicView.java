@@ -37,7 +37,7 @@ public class AddMusicView extends JFrame {
 
 
 
-    public JPanel getPanel_add_song() {
+    public JPanel getPanelAddSong() {
         return panel_add_song;
     }
 

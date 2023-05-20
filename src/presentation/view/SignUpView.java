@@ -10,7 +10,6 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class SignUpView extends JFrame implements SignUpObserver {
-
     /**
      * TAG to register a user
      */
@@ -32,7 +31,6 @@ public class SignUpView extends JFrame implements SignUpObserver {
     private final JButton bBack;
 
     public SignUpView() {
-
         panelSignup = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         panelSignup.setBackground(UIPalette.APP_BACKGROUND.getColor());

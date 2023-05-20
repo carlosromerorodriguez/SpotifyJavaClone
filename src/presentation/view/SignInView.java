@@ -6,7 +6,6 @@ import presentation.view.Utilities.UIPalette;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -14,8 +13,6 @@ import java.awt.event.MouseEvent;
 import static presentation.view.Utilities.UIPalette.APP_BACKGROUND;
 
 public class SignInView extends JFrame {
-
-
     public static final String LOGIN_COMMAND = "LOGIN_COMMAND";
 
     public static final String BACK_FROM_SIGNIN = "BACK_FROM_SIGNIN";
@@ -23,7 +20,7 @@ public class SignInView extends JFrame {
     private final JTextField jTF_nom_correu;
     private final JPasswordField jTF_contrasenya;
 
-    private final JPanel panel_signin;
+    private final JPanel panelSignin;
 
     private final JButton bIniciarSessio;
 
@@ -38,20 +35,18 @@ public class SignInView extends JFrame {
     }
 
     public JPanel getPanelSignIn() {
-        return panel_signin;
+        return panelSignin;
     }
 
     public SignInView() {
-
-        panel_signin = new JPanel(new GridBagLayout());
-        panel_signin.setBackground(APP_BACKGROUND.getColor());
+        panelSignin = new JPanel(new GridBagLayout());
+        panelSignin.setBackground(APP_BACKGROUND.getColor());
         GridBagConstraints c = new GridBagConstraints();
 
         Font fuente_titol = Fonts.getBoldFont(30f);
         Font fuente_petit = Fonts.getLightFont(15f);
 
-        panel_signin.setBorder(new EmptyBorder(0, 0, 0, 0));
-
+        panelSignin.setBorder(new EmptyBorder(0, 0, 0, 0));
 
         JLabel iniciar_sessio = new JLabel("Iniciar Sessió.");
         iniciar_sessio.setForeground(UIPalette.TEXT_COLOR.getColor());
@@ -62,7 +57,7 @@ public class SignInView extends JFrame {
         c.gridwidth = 2;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(170, 0, 20, 0);
-        panel_signin.add(iniciar_sessio, c);
+        panelSignin.add(iniciar_sessio, c);
 
         JLabel nom_correu = new JLabel("Nom o Correu");
         nom_correu.setForeground(UIPalette.TEXT_COLOR.getColor());
@@ -72,7 +67,7 @@ public class SignInView extends JFrame {
         c.gridy = 1;
         c.gridwidth = 1;
         c.insets = new Insets(0, 0, 10, 0);
-        panel_signin.add(nom_correu, c);
+        panelSignin.add(nom_correu, c);
 
         jTF_nom_correu = new JTextField();
         jTF_nom_correu.setPreferredSize(new Dimension(120, 30));
@@ -84,7 +79,7 @@ public class SignInView extends JFrame {
         c.gridy = 2;
         c.gridwidth = 7;
         c.insets = new Insets(0, 0, 10, 0);
-        panel_signin.add(jTF_nom_correu, c);
+        panelSignin.add(jTF_nom_correu, c);
 
         JLabel contrasenya = new JLabel("Contrasenya");
         contrasenya.setForeground(UIPalette.TEXT_COLOR.getColor());
@@ -94,7 +89,7 @@ public class SignInView extends JFrame {
         c.gridy = 3;
         c.gridwidth = 1;
         c.insets = new Insets(0, 0, 10, 0);
-        panel_signin.add(contrasenya, c);
+        panelSignin.add(contrasenya, c);
 
         jTF_contrasenya = new JPasswordField();
         jTF_contrasenya.setPreferredSize(new Dimension(120, 30));
@@ -130,10 +125,10 @@ public class SignInView extends JFrame {
         });
 
         passwordFieldPanel.add(showPasswordToggle, BorderLayout.EAST);
-        panel_signin.add(passwordFieldPanel, c);
+        panelSignin.add(passwordFieldPanel, c);
 
         passwordFieldPanel.add(showPasswordToggle, BorderLayout.EAST);
-        panel_signin.add(passwordFieldPanel, c);
+        panelSignin.add(passwordFieldPanel, c);
 
         bIniciarSessio = new JButton("Entrar");
         bIniciarSessio.setActionCommand(LOGIN_COMMAND);
@@ -163,7 +158,7 @@ public class SignInView extends JFrame {
         c.gridwidth = 1;
         c.anchor = GridBagConstraints.EAST;
         c.insets = new Insets(20, 220, 0, 0);
-        panel_signin.add(bIniciarSessio, c);
+        panelSignin.add(bIniciarSessio, c);
 
         bBack = new JButton("<");
         bBack.setFont(Fonts.getBoldFont(20f));
@@ -193,14 +188,14 @@ public class SignInView extends JFrame {
         c.gridwidth = 1;
         c.anchor = GridBagConstraints.EAST;
         c.insets = new Insets(20, 0, 0, 220);
-        panel_signin.add(bBack, c);
+        panelSignin.add(bBack, c);
 
         c.ipady = 0;
         c.weighty = 0.2;
         c.gridx = 0;
         c.gridy = 11;
         c.anchor = GridBagConstraints.CENTER;
-        panel_signin.add(new JLabel(), c);
+        panelSignin.add(new JLabel(), c);
 
     }
 

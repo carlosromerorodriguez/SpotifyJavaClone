@@ -1,35 +1,25 @@
     package presentation.view;
 
     import business.BusinessLogicMusic;
-    import business.entities.Music;
     import business.entities.Song;
     import presentation.view.Utilities.Fonts;
     import presentation.view.Utilities.UIPalette;
 
     import javax.swing.*;
-    import javax.swing.border.Border;
-    import javax.swing.border.EmptyBorder;
-    import javax.swing.plaf.basic.BasicScrollBarUI;
     import javax.swing.table.DefaultTableCellRenderer;
     import javax.swing.table.DefaultTableModel;
     import javax.swing.table.TableColumnModel;
     import java.awt.*;
-    import java.awt.event.MouseAdapter;
-    import java.awt.event.MouseEvent;
     import java.awt.event.MouseListener;
     import java.util.List;
 
     public class ListMusicView extends JFrame {
         private final JPanel panel_list;
-
-        private JTable table;
-
-        public static final String SONG_PRESSED = "SONG_PRESSED";
+        private final JTable table;
 
         public ListMusicView(BusinessLogicMusic businessLogicMusic) {
             panel_list = new JPanel(new GridBagLayout());
             panel_list.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
-            Music music = businessLogicMusic.listMusic();
             GridBagConstraints c = new GridBagConstraints();
 
             Font fuente_titulo = Fonts.getBoldFont(50f);
@@ -78,9 +68,9 @@
             c.insets = new Insets(10, 50, 0, 50);
             panel_list.add(scrollPane, c);
 
-            List<Song> songs = music.getArraySongs();
+            List<Song> songs = businessLogicMusic.listMusic();
             for (Song song : songs) {
-                Object[] rowData = {song.getTitle(), song.getGenre(), song.getAuthor(), song.getAlbum()};
+                Object[] rowData = {title(song.getTitle()), title(song.getGenre()), title(song.getAuthor()), title(song.getAlbum())};
                 tableModel.addRow(rowData);
             }
 
@@ -95,8 +85,16 @@
             table.setDefaultRenderer(Object.class, centerRenderer);
         }
 
+        public static String title(String text) {
+            String[] words = text.split(" ");
+            StringBuilder title = new StringBuilder();
+            for (String word : words) {
+                title.append(word.substring(0, 1).toUpperCase()).append(word.substring(1).toLowerCase()).append(" ");
+            }
+            return title.toString();
+        }
 
-        public JPanel getPanel_list() {
+        public JPanel getPanelList() {
             return panel_list;
         }
 

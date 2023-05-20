@@ -10,13 +10,9 @@ import java.awt.event.ActionListener;
 
 public class MainMenuController implements ActionListener {
 
-    private MainMenuView mainMenuView;
-    private BusinessLogicUser businessLogicUser;
-    private ViewsController viewsController;
+    private final ViewsController viewsController;
 
-    public MainMenuController(MainMenuView mainMenuView, BusinessLogicUser businessLogicUser, ViewsController viewsController) {
-        this.mainMenuView = mainMenuView;
-        this.businessLogicUser = businessLogicUser;
+    public MainMenuController(ViewsController viewsController) {
         this.viewsController = viewsController;
     }
 

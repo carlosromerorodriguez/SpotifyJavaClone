@@ -33,7 +33,7 @@ public class ViewsController {
         cardPanelInici.add(signUpView.getPanelSignup(), "signUp");
         cardPanelInici.add(logOutView.ventanaEmergenteLogOut(), "logout");
         cardPanelInici.add(welcomeView.getWelcomePanel(), "welcome");
-        cardPanelInici.add(addMusicView.getPanel_add_song(), "addSong");
+        cardPanelInici.add(addMusicView.getPanelAddSong(), "addSong");
 
         crearPanelPrincipal(mainMenuView, playMusicView, playlistView, listMusicView, logOutView, musicStatisticsView, addMusicView, showMusicInfoView);
     }
@@ -53,12 +53,11 @@ public class ViewsController {
         mainPanelCardLayout = new CardLayout();
         panelSuperiorDerecha = new JPanel(mainPanelCardLayout);
         panelSuperiorDerecha.add(playlistView.getContentPane(), "playlist");
-        panelSuperiorDerecha.add(listMusicView.getPanel_list(), "listMusic");
+        panelSuperiorDerecha.add(listMusicView.getPanelList(), "listMusic");
         panelSuperiorDerecha.add(musicStatisticsView.getContentPane(), "musicStatistics");
         panelSuperiorDerecha.add(logOutView.ventanaEmergenteLogOut(), "logout");
-        panelSuperiorDerecha.add(addMusicView.getPanel_add_song(), "addMusic");
-        panelSuperiorDerecha.add(showMusicInfoView.getPanel_show_song_info(), "showMusic");
-
+        panelSuperiorDerecha.add(addMusicView.getPanelAddSong(), "addMusic");
+        panelSuperiorDerecha.add(showMusicInfoView.getPanelShowSongInfo(), "showMusicInfo");
 
         mainPanelCardLayout.show(panelSuperiorDerecha, "listMusic");
         panelSuperiorDerecha.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
@@ -117,4 +116,7 @@ public class ViewsController {
         mainPanelCardLayout.show(panelSuperiorDerecha, "logout");
     }
 
+    public void showMusicInfo() {
+        mainPanelCardLayout.show(panelSuperiorDerecha, "showMusicInfo");
+    }
 }

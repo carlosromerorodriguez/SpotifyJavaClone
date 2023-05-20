@@ -10,7 +10,6 @@ public class CustomScrollBarUI extends BasicScrollBarUI {
 
     @Override
     protected void configureScrollBarColors() {
-        // Set the track and thumb colors to your desired color
         trackColor = UIPalette.COLOR_PRIMARIO.getColor();
         thumbColor = UIPalette.TEXT_COLOR.getColor();
     }
@@ -27,14 +26,12 @@ public class CustomScrollBarUI extends BasicScrollBarUI {
 
     @Override
     protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
-        // Paint the track as a solid color
         g.setColor(trackColor);
         g.fillRect(trackBounds.x, trackBounds.y, trackBounds.width, trackBounds.height);
     }
 
     @Override
     protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
-        // Paint the thumb as a solid color
         g.setColor(thumbColor);
         g.fillRect(thumbBounds.x, thumbBounds.y, thumbBounds.width, thumbBounds.height);
     }

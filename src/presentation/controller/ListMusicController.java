@@ -1,53 +1,55 @@
 package presentation.controller;
 
 import business.BusinessLogicMusic;
-import business.BusinessLogicSong;
-import persistance.exceptions.*;
 import presentation.view.ListMusicView;
+import presentation.view.ShowMusicInfoView;
 import presentation.view.ViewsController;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
 
 public class ListMusicController implements MouseListener {
-    BusinessLogicMusic businessLogicMusic;
-    ViewsController viewsController;
-    ListMusicView listMusicView;
+    private final ViewsController viewsController;
+    private final ShowMusicInfoView showMusicInfoView;
+    private final BusinessLogicMusic businessLogicMusic;
 
-    public ListMusicController(ListMusicView listMusicView, BusinessLogicMusic businessLogicMusic, ViewsController viewsController) {
-        this.businessLogicMusic = businessLogicMusic;
-        this.listMusicView = listMusicView;
+    public ListMusicController(BusinessLogicMusic businessLogicMusic, ViewsController viewsController, ShowMusicInfoView showMusicInfoView) {
         this.viewsController = viewsController;
-
-        // Add the ListMusicController as the MouseListener for the table
-        // For example, in the constructor or initialization method:
-        // listMusicView.getTable().addMouseListener(this);
+        this.businessLogicMusic = businessLogicMusic;
+        this.showMusicInfoView = showMusicInfoView;
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
         JTable table = (JTable) e.getSource();
 
         int clickedRow = table.rowAtPoint(e.getPoint());
         int clickedColumn = table.columnAtPoint(e.getPoint());
 
-        if(clickedColumn == 0){
+        if (clickedColumn == 0){
             Object value = table.getValueAt(clickedRow, clickedColumn);
-            Object genere_obj = table.getValueAt(clickedRow, clickedColumn + 1);
-            Object artist_obj = table.getValueAt(clickedRow, clickedColumn + 2);
-            Object album_obj = table.getValueAt(clickedRow, clickedColumn + 3);
+            Object genreObjString = table.getValueAt(clickedRow, clickedColumn + 1);
+            Object artistObjString = table.getValueAt(clickedRow, clickedColumn + 2);
+            Object albumObjString = table.getValueAt(clickedRow, clickedColumn + 3);
 
             if (value != null) {
                 String nom = value.toString();
-                String genere = genere_obj.toString();
-                String artist = artist_obj.toString();
-                String album = album_obj.toString();
-                System.out.println("Clicked cell value: " + nom +" "+ genere +" "+ artist +" "+ album);
+                String genre = genreObjString.toString().toLowerCase();
+                String artist = artistObjString.toString();
+                String album = albumObjString.toString().toLowerCase();
+                try {
+                    showMusicInfoView.setSongInfo(
+                            nom,
+                            genre,
+                            artist,
+                            album,
+                            businessLogicMusic.getMusicLyricsFromApi(nom.toLowerCase().replace(" ", "%20"),
+                                                                     artist.toLowerCase().replace(" ", "%20")));
+                    viewsController.showMusicInfo();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
             }
         }
 

@@ -2,18 +2,15 @@ package presentation.controller;
 
 import business.BusinessLogicSong;
 import business.exceptions.*;
-import persistance.exceptions.*;
 import presentation.view.AddMusicView;
-import presentation.view.SignUpView;
 import presentation.view.ViewsController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Scanner;
 
 public class AddMusicController implements ActionListener {
     private final BusinessLogicSong businessLogicSong;
-    private ViewsController viewsController;
+    private final ViewsController viewsController;
     private final AddMusicView addMusicView;
 
     @Override
@@ -33,13 +30,15 @@ public class AddMusicController implements ActionListener {
                 addMusicView.wrongGenreError();
             }
         }
-        if(e.getActionCommand().equals(AddMusicView.BACK_FROM_ADD)){
-            viewsController.setAddMusicView();
+
+        if (e.getActionCommand().equals(AddMusicView.BACK_FROM_ADD)){
+            viewsController.setListMusicView();
         }
     }
 
-    public AddMusicController(BusinessLogicSong businessLogicSong, AddMusicView addMusicView) {
+    public AddMusicController(BusinessLogicSong businessLogicSong, ViewsController viewsController, AddMusicView addMusicView) {
         this.businessLogicSong = businessLogicSong;
+        this.viewsController = viewsController;
         this.addMusicView = addMusicView;
     }
 }

@@ -22,7 +22,6 @@ public class ViewsController {
                            AddMusicView addMusicView, ListMusicView listMusicView, DeleteMusicView deleteMusicView,
                            MainMenuView mainMenuView, PlayMusicView playMusicView, PlaylistView playlistView, MusicStatisticsView musicStatisticsView, ShowMusicInfoView showMusicInfoView) {
 
-
         ImageIcon spotifyIcon = new ImageIcon("data/img/spotify.png");
         this.window = new JFrame("Espotifai");
         this.window.setIconImage(spotifyIcon.getImage());
@@ -92,7 +91,7 @@ public class ViewsController {
     public void setWelcomeView(){
         cardLayout.show(cardPanelInici, "welcome");
     }
-    public void setAddMusicView(){cardLayout.show(cardPanelInici, "addSong");}
+    public void setAddMusicView(){mainPanelCardLayout.show(panelSuperiorDerecha, "addMusic");}
     public void setDeleteMusicView(){cardLayout.show(cardPanelInici, "deleteSong");}
     public void setPlaylistView(){
         mainPanelCardLayout.show(panelSuperiorDerecha, "playlist");
@@ -100,6 +99,7 @@ public class ViewsController {
     public void setListMusicView(){
         mainPanelCardLayout.show(panelSuperiorDerecha, "listMusic");
     }
+
     public void createViewReproductor(){
         window.add(panelPrincipal);
         window.remove(cardPanelInici);

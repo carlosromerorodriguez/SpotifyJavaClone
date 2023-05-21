@@ -14,11 +14,13 @@ public class ShowMusicInfoView {
     private String genere;
     private String artist;
     private String album;
+    private String owner;
     private final JPanel panelMusicInfo;
     private final JLabel titolCancion;
     private final JLabel genereCancion;
     private final JLabel artistCancion;
     private final JLabel albumCancion;
+    private final JLabel ownerCancion;
     private final JTextPane lyricsCancion;
 
     public ShowMusicInfoView() {
@@ -75,6 +77,17 @@ public class ShowMusicInfoView {
         c.insets = new Insets(20, 0, 20, 0);
         panelMusicInfo.add(albumCancion, c);
 
+        ownerCancion = new JLabel("Propietario: " + owner);
+        ownerCancion.setForeground(UIPalette.TEXT_COLOR.getColor());
+        ownerCancion.setFont(fuentePetit);
+        c.ipadx = 100;
+        c.gridx = 0;
+        c.gridy = 4;
+        c.gridwidth = 2;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(20, 0, 20, 0);
+        panelMusicInfo.add(ownerCancion, c);
+
         lyricsCancion = new JTextPane();
         lyricsCancion.setForeground(UIPalette.TEXT_COLOR.getColor());
         lyricsCancion.setFont(Fonts.getLightFont(20f));
@@ -82,7 +95,7 @@ public class ShowMusicInfoView {
         lyricsCancion.setBackground(UIPalette.APP_BACKGROUND.getColor());
         c.ipadx = 100;
         c.gridx = 0;
-        c.gridy = 4;
+        c.gridy = 5;
         c.gridwidth = 2;
         c.fill = GridBagConstraints.BOTH;
         c.weighty = 1.0;

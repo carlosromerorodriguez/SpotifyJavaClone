@@ -128,7 +128,7 @@ public class MainMenuView extends JFrame {
         imageLabel = new JLabel();
         ImageIcon imageIcon = new ImageIcon("data/img/spotify.png"); // Reemplaza "testImage.jpg" con tu imagen.
         Image image = imageIcon.getImage();
-        Image newimg = image.getScaledInstance(70, 70,  java.awt.Image.SCALE_SMOOTH); // Ajusta el tamaño de la imagen.
+        Image newimg = image.getScaledInstance(70, 70,  Image.SCALE_SMOOTH); // Ajusta el tamaño de la imagen.
         imageIcon = new ImageIcon(newimg);
         imageLabel.setIcon(imageIcon);
     }

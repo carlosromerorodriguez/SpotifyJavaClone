@@ -2,14 +2,10 @@ package business;
 
 import business.entities.Song;
 import business.exceptions.*;
-import persistance.PlaylistDAO;
 import persistance.SongDAO;
 import persistance.StatisticsDatabaseDAO;
-import persistance.exceptions.*;
 
-import java.net.URL;
 import java.util.HashMap;
-import java.util.UUID;
 
 public class BusinessLogicSong {
     SongDAO songDAO;

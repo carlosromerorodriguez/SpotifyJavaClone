@@ -1,4 +1,5 @@
 package presentation.view;
+import presentation.view.Utilities.Fonts;
 import presentation.view.Utilities.UIPalette;
 
 import javax.swing.*;
@@ -41,110 +42,109 @@ public class AddMusicView extends JFrame {
     }
 
     public AddMusicView() {
-        setSize(700, 700);
+        //setSize(700, 700);
 
         panelAddSong = new JPanel(new GridBagLayout());
-        panelAddSong.setBackground(ADD_SONG_COLOR.getColor());
+        panelAddSong.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
         GridBagConstraints c = new GridBagConstraints();
 
-        panelAddSong.setBackground(new Color(40, 42, 54));
-        panelAddSong.setSize(500, 500);
+        panelAddSong.setPreferredSize(new Dimension(500, 500)); // Set preferred size of the panel
 
-        Font fuente_titol = new Font("Sans-Serif", Font.PLAIN, 35);
-        Font fuente_petit = new Font("Sans-Serif", Font.PLAIN, 15);
+        Font fuente_titol = Fonts.getBoldFont(30f);
+        Font fuente_petit = Fonts.getMediumFont(15f);
 
         panelAddSong.setBorder(new EmptyBorder(0, 0, 0, 0));
 
-
-        JLabel add_song = new JLabel("AÑADIR CANCION");
+        JLabel add_song = new JLabel("Afegir Cançó.");
         add_song.setForeground(UIPalette.TEXT_COLOR.getColor());
         add_song.setFont(fuente_titol);
         c.ipadx = 100;
+        c.ipady = 0;
         c.gridx = 0;
         c.gridy = 0;
         c.gridwidth = 2;
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.insets = new Insets(100, 0, 20, 0);
+        c.insets = new Insets(0, 10, 10, 0);
         panelAddSong.add(add_song, c);
 
-        JLabel title = new JLabel("TITLE");
+        JLabel title = new JLabel("Títol");
         title.setForeground(UIPalette.TEXT_COLOR.getColor());
         title.setFont(fuente_petit);
         c.ipady = 0;
         c.gridx = 0;
         c.gridy = 1;
         c.gridwidth = 1;
-        c.insets = new Insets(0, 0, 10, 0);
+        c.insets = new Insets(0, 10, 10, 0);
         panelAddSong.add(title, c);
 
         jTFSongTitleText = new JTextField();
-        jTFSongTitleText.setPreferredSize(new Dimension(120, 30));
+        //jTFSongTitleText.setPreferredSize(new Dimension(50, 30));
         jTFSongTitleText.setFont(fuente_petit);
         c.ipady = 0;
         c.gridx = 0;
         c.gridy = 2;
-        c.gridwidth = 7;
-        c.insets = new Insets(0, 0, 10, 0);
+        c.gridwidth = 1;
+        c.insets = new Insets(0, 10, 10, 0);
         panelAddSong.add(jTFSongTitleText, c);
 
-        JLabel genre = new JLabel("GENRE:");
+        JLabel genre = new JLabel("Gènere:");
         genre.setForeground(UIPalette.TEXT_COLOR.getColor());
         genre.setFont(fuente_petit);
         c.ipady = 0;
-        c.gridx = 0;
-        c.gridy = 3;
+        c.gridx = 1;
+        c.gridy = 1;
         c.gridwidth = 1;
-        c.insets = new Insets(0, 0, 10, 0);
+        c.insets = new Insets(0, 10, 10, 0);
         panelAddSong.add(genre, c);
 
         jTFSongGenreText = new JTextField();
-        jTFSongGenreText.setPreferredSize(new Dimension(120, 30));
+        //jTFSongGenreText.setPreferredSize(new Dimension(50, 30));
         jTFSongGenreText.setFont(fuente_petit);
         c.ipady = 0;
-        c.gridx = 0;
-        c.gridy = 4;
-        c.gridwidth = 7;
-        c.insets = new Insets(0, 0, 10, 0);
+        c.gridx = 1;
+        c.gridy = 2;
+        c.gridwidth = 1;
+        c.insets = new Insets(0, 10, 10, 0);
         panelAddSong.add(jTFSongGenreText, c);
 
-        JLabel album = new JLabel("ALBUM:");
+        JLabel album = new JLabel("Àlbum:");
         album.setForeground(UIPalette.TEXT_COLOR.getColor());
         album.setFont(fuente_petit);
         c.ipady = 0;
         c.gridx = 0;
-        c.gridy = 5;
+        c.gridy = 3;
         c.gridwidth = 1;
-        c.insets = new Insets(0, 0, 10, 0);
+        c.insets = new Insets(0, 10, 10, 0);
         panelAddSong.add(album, c);
 
         jTFSongAlbumText = new JTextField();
-        jTFSongAlbumText.setPreferredSize(new Dimension(120, 30));
+        //jTFSongAlbumText.setPreferredSize(new Dimension(50, 30));
         jTFSongAlbumText.setFont(fuente_petit);
         c.ipady = 0;
         c.gridx = 0;
-        c.gridy = 6;
-        c.gridwidth = 7;
-        c.insets = new Insets(0, 0, 10, 0);
+        c.gridy = 4;
+        c.gridwidth = 1;
+        c.insets = new Insets(0, 10, 10, 0);
         panelAddSong.add(jTFSongAlbumText, c);
 
-        JLabel author = new JLabel("AUTHOR:");
+        JLabel author = new JLabel("Autor:");
         author.setForeground(UIPalette.TEXT_COLOR.getColor());
         author.setFont(fuente_petit);
         c.ipady = 0;
-        c.gridx = 0;
-        c.gridy = 7;
+        c.gridx = 1;
+        c.gridy = 3;
         c.gridwidth = 1;
-        c.insets = new Insets(0, 0, 10, 0);
+        c.insets = new Insets(0, 10, 10, 0);
         panelAddSong.add(author, c);
 
         jTFSongAuthorText = new JTextField();
-        jTFSongAuthorText.setPreferredSize(new Dimension(120, 30));
+        //jTFSongAuthorText.setPreferredSize(new Dimension(50, 30));
         jTFSongAuthorText.setFont(fuente_petit);
         c.ipady = 0;
-        c.gridx = 0;
-        c.gridy = 8;
-        c.gridwidth = 7;
-        c.insets = new Insets(0, 0, 10, 0);
+        c.gridx = 1;
+        c.gridy = 4;
+        c.gridwidth = 1;
+        c.insets = new Insets(0, 10, 10, 0);
         panelAddSong.add(jTFSongAuthorText, c);
 
         JLabel url = new JLabel("URL:");
@@ -152,58 +152,44 @@ public class AddMusicView extends JFrame {
         url.setFont(fuente_petit);
         c.ipady = 0;
         c.gridx = 0;
-        c.gridy = 9;
-        c.gridwidth = 1;
-        c.insets = new Insets(0, 0, 10, 0);
+        c.gridy = 5;
+        c.gridwidth = 7;
+        c.insets = new Insets(0, 10, 10, 0);
         panelAddSong.add(url, c);
 
         JFileChooser jTF_song_url = new JFileChooser();
-        jTF_song_url.setPreferredSize(new Dimension(200, 400));
+        jTF_song_url.setPreferredSize(new Dimension(200, 350));
         jTF_song_url.setFont(fuente_petit);
         c.ipady = 0;
         c.gridx = 0;
-        c.gridy =10;
-        c.gridwidth = 7;
+        c.gridy =6;
+        c.gridwidth = 2;
+        c.gridheight = 1;
         c.insets = new Insets(0, 0, 10, 0);
         panelAddSong.add(jTF_song_url, c);
 
-        buttonAdd = new JButton("ADD");
-        buttonAdd.setPreferredSize(new Dimension(50, 30));
-        buttonAdd.setActionCommand(ADD_COMMAND);
-        c.ipady = 0;
-        c.gridx = 0;
-        c.gridy = 11;
-        c.gridwidth = 1;
-        c.anchor = GridBagConstraints.WEST;
-        c.insets = new Insets(20, 220, 0, 0);
-        panelAddSong.add(buttonAdd, c);
-
         buttonBack = new JButton("<");
+        buttonBack.setFont(fuente_petit);
         buttonBack.setActionCommand(BACK_FROM_ADD);
         c.ipady = 0;
-        c.gridx = 1; // Changed from 0 to 1
-        c.gridy = 11;
+        c.gridx = 0;
+        c.gridy = 7;
         c.gridwidth = 1;
-        c.anchor = GridBagConstraints.EAST;
-        c.insets = new Insets(20, 0, 0, 220);
+        c.insets = new Insets(0, 50, 0, 150);
         panelAddSong.add(buttonBack, c);
 
-        JScrollPane scrollPane = new JScrollPane(panelAddSong,
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setBorder(null);
-        scrollPane.setPreferredSize(new Dimension(750, 450));
-        scrollPane.getViewport().setBackground(new Color(40, 42, 54));
-        scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
-            @Override
-            protected void configureScrollBarColors() {
-                this.thumbColor = Color.RED;
-            }
-        });
+        buttonAdd = new JButton("Afegir");
+        buttonAdd.setFont(fuente_petit);
+        buttonAdd.setActionCommand(ADD_COMMAND);
+        c.ipady = 0;
+        c.gridx = 1;
+        c.gridy = 7;
+        c.gridwidth = 1;
+        panelAddSong.add(buttonAdd, c);
 
-        // Añadir el scrollPane al JFrame en lugar del panel
-        this.add(scrollPane);
+
     }
+
 
     public void addMusicController(ActionListener actionListener) {
         buttonAdd.addActionListener(actionListener);

@@ -72,7 +72,7 @@ class BarChartPanel extends JPanel {
         int genresToShow = Math.min(data.size(), MAX_GENRES);
         int barSpacing = (getHeight() - genresToShow * BAR_HEIGHT - MARGIN_BOTTOM) / (genresToShow + 1);
 
-        g.setColor(Color.GRAY);
+        g.setColor(UIPalette.TEXT_COLOR.getColor());
         int maxScale = (maxSongs % 5 == 0) ? maxSongs : (maxSongs / 5 + 1) * 5;
         for (int i = 0; i <= maxScale; i += X_AXIS_INCREMENT) {
             int x = MARGIN_LEFT + (int) ((double) i / maxScale * MAX_BAR_WIDTH);
@@ -103,7 +103,7 @@ class BarChartPanel extends JPanel {
             int genreLabelWidth = fm.stringWidth(genre);
             int genreLabelHeight = fm.getHeight();
             int genreLabelY = y + BAR_HEIGHT / 2 + genreLabelHeight / 2;
-            g.setColor(Color.BLACK);
+            g.setColor(UIPalette.TEXT_COLOR.getColor());
             g.drawString(genre, MARGIN_LEFT - genreLabelWidth - SPACING, genreLabelY);
 
             // Draw song count at the end of the bar
@@ -112,6 +112,7 @@ class BarChartPanel extends JPanel {
 
             i++;
         }
+        setBackground(UIPalette.COLOR_PRIMARIO.getColor());
     }
 
     /**

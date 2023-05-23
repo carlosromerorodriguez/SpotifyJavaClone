@@ -9,7 +9,6 @@ public class MusicStatisticsController {
     public MusicStatisticsController(MusicStatisticsView musicStatisticsView, BusinessLogicSong businessLogicSong) {
         this.musicStatisticsView = musicStatisticsView;
         this.businessLogicSong = businessLogicSong;
-        updateData();
     }
 
     public void updateData() {

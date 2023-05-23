@@ -32,7 +32,7 @@ public class DeleteMusicController implements ActionListener {
                 viewsController.setDeleteMusicView();
             }
         }
-        if(e.getActionCommand().equals(DeleteMusicView.BACK_FROM_DELETE)){
+        if (e.getActionCommand().equals(DeleteMusicView.BACK_FROM_DELETE)){
             viewsController.setDeleteMusicView();
         }
     }

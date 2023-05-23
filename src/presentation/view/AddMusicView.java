@@ -1,14 +1,12 @@
 package presentation.view;
+
 import presentation.view.Utilities.Fonts;
 import presentation.view.Utilities.UIPalette;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.awt.event.ActionListener;
-
-import static presentation.view.Utilities.UIPalette.ADD_SONG_COLOR;
 
 public class AddMusicView extends JFrame {
     public static final String ADD_COMMAND = "ADD_COMMAND";

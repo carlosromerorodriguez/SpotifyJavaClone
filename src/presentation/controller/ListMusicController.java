@@ -14,18 +14,19 @@ public class ListMusicController implements MouseListener, ListMusicViewListener
     private final ViewsController viewsController;
     private final ShowMusicInfoView showMusicInfoView;
     private final BusinessLogicMusic businessLogicMusic;
+    private final ListMusicView listMusicView;
 
     public ListMusicController(BusinessLogicMusic businessLogicMusic, ViewsController viewsController, ListMusicView listMusicView, ShowMusicInfoView showMusicInfoView) {
         this.viewsController = viewsController;
         this.businessLogicMusic = businessLogicMusic;
         this.showMusicInfoView = showMusicInfoView;
+        this.listMusicView = listMusicView;
         listMusicView.setListener(this);
         listMusicView.addMouseListener(this);
-        showAllSongs(listMusicView);
         listMusicView.getOptionsButton().addActionListener(e -> listMusicView.showOptionsDialog());
     }
 
-    private void showAllSongs(ListMusicView listMusicView) {
+    public void loadSongsFromApi() {
         listMusicView.setSongs(businessLogicMusic.listMusic(), "Hola");
     }
 
@@ -36,7 +37,7 @@ public class ListMusicController implements MouseListener, ListMusicViewListener
 
     @Override
     public void onDeleteMusic() {
-        System.out.println("Eliminar música");
+        viewsController.setDeleteMusicView();
     }
 
     @Override

@@ -34,11 +34,11 @@ public class ViewsController {
         cardPanelInici.add(welcomeView.getWelcomePanel(), "welcome");
         cardPanelInici.add(addMusicView.getPanelAddSong(), "addSong");
 
-        crearPanelPrincipal(mainMenuView, playMusicView, playlistView, listMusicView, logOutView, musicStatisticsView, addMusicView, showMusicInfoView);
+        crearPanelPrincipal(mainMenuView, playMusicView, playlistView, listMusicView, logOutView, musicStatisticsView, addMusicView, showMusicInfoView, deleteMusicView);
     }
 
     private void crearPanelPrincipal(MainMenuView mainMenuView, PlayMusicView playMusicView, PlaylistView playlistView, ListMusicView listMusicView,
-                                     LogOutView logOutView, MusicStatisticsView musicStatisticsView, AddMusicView addMusicView, ShowMusicInfoView showMusicInfoView) {
+                                     LogOutView logOutView, MusicStatisticsView musicStatisticsView, AddMusicView addMusicView, ShowMusicInfoView showMusicInfoView, DeleteMusicView deleteMusicView) {
 
         panelPrincipal = new JPanel(new BorderLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -57,6 +57,7 @@ public class ViewsController {
         panelSuperiorDerecha.add(logOutView.ventanaEmergenteLogOut(), "logout");
         panelSuperiorDerecha.add(addMusicView.getPanelAddSong(), "addMusic");
         panelSuperiorDerecha.add(showMusicInfoView.getPanelShowSongInfo(), "showMusicInfo");
+        panelSuperiorDerecha.add(deleteMusicView.getPanelDeleteSong(), "deleteSong");
 
         mainPanelCardLayout.show(panelSuperiorDerecha, "listMusic");
         panelSuperiorDerecha.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
@@ -92,7 +93,7 @@ public class ViewsController {
         cardLayout.show(cardPanelInici, "welcome");
     }
     public void setAddMusicView(){mainPanelCardLayout.show(panelSuperiorDerecha, "addMusic");}
-    public void setDeleteMusicView(){cardLayout.show(cardPanelInici, "deleteSong");}
+    public void setDeleteMusicView(){mainPanelCardLayout.show(panelSuperiorDerecha, "deleteSong");}
     public void setPlaylistView(){
         mainPanelCardLayout.show(panelSuperiorDerecha, "playlist");
     }
@@ -110,7 +111,6 @@ public class ViewsController {
         window.setResizable(false);
         cardLayout.show(cardPanelInici, "welcome");
         window.setVisible(true);
-
     }
     public void setLogOutView(){
         mainPanelCardLayout.show(panelSuperiorDerecha, "logout");

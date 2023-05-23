@@ -54,9 +54,7 @@ public class Main {
             SignInController signInController = new SignInController(signInView, businessLogicUser, viewsController);
             WelcomeController welcomeController = new WelcomeController(welcomeView, businessLogicUser, viewsController);
             PlayMusicController playMusicController = new PlayMusicController(playMusicView, businessLogicMPlayer, viewsController);
-            AddMusicController addMusicController = new AddMusicController(businessLogicSong, viewsController, addMusicView);
             DeleteMusicController deleteMusicController = new DeleteMusicController(deleteMusicView, businessLogicSong);
-            MainMenuController mainMenuController = new MainMenuController(viewsController);
             MusicStatisticsController musicStatisticsController = new MusicStatisticsController(musicStatisticsView, businessLogicSong);
             ListMusicController listMusicController = new ListMusicController(businessLogicMusic, viewsController, listMusicView, showMusicInfoView);
 
@@ -67,9 +65,13 @@ public class Main {
             welcomeView.registerController(welcomeController);
             welcomeView.welcomeController(welcomeController);
             playMusicView.playMusicController(playMusicController);
+
+            AddMusicController addMusicController = new AddMusicController(businessLogicSong, viewsController, addMusicView, listMusicController);
             addMusicView.addMusicController(addMusicController);
             addMusicView.backSongController(addMusicController);
             deleteMusicView.deleteMusicController(deleteMusicController);
+
+            MainMenuController mainMenuController = new MainMenuController(viewsController, listMusicController, musicStatisticsController);
             mainMenuView.setActionListeners(mainMenuController);
             listMusicView.actionLinker(listMusicController);
 
@@ -88,10 +90,10 @@ public class Main {
         }
     }
 
-    private static void clearTxtFile(){
-        try{
+    private static void clearTxtFile() {
+        try {
             Files.write(Paths.get("data/user/userInfo"), new byte[0], StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-        }catch (IOException e){
+        } catch (IOException e){
             System.out.println("Error al limpiar el fichero de informacion de usuario");
         }
 

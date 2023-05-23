@@ -11,23 +11,22 @@ public class DeleteMusicView extends JFrame {
     public static final String DELETE_COMMAND = "DELETE_COMMAND";
     public static final String BACK_FROM_DELETE = "BACK_FROM_DELETE";
     public static final String CONFIRM_COMMAND = "CONMIRM_COMMAND";
-    private JTextField jTF_song_title;
-    private JPanel panel_delete_song;
-    private JButton button_delete;
-    private JButton button_Back;
+    private final JTextField jTFSongTitle;
+    private final JPanel panelDeleteSong;
+    private final JButton buttonDelete;
+    private final JButton buttonBack;
     public String getTitle() {
-        return jTF_song_title.getText();
+        return jTFSongTitle.getText();
     }
     public DeleteMusicView() {
-
-        panel_delete_song = new JPanel(new GridBagLayout());
-        panel_delete_song.setBackground(APP_BACKGROUND.getColor());
+        panelDeleteSong = new JPanel(new GridBagLayout());
+        panelDeleteSong.setBackground(APP_BACKGROUND.getColor());
         GridBagConstraints c = new GridBagConstraints();
 
         Font fuente_titol = new Font("Sans-Serif", Font.PLAIN, 35);
         Font fuente_petit = new Font("Sans-Serif", Font.PLAIN, 15);
 
-        panel_delete_song.setBorder(new EmptyBorder(0, 0, 0, 0));
+        panelDeleteSong.setBorder(new EmptyBorder(0, 0, 0, 0));
 
         JLabel delete_song = new JLabel("ELIMINAR CANCION");
         delete_song.setForeground(UIPalette.TEXT_COLOR.getColor());
@@ -38,7 +37,7 @@ public class DeleteMusicView extends JFrame {
         c.gridwidth = 2;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(100, 0, 20, 0);
-        panel_delete_song.add(delete_song, c);
+        panelDeleteSong.add(delete_song, c);
 
         JLabel title = new JLabel("TITLE OF THE SONG YOU WANT TO DELETE");
         title.setForeground(UIPalette.TEXT_COLOR.getColor());
@@ -48,49 +47,49 @@ public class DeleteMusicView extends JFrame {
         c.gridy = 1;
         c.gridwidth = 1;
         c.insets = new Insets(0, 0, 10, 0);
-        panel_delete_song.add(title, c);
+        panelDeleteSong.add(title, c);
 
-        jTF_song_title = new JTextField();
-        jTF_song_title.setPreferredSize(new Dimension(120, 30));
-        jTF_song_title.setFont(fuente_petit);
+        jTFSongTitle = new JTextField();
+        jTFSongTitle.setPreferredSize(new Dimension(120, 30));
+        jTFSongTitle.setFont(fuente_petit);
         c.ipady = 0;
         c.gridx = 0;
         c.gridy = 2;
         c.gridwidth = 7;
         c.insets = new Insets(0, 0, 10, 0);
-        panel_delete_song.add(jTF_song_title, c);
+        panelDeleteSong.add(jTFSongTitle, c);
 
-        button_delete = new JButton("DELETE");
-        button_delete.setPreferredSize(new Dimension(50, 30));
-        button_delete.setActionCommand(DELETE_COMMAND);
+        buttonDelete = new JButton("DELETE");
+        buttonDelete.setPreferredSize(new Dimension(50, 30));
+        buttonDelete.setActionCommand(DELETE_COMMAND);
         c.ipady = 0;
         c.gridx = 0;
         c.gridy = 11;
         c.gridwidth = 1;
         c.anchor = GridBagConstraints.EAST;
         c.insets = new Insets(20, 220, 0, 0);
-        panel_delete_song.add(button_delete, c);
+        panelDeleteSong.add(buttonDelete, c);
 
-        button_Back = new JButton("<");
-        button_Back.setActionCommand(BACK_FROM_DELETE);
+        buttonBack = new JButton("<");
+        buttonBack.setActionCommand(BACK_FROM_DELETE);
         c.ipady = 0;
         c.gridx = 0;
         c.gridy = 11;
         c.gridwidth = 1;
         c.anchor = GridBagConstraints.EAST;
         c.insets = new Insets(20, 0, 0, 220);
-        panel_delete_song.add(button_Back, c);
+        panelDeleteSong.add(buttonBack, c);
 
         c.ipady = 0;
         c.weighty = 0.2;
         c.gridx = 0;
         c.gridy = 11;
         c.anchor = GridBagConstraints.CENTER;
-        panel_delete_song.add(new JLabel(), c);
+        panelDeleteSong.add(new JLabel(), c);
 
     }
     public void deleteMusicController(ActionListener actionListener) {
-        button_delete.addActionListener(actionListener);
+        buttonDelete.addActionListener(actionListener);
     }
     public String confirmDelete() {
         int response = JOptionPane.showConfirmDialog(null, "Seguro que desea eliminar esta cancion permanentemente?");
@@ -101,12 +100,12 @@ public class DeleteMusicView extends JFrame {
         }
     }
 
-    public JPanel getPanel_delete_song() {
-        return panel_delete_song;
+    public JPanel getPanelDeleteSong() {
+        return panelDeleteSong;
     }
 
     public void backDeleteController(ActionListener actionListener) {
-        button_Back.addActionListener(actionListener);
+        buttonBack.addActionListener(actionListener);
     }
     public void wrongTitleError() {
         JOptionPane.showMessageDialog(this,

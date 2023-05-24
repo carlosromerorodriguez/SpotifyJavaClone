@@ -24,6 +24,7 @@ public class ListMusicController implements MouseListener, ListMusicViewListener
         listMusicView.setListener(this);
         listMusicView.addMouseListener(this);
         listMusicView.getOptionsButton().addActionListener(e -> listMusicView.showOptionsDialog());
+        loadSongsFromApi();
     }
 
     public void loadSongsFromApi() {

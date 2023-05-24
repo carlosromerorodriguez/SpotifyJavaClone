@@ -10,6 +10,8 @@ public interface UserDAO {
      * @return true if the user has been added successfully
      */
     boolean addUser(User user);
+
+    boolean deleteUser(String user, String password);
     /**
      * @param nom User name to delete
      * @param password User password to delete

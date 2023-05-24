@@ -39,6 +39,14 @@ public class BusinessLogicUser {
         }
     }
 
+    public void deleteUser(String username, String password) throws UsernameException, PasswordException{
+
+        if(userDao.deleteUser(username, password)){
+
+        }
+
+    }
+
     public boolean loginUser(String email_user, String password) throws UsernameException, PasswordException {
         boolean exists;
         if (email_user.isEmpty() || email_user.isBlank()) { throw new UsernameException(); }

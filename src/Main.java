@@ -35,7 +35,7 @@ public class Main {
             BusinessLogicMusic businessLogicMusic = new BusinessLogicMusic(songDatabaseDAO, api);
 
             SignUpView signUpView = new SignUpView();
-            LogOutView logOutView = new LogOutView();
+            DeleteUserView deleteUserView = new DeleteUserView();
             SignInView signInView = new SignInView();
             WelcomeView welcomeView = new WelcomeView();
             PlayMusicView playMusicView = new PlayMusicView();
@@ -46,10 +46,12 @@ public class Main {
             PlaylistView playlistView = new PlaylistView();
             MusicStatisticsView musicStatisticsView = new MusicStatisticsView();
             ShowMusicInfoView showMusicInfoView = new ShowMusicInfoView();
-            ViewsController viewsController = new ViewsController(signInView, signUpView, logOutView, welcomeView, addMusicView,
-                    listMusicView, deleteMusicView, mainMenuView, playMusicView, playlistView, musicStatisticsView, showMusicInfoView);
+            LogoutView logoutView = new LogoutView();
+            ViewsController viewsController = new ViewsController(signInView, signUpView, deleteUserView, welcomeView, addMusicView,
+                    listMusicView, deleteMusicView, mainMenuView, playMusicView, playlistView, musicStatisticsView, showMusicInfoView
+                    , logoutView);
 
-            LogOutController logOutController = new LogOutController(businessLogicUser);
+            LogOutController logOutController = new LogOutController(businessLogicUser, logoutView, viewsController);
             SignUpController signUpController = new SignUpController(signUpView, businessLogicUser, viewsController);
             SignInController signInController = new SignInController(signInView, businessLogicUser, viewsController);
             WelcomeController welcomeController = new WelcomeController(welcomeView, businessLogicUser, viewsController);
@@ -57,6 +59,7 @@ public class Main {
             DeleteMusicController deleteMusicController = new DeleteMusicController(deleteMusicView, businessLogicSong);
             MusicStatisticsController musicStatisticsController = new MusicStatisticsController(musicStatisticsView, businessLogicSong);
             ListMusicController listMusicController = new ListMusicController(businessLogicMusic, viewsController, listMusicView, showMusicInfoView);
+            DeleteUserController deleteUserController = new DeleteUserController(businessLogicUser, deleteUserView, viewsController);
 
             signUpView.registerController(signUpController);
             signUpView.backController(signUpController);
@@ -65,6 +68,8 @@ public class Main {
             welcomeView.registerController(welcomeController);
             welcomeView.welcomeController(welcomeController);
             playMusicView.playMusicController(playMusicController);
+            deleteUserView.setActions(deleteUserController);
+            logoutView.setAction(logOutController);
 
             AddMusicController addMusicController = new AddMusicController(businessLogicSong, viewsController, addMusicView, listMusicController);
             addMusicView.addMusicController(addMusicController);

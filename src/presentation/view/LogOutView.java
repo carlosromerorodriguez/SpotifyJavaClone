@@ -28,7 +28,6 @@ public class LogOutView {
 
         panelLogOut.setBorder(new EmptyBorder(50, 50, 50, 50));
         panelLogOut.revalidate();
-        //Jlabel nos crea un texto no editable dentro de nuestra ventana emergente
 
         JLabel tituloLogout = new JLabel("LOGOUT :(");
         tituloLogout.setFont(titulo); // le metemos la fuente que nos interesa previamente declarada
@@ -58,12 +57,7 @@ public class LogOutView {
         confirmButton.setPreferredSize(new Dimension(120, 30));
         cancelButton.setPreferredSize(new Dimension(120, 30));
 
-        confirmButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                LogOutController.removeUser(userText.getText(), passwordText.getText());
-            }
-        });
+        confirmButton.addActionListener(e -> LogOutController.removeUser(userText.getText(), passwordText.getText()));
 
         cancelButton.addActionListener(new ActionListener() {
             @Override

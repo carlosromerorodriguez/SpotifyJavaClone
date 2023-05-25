@@ -11,11 +11,13 @@ public class MainMenuController implements ActionListener {
     private final ViewsController viewsController;
     private final ListMusicController listMusicController;
     private final MusicStatisticsController musicStatisticsController;
+    private final PlaylistController playlistController;
 
-    public MainMenuController(ViewsController viewsController, ListMusicController listMusicController, MusicStatisticsController musicStatisticsController) {
+    public MainMenuController(ViewsController viewsController, ListMusicController listMusicController, MusicStatisticsController musicStatisticsController, PlaylistController playlistController) {
         this.viewsController = viewsController;
         this.listMusicController = listMusicController;
         this.musicStatisticsController = musicStatisticsController;
+        this.playlistController = playlistController;
     }
 
     @Override
@@ -26,6 +28,7 @@ public class MainMenuController implements ActionListener {
         }
         if(e.getActionCommand().equals(MainMenuView.PLAYLIST)){
             viewsController.setPlaylistView();
+            playlistController.loadPlaylistsFromApi();
         }
         if (e.getActionCommand().equals(MainMenuView.MUSIC_STATISTICS)) {
             viewsController.setMusicStatisticsView();

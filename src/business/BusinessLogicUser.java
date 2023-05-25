@@ -2,19 +2,9 @@ package business;
 
 import business.entities.User;
 import persistance.UserDAO;
-import persistance.exceptions.EmailException;
-import persistance.exceptions.PasswordException;
-import persistance.exceptions.PasswordMismatchException;
-import persistance.exceptions.UsernameException;
+import persistance.exceptions.*;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.Collections;
-import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class BusinessLogicUser {
     private final UserDAO userDao;
@@ -23,51 +13,49 @@ public class BusinessLogicUser {
         this.userDao = userDao;
     }
 
-    public void registerUser(String email, String username, String firstPassword, String secondPassword) throws EmailException, PasswordException, PasswordMismatchException, UsernameException {
+    public void registerUser(String email, String username, String firstPassword, String secondPassword) throws EmailException, PasswordException, PasswordMismatchException, UsernameException, UserAlreadyExistsException {
         if (username.isEmpty() || username.isBlank()) { throw new UsernameException(); }
         if (!checkEmail(email)) { throw new EmailException(); }
         if (!checkPassword(firstPassword)) { throw new PasswordException(); }
         if (!checkPasswords(firstPassword, secondPassword)) { throw new PasswordMismatchException(); }
 
-        if (userDao.addUser(new User(UUID.randomUUID(), username, email, firstPassword))) {
-            try {
-                writeTxtFile(username);
-            } catch (IOException e) {
-                e.printStackTrace();
+        if (this.checkUserExists(username, firstPassword) || this.checkUserExists(email, firstPassword)) {
+            throw new UserAlreadyExistsException();
+        }
+
+        if (userDao.addUser(new User(username, email, firstPassword))) {
+            userDao.writeUserToTxtFile(username);
+        }
+    }
+
+    public void loginUser(String email_user, String password) throws UsernameException, PasswordException, IOException {
+        validateInput(email_user, password);
+    }
+
+    private void validateInput(String email_user, String password) throws UsernameException, PasswordException {
+        if (email_user == null || email_user.trim().isEmpty() || !checkUserExists(email_user, password)) {
+            throw new UsernameException();
+        }
+
+        if (!checkPassword(password)) {
+            throw new PasswordException();
+        }
+
+    }
+
+    private boolean checkUserExists(String s, String password) {
+        if (s.contains("@")) {
+            if (userDao.checkUserByEmail(s, password)) {
+                userDao.writeUserNameFromEmail(s);
+                return true;
             }
-            System.out.println("User added");
-        }
-    }
-
-    public boolean loginUser(String email_user, String password) throws UsernameException, PasswordException {
-        boolean exists;
-        if (email_user.isEmpty() || email_user.isBlank()) { throw new UsernameException(); }
-        if (!checkPassword(password)) { throw new PasswordException(); }
-
-        if(email_user.contains("@")){
-            exists = userDao.checkUserByEmail(email_user, password);
-        }
-        else{
-            exists = userDao.checkUserByName(email_user, password);
-        }
-        if (exists) {
-            try {
-                writeTxtFile(email_user);
-            } catch (IOException e) {
-                e.printStackTrace();
+        } else {
+            if (userDao.checkUserByName(s, password)) {
+                userDao.writeUserToTxtFile(s);
+                return true;
             }
-            return true;
-        } else { return false; }
-    }
-
-    private static String readTxtFile() throws IOException {
-        try (Stream<String> lines = Files.lines(Paths.get("data/user/userInfo"))) {
-            return lines.collect(Collectors.joining("\n"));
         }
-    }
-
-    private void writeTxtFile(String username) throws IOException {
-        Files.write(Paths.get("data/user/userInfo"), Collections.singletonList(username), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+        return false;
     }
 
     /**

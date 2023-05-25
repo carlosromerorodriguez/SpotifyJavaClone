@@ -11,14 +11,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import static presentation.view.Utilities.UIPalette.APP_BACKGROUND;
+import static presentation.view.Utilities.UIPalette.INPUT_TEXT;
 
 public class SignInView extends JFrame {
     public static final String LOGIN_COMMAND = "LOGIN_COMMAND";
 
     public static final String BACK_FROM_SIGNIN = "BACK_FROM_SIGNIN";
 
-    private final JTextField jTF_nom_correu;
-    private final JPasswordField jTF_contrasenya;
+    private final JTextField jTFNomCorreu;
+    private final JPasswordField jTFContrasenya;
 
     private final JPanel panelSignin;
 
@@ -27,11 +28,11 @@ public class SignInView extends JFrame {
     private final JButton bBack;
 
     public String getLoginUserMail() {
-        return jTF_nom_correu.getText();
+        return jTFNomCorreu.getText();
     }
 
     public String getLoginUserPassword() {
-        return new String(jTF_contrasenya.getPassword());
+        return new String(jTFContrasenya.getPassword());
     }
 
     public JPanel getPanelSignIn() {
@@ -69,17 +70,17 @@ public class SignInView extends JFrame {
         c.insets = new Insets(0, 0, 10, 0);
         panelSignin.add(nom_correu, c);
 
-        jTF_nom_correu = new JTextField();
-        jTF_nom_correu.setPreferredSize(new Dimension(120, 30));
-        jTF_nom_correu.setFont(Fonts.getMediumFont(20f));
-        jTF_nom_correu.setBackground(UIPalette.COLOR_SECUNDARIO.getColor());
-        jTF_nom_correu.setForeground(UIPalette.COLOR_PRIMARIO.getColor());
+        jTFNomCorreu = new JTextField();
+        jTFNomCorreu.setPreferredSize(new Dimension(120, 30));
+        jTFNomCorreu.setFont(Fonts.getMediumFont(20f));
+        jTFNomCorreu.setBackground(UIPalette.COLOR_SECUNDARIO.getColor());
+        jTFNomCorreu.setForeground(UIPalette.COLOR_PRIMARIO.getColor());
         c.ipady = 0;
         c.gridx = 0;
         c.gridy = 2;
         c.gridwidth = 7;
         c.insets = new Insets(0, 0, 10, 0);
-        panelSignin.add(jTF_nom_correu, c);
+        panelSignin.add(jTFNomCorreu, c);
 
         JLabel contrasenya = new JLabel("Contrasenya");
         contrasenya.setForeground(UIPalette.TEXT_COLOR.getColor());
@@ -91,12 +92,12 @@ public class SignInView extends JFrame {
         c.insets = new Insets(0, 0, 10, 0);
         panelSignin.add(contrasenya, c);
 
-        jTF_contrasenya = new JPasswordField();
-        jTF_contrasenya.setPreferredSize(new Dimension(120, 30));
-        jTF_contrasenya.setFont(Fonts.getMediumFont(20f));
-        jTF_contrasenya.setForeground(UIPalette.COLOR_PRIMARIO.getColor());
-        jTF_contrasenya.setBackground(UIPalette.COLOR_SECUNDARIO.getColor());
-        char defaultEchoChar = jTF_contrasenya.getEchoChar();
+        jTFContrasenya = new JPasswordField();
+        jTFContrasenya.setPreferredSize(new Dimension(120, 30));
+        jTFContrasenya.setFont(Fonts.getMediumFont(20f));
+        jTFContrasenya.setForeground(UIPalette.COLOR_PRIMARIO.getColor());
+        jTFContrasenya.setBackground(UIPalette.COLOR_SECUNDARIO.getColor());
+        char defaultEchoChar = jTFContrasenya.getEchoChar();
         c.ipady = 0;
         c.gridx = 0;
         c.gridy = 4;
@@ -104,7 +105,7 @@ public class SignInView extends JFrame {
         c.insets = new Insets(0, 0, 10, 0);
 
         JPanel passwordFieldPanel = new JPanel(new BorderLayout());
-        passwordFieldPanel.add(jTF_contrasenya, BorderLayout.CENTER);
+        passwordFieldPanel.add(jTFContrasenya, BorderLayout.CENTER);
 
         JToggleButton showPasswordToggle = new JToggleButton();
         ImageIcon eyeClosedIcon = new ImageIcon(new ImageIcon("data/img/contra_ojo_cerrado.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
@@ -116,10 +117,10 @@ public class SignInView extends JFrame {
 
         showPasswordToggle.addActionListener(e -> {
             if (showPasswordToggle.isSelected()) {
-                jTF_contrasenya.setEchoChar((char) 0);
+                jTFContrasenya.setEchoChar((char) 0);
                 showPasswordToggle.setIcon(eyeOpenIcon);
             } else {
-                jTF_contrasenya.setEchoChar(defaultEchoChar);
+                jTFContrasenya.setEchoChar(defaultEchoChar);
                 showPasswordToggle.setIcon(eyeClosedIcon);
             }
         });
@@ -207,5 +208,23 @@ public class SignInView extends JFrame {
         bBack.addActionListener(actionListener);
     }
 
+    public void showUsernameError() {
+        JOptionPane.showMessageDialog(this, "This username does not exist", "Error", JOptionPane.ERROR_MESSAGE);
+        clearWrongField(jTFNomCorreu);
+    }
+
+    public void showPasswordError() {
+        JOptionPane.showMessageDialog(this, "Incorrect password", "Error", JOptionPane.ERROR_MESSAGE);
+        clearWrongField(jTFContrasenya);
+    }
+
+    private void clearWrongField(JTextField s) {
+        s.setText("");
+        s.setBorder(BorderFactory.createLineBorder(UIPalette.COLOR_ERROR.getColor(), 2));
+    }
+
+    public void showIOError() {
+        JOptionPane.showMessageDialog(this, "Error reading the file", "Error", JOptionPane.ERROR_MESSAGE);
+    }
 }
 

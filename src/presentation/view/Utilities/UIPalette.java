@@ -72,7 +72,8 @@ public enum UIPalette {
 
     BUTTON_HOVER(100, 255, 153),
 
-    BUTTON_COLOR(0, 255, 153);
+    BUTTON_COLOR(0, 255, 153),
+    COLOR_ERROR(255, 0, 0);
 
     /**
      * The RGB values for the color

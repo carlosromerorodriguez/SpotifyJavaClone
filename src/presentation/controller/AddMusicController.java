@@ -25,7 +25,7 @@ public class AddMusicController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(AddMusicView.ADD_COMMAND)) {
             try {
-                businessLogicSong.registerSong(addMusicView.getTitle(), addMusicView.getAuthor(), addMusicView.getAlbum(), addMusicView.getGenre());
+                businessLogicSong.registerSong(addMusicView.getTitle(), addMusicView.getGenre(), addMusicView.getAlbum(), addMusicView.getAuthor());
                 viewsController.setListMusicView();
                 listMusicController.loadSongsFromApi();
             } catch (UrlException ex) {

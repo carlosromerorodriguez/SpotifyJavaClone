@@ -149,4 +149,8 @@ public class ViewsController {
     public void setDeleteSongFromPlaylistView() {
         mainPanelCardLayout.show(panelSuperiorDerecha, "deleteSongFromPlaylist");
     }
+
+    public void closeWindow() {
+        window.dispose();
+    }
 }

@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 public class LogOutView {
 
 
+    public static final String LOGOUT_COMMAND = "LOGOUT_COMMAND";
+
     public LogOutView() {
 
     }

@@ -55,7 +55,7 @@ public class Main {
                     listMusicView, deleteMusicView, mainMenuView, playMusicView, playlistView, musicStatisticsView, showMusicInfoView,
                     addPlaylistView, playlistSongsView, addSongToPlaylistView, deletePlaylistView, deleteSongFromPlaylistView);
 
-            LogOutController logOutController = new LogOutController(businessLogicUser);
+            //LogOutController logOutController = new LogOutController(businessLogicUser);
             SignUpController signUpController = new SignUpController(signUpView, businessLogicUser, viewsController);
             SignInController signInController = new SignInController(signInView, businessLogicUser, viewsController);
             WelcomeController welcomeController = new WelcomeController(welcomeView, businessLogicUser, viewsController);

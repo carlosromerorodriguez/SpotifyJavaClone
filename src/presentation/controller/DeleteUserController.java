@@ -27,11 +27,7 @@ public class DeleteUserController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals(deleteUserView.DELETE_COMMAND)){
-            try {
-                businessLogicUser.deleteUser(deleteUserView.getUserText(), deleteUserView.getPasswordText());
-            } catch (UsernameException | PasswordException ex) {
-                throw new RuntimeException(ex);
-            }
+            businessLogicUser.deleteUser(deleteUserView.getUserText(), deleteUserView.getPasswordText());
         }
     }
 }

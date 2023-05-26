@@ -83,4 +83,12 @@ public class BusinessLogicUser {
     private boolean checkPasswords(String firstPassword, String secondPassword) {
         return (firstPassword.equals(secondPassword));
     }
+
+    public void deleteUser(String userText, String passwordText) {
+        if (userText.contains("@")) {
+            userDao.deleteUser(userText, passwordText);
+        } else {
+            userDao.deleteUser(userText, passwordText);
+        }
+    }
 }

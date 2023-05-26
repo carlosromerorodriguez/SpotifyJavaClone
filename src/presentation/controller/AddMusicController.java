@@ -2,6 +2,7 @@ package presentation.controller;
 
 import business.BusinessLogicSong;
 import business.exceptions.*;
+import persistance.exceptions.RepeatedSongNameException;
 import presentation.view.AddMusicView;
 import presentation.view.ViewsController;
 
@@ -25,7 +26,11 @@ public class AddMusicController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(AddMusicView.ADD_COMMAND)) {
             try {
-                businessLogicSong.registerSong(addMusicView.getTitle(), addMusicView.getGenre(), addMusicView.getAlbum(), addMusicView.getAuthor());
+                if (businessLogicSong.registerSong(addMusicView.getTitle(), addMusicView.getGenre(), addMusicView.getAlbum(), addMusicView.getAuthor(), addMusicView.getFile())) {
+                    addMusicView.successfulAdd();
+                } else {
+                    addMusicView.unsuccessfulAdd();
+                }
                 viewsController.setListMusicView();
                 listMusicController.loadSongsFromApi();
             } catch (UrlException ex) {
@@ -38,6 +43,8 @@ public class AddMusicController implements ActionListener {
                 addMusicView.wrongAlbumError();
             } catch (GenreException ex) {
                 addMusicView.wrongGenreError();
+            } catch (RepeatedSongNameException ex) {
+                addMusicView.repeatedSongNameError();
             }
         }
         if (e.getActionCommand().equals(AddMusicView.BACK_FROM_ADD)){

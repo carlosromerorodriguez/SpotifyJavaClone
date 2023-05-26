@@ -85,4 +85,29 @@ public class MPlayer {
     public boolean isFinished() {
         return playerThread != null && !playerThread.isAlive();
     }
+
+    public int getSongTime() {
+        if (player != null && fisNotClosed()) {
+            try {
+                return fis.available() / 1000;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    private boolean fisNotClosed() {
+        try {
+            fis.available();
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    public int getDuration() {
+        return total / 1000;
+    }
 }

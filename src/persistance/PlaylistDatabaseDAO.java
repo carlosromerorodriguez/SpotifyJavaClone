@@ -3,6 +3,7 @@ package persistance;
 import business.entities.Playlist;
 import business.entities.Song;
 import business.exceptions.TitleException;
+import persistance.exceptions.DuplicateKeyException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -96,7 +97,8 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
                         resultSet.getString("genere"),
                         resultSet.getString("album"),
                         resultSet.getString("autor"),
-                        resultSet.getString("url")
+                        resultSet.getString("url"),
+                        resultSet.getString("owner")
                 );
                 songs.add(song);
             }
@@ -136,17 +138,19 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
         return false;
     }
 
-    public void addSongToPlaylist(String playlistName, Song song, String userNameFromFile) {
-        String query = "INSERT INTO playlist_cancion (playlist, cancion) VALUES ((SELECT id FROM playlist WHERE nom = ? AND creador = ? LIMIT 1), (SELECT id FROM cancion WHERE nom = ? AND autor = ? LIMIT 1))";
+    public void addSongToPlaylist(String playlistName, Song song) throws DuplicateKeyException {
+        String query = "INSERT INTO playlist_cancion (playlist, cancion) VALUES ((SELECT id FROM playlist WHERE nom = ? LIMIT 1), (SELECT id FROM cancion WHERE nom = ? LIMIT 1))";
         try {
             PreparedStatement statement = ddbbAccess.getConnection().prepareStatement(query);
             statement.setString(1, playlistName);
-            statement.setString(2, userNameFromFile);
-            statement.setString(3, song.getTitle());
-            statement.setString(4, song.getAuthor());
+            statement.setString(2, song.getTitle());
             statement.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Error al añadir la canción a la playlist: " + e.getMessage());
+
+            if (e.getMessage().contains("Duplicate entry")) {
+                throw new DuplicateKeyException();
+            }
         }
     }
 }

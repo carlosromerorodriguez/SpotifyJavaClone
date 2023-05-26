@@ -22,35 +22,21 @@ public class PlayMusicView {
     private JButton bStop;
     private JProgressBar progressBar;
     private JButton bRepeat;
-
-    private JLabel titleArtist;
+    private JLabel timeCounter;
     private JLabel titleSong;
+    private JLabel titleArtist;
 
-    public JButton getbStop() {
-        return bStop;
-    }
 
-    public JPanel getContentPane() {
-        return contentPane;
-    }
+    private final ImageIcon[] imageIcons;
+    private final ImageIcon[] imageRepeat;
 
-    public JButton getbPrev() {
-        return bPrev;
-    }
-
-    public JButton getbPlay() {
+    public JButton getPlayButton() {
         return bPlay;
     }
 
-    public JButton getbNext() {
-        return bNext;
-    }
+    public JProgressBar getProgressBar() { return progressBar; }
 
-    public JProgressBar getProgressBar() {
-        return progressBar;
-    }
-
-    public JButton getbRepeat() {
+    public JButton getRepetitionButton() {
         return bRepeat;
     }
 
@@ -59,6 +45,17 @@ public class PlayMusicView {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new GridBagLayout());
         contentPane.setBackground(UIPalette.COLOR_REPRODUCTOR.getColor());
+
+        imageIcons = new ImageIcon[2];
+        imageIcons[0] = imageResize("data/img/play.png");
+        imageIcons[1] = imageResize("data/img/pause.png");
+
+        imageRepeat = new ImageIcon[3];
+        imageRepeat[0] = imageResize("data/img/repeat.png");
+        imageRepeat[1] = imageResize("data/img/repeat_individual.png");
+        imageRepeat[2] = imageResize("data/img/repeat_global.png");
+
+        timeCounter = new JLabel("00:00");
 
         GridBagConstraints gbc = new GridBagConstraints();
         addTitleArtist(gbc);
@@ -71,6 +68,18 @@ public class PlayMusicView {
         addRepeatButton(gbc);
         addStopButton(gbc);
         addProgressBar(gbc);
+    }
+
+    private ImageIcon imageResize(String ruta){
+        return new ImageIcon(new ImageIcon(ruta).getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+    }
+
+    public ImageIcon[] getImageIcons() {
+        return imageIcons;
+    }
+
+    public ImageIcon[] getImageRepeat() {
+        return imageRepeat;
     }
 
     private void addBlankSpace(GridBagConstraints gbc) {
@@ -88,7 +97,6 @@ public class PlayMusicView {
         gbc.gridwidth = 1;
         gbc.weightx = 0.0;
         gbc.fill = GridBagConstraints.BOTH;
-        //gbc.fill = GridBagConstraints.HORIZONTAL;
         contentPane.add(blankLabel, gbc);
     }
 
@@ -104,92 +112,114 @@ public class PlayMusicView {
         gbc.weightx = 0.0;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.insets = new Insets(0, 50, 0, 0); // Añadir margen inferior para separar de los botones
+        gbc.insets = new Insets(0, 50, 0, 0);
         contentPane.add(titleSong, gbc);
         gbc.gridx = 0;
         gbc.gridy = 1;
-        gbc.insets = new Insets(0, 25, 0, 10); // Añadir margen inferior para separar de los botones
+        gbc.insets = new Insets(0, 25, 0, 10);
         contentPane.add(titleArtist, gbc);
+    }
+
+    public void setTitleSong(String songName) {
+        titleSong.setText(songName);
+    }
+
+    public void setTitleArtist(String artistName) {
+        titleArtist.setText(artistName);
     }
 
     private void addProgressBar(GridBagConstraints gbc) {
         progressBar = new JProgressBar();
-        progressBar.setValue(40);
         progressBar.setMaximum(200);
-        progressBar.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
-        progressBar.setForeground(UIPalette.TEXT_COLOR.getColor());
+        progressBar.setMinimum(0);
+        progressBar.setPreferredSize(new Dimension(300, 20));
+        progressBar.setBackground(UIPalette.TEXT_COLOR.getColor());
+        progressBar.setForeground(UIPalette.COLOR_REPRODUCTOR.getColor());
         progressBar.setBorderPainted(false);
+        progressBar.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         gbc.gridx = 1;
-        gbc.gridy = 1; // Colocar la barra de progreso en la tercera fila
-        gbc.gridwidth = 5; // Ajustar el ancho de la barra de progreso para que ocupe todas las columnas
+        gbc.gridy = 1;
+        gbc.gridwidth = 5;
         gbc.ipadx = -11;
-        gbc.fill = GridBagConstraints.HORIZONTAL; // Hace que la barra de progreso se expanda horizontalmente
-        gbc.insets = new Insets(0, 300, 0, -230); // Añade margen superior e inferior para separar de los botones
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(0, 300, 0, -150);
         contentPane.add(progressBar, gbc);
+
+        timeCounter = new JLabel("00:00");
+        timeCounter.setForeground(UIPalette.TEXT_COLOR.getColor());
+        timeCounter.setFont(Fonts.getLightFont(15f));
+        gbc.gridx = 6;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.ipadx = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.insets = new Insets(0, 0, 0, 100);
+        contentPane.add(timeCounter, gbc);
+    }
+
+    public void setTimeCounter(String time) {
+        timeCounter.setText(time);
     }
 
 
     private void addPreviousButton(GridBagConstraints gbc) {
-        bPrev = new JButton(imageResize("data/img/previous.png", 25, 25));
+        bPrev = new JButton(imageResize("data/img/previous.png", 25));
         bPrev.setContentAreaFilled(false);
         bPrev.setBorderPainted(false);
         bPrev.setActionCommand(PREVIOUS_MUSIC_COMMAND);
-        gbc.gridx = 2; // Cambiar el valor de gridx a 1
+        gbc.gridx = 2;
         gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.LINE_END; // Alinear a la derecha
-        gbc.insets = new Insets(0, 10, 0, 10); // Añadir margen derecho
+        gbc.anchor = GridBagConstraints.LINE_END;
+        gbc.insets = new Insets(0, 10, 0, 17);
         contentPane.add(bPrev, gbc);
     }
 
 
     private void addPlayButton(GridBagConstraints gbc) {
-        bPlay = new JButton(imageResize("data/img/play.png", 25, 25));
+        bPlay = new JButton(imageResize("data/img/play.png", 25));
         bPlay.setContentAreaFilled(false);
         bPlay.setBorderPainted(false);
         bPlay.setActionCommand(PLAY_PAUSE_MUSIC_COMMAND);
-        gbc.gridx = 3; // Cambiar el valor de gridx a 2
+        gbc.gridx = 3;
         gbc.insets = new Insets(0, 10, 0, 10); // Añadir margen derecho e izquierdo
         contentPane.add(bPlay, gbc);
     }
 
 
     private void addNextButton(GridBagConstraints gbc) {
-        bNext = new JButton(imageResize("data/img/next.png", 30, 25));
+        bNext = new JButton(imageResize("data/img/next.png", 30));
         bNext.setContentAreaFilled(false);
         bNext.setBorderPainted(false);
         bNext.setActionCommand(NEXT_MUSIC_COMMAND);
-        gbc.gridx = 4; // Cambiar el valor de gridx a 3
+        gbc.gridx = 4;
         gbc.insets = new Insets(0, 10, 0, 10); // Añadir margen derecho e izquierdo
         contentPane.add(bNext, gbc);
     }
 
     private void addRepeatButton(GridBagConstraints gbc) {
-        bRepeat = new JButton(imageResize("data/img/repeat.png", 25, 25));
+        bRepeat = new JButton(imageResize("data/img/repeat.png", 25));
         bRepeat.setContentAreaFilled(false);
         bRepeat.setBorderPainted(false);
         bRepeat.setActionCommand(REPEAT_MUSIC_COMMAND);
-        gbc.gridx = 5; // Cambiar el valor de gridx a 4
+        gbc.gridx = 5;
         gbc.insets = new Insets(0, 10, 0, 10); // Añadir margen derecho e izquierdo
         contentPane.add(bRepeat, gbc);
     }
 
 
     private void addStopButton(GridBagConstraints gbc) {
-        bStop = new JButton(imageResize("data/img/stop_music.png", 25, 25));
+        bStop = new JButton(imageResize("data/img/stop_music.png", 25));
         bStop.setContentAreaFilled(false);
         bStop.setBorderPainted(false);
         bStop.setActionCommand(STOP_MUSIC_COMMAND);
-        gbc.gridx = 6; // Cambiar el valor de gridx a 5
+        gbc.gridx = 6;
         gbc.insets = new Insets(0, 10, 0, 250); // Añadir margen izquierdo
         contentPane.add(bStop, gbc);
     }
 
 
-    private ImageIcon imageResize(String ruta, int width, int height){
-        ImageIcon imagenIcono = new ImageIcon(ruta);
-        Image imagenOriginal = imagenIcono.getImage();
-        Image nuevaImagen = imagenOriginal.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        return new ImageIcon(nuevaImagen);
+    private ImageIcon imageResize(String ruta, int width){
+        return new ImageIcon(new ImageIcon(ruta).getImage().getScaledInstance(width, 25, Image.SCALE_SMOOTH));
     }
 
     public JPanel getPanelReproductor() {

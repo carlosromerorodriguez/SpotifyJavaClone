@@ -6,12 +6,23 @@ public class Song {
     private final String album;
     private final String author;
     private final String url;
+    private final String owner;
     public Song(String title, String genre, String album, String author, String url) {
         this.title = title;
         this.genre = genre;
         this.album = album;
         this.author = author;
         this.url = url;
+        this.owner = null;
+    }
+
+    public Song(String title, String genre, String album, String author, String url, String owner) {
+        this.title = title;
+        this.genre = genre;
+        this.album = album;
+        this.author = author;
+        this.url = url;
+        this.owner = owner;
     }
 
     public Song(String title, String genre, String album, String author) {
@@ -20,6 +31,7 @@ public class Song {
         this.album = album;
         this.author = author;
         this.url = null;
+        this.owner = null;
     }
 
     public String getTitle() {
@@ -40,5 +52,13 @@ public class Song {
 
     public String getUrl() {
         return url;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public int getDuration() {
+        return 0;
     }
 }

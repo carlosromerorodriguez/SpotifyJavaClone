@@ -28,4 +28,8 @@ public class BusinessLogicMusic {
         }
         return "Error: " + jsonObject.get("error").getAsString();
     }
+
+    public List<Song> searchMusic(String searchText) {
+        return songDAO.searchAllMusicFromSearchText(searchText);
+    }
 }

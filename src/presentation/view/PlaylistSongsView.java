@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 public class PlaylistSongsView extends JFrame {
@@ -20,30 +21,24 @@ public class PlaylistSongsView extends JFrame {
     private final JButton optionsButton;
     private PlaylistSongsViewListener listener;
     private String playlistName;
-    //private final JLabel title;
 
     public PlaylistSongsView() {
         panelList = new JPanel(new GridBagLayout());
         panelList.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
         GridBagConstraints c = new GridBagConstraints();
 
-        Font boldFont = Fonts.getBoldFont(30f);
         Font lightFont = Fonts.getLightFont(15f);
 
-        //title = new JLabel("Canciones de la Playlist " + playlistName);
-        //title.setForeground(UIPalette.TEXT_COLOR.getColor());
-        //title.setFont(boldFont);
         c.gridx = 0;
         c.gridy = 0;
         c.gridwidth = 2;
         c.insets = new Insets(0, 0, 0, 500);
-        //panelList.add(title, c);
 
         // JTable
-        tableModel = new DefaultTableModel(new Object[]{"Título", "Género", "Autor", "Álbum"}, 0){
+        tableModel = new DefaultTableModel(new Object[]{"Título", "Género", "Autor", "Álbum", "Owner"}, 0){
             @Override
             public boolean isCellEditable(int row, int column) {
-                return this.getRowCount() > 1;
+                return false;
             }
         };
 
@@ -116,12 +111,15 @@ public class PlaylistSongsView extends JFrame {
         table.setDefaultRenderer(Object.class, centerRenderer);
     }
 
+    public void addTableMouseListener(MouseListener mouseListener){
+        table.addMouseListener(mouseListener);
+    }
+
     public void setSongs(List<Song> songs) {
         SwingUtilities.invokeLater(() -> {
             tableModel.setRowCount(0);
             for (Song song : songs) {
-                System.out.println("Añadiendo canción: " + song.getTitle());
-                Object[] rowData = {title(song.getTitle()), title(song.getGenre()), title(song.getAuthor()), title(song.getAlbum())};
+                Object[] rowData = {title(song.getTitle()), title(song.getGenre()), title(song.getAuthor()), title(song.getAlbum()), title(song.getOwner())};
                 tableModel.addRow(rowData);
             }
             noSongsLabel.setVisible(tableModel.getRowCount() == 0);
@@ -148,8 +146,8 @@ public class PlaylistSongsView extends JFrame {
     }
 
     public void showOptionsDialog() {
-        String[] options = {"Añadir canción", "Eliminar canción"};
-        int choice = JOptionPane.showOptionDialog(this, "Seleccione una opción", "Opciones Playlist", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        String[] options = {"Add song", "Delete song"};
+        int choice = JOptionPane.showOptionDialog(this, "Choose an option", "Playlist's options", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
         if (choice == 0 && listener != null) {
             listener.onAddSong();
         } else if (choice == 1 && listener != null) {
@@ -167,6 +165,9 @@ public class PlaylistSongsView extends JFrame {
 
     public void setPlaylistName(String selectedPlaylistName) {
         this.playlistName = selectedPlaylistName;
-        //title.setText("Canciones de la Playlist " + playlistName);
+    }
+
+    public JTable getTable() {
+        return table;
     }
 }

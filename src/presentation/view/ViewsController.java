@@ -82,7 +82,7 @@ public class ViewsController {
         panelSuperiorDerecha.add(showMusicInfoView.getPanelShowSongInfo(), "showMusicInfo");
         panelSuperiorDerecha.add(musicStatisticsView.getContentPane(), "musicStatistics");
         panelSuperiorDerecha.add(playlistSongsView.getPanelList(), "playlistSongs");
-        panelSuperiorDerecha.add(addSongToPlaylistView.getPanel(), "addSongToPlaylist");
+        panelSuperiorDerecha.add(addSongToPlaylistView.getPanelList(), "addSongToPlaylist");
         panelSuperiorDerecha.add(deleteSongFromPlaylistView.getPanel(), "deleteSongFromPlaylist");
 
         mainPanelCardLayout.show(panelSuperiorDerecha, "listMusic");

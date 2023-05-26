@@ -11,88 +11,88 @@ import static presentation.view.Utilities.UIPalette.APP_BACKGROUND;
 
 public class ShowMusicInfoView {
     private String nom;
-    private String genere;
+    private String genre;
     private String artist;
     private String album;
     private String owner;
     private final JPanel panelMusicInfo;
-    private final JLabel titolCancion;
-    private final JLabel genereCancion;
-    private final JLabel artistCancion;
-    private final JLabel albumCancion;
-    private final JLabel ownerCancion;
-    private final JTextPane lyricsCancion;
+    private final JLabel songTitle;
+    private final JLabel songGenre;
+    private final JLabel songArtist;
+    private final JLabel songAlbum;
+    private final JLabel songOwner;
+    private final JTextPane songLyrics;
 
     public ShowMusicInfoView() {
         panelMusicInfo = new JPanel(new GridBagLayout());
         panelMusicInfo.setBackground(APP_BACKGROUND.getColor());
         GridBagConstraints c = new GridBagConstraints();
 
-        Font fuenteTitol = Fonts.getBoldFont(30f);
-        Font fuentePetit = Fonts.getLightFont(15f);
+        Font boldFont = Fonts.getBoldFont(30f);
+        Font lightFont = Fonts.getLightFont(15f);
 
         panelMusicInfo.setBorder(new EmptyBorder(0, 0, 0, 0));
 
-        titolCancion = new JLabel("Nombre de la canción: " + nom);
-        titolCancion.setForeground(UIPalette.TEXT_COLOR.getColor());
-        titolCancion.setFont(fuenteTitol);
+        songTitle = new JLabel("Song name: " + nom);
+        songTitle.setForeground(UIPalette.TEXT_COLOR.getColor());
+        songTitle.setFont(boldFont);
         c.ipadx = 100;
         c.gridx = 0;
         c.gridy = 0;
         c.gridwidth = 2;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(20, 0, 20, 0);
-        panelMusicInfo.add(titolCancion, c);
+        panelMusicInfo.add(songTitle, c);
 
-        genereCancion = new JLabel("Género: " + genere);
-        genereCancion.setForeground(UIPalette.TEXT_COLOR.getColor());
-        genereCancion.setFont(fuentePetit);
+        songGenre = new JLabel("Genre: " + genre);
+        songGenre.setForeground(UIPalette.TEXT_COLOR.getColor());
+        songGenre.setFont(lightFont);
         c.ipadx = 100;
         c.gridx = 0;
         c.gridy = 1;
         c.gridwidth = 2;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(20, 0, 20, 0);
-        panelMusicInfo.add(genereCancion, c);
+        panelMusicInfo.add(songGenre, c);
 
-        artistCancion = new JLabel("Artista: " + artist);
-        artistCancion.setForeground(UIPalette.TEXT_COLOR.getColor());
-        artistCancion.setFont(fuentePetit);
+        songArtist = new JLabel("Artist: " + artist);
+        songArtist.setForeground(UIPalette.TEXT_COLOR.getColor());
+        songArtist.setFont(lightFont);
         c.ipadx = 100;
         c.gridx = 0;
         c.gridy = 2;
         c.gridwidth = 2;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(20, 0, 20, 0);
-        panelMusicInfo.add(artistCancion, c);
+        panelMusicInfo.add(songArtist, c);
 
-        albumCancion = new JLabel("Álbum: " + album);
-        albumCancion.setForeground(UIPalette.TEXT_COLOR.getColor());
-        albumCancion.setFont(fuentePetit);
+        songAlbum = new JLabel("Album: " + album);
+        songAlbum.setForeground(UIPalette.TEXT_COLOR.getColor());
+        songAlbum.setFont(lightFont);
         c.ipadx = 100;
         c.gridx = 0;
         c.gridy = 3;
         c.gridwidth = 2;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(20, 0, 20, 0);
-        panelMusicInfo.add(albumCancion, c);
+        panelMusicInfo.add(songAlbum, c);
 
-        ownerCancion = new JLabel("Propietario: " + owner);
-        ownerCancion.setForeground(UIPalette.TEXT_COLOR.getColor());
-        ownerCancion.setFont(fuentePetit);
+        songOwner = new JLabel("Owner: " + owner);
+        songOwner.setForeground(UIPalette.TEXT_COLOR.getColor());
+        songOwner.setFont(lightFont);
         c.ipadx = 100;
         c.gridx = 0;
         c.gridy = 4;
         c.gridwidth = 2;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(20, 0, 20, 0);
-        panelMusicInfo.add(ownerCancion, c);
+        panelMusicInfo.add(songOwner, c);
 
-        lyricsCancion = new JTextPane();
-        lyricsCancion.setForeground(UIPalette.TEXT_COLOR.getColor());
-        lyricsCancion.setFont(Fonts.getLightFont(20f));
-        lyricsCancion.setEditable(false);
-        lyricsCancion.setBackground(UIPalette.APP_BACKGROUND.getColor());
+        songLyrics = new JTextPane();
+        songLyrics.setForeground(UIPalette.TEXT_COLOR.getColor());
+        songLyrics.setFont(Fonts.getLightFont(20f));
+        songLyrics.setEditable(false);
+        songLyrics.setBackground(UIPalette.APP_BACKGROUND.getColor());
         c.ipadx = 100;
         c.gridx = 0;
         c.gridy = 5;
@@ -100,7 +100,7 @@ public class ShowMusicInfoView {
         c.fill = GridBagConstraints.BOTH;
         c.weighty = 1.0;
 
-        JScrollPane scrollPane = new JScrollPane(lyricsCancion);
+        JScrollPane scrollPane = new JScrollPane(songLyrics);
         scrollPane.setBackground(UIPalette.APP_BACKGROUND.getColor());
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.setPreferredSize(new Dimension(750, 450));
@@ -109,17 +109,19 @@ public class ShowMusicInfoView {
         panelMusicInfo.add(scrollPane, c);
     }
 
-    public void setSongInfo(String nom, String genere, String artist, String album, String lyrics) {
-        this.nom = nom;
-        this.genere = genere;
+    public void setSongInfo(String name, String title, String artist, String album, String lyrics, String owner) {
+        this.nom = name;
+        this.genre = title;
         this.artist = artist;
         this.album = album;
+        this.owner = owner;
 
-        titolCancion.setText("Nombre de la canción: " + title(nom));
-        genereCancion.setText("Género: " + title(genere));
-        artistCancion.setText("Artista: " + title(artist));
-        albumCancion.setText("Álbum: " + title(album));
-        lyricsCancion.setText("Lyrics: \n\n" + lyrics);
+        songTitle.setText("Song name: " + title(name));
+        songGenre.setText("Genre: " + title(title));
+        songArtist.setText("Artist: " + title(artist));
+        songAlbum.setText("Album: " + title(album));
+        songOwner.setText("Owner: " + title(owner));
+        songLyrics.setText("Lyrics: \n\n" + lyrics);
     }
 
     public JPanel getPanelShowSongInfo() {

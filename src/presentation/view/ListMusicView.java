@@ -9,12 +9,14 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.List;
 
 public class ListMusicView extends JFrame {
     private final JPanel panelList;
     private final JTable table;
+    private final JTextField searchField;
     private final DefaultTableModel tableModel;
     private final JButton optionsButton;
     private ListMusicViewListener listener;
@@ -27,13 +29,28 @@ public class ListMusicView extends JFrame {
         Font boldFont = Fonts.getBoldFont(50f);
         Font lightFont = Fonts.getLightFont(15f);
 
-        JLabel title = new JLabel("Canciones");
-        title.setForeground(UIPalette.TEXT_COLOR.getColor());
-        title.setFont(boldFont);
+        searchField = new JTextField();
+        searchField.setFont(Fonts.getBoldFont(20f));
+        searchField.setPreferredSize(new Dimension(400, 30));
+        searchField.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
+        searchField.setForeground(UIPalette.TEXT_COLOR.getColor());
+        c.weightx = 1.0;
+        c.weighty = 0.1;
         c.gridx = 0;
         c.gridy = 0;
         c.gridwidth = 2;
-        c.insets = new Insets(0, 0, 0, 500);
+        c.insets = new Insets(10, 10, 20, -350);
+        panelList.add(searchField, c);
+
+        JLabel title = new JLabel("Songs List");
+        title.setForeground(UIPalette.TEXT_COLOR.getColor());
+        title.setFont(boldFont);
+        c.weightx = 1.0;
+        c.weighty = 0.2;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.gridwidth = 2;
+        c.insets = new Insets(0, 0, 0, 450);
         panelList.add(title, c);
 
         ImageIcon icon = new ImageIcon("data/img/boton_mas.png");
@@ -47,17 +64,21 @@ public class ListMusicView extends JFrame {
         optionsButton.setFocusPainted(false);
         optionsButton.setBorderPainted(false);
         optionsButton.setOpaque(false);
-
         c.anchor = GridBagConstraints.NORTHEAST;
         c.weightx = 1.0;
-        c.weighty = 0.0;
+        c.weighty = 0.3;
         c.gridx = 1;
-        c.gridy = 0;
-        c.insets = new Insets(5, 5, 10, 100);
+        c.gridy = 2;
+        c.insets = new Insets(-50, 5, 30, 100);
         panelList.add(optionsButton, c);
 
         // JTable
-        tableModel = new DefaultTableModel(new Object[]{"Título", "Género", "Autor", "Álbum", "Propietario"}, 0);
+        tableModel = new DefaultTableModel(new Object[]{"Título", "Género", "Autor", "Álbum", "Owner"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
         table = new JTable(tableModel);
         table.setFont(lightFont);
@@ -80,9 +101,9 @@ public class ListMusicView extends JFrame {
         scrollPane.getVerticalScrollBar().setUI(new CustomScrollBarUI());
 
         c.gridx = 0;
-        c.gridy = 1;
+        c.gridy = 3;
         c.gridwidth = 2;
-        c.insets = new Insets(10, 50, 0, 50);
+        c.insets = new Insets(10, 50, 60, 50);
         panelList.add(scrollPane, c);
 
         TableColumnModel columnModel = table.getColumnModel();
@@ -96,10 +117,10 @@ public class ListMusicView extends JFrame {
         table.setDefaultRenderer(Object.class, centerRenderer);
     }
 
-    public void setSongs(List<Song> songs, String owner) {
+    public void setSongs(List<Song> songs) {
         tableModel.setRowCount(0);
         for (Song song : songs) {
-            Object[] rowData = {title(song.getTitle()), title(song.getGenre()), title(song.getAuthor()), title(song.getAlbum()), owner};
+            Object[] rowData = {title(song.getTitle()), title(song.getGenre()), title(song.getAuthor()), title(song.getAlbum()), title(song.getOwner())};
             tableModel.addRow(rowData);
         }
     }
@@ -120,6 +141,9 @@ public class ListMusicView extends JFrame {
     public JPanel getPanelList() {
         return panelList;
     }
+    public String getSearchText() {
+        return searchField.getText();
+    }
 
     public void actionLinker(MouseListener mouseListener){
         table.addMouseListener(mouseListener);
@@ -128,6 +152,11 @@ public class ListMusicView extends JFrame {
     public void setListener(ListMusicViewListener listener) {
         this.listener = listener;
     }
+
+    public void setSearchFieldListener(ActionListener actionListener) {
+        searchField.addActionListener(actionListener);
+    }
+
 
     public void showOptionsDialog() {
         String[] options = {"Añadir música", "Eliminar música"};

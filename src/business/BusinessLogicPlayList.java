@@ -5,6 +5,7 @@ import business.entities.Song;
 import business.exceptions.*;
 import persistance.PlaylistDatabaseDAO;
 import persistance.UserDatabaseDAO;
+import persistance.exceptions.DuplicateKeyException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,13 +31,8 @@ public class BusinessLogicPlayList {
         return playlistDatabaseDAO.getSongsFromPlaylist(playlistName, userDatabaseDAO.getUserNameFromFile());
     }
 
-    public void addSongToPlaylist(String playlistName, Song song) throws TitleException, GenreException, AuthorException, AlbumException, UrlException {
-        if (song.getTitle().isEmpty()) { throw new TitleException(); }
-        if (song.getGenre().isEmpty()) { throw new GenreException(); }
-        if (song.getAuthor().isEmpty()) { throw new AuthorException(); }
-        if (song.getAlbum().isEmpty()) { throw new AlbumException(); }
-        //if (song.getUrl().isEmpty()) { throw new UrlException(); }
-        playlistDatabaseDAO.addSongToPlaylist(playlistName, song, userDatabaseDAO.getUserNameFromFile());
+    public void addSongToPlaylist(String playlistName, Song song) throws DuplicateKeyException {
+        playlistDatabaseDAO.addSongToPlaylist(playlistName, song);
     }
 
     public boolean deletePlaylist(String playlistName) {

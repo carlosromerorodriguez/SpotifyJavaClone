@@ -1,4 +1,5 @@
 package presentation.view;
+import presentation.controller.DeleteMusicController;
 import presentation.view.Utilities.UIPalette;
 
 import javax.swing.*;
@@ -92,32 +93,33 @@ public class DeleteMusicView extends JFrame {
         buttonDelete.addActionListener(actionListener);
     }
     public String confirmDelete() {
-        int response = JOptionPane.showConfirmDialog(null, "Seguro que desea eliminar esta cancion permanentemente?");
-        if (response == JOptionPane.YES_OPTION) {
-            return CONFIRM_COMMAND;
-        } else {
-            return BACK_FROM_DELETE;
-        }
+        int response = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar esta canción permanentemente?");
+        return (response == JOptionPane.YES_OPTION) ? CONFIRM_COMMAND : BACK_FROM_DELETE;
     }
 
     public JPanel getPanelDeleteSong() {
         return panelDeleteSong;
     }
 
-    public void backDeleteController(ActionListener actionListener) {
-        buttonBack.addActionListener(actionListener);
+    public void backButtonListener(DeleteMusicController deleteMusicController) {
+        buttonBack.addActionListener(deleteMusicController);
     }
+
     public void wrongTitleError() {
         JOptionPane.showMessageDialog(this,
                 "The title you entered is not valid. Please ensure it meets the requirements and try again.",
                 "Invalid Title", JOptionPane.ERROR_MESSAGE);
     }
-    /*
-    public void wrongUserError() {
+
+    public void successfulDelete() {
         JOptionPane.showMessageDialog(this,
-                "The username you entered is not valid. Please ensure it meets the requirements and try again.",
-                "Invalid Username", JOptionPane.ERROR_MESSAGE);
+                "The song has been successfully deleted.",
+                "Successful Delete", JOptionPane.INFORMATION_MESSAGE);
     }
 
-     */
+    public void unsuccessfulDelete() {
+        JOptionPane.showMessageDialog(this,
+                "The song could not be deleted.",
+                "Unsuccessful Delete", JOptionPane.ERROR_MESSAGE);
+    }
 }

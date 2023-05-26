@@ -1,5 +1,6 @@
 import business.*;
 import persistance.*;
+import persistance.exceptions.ApiServerException;
 import presentation.controller.*;
 import presentation.view.SignUpView;
 import presentation.view.WelcomeView;
@@ -25,13 +26,13 @@ public class Main {
             // TODO: Esto se puede modificar
             UserDatabaseDAO userDatabaseDAO = new UserDatabaseDAO(ddBBAccess);
             BusinessLogicUser businessLogicUser = new BusinessLogicUser(userDatabaseDAO);
-            BusinessLogicMPlayer businessLogicMPlayer = new BusinessLogicMPlayer();
             SongDatabaseDAO songDatabaseDAO = new SongDatabaseDAO(ddBBAccess);
             StatisticsDatabaseDAO statisticsDatabaseDAO = new StatisticsDatabaseDAO(ddBBAccess);
-            BusinessLogicSong businessLogicSong = new BusinessLogicSong(songDatabaseDAO, statisticsDatabaseDAO);
+            BusinessLogicSong businessLogicSong = new BusinessLogicSong(songDatabaseDAO, statisticsDatabaseDAO, userDatabaseDAO);
             BusinessLogicMusic businessLogicMusic = new BusinessLogicMusic(songDatabaseDAO, api);
             PlaylistDatabaseDAO playlistDatabaseDAO = new PlaylistDatabaseDAO(ddBBAccess);
             BusinessLogicPlayList businessLogicPlayList = new BusinessLogicPlayList(playlistDatabaseDAO, userDatabaseDAO);
+            BusinessLogicMPlayer businessLogicMPlayer = new BusinessLogicMPlayer();
 
             SignUpView signUpView = new SignUpView();
             LogOutView logOutView = new LogOutView();
@@ -60,18 +61,17 @@ public class Main {
             SignUpController signUpController = new SignUpController(signUpView, businessLogicUser, viewsController);
             SignInController signInController = new SignInController(signInView, businessLogicUser, viewsController);
             WelcomeController welcomeController = new WelcomeController(welcomeView, businessLogicUser, viewsController);
-            AddSongToPlaylistController addSongToPlaylistController = new AddSongToPlaylistController(businessLogicPlayList, viewsController, addSongToPlaylistView);
-            PlayMusicController playMusicController = new PlayMusicController(playMusicView, businessLogicMPlayer, viewsController);
-            DeleteMusicController deleteMusicController = new DeleteMusicController(deleteMusicView, businessLogicSong);
+            AddSongToPlaylistController addSongToPlaylistController = new AddSongToPlaylistController(businessLogicMusic, businessLogicPlayList, viewsController, addSongToPlaylistView);
+            PlayMusicController playMusicController = new PlayMusicController(playMusicView, businessLogicMPlayer);
             MusicStatisticsController musicStatisticsController = new MusicStatisticsController(musicStatisticsView, businessLogicSong);
-            ListMusicController listMusicController = new ListMusicController(businessLogicMusic, viewsController, listMusicView, showMusicInfoView);
-            PlaylistSongsController playlistSongsController = new PlaylistSongsController(playlistSongsView, businessLogicPlayList, viewsController, addSongToPlaylistView, deleteSongFromPlaylistView);
+            ListMusicController listMusicController = new ListMusicController(businessLogicMusic, viewsController, listMusicView, showMusicInfoView, playMusicController);
+            DeleteMusicController deleteMusicController = new DeleteMusicController(deleteMusicView, businessLogicSong, viewsController, listMusicController);
+            PlaylistSongsController playlistSongsController = new PlaylistSongsController(playlistSongsView, businessLogicPlayList, viewsController, addSongToPlaylistView, deleteSongFromPlaylistView, businessLogicMusic, playMusicController);
             PlaylistController playlistController = new PlaylistController(playlistView, businessLogicPlayList, viewsController, playlistSongsController);
             AddPlaylistController addPlaylistController = new AddPlaylistController(businessLogicPlayList, viewsController, addPlaylistView, playlistController);
             DeletePlaylistController deletePlaylistController = new DeletePlaylistController(businessLogicPlayList, viewsController, deletePlaylistView, playlistController);
             DeleteSongFromPlaylistController deleteSongFromPlaylistController = new DeleteSongFromPlaylistController(businessLogicPlayList, viewsController, deleteSongFromPlaylistView, playlistSongsController);
             DeleteUserController deleteUserController = new DeleteUserController(businessLogicUser, deleteUserView, viewsController);
-
 
             signUpView.registerController(signUpController);
             signUpView.backController(signUpController);
@@ -96,17 +96,9 @@ public class Main {
             listMusicView.actionLinker(listMusicController);
 
 
-            viewsController.createViewPrincipal();
-            //musicStatisticsView.MusicStatisticsView();
-            //musicStatisticsView.BarChartExample();
-            //viewsController.createViewAddSong();
-            //viewsController.createViewListSong();
-            //viewsController.createViewDeleteSong();
-            //viewsController.create();
-            //MusicStatisticsView musicStatisticsView = new MusicStatisticsView();
-            //musicStatisticsView.BarChartExample();
-        } catch (Exception e) {
-            System.out.println("Error al iniciar la aplicacion");
+            viewsController.createViewReproductor();
+        } catch (ApiServerException e) {
+            System.out.println("Error al conectar con la API" + e.getMessage());
         }
     }
 

@@ -1,236 +1,117 @@
 package presentation.view;
 
-
+import business.entities.Song;
 import presentation.view.Utilities.Fonts;
 import presentation.view.Utilities.UIPalette;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.util.List;
 
 public class AddSongToPlaylistView extends JFrame {
-    public static final String ADD_COMMAND = "ADD_COMMAND";
-    public static final String BACK_FROM_ADD = "BACK_FROM_ADD";
-    private final JTextField jTFSongTitleText;
-    private final JTextField jTFSongGenreText;
-    private final JTextField jTFSongAlbumText;
-    private final JTextField jTFSongAuthorText;
-    private final JTextField jTFPlaylistNameText;
-    private final JPanel panelAddSong;
-    private final JButton buttonAdd;
-    private final JButton buttonBack;
-    private JLabel addSongTitle;
-
-    public String getTitle() {
-        return jTFSongTitleText.getText();
-    }
-
-    public String getGenre() {
-        return jTFSongGenreText.getText();
-    }
-
-    public String getAlbum() {
-        return jTFSongAlbumText.getText();
-    }
-
-    public String getAuthor() {
-        return jTFSongAuthorText.getText();
-    }
-
-    public JPanel getPanelAddSong() {
-        return panelAddSong;
-    }
+    private final JPanel panelList;
+    private final JTable table;
+    private final DefaultTableModel tableModel;
+    private String playlistName;
 
     public AddSongToPlaylistView() {
-        panelAddSong = new JPanel(new GridBagLayout());
-        panelAddSong.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
+        panelList = new JPanel(new GridBagLayout());
+        panelList.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
         GridBagConstraints c = new GridBagConstraints();
-        jTFPlaylistNameText = new JTextField("");
 
-        panelAddSong.setPreferredSize(new Dimension(500, 500)); // Set preferred size of the panel
+        Font lightFont = Fonts.getLightFont(15f);
 
-        Font boldFont = Fonts.getBoldFont(30f);
-        Font mediumFont = Fonts.getMediumFont(15f);
+        // JTable
+        tableModel = new DefaultTableModel(new Object[]{"Título", "Género", "Autor", "Álbum", "Owner"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
-        panelAddSong.setBorder(new EmptyBorder(0, 0, 0, 0));
+        table = new JTable(tableModel);
+        table.setFont(lightFont);
+        table.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
+        table.setForeground(UIPalette.TEXT_COLOR.getColor());
+        table.setGridColor(UIPalette.TEXT_COLOR.getColor());
+        table.setFont(Fonts.getMediumFont(15f));
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        table.getTableHeader().setFont(lightFont);
+        table.getTableHeader().setForeground(UIPalette.INPUT_TEXT.getColor());
+        table.getTableHeader().setBackground(UIPalette.JTABLE_TEXT_COLOR.getColor());
+        table.setRowHeight(100);
+        table.getTableHeader().setReorderingAllowed(false);
 
-        addSongTitle = new JLabel("Add Song To Playlist " + jTFPlaylistNameText.getText());
-        addSongTitle.setForeground(UIPalette.TEXT_COLOR.getColor());
-        addSongTitle.setFont(boldFont);
-        c.ipadx = 100;
-        c.ipady = 0;
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        scrollPane.setPreferredSize(new Dimension(750, 450));
+        scrollPane.getViewport().setBackground(UIPalette.ADD_SONG_COLOR.getColor());
+        scrollPane.getVerticalScrollBar().setUI(new CustomScrollBarUI());
+
         c.gridx = 0;
         c.gridy = 0;
         c.gridwidth = 2;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.insets = new Insets(0, 10, 10, 0);
-        panelAddSong.add(addSongTitle, c);
+        c.insets = new Insets(10, 50, 60, 50);
+        panelList.add(scrollPane, c);
 
-        JLabel title = new JLabel("Title:");
-        title.setForeground(UIPalette.TEXT_COLOR.getColor());
-        title.setFont(mediumFont);
-        c.ipady = 0;
-        c.gridx = 0;
-        c.gridy = 1;
-        c.gridwidth = 1;
-        c.insets = new Insets(0, 10, 10, 0);
-        panelAddSong.add(title, c);
+        TableColumnModel columnModel = table.getColumnModel();
+        int columnCount = columnModel.getColumnCount();
+        for (int i = 0; i < columnCount; i++) {
+            columnModel.getColumn(i).setPreferredWidth(800);
+        }
 
-        jTFSongTitleText = new JTextField();
-        jTFSongTitleText.setFont(mediumFont);
-        c.ipady = 0;
-        c.gridx = 0;
-        c.gridy = 2;
-        c.gridwidth = 1;
-        c.insets = new Insets(0, 10, 10, 0);
-        panelAddSong.add(jTFSongTitleText, c);
-
-        JLabel genre = new JLabel("Genre:");
-        genre.setForeground(UIPalette.TEXT_COLOR.getColor());
-        genre.setFont(mediumFont);
-        c.ipady = 0;
-        c.gridx = 1;
-        c.gridy = 1;
-        c.gridwidth = 1;
-        c.insets = new Insets(0, 10, 10, 0);
-        panelAddSong.add(genre, c);
-
-        jTFSongGenreText = new JTextField();
-        jTFSongGenreText.setFont(mediumFont);
-        c.ipady = 0;
-        c.gridx = 1;
-        c.gridy = 2;
-        c.gridwidth = 1;
-        c.insets = new Insets(0, 10, 10, 0);
-        panelAddSong.add(jTFSongGenreText, c);
-
-        JLabel album = new JLabel("Album:");
-        album.setForeground(UIPalette.TEXT_COLOR.getColor());
-        album.setFont(mediumFont);
-        c.ipady = 0;
-        c.gridx = 0;
-        c.gridy = 3;
-        c.gridwidth = 1;
-        c.insets = new Insets(0, 10, 10, 0);
-        panelAddSong.add(album, c);
-
-        jTFSongAlbumText = new JTextField();
-        jTFSongAlbumText.setFont(mediumFont);
-        c.ipady = 0;
-        c.gridx = 0;
-        c.gridy = 4;
-        c.gridwidth = 1;
-        c.insets = new Insets(0, 10, 10, 0);
-        panelAddSong.add(jTFSongAlbumText, c);
-
-        JLabel author = new JLabel("Author:");
-        author.setForeground(UIPalette.TEXT_COLOR.getColor());
-        author.setFont(mediumFont);
-        c.ipady = 0;
-        c.gridx = 1;
-        c.gridy = 3;
-        c.gridwidth = 1;
-        c.insets = new Insets(0, 10, 10, 0);
-        panelAddSong.add(author, c);
-
-        jTFSongAuthorText = new JTextField();
-        jTFSongAuthorText.setFont(mediumFont);
-        c.ipady = 0;
-        c.gridx = 1;
-        c.gridy = 4;
-        c.gridwidth = 1;
-        c.insets = new Insets(0, 10, 10, 0);
-        panelAddSong.add(jTFSongAuthorText, c);
-
-        JLabel url = new JLabel("URL:");
-        url.setForeground(UIPalette.TEXT_COLOR.getColor());
-        url.setFont(mediumFont);
-        c.ipady = 0;
-        c.gridx = 0;
-        c.gridy = 5;
-        c.gridwidth = 7;
-        c.insets = new Insets(0, 10, 10, 0);
-        panelAddSong.add(url, c);
-
-        JFileChooser jTF_song_url = new JFileChooser();
-        jTF_song_url.setPreferredSize(new Dimension(200, 350));
-        jTF_song_url.setFont(mediumFont);
-        c.ipady = 0;
-        c.gridx = 0;
-        c.gridy =6;
-        c.gridwidth = 2;
-        c.gridheight = 1;
-        c.insets = new Insets(0, 0, 10, 0);
-        panelAddSong.add(jTF_song_url, c);
-
-        buttonBack = new JButton("<");
-        buttonBack.setFont(mediumFont);
-        buttonBack.setActionCommand(BACK_FROM_ADD);
-        c.ipady = 0;
-        c.gridx = 0;
-        c.gridy = 7;
-        c.gridwidth = 1;
-        c.insets = new Insets(0, 50, 0, 150);
-        panelAddSong.add(buttonBack, c);
-
-        buttonAdd = new JButton("Add");
-        buttonAdd.setFont(mediumFont);
-        buttonAdd.setActionCommand(ADD_COMMAND);
-        c.ipady = 0;
-        c.gridx = 1;
-        c.gridy = 7;
-        c.gridwidth = 1;
-        panelAddSong.add(buttonAdd, c);
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        table.setDefaultRenderer(Object.class, centerRenderer);
     }
 
-    public void setPlaylistName(String jTFPlaylistNameText) {
-        this.jTFPlaylistNameText.setText(jTFPlaylistNameText);
-        addSongTitle.setText("Add Song To Playlist " + jTFPlaylistNameText);
+    public void setSongs(List<Song> songs) {
+        tableModel.setRowCount(0);
+        for (Song song : songs) {
+            Object[] rowData = {title(song.getTitle()), title(song.getGenre()), title(song.getAuthor()), title(song.getAlbum()), title(song.getOwner())};
+            tableModel.addRow(rowData);
+        }
     }
 
-    public void addSongController(ActionListener actionListener) {
-        buttonAdd.addActionListener(actionListener);
-    }
-    public void wrongUrlError() {
-        JOptionPane.showMessageDialog(this,
-                "The url you entered is not valid. Please ensure you have copied correctly",
-                "Invalid Url Address", JOptionPane.ERROR_MESSAGE);
-    }
-
-    public void wrongTitleError() {
-        JOptionPane.showMessageDialog(this,
-                "The title you entered is not valid. Please ensure it meets the requirements and try again.",
-                "Invalid Title", JOptionPane.ERROR_MESSAGE);
+    private static String title(String text) {
+        String[] words = text.split(" ");
+        StringBuilder title = new StringBuilder();
+        for (String word : words) {
+            title.append(word.substring(0, 1).toUpperCase()).append(word.substring(1).toLowerCase()).append(" ");
+        }
+        return title.toString().trim();
     }
 
-    public void wrongAuthorError() {
-        JOptionPane.showMessageDialog(this,
-                "The author you entered is not valid. Please ensure it meets the requirements and try again.",
-                "Invalid Author", JOptionPane.ERROR_MESSAGE);
+    public JPanel getPanelList() {
+        return panelList;
     }
 
-    public void wrongAlbumError() {
-        JOptionPane.showMessageDialog(this,
-                "The album you entered is not valid. Please ensure it meets the requirements and try again.",
-                "Invalid Album", JOptionPane.ERROR_MESSAGE);
+    public void actionLinker(MouseListener mouseListener){
+        table.addMouseListener(mouseListener);
     }
 
-    public void wrongGenreError() {
-        JOptionPane.showMessageDialog(this,
-                "The genre you entered is not valid. Please ensure it meets the requirements and try again.",
-                "Invalid Genre", JOptionPane.ERROR_MESSAGE);
-    }
-
-    public JPanel getPanel() {
-        return panelAddSong;
-    }
-
-    public AbstractButton getBackButton() {
-        return buttonBack;
+    public void setPlaylistName(String playlistName) {
+        this.playlistName = playlistName;
     }
 
     public String getPlaylistName() {
-        return jTFPlaylistNameText.getText();
+        return playlistName;
+    }
+
+    public void showDuplicateSongError() {
+        JOptionPane.showMessageDialog(this, "La canción ya está en la playlist", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void showSongAddedToPlaylist() {
+        JOptionPane.showMessageDialog(this, "Canción añadida a la playlist", "Canción añadida", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void showSongNotSelectedError() {
+        JOptionPane.showMessageDialog(this, "Selecciona una canción", "Error", JOptionPane.ERROR_MESSAGE);
     }
 }

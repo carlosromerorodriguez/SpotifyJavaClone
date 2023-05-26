@@ -3,6 +3,9 @@ package persistance;
 import business.entities.Music;
 import business.entities.Song;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,11 +38,30 @@ public class SongDatabaseDAO implements SongDAO {
             statement.setString(4, song.getAuthor());
             statement.setString(5, song.getUrl());
             statement.executeUpdate();
+            matchOwnerWithSong(song);
             return true;
         } catch (SQLException e) {
             System.err.println("Error al insertar la cancion: " + e.getMessage());
         }
         return false;
+    }
+
+    private void matchOwnerWithSong(Song song) {
+        String query = "INSERT INTO usuari_cancio VALUES (?, ?)";
+        try {
+            PreparedStatement statement = ddbbAccess.getConnection().prepareStatement(query);
+            statement.setString(1, readUserInfoFile());
+            statement.setString(2, song.getTitle());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error al insertar la cancion: " + e.getMessage());
+        }
+    }
+
+    private String readUserInfoFile() {
+        try {
+            return new String(Files.readAllBytes(Paths.get("data", "user", "userInfo")));
+        } catch (IOException ignored) { return null; }
     }
 
     @Override

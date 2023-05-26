@@ -14,7 +14,6 @@ public class MusicStatisticsView {
 
     public MusicStatisticsView() {
         data = new HashMap<>();
-        //BarChartPanel chartPanel = new BarChartPanel(data);
 
         contentPane = new JPanel();
         contentPane.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
@@ -23,8 +22,7 @@ public class MusicStatisticsView {
         c.fill = GridBagConstraints.BOTH;
 
         JPanel chart = new JPanel();
-        //chart.add(chartPanel);
-        JLabel titol = new JLabel("Estadistiques.");
+        JLabel titol = new JLabel("Estadistiques");
         titol.setFont(Fonts.getBoldFont(50f));
 
         c.gridx = 0;
@@ -48,9 +46,7 @@ public class MusicStatisticsView {
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
 
-        JPanel chart = new JPanel();
-        //chart.add(chartPanel);
-        JLabel titol = new JLabel("Estadistiques.");
+        JLabel titol = new JLabel("Estadistiques");
         titol.setForeground(UIPalette.TEXT_COLOR.getColor());
         titol.setFont(Fonts.getBoldFont(50f));
 

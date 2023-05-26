@@ -10,14 +10,14 @@ import presentation.view.ViewsController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class SignInController implements ActionListener {
+    private final BusinessLogicUser businessLogicUser;
 
-    BusinessLogicUser businessLogicUser;
+    private final ViewsController viewsController;
 
-    ViewsController viewsController;
-
-    SignInView signInView;
+    private final SignInView signInView;
 
     public SignInController(SignInView signInView, BusinessLogicUser businessLogicUser, ViewsController viewsController){
         this.signInView = signInView;
@@ -25,25 +25,21 @@ public class SignInController implements ActionListener {
         this.viewsController = viewsController;
     }
 
-    public void signInButtonPressed(String nom_correu, char[] password) {
-        //businessLogicUser.loginUser(nom_correu, password.toString());
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals(signInView.LOGIN_COMMAND)) {
+        if (e.getActionCommand().equals(SignInView.LOGIN_COMMAND)) {
             try {
-                if(businessLogicUser.loginUser(signInView.getLoginUserMail(), signInView.getLoginUserPassword())){
-                    System.out.println("Login correcte");
-                    viewsController.createViewReproductor();
-                }
+                businessLogicUser.loginUser(signInView.getLoginUserMail(), signInView.getLoginUserPassword());
+                viewsController.createViewReproductor();
             } catch (UsernameException ex) {
-                throw new RuntimeException(ex);
+                signInView.showUsernameError();
             } catch (PasswordException ex) {
-                throw new RuntimeException(ex);
+                signInView.showPasswordError();
+            } catch (IOException ex) {
+                signInView.showIOError();
             }
         }
-        if(e.getActionCommand().equals(signInView.BACK_FROM_SIGNIN)){
+        if (e.getActionCommand().equals(SignInView.BACK_FROM_SIGNIN)){
             viewsController.setWelcomeView();
         }
     }

@@ -1,6 +1,6 @@
 package presentation.view;
 
-import presentation.controller.ListMusicController;
+import presentation.controller.AddSongToPlaylistController;
 import presentation.view.Utilities.UIPalette;
 
 import javax.swing.*;
@@ -19,12 +19,13 @@ public class ViewsController {
 
     private JPanel panelPrincipal;
 
-
-    public ViewsController(SignInView signInView, SignUpView signUpView, DeleteUserView deleteUserView, WelcomeView welcomeView,
+    public ViewsController(SignInView signInView, SignUpView signUpView, LogOutView logOutView, WelcomeView welcomeView,
                            AddMusicView addMusicView, ListMusicView listMusicView, DeleteMusicView deleteMusicView,
-                           MainMenuView mainMenuView, PlayMusicView playMusicView, PlaylistView playlistView, MusicStatisticsView musicStatisticsView,
-                           ShowMusicInfoView showMusicInfoView, LogoutView logoutView) {
-
+                           MainMenuView mainMenuView, PlayMusicView playMusicView, PlaylistView playlistView,
+                           MusicStatisticsView musicStatisticsView, ShowMusicInfoView showMusicInfoView,
+                           AddPlaylistView addPlaylistView, PlaylistSongsView playlistSongsView,
+                           AddSongToPlaylistView addSongToPlaylistView, DeletePlaylistView deletePlaylistView,
+                           DeleteSongFromPlaylistView deleteSongFromPlaylistView, DeleteUserView deleteUserView) {
 
         ImageIcon spotifyIcon = new ImageIcon("data/img/spotify.png");
         this.window = new JFrame("Espotifai");
@@ -35,14 +36,17 @@ public class ViewsController {
         cardPanelInici.add(signInView.getPanelSignIn(), "signIn");
         cardPanelInici.add(signUpView.getPanelSignup(), "signUp");
         cardPanelInici.add(welcomeView.getWelcomePanel(), "welcome");
-        cardPanelInici.add(addMusicView.getPanelAddSong(), "addSong");
 
-        crearPanelPrincipal(mainMenuView, playMusicView, playlistView, listMusicView, deleteUserView, musicStatisticsView, addMusicView, showMusicInfoView, logoutView);
+        crearPanelPrincipal(mainMenuView, playMusicView, playlistView, listMusicView, logOutView, musicStatisticsView,
+                addMusicView, showMusicInfoView, deleteMusicView, addPlaylistView, playlistSongsView,
+                addSongToPlaylistView, deletePlaylistView, deleteSongFromPlaylistView, deleteUserView);
     }
 
     private void crearPanelPrincipal(MainMenuView mainMenuView, PlayMusicView playMusicView, PlaylistView playlistView, ListMusicView listMusicView,
-                                     DeleteUserView deleteUserView, MusicStatisticsView musicStatisticsView, AddMusicView addMusicView, ShowMusicInfoView showMusicInfoView
-                         , LogoutView logoutView) {
+                                     LogOutView logOutView, MusicStatisticsView musicStatisticsView, AddMusicView addMusicView, ShowMusicInfoView showMusicInfoView,
+                                     DeleteMusicView deleteMusicView, AddPlaylistView addPlaylistView, PlaylistSongsView playlistSongsView,
+                                     AddSongToPlaylistView addSongToPlaylistView, DeletePlaylistView deletePlaylistView, DeleteSongFromPlaylistView deleteSongFromPlaylistView,
+                                     DeleteUserView deleteUserView) {
 
         panelPrincipal = new JPanel(new BorderLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -64,17 +68,22 @@ public class ViewsController {
         c.gridx = 0;
         c.gridy = 1;
         c.insets = new Insets(70, 0, 100, 0);
-        outView.add(logoutView.getContentPane(), c);
+        outView.add(logOutView.getContentPane(), c);
 
         mainPanelCardLayout = new CardLayout();
         panelSuperiorDerecha = new JPanel(mainPanelCardLayout);
         panelSuperiorDerecha.add(playlistView.getContentPane(), "playlist");
         panelSuperiorDerecha.add(listMusicView.getPanelList(), "listMusic");
-        panelSuperiorDerecha.add(musicStatisticsView.getContentPane(), "musicStatistics");
         panelSuperiorDerecha.add(outView, "logout");
         panelSuperiorDerecha.add(addMusicView.getPanelAddSong(), "addMusic");
+        panelSuperiorDerecha.add(deleteMusicView.getPanelDeleteSong(), "deleteSong");
+        panelSuperiorDerecha.add(addPlaylistView.getPanelAddSong(), "addPlaylist");
+        panelSuperiorDerecha.add(deletePlaylistView.getPanelAddSong(), "deletePlaylist");
         panelSuperiorDerecha.add(showMusicInfoView.getPanelShowSongInfo(), "showMusicInfo");
-        //panelSuperiorDerecha.add(dele.getPanelDeleteSong(), "deleteSong");
+        panelSuperiorDerecha.add(musicStatisticsView.getContentPane(), "musicStatistics");
+        panelSuperiorDerecha.add(playlistSongsView.getPanelList(), "playlistSongs");
+        panelSuperiorDerecha.add(addSongToPlaylistView.getPanel(), "addSongToPlaylist");
+        panelSuperiorDerecha.add(deleteSongFromPlaylistView.getPanel(), "deleteSongFromPlaylist");
 
         mainPanelCardLayout.show(panelSuperiorDerecha, "listMusic");
         panelSuperiorDerecha.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
@@ -100,6 +109,17 @@ public class ViewsController {
         cardLayout.show(cardPanelInici, "welcome");
         window.setVisible(true);
     }
+    public void createViewReproductor(){
+        window.add(panelPrincipal);
+        window.remove(cardPanelInici);
+        window.pack();
+        window.setSize(1300, 800);
+        window.setLocationRelativeTo(null);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setResizable(false);
+        cardLayout.show(cardPanelInici, "welcome");
+        window.setVisible(true);
+    }
     public void setSignInView(){
         cardLayout.show(cardPanelInici, "signIn");
     }
@@ -117,18 +137,11 @@ public class ViewsController {
     public void setListMusicView(){
         mainPanelCardLayout.show(panelSuperiorDerecha, "listMusic");
     }
-
-    public void createViewReproductor(){
-        window.add(panelPrincipal);
-        window.remove(cardPanelInici);
-        window.pack();
-        window.setSize(1300, 800);
-        window.setLocationRelativeTo(null);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
-        mainPanelCardLayout.show(panelSuperiorDerecha, "listMusic");
-        window.setVisible(true);
-
+    public void setAddPlaylistView() {
+        mainPanelCardLayout.show(panelSuperiorDerecha, "addPlaylist");
+    }
+    public void setDeletePlaylistView() {
+        mainPanelCardLayout.show(panelSuperiorDerecha, "deletePlaylist");
     }
     public void setLogOutView(){
         mainPanelCardLayout.show(panelSuperiorDerecha, "logout");
@@ -138,7 +151,19 @@ public class ViewsController {
         mainPanelCardLayout.show(panelSuperiorDerecha, "showMusicInfo");
     }
 
-    public void closeWindow(){
-        System.exit(0);
+    public void setPlaylistSongsView() {
+        mainPanelCardLayout.show(panelSuperiorDerecha, "playlistSongs");
+    }
+
+    public void setAddSongToPlaylistView() {
+        mainPanelCardLayout.show(panelSuperiorDerecha, "addSongToPlaylist");
+    }
+
+    public void setDeleteSongFromPlaylistView() {
+        mainPanelCardLayout.show(panelSuperiorDerecha, "deleteSongFromPlaylist");
+    }
+
+    public void closeWindow() {
+        window.dispose();
     }
 }

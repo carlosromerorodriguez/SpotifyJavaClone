@@ -110,4 +110,9 @@ public class TemplateField extends JPanel {
     public String getFieldInput() {
         return new String(((JPasswordField) jtfInput).getPassword());
     }
+
+    public void clearWrongField() {
+        jtfInput.setText("");
+        jtfInput.setBorder(BorderFactory.createLineBorder(UIPalette.ERROR_COLOR.getColor()));
+    }
 }

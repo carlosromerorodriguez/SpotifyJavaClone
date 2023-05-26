@@ -4,10 +4,7 @@ import presentation.view.Utilities.UIPalette;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 class BarChartPanel extends JPanel {
@@ -46,18 +43,19 @@ class BarChartPanel extends JPanel {
     private static final int X_AXIS_INCREMENT = 5;
 
     /**
-     * Returns the maximum number of songs for a genre.
+     * Constructs a new bar chart panel with the given data.
      */
     public BarChartPanel(HashMap<String, Integer> data) {
         this.data = data.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue())
-                .limit(MAX_GENRES)
+                .skip(Math.max(0, data.size() - MAX_GENRES))
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
                         Map.Entry::getValue,
-                        (e1, e2) -> e1,
+                        (e1, e2) -> e2,
                         LinkedHashMap::new));
+
         this.setPreferredSize(new Dimension(800, 500 + MARGIN_BOTTOM));
     }
 
@@ -73,7 +71,7 @@ class BarChartPanel extends JPanel {
         int barSpacing = (getHeight() - genresToShow * BAR_HEIGHT - MARGIN_BOTTOM) / (genresToShow + 1);
 
         g.setColor(UIPalette.TEXT_COLOR.getColor());
-        int maxScale = (maxSongs % 5 == 0) ? maxSongs : (maxSongs / 5 + 1) * 5;
+        int maxScale = (maxSongs % 5 == 0) ? maxSongs : (maxSongs / 6) * 5;
         for (int i = 0; i <= maxScale; i += X_AXIS_INCREMENT) {
             int x = MARGIN_LEFT + (int) ((double) i / maxScale * MAX_BAR_WIDTH);
             g.drawLine(x, 0, x, getHeight() - MARGIN_BOTTOM);
@@ -105,10 +103,7 @@ class BarChartPanel extends JPanel {
             int genreLabelY = y + BAR_HEIGHT / 2 + genreLabelHeight / 2;
             g.setColor(UIPalette.TEXT_COLOR.getColor());
             g.drawString(genre, MARGIN_LEFT - genreLabelWidth - SPACING, genreLabelY);
-
-            // Draw song count at the end of the bar
-            String songCountStr = String.valueOf(songCount);
-            g.drawString(songCountStr, MARGIN_LEFT + barWidth + SPACING, genreLabelY);
+            g.drawString(String.valueOf(songCount), MARGIN_LEFT + barWidth + SPACING, genreLabelY);
 
             i++;
         }
@@ -126,9 +121,5 @@ class BarChartPanel extends JPanel {
             }
         }
         return maxSongs;
-    }
-
-    public JPanel getPanel() {
-        return this;
     }
 }

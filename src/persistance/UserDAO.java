@@ -1,6 +1,7 @@
 package persistance;
 
 import business.entities.User;
+
 /**
  * User DAO interface
  */
@@ -24,4 +25,18 @@ public interface UserDAO {
      * @return true if the user has been deleted successfully
      */
     boolean checkUserByEmail(String email, String password);
+
+    /**
+     * @param username Username to write
+     */
+    void writeUserToTxtFile(String username);
+
+    /**
+     * @param emailUser Email to get username
+     */
+    void writeUserNameFromEmail(String emailUser);
+    /**
+     * @return Username from file
+     */
+    String getUserNameFromFile();
 }

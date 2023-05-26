@@ -201,6 +201,9 @@ public class SignUpView extends JFrame implements SignUpObserver {
                         "</ul>" +
                         "Please try again.</p></body></html>",
                 "Invalid Password", JOptionPane.ERROR_MESSAGE);
+
+        tfFirstPassword.clearWrongField();
+        tfSecondPassword.clearWrongField();
     }
 
     /**
@@ -210,6 +213,8 @@ public class SignUpView extends JFrame implements SignUpObserver {
         JOptionPane.showMessageDialog(this,
                 "The passwords entered do not match. Please ensure both passwords are identical and try again.",
                 "Password Mismatch", JOptionPane.ERROR_MESSAGE);
+        tfFirstPassword.clearWrongField();
+        tfSecondPassword.clearWrongField();
     }
 
     /**
@@ -219,6 +224,7 @@ public class SignUpView extends JFrame implements SignUpObserver {
         JOptionPane.showMessageDialog(this,
                 "The email address you entered is not valid. Please ensure the email format is correct and try again.",
                 "Invalid Email Address", JOptionPane.ERROR_MESSAGE);
+        tfEmail.clearWrongField();
     }
 
     /**
@@ -228,6 +234,7 @@ public class SignUpView extends JFrame implements SignUpObserver {
         JOptionPane.showMessageDialog(this,
                 "The username you entered is not valid. Please ensure it meets the requirements and try again.",
                 "Invalid Username", JOptionPane.ERROR_MESSAGE);
+        tfUsername.clearWrongField();
     }
 
     /**

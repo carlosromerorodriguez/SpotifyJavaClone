@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class LogoutView {
+public class LogOutView {
 
     private JPanel contentPane;
 
@@ -15,7 +15,7 @@ public class LogoutView {
 
     private JButton logoutButton;
 
-    public LogoutView() {
+    public LogOutView() {
         contentPane = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         contentPane.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
@@ -34,7 +34,7 @@ public class LogoutView {
         logoutButton.setBackground(UIPalette.TEXT_COLOR.getColor());
         logoutButton.setForeground(UIPalette.COLOR_PRIMARIO.getColor());
         logoutButton.setActionCommand(LOGOUT_COMMAND);
-        contentPane.add(logoutButton , c);
+        contentPane.add(logoutButton, c);
     }
 
     public JPanel getContentPane() {

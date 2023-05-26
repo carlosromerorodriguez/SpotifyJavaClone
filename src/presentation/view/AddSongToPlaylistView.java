@@ -1,5 +1,6 @@
 package presentation.view;
 
+
 import presentation.view.Utilities.Fonts;
 import presentation.view.Utilities.UIPalette;
 
@@ -8,16 +9,18 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class AddMusicView extends JFrame {
+public class AddSongToPlaylistView extends JFrame {
     public static final String ADD_COMMAND = "ADD_COMMAND";
     public static final String BACK_FROM_ADD = "BACK_FROM_ADD";
     private final JTextField jTFSongTitleText;
     private final JTextField jTFSongGenreText;
     private final JTextField jTFSongAlbumText;
     private final JTextField jTFSongAuthorText;
+    private final JTextField jTFPlaylistNameText;
     private final JPanel panelAddSong;
     private final JButton buttonAdd;
     private final JButton buttonBack;
+    private JLabel addSongTitle;
 
     public String getTitle() {
         return jTFSongTitleText.getText();
@@ -39,23 +42,22 @@ public class AddMusicView extends JFrame {
         return panelAddSong;
     }
 
-    public AddMusicView() {
-        //setSize(700, 700);
-
+    public AddSongToPlaylistView() {
         panelAddSong = new JPanel(new GridBagLayout());
         panelAddSong.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
         GridBagConstraints c = new GridBagConstraints();
+        jTFPlaylistNameText = new JTextField("");
 
         panelAddSong.setPreferredSize(new Dimension(500, 500)); // Set preferred size of the panel
 
-        Font fuente_titol = Fonts.getBoldFont(30f);
-        Font fuente_petit = Fonts.getMediumFont(15f);
+        Font boldFont = Fonts.getBoldFont(30f);
+        Font mediumFont = Fonts.getMediumFont(15f);
 
         panelAddSong.setBorder(new EmptyBorder(0, 0, 0, 0));
 
-        JLabel add_song = new JLabel("Afegir Cançó.");
-        add_song.setForeground(UIPalette.TEXT_COLOR.getColor());
-        add_song.setFont(fuente_titol);
+        addSongTitle = new JLabel("Add Song To Playlist " + jTFPlaylistNameText.getText());
+        addSongTitle.setForeground(UIPalette.TEXT_COLOR.getColor());
+        addSongTitle.setFont(boldFont);
         c.ipadx = 100;
         c.ipady = 0;
         c.gridx = 0;
@@ -63,11 +65,11 @@ public class AddMusicView extends JFrame {
         c.gridwidth = 2;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(0, 10, 10, 0);
-        panelAddSong.add(add_song, c);
+        panelAddSong.add(addSongTitle, c);
 
-        JLabel title = new JLabel("Títol");
+        JLabel title = new JLabel("Title:");
         title.setForeground(UIPalette.TEXT_COLOR.getColor());
-        title.setFont(fuente_petit);
+        title.setFont(mediumFont);
         c.ipady = 0;
         c.gridx = 0;
         c.gridy = 1;
@@ -76,8 +78,7 @@ public class AddMusicView extends JFrame {
         panelAddSong.add(title, c);
 
         jTFSongTitleText = new JTextField();
-        //jTFSongTitleText.setPreferredSize(new Dimension(50, 30));
-        jTFSongTitleText.setFont(fuente_petit);
+        jTFSongTitleText.setFont(mediumFont);
         c.ipady = 0;
         c.gridx = 0;
         c.gridy = 2;
@@ -85,9 +86,9 @@ public class AddMusicView extends JFrame {
         c.insets = new Insets(0, 10, 10, 0);
         panelAddSong.add(jTFSongTitleText, c);
 
-        JLabel genre = new JLabel("Gènere:");
+        JLabel genre = new JLabel("Genre:");
         genre.setForeground(UIPalette.TEXT_COLOR.getColor());
-        genre.setFont(fuente_petit);
+        genre.setFont(mediumFont);
         c.ipady = 0;
         c.gridx = 1;
         c.gridy = 1;
@@ -96,8 +97,7 @@ public class AddMusicView extends JFrame {
         panelAddSong.add(genre, c);
 
         jTFSongGenreText = new JTextField();
-        //jTFSongGenreText.setPreferredSize(new Dimension(50, 30));
-        jTFSongGenreText.setFont(fuente_petit);
+        jTFSongGenreText.setFont(mediumFont);
         c.ipady = 0;
         c.gridx = 1;
         c.gridy = 2;
@@ -105,9 +105,9 @@ public class AddMusicView extends JFrame {
         c.insets = new Insets(0, 10, 10, 0);
         panelAddSong.add(jTFSongGenreText, c);
 
-        JLabel album = new JLabel("Àlbum:");
+        JLabel album = new JLabel("Album:");
         album.setForeground(UIPalette.TEXT_COLOR.getColor());
-        album.setFont(fuente_petit);
+        album.setFont(mediumFont);
         c.ipady = 0;
         c.gridx = 0;
         c.gridy = 3;
@@ -116,8 +116,7 @@ public class AddMusicView extends JFrame {
         panelAddSong.add(album, c);
 
         jTFSongAlbumText = new JTextField();
-        //jTFSongAlbumText.setPreferredSize(new Dimension(50, 30));
-        jTFSongAlbumText.setFont(fuente_petit);
+        jTFSongAlbumText.setFont(mediumFont);
         c.ipady = 0;
         c.gridx = 0;
         c.gridy = 4;
@@ -125,9 +124,9 @@ public class AddMusicView extends JFrame {
         c.insets = new Insets(0, 10, 10, 0);
         panelAddSong.add(jTFSongAlbumText, c);
 
-        JLabel author = new JLabel("Autor:");
+        JLabel author = new JLabel("Author:");
         author.setForeground(UIPalette.TEXT_COLOR.getColor());
-        author.setFont(fuente_petit);
+        author.setFont(mediumFont);
         c.ipady = 0;
         c.gridx = 1;
         c.gridy = 3;
@@ -136,8 +135,7 @@ public class AddMusicView extends JFrame {
         panelAddSong.add(author, c);
 
         jTFSongAuthorText = new JTextField();
-        //jTFSongAuthorText.setPreferredSize(new Dimension(50, 30));
-        jTFSongAuthorText.setFont(fuente_petit);
+        jTFSongAuthorText.setFont(mediumFont);
         c.ipady = 0;
         c.gridx = 1;
         c.gridy = 4;
@@ -147,7 +145,7 @@ public class AddMusicView extends JFrame {
 
         JLabel url = new JLabel("URL:");
         url.setForeground(UIPalette.TEXT_COLOR.getColor());
-        url.setFont(fuente_petit);
+        url.setFont(mediumFont);
         c.ipady = 0;
         c.gridx = 0;
         c.gridy = 5;
@@ -157,7 +155,7 @@ public class AddMusicView extends JFrame {
 
         JFileChooser jTF_song_url = new JFileChooser();
         jTF_song_url.setPreferredSize(new Dimension(200, 350));
-        jTF_song_url.setFont(fuente_petit);
+        jTF_song_url.setFont(mediumFont);
         c.ipady = 0;
         c.gridx = 0;
         c.gridy =6;
@@ -167,7 +165,7 @@ public class AddMusicView extends JFrame {
         panelAddSong.add(jTF_song_url, c);
 
         buttonBack = new JButton("<");
-        buttonBack.setFont(fuente_petit);
+        buttonBack.setFont(mediumFont);
         buttonBack.setActionCommand(BACK_FROM_ADD);
         c.ipady = 0;
         c.gridx = 0;
@@ -176,8 +174,8 @@ public class AddMusicView extends JFrame {
         c.insets = new Insets(0, 50, 0, 150);
         panelAddSong.add(buttonBack, c);
 
-        buttonAdd = new JButton("Afegir");
-        buttonAdd.setFont(fuente_petit);
+        buttonAdd = new JButton("Add");
+        buttonAdd.setFont(mediumFont);
         buttonAdd.setActionCommand(ADD_COMMAND);
         c.ipady = 0;
         c.gridx = 1;
@@ -186,12 +184,13 @@ public class AddMusicView extends JFrame {
         panelAddSong.add(buttonAdd, c);
     }
 
-
-    public void addMusicController(ActionListener actionListener) {
-        buttonAdd.addActionListener(actionListener);
+    public void setPlaylistName(String jTFPlaylistNameText) {
+        this.jTFPlaylistNameText.setText(jTFPlaylistNameText);
+        addSongTitle.setText("Add Song To Playlist " + jTFPlaylistNameText);
     }
-    public void backSongController(ActionListener actionListener) {
-        buttonBack.addActionListener(actionListener);
+
+    public void addSongController(ActionListener actionListener) {
+        buttonAdd.addActionListener(actionListener);
     }
     public void wrongUrlError() {
         JOptionPane.showMessageDialog(this,
@@ -221,5 +220,17 @@ public class AddMusicView extends JFrame {
         JOptionPane.showMessageDialog(this,
                 "The genre you entered is not valid. Please ensure it meets the requirements and try again.",
                 "Invalid Genre", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public JPanel getPanel() {
+        return panelAddSong;
+    }
+
+    public AbstractButton getBackButton() {
+        return buttonBack;
+    }
+
+    public String getPlaylistName() {
+        return jTFPlaylistNameText.getText();
     }
 }

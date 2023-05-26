@@ -2,13 +2,46 @@ package persistance;
 
 import business.entities.Playlist;
 import business.entities.Song;
+import business.exceptions.TitleException;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PlaylistDatabaseDAO implements PlaylistDAO {
+    private final DDBBAccess ddbbAccess;
+    public PlaylistDatabaseDAO(DDBBAccess ddbbAccess) {
+        this.ddbbAccess = ddbbAccess;
+    }
     @Override
-    public boolean createPlaylist(Playlist playlist) {
-        return false;
+    public void createPlaylist(Playlist playlist) {
+        String query = "INSERT INTO playlist (nom, creador) VALUES (?, ?)";
+        try {
+            PreparedStatement statement = ddbbAccess.getConnection().prepareStatement(query);
+            statement.setString(1, playlist.getName());
+            statement.setString(2, playlist.getOwner());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error al crear la playlist: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void checkRepeatedPlaylistOwnerName(Playlist playlist) throws TitleException {
+        String query = "SELECT * FROM playlist WHERE nom = ? AND creador = ?";
+        try {
+            PreparedStatement statement = ddbbAccess.getConnection().prepareStatement(query);
+            statement.setString(1, playlist.getName());
+            statement.setString(2, playlist.getOwner());
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                throw new TitleException();
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al comprobar si existe una playlist con ese nombre: " + e.getMessage());
+        }
     }
 
     @Override
@@ -18,7 +51,19 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
 
     @Override
     public ArrayList<Playlist> getPlaylists() {
-        return null;
+        ArrayList<Playlist> playlists = new ArrayList<>();
+        String query = "SELECT * FROM playlist";
+        try {
+            PreparedStatement statement = ddbbAccess.getConnection().prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Playlist playlist = new Playlist(resultSet.getString("nom"), resultSet.getString("creador"));
+                playlists.add(playlist);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener las playlists: " + e.getMessage());
+        }
+        return playlists;
     }
 
     @Override
@@ -34,5 +79,74 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
     @Override
     public boolean removeSongAllPlaylist(Song song) {
         return false;
+    }
+
+    @Override
+    public List<Song> getSongsFromPlaylist(String playlistName, String userName) {
+        List<Song> songs = new ArrayList<>();
+        String query = "SELECT c.* FROM cancion c INNER JOIN playlist_cancion pc ON c.id = pc.cancion INNER JOIN playlist p ON pc.playlist = p.id WHERE p.nom = ? AND p.creador = ?";
+        try {
+            PreparedStatement statement = ddbbAccess.getConnection().prepareStatement(query);
+            statement.setString(1, playlistName);
+            statement.setString(2, userName);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Song song = new Song(
+                        resultSet.getString("nom"),
+                        resultSet.getString("genere"),
+                        resultSet.getString("album"),
+                        resultSet.getString("autor"),
+                        resultSet.getString("url")
+                );
+                songs.add(song);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener las canciones de la playlist: " + e.getMessage());
+        }
+        return songs;
+    }
+
+    @Override
+    public boolean deletePlaylist(String playlistName, String userNameFromFile) {
+        String query = "DELETE FROM playlist WHERE nom = ? AND creador = ?";
+        try {
+            PreparedStatement statement = ddbbAccess.getConnection().prepareStatement(query);
+            statement.setString(1, playlistName);
+            statement.setString(2, userNameFromFile);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.err.println("Error al eliminar la playlist: " + e.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteSongFromPlaylist(String playlistName, String title, String userNameFromFile) {
+        String query = "DELETE FROM playlist_cancion WHERE playlist = (SELECT id FROM playlist WHERE nom = ? AND creador = ? LIMIT 1) AND cancion = (SELECT id FROM cancion WHERE nom = ? LIMIT 1)";
+        try {
+            PreparedStatement statement = ddbbAccess.getConnection().prepareStatement(query);
+            statement.setString(1, playlistName);
+            statement.setString(2, userNameFromFile);
+            statement.setString(3, title);
+            return (statement.executeUpdate() > 0);
+        } catch (SQLException e) {
+            System.err.println("Error al eliminar la canción de la playlist: " + e.getMessage());
+        }
+        return false;
+    }
+
+    public void addSongToPlaylist(String playlistName, Song song, String userNameFromFile) {
+        String query = "INSERT INTO playlist_cancion (playlist, cancion) VALUES ((SELECT id FROM playlist WHERE nom = ? AND creador = ? LIMIT 1), (SELECT id FROM cancion WHERE nom = ? AND autor = ? LIMIT 1))";
+        try {
+            PreparedStatement statement = ddbbAccess.getConnection().prepareStatement(query);
+            statement.setString(1, playlistName);
+            statement.setString(2, userNameFromFile);
+            statement.setString(3, song.getTitle());
+            statement.setString(4, song.getAuthor());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error al añadir la canción a la playlist: " + e.getMessage());
+        }
     }
 }

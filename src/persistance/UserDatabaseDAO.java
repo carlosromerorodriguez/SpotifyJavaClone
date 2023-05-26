@@ -1,12 +1,15 @@
 package persistance;
 
 import business.entities.User;
-import persistance.exceptions.MaxConnectionsReachedException;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.Collections;
 
 public class UserDatabaseDAO implements UserDAO {
     private final DDBBAccess ddbbAccess;
@@ -93,5 +96,39 @@ public class UserDatabaseDAO implements UserDAO {
             System.err.println("Error al comprobar el usuario: " + e.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public void writeUserToTxtFile(String username) {
+        try {
+            Files.write(Paths.get("data/user/userInfo"), Collections.singletonList(username), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            System.out.println("Error al escribir el usuario en el fichero: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void writeUserNameFromEmail(String emailUser) {
+        String query = "SELECT nom FROM usuario WHERE email = ?";
+        try {
+            PreparedStatement statement = ddbbAccess.getConnection().prepareStatement(query);
+            statement.setString(1, emailUser);
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()){
+                writeUserToTxtFile(rs.getString("nom"));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al comprobar el usuario: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public String getUserNameFromFile() {
+        try {
+            return Files.readAllLines(Paths.get("data/user/userInfo")).get(0);
+        } catch (IOException e) {
+            System.out.println("Error al leer el usuario del fichero: " + e.getMessage());
+        }
+        return "";
     }
 }

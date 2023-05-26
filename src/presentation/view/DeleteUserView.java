@@ -11,8 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DeleteUserView {
-
-
     private JPanel panelLogOut;
     private JTextField userText;
     private JPasswordField passwordText;

@@ -1,100 +1,48 @@
 package presentation.view;
 
-import presentation.controller.LogOutController;
-import presentation.controller.SignInController;
+import presentation.view.Utilities.Fonts;
+import presentation.view.Utilities.UIPalette;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LogOutView {
 
+    private JPanel contentPane;
 
-    public static final String LOGOUT_COMMAND = "LOGOUT_COMMAND";
+    public final String LOGOUT_COMMAND = "LOGOUT_COMMAND";
+
+    private JButton logoutButton;
 
     public LogOutView() {
+        contentPane = new JPanel(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        contentPane.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
 
-    }
-    public JPanel ventanaEmergenteLogOut(){
+        JLabel titlePanel = new JLabel("Or you just can...");
+        titlePanel.setForeground(UIPalette.TEXT_COLOR.getColor());
+        titlePanel.setFont(Fonts.getBoldFont(25f));
+        c.gridy = 0;
+        c.gridx = 0;
+        c.insets = new Insets(0, 0, 30, 0);
+        contentPane.add(titlePanel, c);
 
-        GridLayout gridLayout = new GridLayout(12, 1);
-        gridLayout.setVgap(10); // indica los gaps entre las filas
-
-        JPanel panelLogOut = new JPanel();
-        panelLogOut.setLayout(gridLayout); // les decimos el diseño que queremos en nuestro panel
-
-        Font titulo = new Font("Sans-Serif", Font.PLAIN, 35);
-        Font subtitulo = new Font("Sans-Serif", Font.PLAIN, 15);
-
-        panelLogOut.setBorder(new EmptyBorder(50, 50, 50, 50));
-        panelLogOut.revalidate();
-
-        JLabel tituloLogout = new JLabel("LOGOUT :(");
-        tituloLogout.setFont(titulo); // le metemos la fuente que nos interesa previamente declarada
-
-        JLabel user = new JLabel("USER: ");
-        user.setFont(subtitulo); // le metemos la fuente que nos interesa previamente declarada
-
-        JLabel password = new JLabel("PASSWORD: ");
-        password.setFont(subtitulo);
-
-        JTextField userText = new JTextField();
-        userText.setPreferredSize(new Dimension(120, 30));
-        userText.setFont(subtitulo);
-
-        JTextField passwordText = new JTextField();
-        passwordText.setPreferredSize(new Dimension(120, 30));
-        userText.setFont(subtitulo);
-
-        JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-
-        JButton confirmButton = new JButton();
-        JButton cancelButton = new JButton();
-
-        confirmButton.setText("CONFIRM :(");
-        cancelButton.setText("CANCEL :)");
-
-        confirmButton.setPreferredSize(new Dimension(120, 30));
-        cancelButton.setPreferredSize(new Dimension(120, 30));
-
-        confirmButton.addActionListener(e -> LogOutController.removeUser(userText.getText(), passwordText.getText()));
-
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
-        buttonsPanel.add(confirmButton);
-        buttonsPanel.add(cancelButton);
-
-        panelLogOut.add(tituloLogout);
-        panelLogOut.add(user);
-        panelLogOut.add(userText);
-        panelLogOut.add(password);
-        panelLogOut.add(passwordText);
-        panelLogOut.add(buttonsPanel);
-
-
-        return panelLogOut;
+        c.gridy = 1;
+        logoutButton = new JButton("Logout");
+        logoutButton.setFont(Fonts.getMediumFont(15f));
+        logoutButton.setBackground(UIPalette.TEXT_COLOR.getColor());
+        logoutButton.setForeground(UIPalette.COLOR_PRIMARIO.getColor());
+        logoutButton.setActionCommand(LOGOUT_COMMAND);
+        contentPane.add(logoutButton, c);
     }
 
-    public JPanel logOutButton (JFrame frame) {
-        final JPanel[] panel = {new JPanel()};
-        JButton button = new JButton(new ImageIcon("src/main/resources/default_user.png"));
-        button.setSize(120, 30);
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panel[0] = ventanaEmergenteLogOut();
-            }
-        });
-        frame.add(button);
-        frame.setSize(500, 700);
-        frame.setVisible(true);
-        return panel[0];
+    public JPanel getContentPane() {
+        return contentPane;
     }
+
+    public void setAction(ActionListener actionListener) {
+        logoutButton.addActionListener(actionListener);
+    }
+
 }

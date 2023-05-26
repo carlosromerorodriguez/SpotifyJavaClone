@@ -25,7 +25,7 @@ public class ViewsController {
                            MusicStatisticsView musicStatisticsView, ShowMusicInfoView showMusicInfoView,
                            AddPlaylistView addPlaylistView, PlaylistSongsView playlistSongsView,
                            AddSongToPlaylistView addSongToPlaylistView, DeletePlaylistView deletePlaylistView,
-                           DeleteSongFromPlaylistView deleteSongFromPlaylistView) {
+                           DeleteSongFromPlaylistView deleteSongFromPlaylistView, DeleteUserView deleteUserView) {
 
         ImageIcon spotifyIcon = new ImageIcon("data/img/spotify.png");
         this.window = new JFrame("Espotifai");
@@ -35,18 +35,18 @@ public class ViewsController {
         cardPanelInici = new JPanel(cardLayout);
         cardPanelInici.add(signInView.getPanelSignIn(), "signIn");
         cardPanelInici.add(signUpView.getPanelSignup(), "signUp");
-        cardPanelInici.add(logOutView.ventanaEmergenteLogOut(), "logout");
         cardPanelInici.add(welcomeView.getWelcomePanel(), "welcome");
 
         crearPanelPrincipal(mainMenuView, playMusicView, playlistView, listMusicView, logOutView, musicStatisticsView,
                 addMusicView, showMusicInfoView, deleteMusicView, addPlaylistView, playlistSongsView,
-                addSongToPlaylistView, deletePlaylistView, deleteSongFromPlaylistView);
+                addSongToPlaylistView, deletePlaylistView, deleteSongFromPlaylistView, deleteUserView);
     }
 
     private void crearPanelPrincipal(MainMenuView mainMenuView, PlayMusicView playMusicView, PlaylistView playlistView, ListMusicView listMusicView,
                                      LogOutView logOutView, MusicStatisticsView musicStatisticsView, AddMusicView addMusicView, ShowMusicInfoView showMusicInfoView,
                                      DeleteMusicView deleteMusicView, AddPlaylistView addPlaylistView, PlaylistSongsView playlistSongsView,
-                                     AddSongToPlaylistView addSongToPlaylistView, DeletePlaylistView deletePlaylistView, DeleteSongFromPlaylistView deleteSongFromPlaylistView) {
+                                     AddSongToPlaylistView addSongToPlaylistView, DeletePlaylistView deletePlaylistView, DeleteSongFromPlaylistView deleteSongFromPlaylistView,
+                                     DeleteUserView deleteUserView) {
 
         panelPrincipal = new JPanel(new BorderLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -57,11 +57,24 @@ public class ViewsController {
         JPanel panelSuperiorIzquierda = mainMenuView.getMenuPanel();
         panelSuperiorIzquierda.setBackground(UIPalette.COLOR_PRIMARIO_CLARO .getColor());
 
+        JPanel outView = new JPanel();
+        outView.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
+        outView.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 0;
+        c.insets = new Insets(100, 0, 0, 0);
+        outView.add(deleteUserView.getPanelLogOut(), c);
+        c.gridx = 0;
+        c.gridy = 1;
+        c.insets = new Insets(70, 0, 100, 0);
+        outView.add(logOutView.getContentPane(), c);
+
         mainPanelCardLayout = new CardLayout();
         panelSuperiorDerecha = new JPanel(mainPanelCardLayout);
         panelSuperiorDerecha.add(playlistView.getContentPane(), "playlist");
         panelSuperiorDerecha.add(listMusicView.getPanelList(), "listMusic");
-        panelSuperiorDerecha.add(logOutView.ventanaEmergenteLogOut(), "logout");
+        panelSuperiorDerecha.add(outView, "logout");
         panelSuperiorDerecha.add(addMusicView.getPanelAddSong(), "addMusic");
         panelSuperiorDerecha.add(deleteMusicView.getPanelDeleteSong(), "deleteSong");
         panelSuperiorDerecha.add(addPlaylistView.getPanelAddSong(), "addPlaylist");

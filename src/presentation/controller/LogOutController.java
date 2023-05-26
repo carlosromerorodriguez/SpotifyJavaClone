@@ -9,9 +9,7 @@ import java.awt.event.ActionListener;
 
 public class LogOutController implements ActionListener {
     BusinessLogicUser businessLogicUser;
-
     LogOutView logoutView;
-
     ViewsController viewsController;
 
     public LogOutController(BusinessLogicUser businessLogicUser, LogOutView logoutView, ViewsController viewsController){
@@ -21,13 +19,9 @@ public class LogOutController implements ActionListener {
 
     }
 
-    public static void removeUser(String text, String text1) {
-
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand().equals(LogOutView.LOGOUT_COMMAND)){
+        if(e.getActionCommand().equals(logoutView.LOGOUT_COMMAND)){
             viewsController.closeWindow();
         }
     }

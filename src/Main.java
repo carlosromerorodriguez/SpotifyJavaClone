@@ -50,10 +50,11 @@ public class Main {
             MusicStatisticsView musicStatisticsView = new MusicStatisticsView();
             ShowMusicInfoView showMusicInfoView = new ShowMusicInfoView();
             AddSongToPlaylistView addSongToPlaylistView = new AddSongToPlaylistView();
+            DeleteUserView deleteUserView = new DeleteUserView();
 
             ViewsController viewsController = new ViewsController(signInView, signUpView, logOutView, welcomeView, addMusicView,
                     listMusicView, deleteMusicView, mainMenuView, playMusicView, playlistView, musicStatisticsView, showMusicInfoView,
-                    addPlaylistView, playlistSongsView, addSongToPlaylistView, deletePlaylistView, deleteSongFromPlaylistView);
+                    addPlaylistView, playlistSongsView, addSongToPlaylistView, deletePlaylistView, deleteSongFromPlaylistView, deleteUserView);
 
             //LogOutController logOutController = new LogOutController(businessLogicUser);
             SignUpController signUpController = new SignUpController(signUpView, businessLogicUser, viewsController);
@@ -69,6 +70,7 @@ public class Main {
             AddPlaylistController addPlaylistController = new AddPlaylistController(businessLogicPlayList, viewsController, addPlaylistView, playlistController);
             DeletePlaylistController deletePlaylistController = new DeletePlaylistController(businessLogicPlayList, viewsController, deletePlaylistView, playlistController);
             DeleteSongFromPlaylistController deleteSongFromPlaylistController = new DeleteSongFromPlaylistController(businessLogicPlayList, viewsController, deleteSongFromPlaylistView, playlistSongsController);
+            DeleteUserController deleteUserController = new DeleteUserController(businessLogicUser, deleteUserView, viewsController);
 
 
             signUpView.registerController(signUpController);
@@ -82,6 +84,7 @@ public class Main {
             addPlaylistView.backPlaylistController(addPlaylistController);
             deletePlaylistView.deletePlaylistController(deletePlaylistController);
             deletePlaylistView.backPlaylistController(deletePlaylistController);
+            deleteUserView.setActions(deleteUserController);
 
             AddMusicController addMusicController = new AddMusicController(businessLogicSong, viewsController, addMusicView, listMusicController);
             addMusicView.addMusicController(addMusicController);
@@ -93,7 +96,7 @@ public class Main {
             listMusicView.actionLinker(listMusicController);
 
 
-            viewsController.createViewReproductor();
+            viewsController.createViewPrincipal();
             //musicStatisticsView.MusicStatisticsView();
             //musicStatisticsView.BarChartExample();
             //viewsController.createViewAddSong();

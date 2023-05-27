@@ -4,6 +4,7 @@ import business.BusinessLogicMPlayer;
 import business.entities.Song;
 import presentation.view.PlayMusicView;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -21,16 +22,18 @@ public class PlayMusicController implements ActionListener {
     }
 
     private void updateProgressBar() {
-        int duration = businessLogicMPlayer.getDuration();
-        int currentTime = businessLogicMPlayer.getSongTime();
 
-        int progress = (int) ((double) currentTime / duration * 200);
+        float duration = businessLogicMPlayer.getDuration();
+        float currentTime = businessLogicMPlayer.getSongTime();
+        int progressBarValue = (int) ((currentTime / duration) * 100);
 
         SwingUtilities.invokeLater(() -> {
-            playMusicView.getProgressBar().setValue(progress);
-            playMusicView.setTimeCounter(formatTime(currentTime));
+            playMusicView.getProgressBar().setValue(progressBarValue);
+            playMusicView.setTimeCounter(formatTime((int) currentTime));
         });
+
     }
+
 
     private String formatTime(int timeInSeconds) {
         int minutes = timeInSeconds / 60;
@@ -77,7 +80,6 @@ public class PlayMusicController implements ActionListener {
             businessLogicMPlayer.stopMusic();
             playMusicView.getPlayButton().setIcon(playMusicView.getImageIcons()[0]);
             this.timer.stop();
-            playMusicView.getProgressBar().setValue(20000);
         }
     }
 }

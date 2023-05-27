@@ -172,7 +172,7 @@ public class BusinessLogicMPlayer {
             while (isRepeatThreadRunning) {
                 checkRepetition();
                 try {
-                    System.out.println("Time: " + player.getSongTime());
+                    //System.out.println("Time: " + player.getSongTime());
                     Thread.sleep(1000);
                 } catch (InterruptedException ignored) {}
             }

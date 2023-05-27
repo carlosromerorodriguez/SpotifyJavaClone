@@ -130,9 +130,6 @@ public class PlayMusicView {
 
     private void addProgressBar(GridBagConstraints gbc) {
         progressBar = new JProgressBar();
-        progressBar.setMaximum(200);
-        progressBar.setMinimum(0);
-        progressBar.setPreferredSize(new Dimension(300, 20));
         progressBar.setBackground(UIPalette.TEXT_COLOR.getColor());
         progressBar.setForeground(UIPalette.COLOR_REPRODUCTOR.getColor());
         progressBar.setBorderPainted(false);
@@ -140,9 +137,10 @@ public class PlayMusicView {
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.gridwidth = 5;
-        gbc.ipadx = -11;
+        gbc.weightx = 0.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(0, 300, 0, -150);
+        progressBar.setBackground(UIPalette.TEXT_COLOR.getColor());
         contentPane.add(progressBar, gbc);
 
         timeCounter = new JLabel("00:00");
@@ -156,6 +154,7 @@ public class PlayMusicView {
         gbc.insets = new Insets(0, 0, 0, 100);
         contentPane.add(timeCounter, gbc);
     }
+
 
     public void setTimeCounter(String time) {
         timeCounter.setText(time);

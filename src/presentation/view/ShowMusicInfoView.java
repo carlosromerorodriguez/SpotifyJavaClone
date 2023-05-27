@@ -9,6 +9,9 @@ import java.awt.*;
 
 import static presentation.view.Utilities.UIPalette.APP_BACKGROUND;
 
+/**
+ * The view class for displaying music information.
+ */
 public class ShowMusicInfoView {
     private String nom;
     private String genre;
@@ -23,6 +26,9 @@ public class ShowMusicInfoView {
     private final JLabel songOwner;
     private final JTextPane songLyrics;
 
+    /**
+     * Constructs a new ShowMusicInfoView object.
+     */
     public ShowMusicInfoView() {
         panelMusicInfo = new JPanel(new GridBagLayout());
         panelMusicInfo.setBackground(APP_BACKGROUND.getColor());
@@ -109,6 +115,16 @@ public class ShowMusicInfoView {
         panelMusicInfo.add(scrollPane, c);
     }
 
+    /**
+     * Sets the information of the song to be displayed.
+     *
+     * @param name   the name of the song
+     * @param title  the genre of the song
+     * @param artist the artist of the song
+     * @param album  the album of the song
+     * @param lyrics the lyrics of the song
+     * @param owner  the owner of the song
+     */
     public void setSongInfo(String name, String title, String artist, String album, String lyrics, String owner) {
         this.nom = name;
         this.genre = title;
@@ -124,10 +140,21 @@ public class ShowMusicInfoView {
         songLyrics.setText("Lyrics: \n\n" + lyrics);
     }
 
+    /**
+     * Returns the panel containing the music information.
+     *
+     * @return the panel containing the music information
+     */
     public JPanel getPanelShowSongInfo() {
         return panelMusicInfo;
     }
 
+    /**
+     * Capitalizes the first letter of each word in the given text.
+     *
+     * @param text the text to capitalize
+     * @return the capitalized text
+     */
     public static String title(String text) {
         String[] words = text.split(" ");
         StringBuilder title = new StringBuilder();

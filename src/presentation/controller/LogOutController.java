@@ -8,9 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LogOutController implements ActionListener {
-    BusinessLogicUser businessLogicUser;
-    LogOutView logoutView;
-    ViewsController viewsController;
+    private BusinessLogicUser businessLogicUser;
+    private LogOutView logoutView;
+    private ViewsController viewsController;
 
     public LogOutController(BusinessLogicUser businessLogicUser, LogOutView logoutView, ViewsController viewsController){
         this.businessLogicUser = businessLogicUser;

@@ -13,7 +13,7 @@ public class WelcomeController implements ActionListener {
 
     private ViewsController viewsController;
 
-    BusinessLogicUser businessLogicUser;
+    private BusinessLogicUser businessLogicUser;
 
     public WelcomeController(WelcomeView welcomeView, BusinessLogicUser businessLogicUser, ViewsController viewsController){
         this.welcomeView = welcomeView;

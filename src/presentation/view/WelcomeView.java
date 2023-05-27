@@ -26,6 +26,10 @@ public class WelcomeView extends JFrame {
      */
     private final JButton bSignIn;
 
+    /**
+     * Getter of the button to register a user
+     * @return JButton
+     */
     public WelcomeView() {
         welcomePanel = new JPanel(new GridBagLayout());
         welcomePanel.setBackground(UIPalette.APP_BACKGROUND.getColor());
@@ -96,6 +100,10 @@ public class WelcomeView extends JFrame {
         welcomePanel.add(bSignIn, c);
     }
 
+    /**
+     * @param font font to use
+     * @return a label with the font specified
+     */
     private JLabel createLabel(Font font) {
         JLabel label = new JLabel("Benvingut.");
         label.setFont(font);
@@ -103,14 +111,23 @@ public class WelcomeView extends JFrame {
         return label;
     }
 
+    /**
+     * @return the register button
+     */
     public JPanel getWelcomePanel() {
         return welcomePanel;
     }
 
+    /**
+     * @return the register button
+     */
     public void registerController(ActionListener actionListener) {
         bRegister.addActionListener(actionListener);
     }
 
+    /**
+     * @return the sign in button
+     */
     public void welcomeController(ActionListener actionListener) {
         bSignIn.addActionListener(actionListener);
     }

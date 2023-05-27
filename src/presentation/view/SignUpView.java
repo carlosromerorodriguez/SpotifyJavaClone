@@ -30,6 +30,10 @@ public class SignUpView extends JFrame implements SignUpObserver {
 
     private final JButton bBack;
 
+    /**
+     * Getter of the button to register a user
+     * @return JButton
+     */
     public SignUpView() {
         panelSignup = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -111,6 +115,10 @@ public class SignUpView extends JFrame implements SignUpObserver {
 
     }
 
+    /**
+     * Getter of the panel to register a user
+     * @return JPanel
+     */
     public JPanel getPanelSignup() {
         return panelSignup;
     }
@@ -127,10 +135,18 @@ public class SignUpView extends JFrame implements SignUpObserver {
         return label;
     }
 
+    /**
+     * Registers the controller
+     * @param actionListener Controller to register
+     */
     public void registerController(ActionListener actionListener) {
         bRegister.addActionListener(actionListener);
     }
 
+    /**
+     * Registers the controller
+     * @param actionListener Controller to register
+     */
     public void backController(ActionListener actionListener) {
         bBack.addActionListener(actionListener);
     }

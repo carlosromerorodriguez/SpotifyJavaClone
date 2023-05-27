@@ -19,6 +19,27 @@ public class ViewsController {
 
     private JPanel panelPrincipal;
 
+    /**
+     * Constructor de la clase ViewsController
+     * @param signInView
+     * @param signUpView
+     * @param logOutView
+     * @param welcomeView
+     * @param addMusicView
+     * @param listMusicView
+     * @param deleteMusicView
+     * @param mainMenuView
+     * @param playMusicView
+     * @param playlistView
+     * @param musicStatisticsView
+     * @param showMusicInfoView
+     * @param addPlaylistView
+     * @param playlistSongsView
+     * @param addSongToPlaylistView
+     * @param deletePlaylistView
+     * @param deleteSongFromPlaylistView
+     * @param deleteUserView
+     */
     public ViewsController(SignInView signInView, SignUpView signUpView, LogOutView logOutView, WelcomeView welcomeView,
                            AddMusicView addMusicView, ListMusicView listMusicView, DeleteMusicView deleteMusicView,
                            MainMenuView mainMenuView, PlayMusicView playMusicView, PlaylistView playlistView,
@@ -42,6 +63,24 @@ public class ViewsController {
                 addSongToPlaylistView, deletePlaylistView, deleteSongFromPlaylistView, deleteUserView);
     }
 
+    /**
+     * Crea el panel principal
+     * @param mainMenuView
+     * @param playMusicView
+     * @param playlistView
+     * @param listMusicView
+     * @param logOutView
+     * @param musicStatisticsView
+     * @param addMusicView
+     * @param showMusicInfoView
+     * @param deleteMusicView
+     * @param addPlaylistView
+     * @param playlistSongsView
+     * @param addSongToPlaylistView
+     * @param deletePlaylistView
+     * @param deleteSongFromPlaylistView
+     * @param deleteUserView
+     */
     private void crearPanelPrincipal(MainMenuView mainMenuView, PlayMusicView playMusicView, PlaylistView playlistView, ListMusicView listMusicView,
                                      LogOutView logOutView, MusicStatisticsView musicStatisticsView, AddMusicView addMusicView, ShowMusicInfoView showMusicInfoView,
                                      DeleteMusicView deleteMusicView, AddPlaylistView addPlaylistView, PlaylistSongsView playlistSongsView,
@@ -97,9 +136,16 @@ public class ViewsController {
         panelPrincipal.add(panelInferior, BorderLayout.PAGE_END);
     }
 
+    /**
+     * Cambia la vista del panel principal a la vista de las playlists
+     */
     public void setMusicStatisticsView(){
         mainPanelCardLayout.show(panelSuperiorDerecha, "musicStatistics");
     }
+
+    /**
+     * Cambia la vista del panel principal a la vista de las playlists
+     */
     public void createViewPrincipal(){
         window.add(this.cardPanelInici);
         window.setSize(500, 700);
@@ -109,6 +155,10 @@ public class ViewsController {
         cardLayout.show(cardPanelInici, "welcome");
         window.setVisible(true);
     }
+
+    /**
+     * Cambia la vista del panel principal a la vista de las playlists
+     */
     public void createViewReproductor(){
         window.add(panelPrincipal);
         window.remove(cardPanelInici);
@@ -120,49 +170,106 @@ public class ViewsController {
         cardLayout.show(cardPanelInici, "welcome");
         window.setVisible(true);
     }
+
+    /**
+     * Cambia la vista del panel principal a la vista de las playlists
+     */
     public void setSignInView(){
         cardLayout.show(cardPanelInici, "signIn");
     }
+
+    /**
+     * Cambia la vista del panel principal a la vista de las playlists
+     */
     public void setRegisterView(){
         cardLayout.show(cardPanelInici, "signUp");
     }
+
+    /**
+     * Cambia la vista del panel principal a la vista de las playlists
+     */
     public void setWelcomeView(){
         cardLayout.show(cardPanelInici, "welcome");
     }
+
+    /**
+     * Cambia la vista del panel principal a la vista de las playlists
+     */
     public void setAddMusicView(){mainPanelCardLayout.show(panelSuperiorDerecha, "addMusic");}
+
+    /**
+     * Cambia la vista del panel principal a la vista de las playlists
+     */
     public void setDeleteMusicView(){mainPanelCardLayout.show(panelSuperiorDerecha, "deleteSong");}
+
+    /**
+     * Cambia la vista del panel principal a la vista de las playlists
+     */
     public void setPlaylistView(){
         mainPanelCardLayout.show(panelSuperiorDerecha, "playlist");
     }
+
+    /**
+     * Cambia la vista del panel principal a la vista de las playlists
+     */
     public void setListMusicView(){
         mainPanelCardLayout.show(panelSuperiorDerecha, "listMusic");
     }
+
+    /**
+     * Cambia la vista del panel principal a la vista de las playlists
+     */
     public void setAddPlaylistView() {
         mainPanelCardLayout.show(panelSuperiorDerecha, "addPlaylist");
     }
+
+    /**
+     * Cambia la vista del panel principal a la vista de las playlists
+     */
     public void setDeletePlaylistView() {
         mainPanelCardLayout.show(panelSuperiorDerecha, "deletePlaylist");
     }
+
+    /**
+     * Cambia la vista del panel principal a la vista de las playlists
+     */
     public void setLogOutView(){
         mainPanelCardLayout.show(panelSuperiorDerecha, "logout");
     }
 
+
+    /**
+     * Cambia la vista del panel principal a la vista de las playlists
+     */
     public void showMusicInfo() {
         mainPanelCardLayout.show(panelSuperiorDerecha, "showMusicInfo");
     }
 
+    /**
+     *  Cambia la vista del panel principal a la vista de las playlists
+     */
     public void setPlaylistSongsView() {
         mainPanelCardLayout.show(panelSuperiorDerecha, "playlistSongs");
     }
 
+
+    /**
+     *  Cambia la vista del panel principal a la vista de las playlists
+     */
     public void setAddSongToPlaylistView() {
         mainPanelCardLayout.show(panelSuperiorDerecha, "addSongToPlaylist");
     }
 
+    /**
+     *  Cambia la vista del panel principal a la vista de las playlists
+     */
     public void setDeleteSongFromPlaylistView() {
         mainPanelCardLayout.show(panelSuperiorDerecha, "deleteSongFromPlaylist");
     }
 
+    /**
+     * cierra la ventana
+     */
     public void closeWindow() {
         window.dispose();
     }

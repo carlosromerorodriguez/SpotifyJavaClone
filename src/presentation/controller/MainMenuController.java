@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainMenuController implements ActionListener {
-
     private final ViewsController viewsController;
     private final ListMusicController listMusicController;
     private final MusicStatisticsController musicStatisticsController;
@@ -22,11 +21,11 @@ public class MainMenuController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand().equals(MainMenuView.PLAY_MUSIC)){
+        if (e.getActionCommand().equals(MainMenuView.PLAY_MUSIC)) {
             viewsController.setListMusicView();
             listMusicController.loadSongsFromApi();
         }
-        if(e.getActionCommand().equals(MainMenuView.PLAYLIST)){
+        if (e.getActionCommand().equals(MainMenuView.PLAYLIST)) {
             viewsController.setPlaylistView();
             playlistController.loadPlaylistsFromApi();
         }
@@ -34,7 +33,7 @@ public class MainMenuController implements ActionListener {
             viewsController.setMusicStatisticsView();
             musicStatisticsController.updateData();
         }
-        if(e.getActionCommand().equals(MainMenuView.EXIT)){
+        if (e.getActionCommand().equals(MainMenuView.EXIT)) {
             viewsController.setLogOutView();
         }
     }

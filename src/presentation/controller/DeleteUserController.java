@@ -1,22 +1,16 @@
 package presentation.controller;
 
 import business.BusinessLogicUser;
-import business.entities.User;
-import persistance.exceptions.PasswordException;
-import persistance.exceptions.UsernameException;
 import presentation.view.DeleteUserView;
 import presentation.view.ViewsController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class DeleteUserController implements ActionListener {
-
-
-    private BusinessLogicUser businessLogicUser;
-    private DeleteUserView deleteUserView;
-    private ViewsController viewsController;
+    private final BusinessLogicUser businessLogicUser;
+    private final DeleteUserView deleteUserView;
+    private final ViewsController viewsController;
 
     public DeleteUserController(BusinessLogicUser businessLogicUser, DeleteUserView deleteUserView, ViewsController viewsController){
         this.businessLogicUser = businessLogicUser;
@@ -26,8 +20,13 @@ public class DeleteUserController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand().equals(deleteUserView.DELETE_COMMAND)){
-            businessLogicUser.deleteUser(deleteUserView.getUserText(), deleteUserView.getPasswordText());
+        if (e.getActionCommand().equals(deleteUserView.DELETE_COMMAND)) {
+            if (businessLogicUser.deleteUser(deleteUserView.getPasswordText())) {
+                deleteUserView.successfulDelete();
+                viewsController.setWelcomeView();
+            } else {
+                deleteUserView.setErrorMessage();
+            }
         }
     }
 }

@@ -1,21 +1,17 @@
 package presentation.view;
 
-import presentation.controller.LogOutController;
 import presentation.view.Utilities.Fonts;
 import presentation.view.Utilities.UIPalette;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DeleteUserView {
-    private JPanel panelLogOut;
-    private JTextField userText;
-    private JPasswordField passwordText;
-
-    private JButton confirmButton;
+    private final JPanel panelLogOut;
+    private final JTextField userText;
+    private final JPasswordField passwordText;
+    private final JButton confirmButton;
     public final String DELETE_COMMAND = "DELETE_COMMAND";
 
     public DeleteUserView() {
@@ -32,10 +28,6 @@ public class DeleteUserView {
         JLabel tituloLogout = new JLabel("Delete :(");
         tituloLogout.setForeground(UIPalette.TEXT_COLOR.getColor());
         tituloLogout.setFont(titulo);
-
-        JLabel user = new JLabel("User: ");
-        user.setForeground(UIPalette.TEXT_COLOR.getColor());
-        user.setFont(subtitulo);
 
         JLabel password = new JLabel("Password: ");
         password.setForeground(UIPalette.TEXT_COLOR.getColor());
@@ -70,12 +62,6 @@ public class DeleteUserView {
         c.gridx = 0;
         c.gridy = 0;
         panelLogOut.add(tituloLogout,c);
-        c.gridy = 1;
-        c.insets = new Insets(0, 0, 10, 160);
-        panelLogOut.add(user,c);
-        c.gridy = 2;
-        c.insets = new Insets(0, 0, 30, 0);
-        panelLogOut.add(userText,c);
         c.gridy = 3;
         c.insets = new Insets(0, 0, 10, 120);
         panelLogOut.add(password,c);
@@ -101,5 +87,12 @@ public class DeleteUserView {
 
     public JPanel getPanelLogOut() {
         return panelLogOut;
+    }
+    public void setErrorMessage() {
+        JOptionPane.showMessageDialog(panelLogOut, "User or password incorrect", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void successfulDelete() {
+        JOptionPane.showMessageDialog(panelLogOut, "User deleted", "Success", JOptionPane.INFORMATION_MESSAGE);
     }
 }

@@ -23,8 +23,12 @@ public class SignUpController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(SignUpView.REGISTER_COMMAND)) {
             try {
-                businessLogicUser.registerUser(signUpView.getEmail(), signUpView.getUsername(), signUpView.getFirstPassword(), signUpView.getSecondPassword());
-                signUpView.userRegisteredSuccessfully();
+                if (businessLogicUser.registerUser(signUpView.getEmail(), signUpView.getUsername(), signUpView.getFirstPassword(), signUpView.getSecondPassword())) {
+                    signUpView.userRegisteredSuccessfully();
+                    viewsController.createViewReproductor();
+                    return;
+                }
+                businessLogicUser.cleanUserInfoFile();
             } catch (PasswordException ex) {
                 signUpView.wrongPasswordError();
             } catch (PasswordMismatchException ex) {

@@ -8,13 +8,22 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class LogOutView {
-
-    private JPanel contentPane;
-
+    /**
+     * Content pane of the view (panel).
+     */
+    private final JPanel contentPane;
+    /**
+     * Action command for the log-out button.
+     */
     public final String LOGOUT_COMMAND = "LOGOUT_COMMAND";
+    /**
+     * Log-out button of the view.
+     */
+    private final JButton logOutButton;
 
-    private JButton logoutButton;
-
+    /**
+     * Creates the view for the log-out panel.
+     */
     public LogOutView() {
         contentPane = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -29,20 +38,23 @@ public class LogOutView {
         contentPane.add(titlePanel, c);
 
         c.gridy = 1;
-        logoutButton = new JButton("Logout");
-        logoutButton.setFont(Fonts.getMediumFont(15f));
-        logoutButton.setBackground(UIPalette.TEXT_COLOR.getColor());
-        logoutButton.setForeground(UIPalette.COLOR_PRIMARIO.getColor());
-        logoutButton.setActionCommand(LOGOUT_COMMAND);
-        contentPane.add(logoutButton, c);
+        logOutButton = new JButton("Logout");
+        logOutButton.setFont(Fonts.getMediumFont(15f));
+        logOutButton.setBackground(UIPalette.TEXT_COLOR.getColor());
+        logOutButton.setForeground(UIPalette.COLOR_PRIMARIO.getColor());
+        logOutButton.setActionCommand(LOGOUT_COMMAND);
+        contentPane.add(logOutButton, c);
     }
 
     public JPanel getContentPane() {
         return contentPane;
     }
 
-    public void setAction(ActionListener actionListener) {
-        logoutButton.addActionListener(actionListener);
+    public JButton getLogOutButton() {
+        return logOutButton;
     }
 
+    public void setAction(ActionListener actionListener) {
+        logOutButton.addActionListener(actionListener);
+    }
 }

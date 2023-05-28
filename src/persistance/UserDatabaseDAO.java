@@ -23,24 +23,27 @@ public class UserDatabaseDAO implements UserDAO {
     }
 
     /**
-     * @param user User to add
+     * @param userName User name or email to delete from database
      * @return true if the user has been added successfully
      */
     @Override
-    public boolean deleteUser(String user, String password) {
-        String query = "DELETE FROM usuario WHERE nom = ? AND password = ?;";
+    public boolean deleteUser(String userName, String password) {
+        String query = "DELETE FROM usuario WHERE (nom = ?) AND password = ?";
         try {
             PreparedStatement statement = ddbbAccess.getConnection().prepareStatement(query);
-            statement.setString(1, user);
+            statement.setString(1, userName);
             statement.setString(2, password);
-            statement.executeUpdate();
-            return true;
+            return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Error al eliminar el usuario: " + e.getMessage());
         }
         return false;
     }
 
+    /**
+     * @param user User email or name to add to database
+     * @return true if the user has been added successfully
+     */
     public boolean addUser(User user) {
         String query = "INSERT INTO usuario(email, nom, password) VALUES (?, ?, ?)";
         try {
@@ -69,12 +72,12 @@ public class UserDatabaseDAO implements UserDAO {
             statement.setString(2, password);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                return true; // El usuario existe
+                return true;
             }
         } catch (SQLException e) {
             System.err.println("Error al comprobar el usuario: " + e.getMessage());
         }
-        return false; // El usuario no existe
+        return false;
     }
 
     /**
@@ -89,7 +92,7 @@ public class UserDatabaseDAO implements UserDAO {
             statement.setString(1, email);
             statement.setString(2, password);
             ResultSet rs = statement.executeQuery();
-            if(rs.next()){
+            if (rs.next()){
                 return true;
             }
         } catch (SQLException e) {
@@ -101,7 +104,7 @@ public class UserDatabaseDAO implements UserDAO {
     @Override
     public void writeUserToTxtFile(String username) {
         try {
-            Files.write(Paths.get("data/user/userInfo"), Collections.singletonList(username), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            Files.write(Paths.get("data/user/userInfo"), Collections.singletonList(username), StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
             System.out.println("Error al escribir el usuario en el fichero: " + e.getMessage());
         }

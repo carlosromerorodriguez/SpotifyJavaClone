@@ -2,15 +2,10 @@ package presentation.controller;
 
 import business.BusinessLogicMusic;
 import business.BusinessLogicPlayList;
-import business.entities.Song;
 import presentation.view.*;
 
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Arrays;
 
 public class PlaylistSongsController implements PlaylistSongsViewListener {
     private final PlaylistSongsView playlistSongsView;
@@ -39,7 +34,7 @@ public class PlaylistSongsController implements PlaylistSongsViewListener {
             public void mouseClicked(MouseEvent e) {
                 int selectedRow = playlistSongsView.getTable().getSelectedRow();
                 if (selectedRow != -1) {
-                    playMusicController.setSongs(businessLogicPlayList.getSongsFromPlaylist(playlistSongsView.getPlaylistName()));
+                    playMusicController.setSongsToMPlayer(businessLogicPlayList.getSongsFromPlaylist(playlistSongsView.getPlaylistName()));
                     playMusicController.playSong(playlistSongsView.getTable().getValueAt(selectedRow, 0).toString());
                 }
             }

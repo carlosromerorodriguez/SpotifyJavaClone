@@ -8,24 +8,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class WelcomeController implements ActionListener {
+    private final ViewsController viewsController;
 
-    private WelcomeView welcomeView;
-
-    private ViewsController viewsController;
-
-    private BusinessLogicUser businessLogicUser;
-
-    public WelcomeController(WelcomeView welcomeView, BusinessLogicUser businessLogicUser, ViewsController viewsController){
-        this.welcomeView = welcomeView;
-        this.businessLogicUser = businessLogicUser;
+    public WelcomeController(ViewsController viewsController){
         this.viewsController = viewsController;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand().equals(welcomeView.REGISTER_VIEW_COMMAND)){
+        if(e.getActionCommand().equals(WelcomeView.REGISTER_VIEW_COMMAND)){
             viewsController.setRegisterView();
-        } else if (e.getActionCommand().equals(welcomeView.SIGNUP_VIEW_COMMAND)) {
+        } else if (e.getActionCommand().equals(WelcomeView.SIGNUP_VIEW_COMMAND)) {
             viewsController.setSignInView();
         }
     }

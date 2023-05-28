@@ -13,7 +13,7 @@ public class BusinessLogicUser {
         this.userDao = userDao;
     }
 
-    public void registerUser(String email, String username, String firstPassword, String secondPassword) throws EmailException, PasswordException, PasswordMismatchException, UsernameException, UserAlreadyExistsException {
+    public boolean registerUser(String email, String username, String firstPassword, String secondPassword) throws EmailException, PasswordException, PasswordMismatchException, UsernameException, UserAlreadyExistsException {
         if (username.isEmpty() || username.isBlank()) { throw new UsernameException(); }
         if (!checkEmail(email)) { throw new EmailException(); }
         if (!checkPassword(firstPassword)) { throw new PasswordException(); }
@@ -25,7 +25,9 @@ public class BusinessLogicUser {
 
         if (userDao.addUser(new User(username, email, firstPassword))) {
             userDao.writeUserToTxtFile(username);
+            return true;
         }
+        return false;
     }
 
     public void loginUser(String email_user, String password) throws UsernameException, PasswordException, IOException {
@@ -84,11 +86,11 @@ public class BusinessLogicUser {
         return (firstPassword.equals(secondPassword));
     }
 
-    public void deleteUser(String userText, String passwordText) {
-        if (userText.contains("@")) {
-            userDao.deleteUser(userText, passwordText);
-        } else {
-            userDao.deleteUser(userText, passwordText);
-        }
+    public boolean deleteUser(String passwordText) {
+        return userDao.deleteUser(userDao.getUserNameFromFile(), passwordText);
+    }
+
+    public void cleanUserInfoFile() {
+        userDao.writeUserToTxtFile("");
     }
 }

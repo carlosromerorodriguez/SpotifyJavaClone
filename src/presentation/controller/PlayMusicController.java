@@ -4,7 +4,6 @@ import business.BusinessLogicMPlayer;
 import business.entities.Song;
 import presentation.view.PlayMusicView;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -22,7 +21,6 @@ public class PlayMusicController implements ActionListener {
     }
 
     private void updateProgressBar() {
-
         float duration = businessLogicMPlayer.getDuration();
         float currentTime = businessLogicMPlayer.getSongTime();
         int progressBarValue = (int) ((currentTime / duration) * 100);
@@ -34,7 +32,6 @@ public class PlayMusicController implements ActionListener {
 
     }
 
-
     private String formatTime(int timeInSeconds) {
         int minutes = timeInSeconds / 60;
         int seconds = timeInSeconds % 60;
@@ -42,7 +39,7 @@ public class PlayMusicController implements ActionListener {
         return String.format("%02d:%02d", minutes, seconds);
     }
 
-    public void setSongs(List<Song> songs) {
+    public void setSongsToMPlayer(List<Song> songs) {
         businessLogicMPlayer.setSongs(songs);
     }
 

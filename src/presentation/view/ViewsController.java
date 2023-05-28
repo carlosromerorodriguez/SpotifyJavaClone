@@ -1,6 +1,5 @@
 package presentation.view;
 
-import presentation.controller.AddSongToPlaylistController;
 import presentation.view.Utilities.UIPalette;
 
 import javax.swing.*;
@@ -20,25 +19,26 @@ public class ViewsController {
     private JPanel panelPrincipal;
 
     /**
-     * Constructor de la clase ViewsController
-     * @param signInView
-     * @param signUpView
-     * @param logOutView
-     * @param welcomeView
-     * @param addMusicView
-     * @param listMusicView
-     * @param deleteMusicView
-     * @param mainMenuView
-     * @param playMusicView
-     * @param playlistView
-     * @param musicStatisticsView
-     * @param showMusicInfoView
-     * @param addPlaylistView
-     * @param playlistSongsView
-     * @param addSongToPlaylistView
-     * @param deletePlaylistView
-     * @param deleteSongFromPlaylistView
-     * @param deleteUserView
+     * Creates the view controller for the views.
+     *
+     * @param signInView                 Sign-in view.
+     * @param signUpView                 Sign-up view.
+     * @param logOutView                 Log-out view.
+     * @param welcomeView                Welcome to view.
+     * @param addMusicView               Add music view.
+     * @param listMusicView              List music view.
+     * @param deleteMusicView            Delete music view.
+     * @param mainMenuView               Main menu view.
+     * @param playMusicView              Play music view.
+     * @param playlistView               Playlist view.
+     * @param musicStatisticsView        Music statistics view.
+     * @param showMusicInfoView          Show music info view.
+     * @param addPlaylistView            Add playlist view.
+     * @param playlistSongsView          Playlist songs view.
+     * @param addSongToPlaylistView      Add song to playlist view.
+     * @param deletePlaylistView         Delete playlist view.
+     * @param deleteSongFromPlaylistView Delete song from playlist view.
+     * @param deleteUserView             Delete user view.
      */
     public ViewsController(SignInView signInView, SignUpView signUpView, LogOutView logOutView, WelcomeView welcomeView,
                            AddMusicView addMusicView, ListMusicView listMusicView, DeleteMusicView deleteMusicView,
@@ -58,34 +58,34 @@ public class ViewsController {
         cardPanelInici.add(signUpView.getPanelSignup(), "signUp");
         cardPanelInici.add(welcomeView.getWelcomePanel(), "welcome");
 
-        crearPanelPrincipal(mainMenuView, playMusicView, playlistView, listMusicView, logOutView, musicStatisticsView,
+        createMainPanel(mainMenuView, playMusicView, playlistView, listMusicView, logOutView, musicStatisticsView,
                 addMusicView, showMusicInfoView, deleteMusicView, addPlaylistView, playlistSongsView,
                 addSongToPlaylistView, deletePlaylistView, deleteSongFromPlaylistView, deleteUserView);
     }
 
     /**
-     * Crea el panel principal
-     * @param mainMenuView
-     * @param playMusicView
-     * @param playlistView
-     * @param listMusicView
-     * @param logOutView
-     * @param musicStatisticsView
-     * @param addMusicView
-     * @param showMusicInfoView
-     * @param deleteMusicView
-     * @param addPlaylistView
-     * @param playlistSongsView
-     * @param addSongToPlaylistView
-     * @param deletePlaylistView
-     * @param deleteSongFromPlaylistView
-     * @param deleteUserView
+     * Creates the main panel of the view.
+     * @param mainMenuView Main menu view.
+     * @param playMusicView Play music view.
+     * @param playlistView Playlist view.
+     * @param listMusicView List music view.
+     * @param logOutView Log-out view.
+     * @param musicStatisticsView Music statistics view.
+     * @param addMusicView Add music view.
+     * @param showMusicInfoView Show music info view.
+     * @param deleteMusicView Delete music view.
+     * @param addPlaylistView Add playlist view.
+     * @param playlistSongsView Playlist songs view.
+     * @param addSongToPlaylistView Add song to playlist view.
+     * @param deletePlaylistView Delete playlist view.
+     * @param deleteSongFromPlaylistView Delete song from playlist view.
+     * @param deleteUserView Delete user view.
      */
-    private void crearPanelPrincipal(MainMenuView mainMenuView, PlayMusicView playMusicView, PlaylistView playlistView, ListMusicView listMusicView,
-                                     LogOutView logOutView, MusicStatisticsView musicStatisticsView, AddMusicView addMusicView, ShowMusicInfoView showMusicInfoView,
-                                     DeleteMusicView deleteMusicView, AddPlaylistView addPlaylistView, PlaylistSongsView playlistSongsView,
-                                     AddSongToPlaylistView addSongToPlaylistView, DeletePlaylistView deletePlaylistView, DeleteSongFromPlaylistView deleteSongFromPlaylistView,
-                                     DeleteUserView deleteUserView) {
+    private void createMainPanel(MainMenuView mainMenuView, PlayMusicView playMusicView, PlaylistView playlistView, ListMusicView listMusicView,
+                                 LogOutView logOutView, MusicStatisticsView musicStatisticsView, AddMusicView addMusicView, ShowMusicInfoView showMusicInfoView,
+                                 DeleteMusicView deleteMusicView, AddPlaylistView addPlaylistView, PlaylistSongsView playlistSongsView,
+                                 AddSongToPlaylistView addSongToPlaylistView, DeletePlaylistView deletePlaylistView, DeleteSongFromPlaylistView deleteSongFromPlaylistView,
+                                 DeleteUserView deleteUserView) {
 
         panelPrincipal = new JPanel(new BorderLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -148,6 +148,7 @@ public class ViewsController {
      */
     public void createViewPrincipal(){
         window.add(this.cardPanelInici);
+        window.remove(panelPrincipal);
         window.setSize(500, 700);
         window.setLocationRelativeTo(null);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -188,7 +189,7 @@ public class ViewsController {
     /**
      * Cambia la vista del panel principal a la vista de las playlists
      */
-    public void setWelcomeView(){
+    public void setWelcomeView() {
         cardLayout.show(cardPanelInici, "welcome");
     }
 
@@ -265,12 +266,5 @@ public class ViewsController {
      */
     public void setDeleteSongFromPlaylistView() {
         mainPanelCardLayout.show(panelSuperiorDerecha, "deleteSongFromPlaylist");
-    }
-
-    /**
-     * cierra la ventana
-     */
-    public void closeWindow() {
-        window.dispose();
     }
 }

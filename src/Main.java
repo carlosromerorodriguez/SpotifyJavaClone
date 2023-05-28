@@ -16,7 +16,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             //TODO: Limpiar el fichero de informacion de usuario
-            //clearTxtFile();
+            clearTxtFile();
 
             // TODO: Esto SIEMPRE es igual, no hay que cambiarlo
             ConfigDatabaseDAO configDatabaseDAO = new ConfigDatabaseDAO("data/config.json");
@@ -60,7 +60,7 @@ public class Main {
             //LogOutController logOutController = new LogOutController(businessLogicUser);
             SignUpController signUpController = new SignUpController(signUpView, businessLogicUser, viewsController);
             SignInController signInController = new SignInController(signInView, businessLogicUser, viewsController);
-            WelcomeController welcomeController = new WelcomeController(welcomeView, businessLogicUser, viewsController);
+            WelcomeController welcomeController = new WelcomeController(viewsController);
             AddSongToPlaylistController addSongToPlaylistController = new AddSongToPlaylistController(businessLogicMusic, businessLogicPlayList, viewsController, addSongToPlaylistView);
             PlayMusicController playMusicController = new PlayMusicController(playMusicView, businessLogicMPlayer);
             MusicStatisticsController musicStatisticsController = new MusicStatisticsController(musicStatisticsView, businessLogicSong);
@@ -72,6 +72,7 @@ public class Main {
             DeletePlaylistController deletePlaylistController = new DeletePlaylistController(businessLogicPlayList, viewsController, deletePlaylistView, playlistController);
             DeleteSongFromPlaylistController deleteSongFromPlaylistController = new DeleteSongFromPlaylistController(businessLogicPlayList, viewsController, deleteSongFromPlaylistView, playlistSongsController);
             DeleteUserController deleteUserController = new DeleteUserController(businessLogicUser, deleteUserView, viewsController);
+            LogOutController logOutController = new LogOutController(logOutView, viewsController);
 
             signUpView.registerController(signUpController);
             signUpView.backController(signUpController);
@@ -85,6 +86,7 @@ public class Main {
             deletePlaylistView.deletePlaylistController(deletePlaylistController);
             deletePlaylistView.backPlaylistController(deletePlaylistController);
             deleteUserView.setActions(deleteUserController);
+            logOutView.setAction(logOutController);
 
             AddMusicController addMusicController = new AddMusicController(businessLogicSong, viewsController, addMusicView, listMusicController);
             addMusicView.addMusicController(addMusicController);
@@ -96,7 +98,7 @@ public class Main {
             listMusicView.actionLinker(listMusicController);
 
 
-            viewsController.createViewReproductor();
+            viewsController.createViewPrincipal();
         } catch (ApiServerException e) {
             System.out.println("Error al conectar con la API" + e.getMessage());
         }

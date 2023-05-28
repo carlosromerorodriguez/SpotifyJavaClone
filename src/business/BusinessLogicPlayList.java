@@ -18,8 +18,8 @@ public class BusinessLogicPlayList {
         this.userDatabaseDAO = userDatabaseDAO;
     }
 
-    public ArrayList<Playlist> getPlaylists() {
-        return playlistDatabaseDAO.getPlaylists();
+    public ArrayList<Playlist> getPlaylistsWithTheUserFirst() {
+        return playlistDatabaseDAO.getPlaylistsWithTheUserFirst(userDatabaseDAO.getUserNameFromFile());
     }
 
     public void createPlaylist(String playlistName) throws TitleException {

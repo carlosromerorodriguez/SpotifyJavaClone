@@ -51,14 +51,18 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
     }
 
     @Override
-    public ArrayList<Playlist> getPlaylists() {
+    public ArrayList<Playlist> getPlaylistsWithTheUserFirst(String userNameFromFile) {
         ArrayList<Playlist> playlists = new ArrayList<>();
-        String query = "SELECT * FROM playlist";
+        String query = "SELECT * FROM playlist ORDER BY CASE WHEN creador = ? THEN 0 ELSE 1 END, creador";
         try {
             PreparedStatement statement = ddbbAccess.getConnection().prepareStatement(query);
+            statement.setString(1, userNameFromFile);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Playlist playlist = new Playlist(resultSet.getString("nom"), resultSet.getString("creador"));
+                Playlist playlist = new Playlist(
+                        resultSet.getString("nom"),
+                        resultSet.getString("creador")
+                );
                 playlists.add(playlist);
             }
         } catch (SQLException e) {

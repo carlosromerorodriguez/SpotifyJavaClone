@@ -1,7 +1,6 @@
 package presentation.controller;
 
 import business.BusinessLogicPlayList;
-import presentation.view.DeleteSongFromPlaylistView;
 import presentation.view.PlayListViewListener;
 import presentation.view.PlaylistView;
 import presentation.view.ViewsController;
@@ -25,7 +24,7 @@ public class PlaylistController implements MouseListener, PlayListViewListener {
     }
 
     public void loadPlaylistsFromApi() {
-        playlistView.setData(businessLogicPlayList.getPlaylists());
+        playlistView.setData(businessLogicPlayList.getPlaylistsWithTheUserFirst());
     }
 
     @Override

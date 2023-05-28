@@ -10,7 +10,7 @@ public interface PlaylistDAO {
     void createPlaylist(Playlist playlist);
     void checkRepeatedPlaylistOwnerName(Playlist playlist) throws Exception;
     boolean removePlaylist();
-    ArrayList<Playlist> getPlaylists();
+    ArrayList<Playlist> getPlaylistsWithTheUserFirst(String userNameFromFile);
     List<Song> getSongsFromPlaylist(String playlistName);
     boolean deletePlaylist(String playlistName, String userNameFromFile);
     boolean deleteSongFromPlaylist(String playlistName, String title, String userNameFromFile);

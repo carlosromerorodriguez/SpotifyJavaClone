@@ -155,6 +155,7 @@ public class ViewsController {
         window.setResizable(false);
         cardLayout.show(cardPanelInici, "welcome");
         window.setVisible(true);
+        mainPanelCardLayout.show(panelSuperiorDerecha, "listMusic");
     }
 
     /**

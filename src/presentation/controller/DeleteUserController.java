@@ -23,7 +23,7 @@ public class DeleteUserController implements ActionListener {
         if (e.getActionCommand().equals(deleteUserView.DELETE_COMMAND)) {
             if (businessLogicUser.deleteUser(deleteUserView.getPasswordText())) {
                 deleteUserView.successfulDelete();
-                viewsController.setWelcomeView();
+                viewsController.createViewPrincipal();
             } else {
                 deleteUserView.setErrorMessage();
             }

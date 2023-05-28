@@ -11,7 +11,7 @@ public interface PlaylistDAO {
     void checkRepeatedPlaylistOwnerName(Playlist playlist) throws Exception;
     boolean removePlaylist();
     ArrayList<Playlist> getPlaylists();
-    List<Song> getSongsFromPlaylist(String playlistName, String userName);
+    List<Song> getSongsFromPlaylist(String playlistName);
     boolean deletePlaylist(String playlistName, String userNameFromFile);
     boolean deleteSongFromPlaylist(String playlistName, String title, String userNameFromFile);
 }

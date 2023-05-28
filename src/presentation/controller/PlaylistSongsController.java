@@ -26,6 +26,16 @@ public class PlaylistSongsController implements PlaylistSongsViewListener {
         tableListenerFunctionality();
         playlistSongsView.setListener(this);
         playlistSongsView.getOptionsButton().addActionListener(e -> playlistSongsView.showOptionsDialog());
+        playlistSongsView.getSortAlphaButton().addActionListener(e -> sortSongsAlphabetically());
+        playlistSongsView.getSortByUserButton().addActionListener(e -> sortSongsByGenre());
+    }
+
+    private void sortSongsByGenre() {
+        playlistSongsView.setSongs(businessLogicPlayList.sortSongsByGenre(playlistSongsView.getPlaylistName()));
+    }
+
+    private void sortSongsAlphabetically() {
+        playlistSongsView.setSongs(businessLogicPlayList.sortSongsAlphabetically(playlistSongsView.getPlaylistName()));
     }
 
     private void tableListenerFunctionality() {
@@ -43,6 +53,7 @@ public class PlaylistSongsController implements PlaylistSongsViewListener {
 
     public void loadSongsFromApi(String playlistName) {
         playlistSongsView.setSongs(businessLogicPlayList.getSongsFromPlaylist(playlistName));
+        playlistSongsView.deactivateAddButton(businessLogicPlayList.isPlaylistFromUser(playlistName));
     }
 
     @Override

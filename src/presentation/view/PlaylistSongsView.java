@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.List;
 
@@ -21,6 +22,8 @@ public class PlaylistSongsView extends JFrame {
     private final JButton optionsButton;
     private PlaylistSongsViewListener listener;
     private String playlistName;
+    private JButton sortAlphaButton;
+    private JButton sortByUserButton;
 
     public PlaylistSongsView() {
         panelList = new JPanel(new GridBagLayout());
@@ -51,6 +54,27 @@ public class PlaylistSongsView extends JFrame {
         optionsButton.setFocusPainted(false);
         optionsButton.setBorderPainted(false);
         optionsButton.setOpaque(false);
+
+        // Configuración de los botones de ordenación
+        sortAlphaButton = new JButton("Ordenar Alfabéticamente");
+        sortAlphaButton.setBackground(UIPalette.TEXT_COLOR.getColor());
+//sortAlphaButton.addActionListener(e -> sortSongsAlphabetically());
+
+        sortByUserButton = new JButton("Ordenar por Usuario");
+        sortByUserButton.setBackground(UIPalette.TEXT_COLOR.getColor());
+
+        JPanel sortButtonsPanel = new JPanel();
+        sortButtonsPanel.add(sortAlphaButton);
+        sortButtonsPanel.add(sortByUserButton);
+
+        GridBagConstraints sortButtonsConstraints = new GridBagConstraints();
+        sortButtonsConstraints.gridx = 0;
+        sortButtonsConstraints.gridy = 0;
+        sortButtonsConstraints.gridwidth = 2;
+        sortButtonsConstraints.insets = new Insets(0, 0, 20, 0);
+
+        panelList.add(sortButtonsPanel, sortButtonsConstraints);
+
 
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.anchor = GridBagConstraints.NORTHEAST;
@@ -111,6 +135,14 @@ public class PlaylistSongsView extends JFrame {
         table.setDefaultRenderer(Object.class, centerRenderer);
     }
 
+    public JButton getSortAlphaButton() {
+        return sortAlphaButton;
+    }
+
+    public JButton getSortByUserButton() {
+        return sortByUserButton;
+    }
+
     public void addTableMouseListener(MouseListener mouseListener){
         table.addMouseListener(mouseListener);
     }
@@ -169,5 +201,9 @@ public class PlaylistSongsView extends JFrame {
 
     public JTable getTable() {
         return table;
+    }
+
+    public void deactivateAddButton(boolean b) {
+        optionsButton.setEnabled(b);
     }
 }

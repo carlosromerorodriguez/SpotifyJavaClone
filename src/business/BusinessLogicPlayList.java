@@ -28,15 +28,11 @@ public class BusinessLogicPlayList {
     }
 
     public List<Song> getSongsFromPlaylist(String playlistName) {
-        return playlistDatabaseDAO.getSongsFromPlaylist(playlistName, userDatabaseDAO.getUserNameFromFile());
+        return playlistDatabaseDAO.getSongsFromPlaylist(playlistName);
     }
 
-    public boolean addSongToPlaylist(String playlistName, Song song) throws DuplicateKeyException {
-        if (playlistDatabaseDAO.isFromSameOwner(playlistName, userDatabaseDAO.getUserNameFromFile())) {
-            playlistDatabaseDAO.addSongToPlaylist(playlistName, song);
-            return true;
-        }
-        return false;
+    public void addSongToPlaylist(String playlistName, Song song) throws DuplicateKeyException {
+        playlistDatabaseDAO.addSongToPlaylist(playlistName, song);
     }
 
     public boolean deletePlaylist(String playlistName) {
@@ -45,5 +41,17 @@ public class BusinessLogicPlayList {
 
     public boolean deleteSongFromPlaylist(String playlistName, String title) {
         return playlistDatabaseDAO.deleteSongFromPlaylist(playlistName, title, userDatabaseDAO.getUserNameFromFile());
+    }
+
+    public boolean isPlaylistFromUser(String playlistName) {
+        return playlistDatabaseDAO.isFromSameOwner(playlistName, userDatabaseDAO.getUserNameFromFile());
+    }
+
+    public List<Song> sortSongsAlphabetically(String playlistName) {
+        return playlistDatabaseDAO.sortSongsAlphabetically(playlistName);
+    }
+
+    public List<Song> sortSongsByGenre(String playlistName) {
+        return playlistDatabaseDAO.sortSongsByGenre(playlistName);
     }
 }

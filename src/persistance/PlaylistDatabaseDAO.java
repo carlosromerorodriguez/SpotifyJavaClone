@@ -68,13 +68,12 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
     }
 
     @Override
-    public List<Song> getSongsFromPlaylist(String playlistName, String userName) {
+    public List<Song> getSongsFromPlaylist(String playlistName) {
         List<Song> songs = new ArrayList<>();
-        String query = "SELECT c.* FROM cancion c INNER JOIN playlist_cancion pc ON c.id = pc.cancion INNER JOIN playlist p ON pc.playlist = p.id WHERE p.nom = ? AND p.creador = ?";
+        String query = "SELECT c.* FROM cancion c INNER JOIN playlist_cancion pc ON c.id = pc.cancion INNER JOIN playlist p ON pc.playlist = p.id WHERE p.nom = ?";
         try {
             PreparedStatement statement = ddbbAccess.getConnection().prepareStatement(query);
             statement.setString(1, playlistName);
-            statement.setString(2, userName);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Song song = new Song(
@@ -150,5 +149,53 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
             System.err.println("Error al comprobar si la playlist es del mismo usuario: " + e.getMessage());
         }
         return false;
+    }
+
+    public List<Song> sortSongsAlphabetically(String playlistName) {
+        List<Song> songs = new ArrayList<>();
+        String query = "SELECT c.* FROM cancion c INNER JOIN playlist_cancion pc ON c.id = pc.cancion INNER JOIN playlist p ON pc.playlist = p.id WHERE p.nom = ? ORDER BY c.nom ASC";
+        try {
+            PreparedStatement statement = ddbbAccess.getConnection().prepareStatement(query);
+            statement.setString(1, playlistName);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Song song = new Song(
+                        resultSet.getString("nom"),
+                        resultSet.getString("genere"),
+                        resultSet.getString("album"),
+                        resultSet.getString("autor"),
+                        resultSet.getString("url"),
+                        resultSet.getString("owner")
+                );
+                songs.add(song);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener las canciones de la playlist: " + e.getMessage());
+        }
+        return songs;
+    }
+
+    public List<Song> sortSongsByGenre(String playlistName) {
+        List<Song> songs = new ArrayList<>();
+        String query = "SELECT c.* FROM cancion c INNER JOIN playlist_cancion pc ON c.id = pc.cancion INNER JOIN playlist p ON pc.playlist = p.id WHERE p.nom = ? ORDER BY c.genere ASC";
+        try {
+            PreparedStatement statement = ddbbAccess.getConnection().prepareStatement(query);
+            statement.setString(1, playlistName);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Song song = new Song(
+                        resultSet.getString("nom"),
+                        resultSet.getString("genere"),
+                        resultSet.getString("album"),
+                        resultSet.getString("autor"),
+                        resultSet.getString("url"),
+                        resultSet.getString("owner")
+                );
+                songs.add(song);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener las canciones de la playlist: " + e.getMessage());
+        }
+        return songs;
     }
 }

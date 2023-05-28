@@ -15,10 +15,10 @@ public class DeletePlaylistController implements ActionListener {
 
     /**
      * Delete playlist controller
-     * @param businessLogicPlaylist
-     * @param viewsController
-     * @param deletePlaylistView
-     * @param playlistController
+     * @param businessLogicPlaylist business logic playlist
+     * @param viewsController views controller
+     * @param deletePlaylistView delete playlist view
+     * @param playlistController playlist controller
      */
     public DeletePlaylistController(BusinessLogicPlayList businessLogicPlaylist, ViewsController viewsController, DeletePlaylistView deletePlaylistView, PlaylistController playlistController) {
         this.businessLogicPlaylist = businessLogicPlaylist;

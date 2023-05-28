@@ -16,10 +16,10 @@ public class AddPlaylistController implements ActionListener {
 
     /**
      * Add playlist controller
-     * @param businessLogicPlaylist
-     * @param viewsController
-     * @param addPlaylistView
-     * @param playlistController
+     * @param businessLogicPlaylist business logic playlist
+     * @param viewsController views controller
+     * @param addPlaylistView add playlist view
+     * @param playlistController playlist controller
      */
     public AddPlaylistController(BusinessLogicPlayList businessLogicPlaylist, ViewsController viewsController, AddPlaylistView addPlaylistView, PlaylistController playlistController) {
         this.businessLogicPlaylist = businessLogicPlaylist;

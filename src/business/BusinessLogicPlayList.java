@@ -33,7 +33,7 @@ public class BusinessLogicPlayList {
     }
 
     /**
-     * Create playlist
+     *
      * @param playlistName
      * @throws TitleException
      */

@@ -17,10 +17,10 @@ public class DeleteSongFromPlaylistController implements ActionListener {
 
     /**
      * Delete song from playlist controller
-     * @param businessLogicPlaylist
-     * @param viewsController
-     * @param deleteSongFromPlaylistView
-     * @param playlistSongsController
+     * @param businessLogicPlaylist business logic playlist
+     * @param viewsController views controller
+     * @param deleteSongFromPlaylistView delete song from playlist view
+     * @param playlistSongsController playlist songs controller
      */
     public DeleteSongFromPlaylistController(BusinessLogicPlayList businessLogicPlaylist, ViewsController viewsController, DeleteSongFromPlaylistView deleteSongFromPlaylistView, PlaylistSongsController playlistSongsController) {
         this.businessLogicPlaylist = businessLogicPlaylist;

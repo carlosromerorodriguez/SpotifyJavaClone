@@ -19,7 +19,7 @@ public class DeleteMusicView extends JFrame {
 
     /**
      * Getter titulo de la cancion
-     * @return
+     * @return titulo de la cancion
      */
     public String getTitle() {
         return jTFSongTitle.getText();
@@ -101,7 +101,7 @@ public class DeleteMusicView extends JFrame {
 
     /**
      * Link controlador de la vista de eliminar cancion
-     * @param actionListener
+     * @param actionListener controlador de la vista de eliminar cancion
      */
     public void deleteMusicController(ActionListener actionListener) {
         buttonDelete.addActionListener(actionListener);
@@ -109,7 +109,7 @@ public class DeleteMusicView extends JFrame {
 
     /**
      * Confirmar eliminar cancion
-     * @return
+     * @return confirmar eliminar cancion
      */
     public String confirmDelete() {
         int response = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar esta canción permanentemente?");
@@ -118,7 +118,7 @@ public class DeleteMusicView extends JFrame {
 
     /**
      * Getter panel de eliminar cancion
-     * @return
+     * @return panel de eliminar cancion
      */
     public JPanel getPanelDeleteSong() {
         return panelDeleteSong;
@@ -126,7 +126,7 @@ public class DeleteMusicView extends JFrame {
 
     /**
      * Link controlador de la vista de eliminar cancion
-     * @param deleteMusicController
+     * @param deleteMusicController controlador de la vista de eliminar cancion
      */
     public void backButtonListener(DeleteMusicController deleteMusicController) {
         buttonBack.addActionListener(deleteMusicController);

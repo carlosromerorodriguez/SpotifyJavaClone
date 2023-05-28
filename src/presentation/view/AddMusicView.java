@@ -168,7 +168,7 @@ public class AddMusicView extends JFrame {
 
     /**
      * Adds action listener to the button
-     * @param actionListener
+     * @param actionListener action listener defined in the controller
      */
     public void addMusicController(ActionListener actionListener) {
         buttonAdd.addActionListener(actionListener);
@@ -176,7 +176,7 @@ public class AddMusicView extends JFrame {
 
     /**
      * Adds action listener to the button
-     * @param actionListener
+     * @param actionListener action listener defined in the controller
      */
     public void backSongController(ActionListener actionListener) {
         buttonBack.addActionListener(actionListener);
@@ -184,7 +184,7 @@ public class AddMusicView extends JFrame {
 
     /**
      * Returns the title of the song
-     * @return
+     * @return title of the song
      */
     public String getTitle() {
         return jTFSongTitleText.getText();
@@ -192,7 +192,7 @@ public class AddMusicView extends JFrame {
 
     /**
      * Returns the genre of the song
-     * @return
+     * @return genre of the song
      */
     public String getGenre() {
         return jTFSongGenreText.getText();
@@ -200,7 +200,7 @@ public class AddMusicView extends JFrame {
 
     /**
      * Returns the album of the song
-     * @return
+     * @return album of the song
      */
     public String getAlbum() {
         return jTFSongAlbumText.getText();
@@ -208,7 +208,7 @@ public class AddMusicView extends JFrame {
 
     /**
      * Returns the author of the song
-     * @return
+     * @return author of the song
      */
     public String getAuthor() {
         return jTFSongAuthorText.getText();
@@ -216,7 +216,7 @@ public class AddMusicView extends JFrame {
 
     /**
      * Returns the file of the song
-     * @return
+     * @return file of the song
      */
     public File getFile() {
         return jTFSongUrl.getSelectedFile();
@@ -224,7 +224,7 @@ public class AddMusicView extends JFrame {
 
     /**
      * Returns the panel
-     * @return
+     * @return panel
      */
     public JPanel getPanelAddSong() {
         return panelAddSong;

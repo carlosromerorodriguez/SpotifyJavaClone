@@ -35,7 +35,7 @@ public class DDBBAccess {
 
     /**
      * get the connection
-     * @return
+     * @return Connection
      */
     public Connection getConnection() {
         return conn;

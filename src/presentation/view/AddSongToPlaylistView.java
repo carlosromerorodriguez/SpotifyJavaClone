@@ -97,7 +97,7 @@ public class AddSongToPlaylistView extends JFrame {
 
     /**
      * Método para obtener el panel de la lista de canciones
-     * @return
+     * @return panel de la lista de canciones
      */
     public JPanel getPanelList() {
         return panelList;
@@ -106,7 +106,7 @@ public class AddSongToPlaylistView extends JFrame {
 
     /**
      * Link de la tabla con el controlador
-     * @param mouseListener
+     * @param mouseListener controlador de la tabla
      */
     public void actionLinker(MouseListener mouseListener){
         table.addMouseListener(mouseListener);
@@ -114,7 +114,7 @@ public class AddSongToPlaylistView extends JFrame {
 
     /**
      * Setter del nombre de la playlist
-     * @param playlistName
+     * @param playlistName nombre de la playlist
      */
     public void setPlaylistName(String playlistName) {
         this.playlistName = playlistName;
@@ -122,7 +122,7 @@ public class AddSongToPlaylistView extends JFrame {
 
     /**
      * Getter del nombre de la playlist
-     * @return
+     * @return nombre de la playlist
      */
     public String getPlaylistName() {
         return playlistName;

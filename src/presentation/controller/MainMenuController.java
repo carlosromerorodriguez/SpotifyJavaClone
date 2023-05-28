@@ -14,10 +14,10 @@ public class MainMenuController implements ActionListener {
 
     /**
      * Main menu controller
-     * @param viewsController
-     * @param listMusicController
-     * @param musicStatisticsController
-     * @param playlistController
+     * @param viewsController views controller
+     * @param listMusicController list music controller
+     * @param musicStatisticsController music statistics controller
+     * @param playlistController playlist controller
      */
     public MainMenuController(ViewsController viewsController, ListMusicController listMusicController, MusicStatisticsController musicStatisticsController, PlaylistController playlistController) {
         this.viewsController = viewsController;

@@ -16,8 +16,8 @@ public class BusinessLogicMusic {
 
     /**
      * Constructor
-     * @param songDAO
-     * @param apiAccess
+     * @param songDAO Song DAO
+     * @param apiAccess API access
      */
     public BusinessLogicMusic(SongDAO songDAO, APIAccess apiAccess) {
         this.songDAO = songDAO;
@@ -26,15 +26,15 @@ public class BusinessLogicMusic {
 
     /**
      * List music
-     * @return
+     * @return List of music
      */
     public List<Song> listMusic(){ return songDAO.readSongList(); }
 
     /**
      * get music lyrics from api
-     * @param nom
-     * @param artist
-     * @return
+     * @param nom Nombre de la cancion
+     * @param artist Nombre del artista
+     * @return Lyrics
      * @throws ApiServerException
      */
     public String getMusicLyricsFromApi(String nom, String artist) throws ApiServerException {
@@ -47,8 +47,8 @@ public class BusinessLogicMusic {
 
     /**
      * Search music
-     * @param searchText
-     * @return
+     * @param searchText Text to search
+     * @return List of music
      */
     public List<Song> searchMusic(String searchText) {
         return songDAO.searchAllMusicFromSearchText(searchText);

@@ -92,8 +92,8 @@ public class PlayMusicView {
 
     /**
      * Cambia tamaño de la imagen.
-     * @param ruta
-     * @return
+     * @param ruta String de la ruta
+     * @return imget
      */
     private ImageIcon imageResize(String ruta){
         return new ImageIcon(new ImageIcon(ruta).getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
@@ -102,7 +102,7 @@ public class PlayMusicView {
 
     /**
      * Get de la imagen
-     * @return
+     * @return imagenIcono
      */
     public ImageIcon[] getImageIcons() {
         return imageIcons;
@@ -110,7 +110,7 @@ public class PlayMusicView {
 
     /**
      * Get de la imagen repeat
-     * @return
+     * @return ImagenIcono
      */
     public ImageIcon[] getImageRepeat() {
         return imageRepeat;
@@ -119,7 +119,7 @@ public class PlayMusicView {
     /**
      * Añade espacio en blanco
      *
-     * @param gbc
+     * @param gbc constraints de la view
      */
     private void addBlankSpace(GridBagConstraints gbc) {
         JLabel blankLabel = new JLabel();
@@ -133,7 +133,7 @@ public class PlayMusicView {
     /**
      * Añade espacio en blanco
      *
-     * @param gbc
+     * @param gbc constraints de la view
      */
     private void addBlankSpace2(GridBagConstraints gbc) {
         JLabel blankLabel = new JLabel();
@@ -167,7 +167,7 @@ public class PlayMusicView {
 
     /**
      * Setea el titulo de la cancion
-     * @param songName
+     * @param songName nombre de la cancion
      */
     public void setTitleSong(String songName) {
         titleSong.setText(songName);
@@ -175,7 +175,7 @@ public class PlayMusicView {
 
     /**
      * Setea el titulo del artista
-     * @param artistName
+     * @param artistName String del nombre
      */
     public void setTitleArtist(String artistName) {
         titleArtist.setText(artistName);
@@ -211,7 +211,7 @@ public class PlayMusicView {
 
     /**
      * Setea el contador del tiempo
-     * @param time
+     * @param time string del tiempo de reproduccion
      */
     public void setTimeCounter(String time) {
         timeCounter.setText(time);
@@ -284,7 +284,7 @@ public class PlayMusicView {
 
     /**
      * link con los controlores de la vista
-     * @param actionListener
+     * @param actionListener Action listener del controlador
      */
     public void playMusicController(ActionListener actionListener) {
         bPlay.addActionListener(actionListener);

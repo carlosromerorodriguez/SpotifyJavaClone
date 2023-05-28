@@ -11,7 +11,7 @@ public class BusinessLogicUser {
 
     /**
      * Constructor
-     * @param userDao
+     * @param userDao User DAO
      */
     public BusinessLogicUser(UserDAO userDao) {
         this.userDao = userDao;
@@ -19,11 +19,11 @@ public class BusinessLogicUser {
 
     /**
      * Register
-     * @param email
-     * @param username
-     * @param firstPassword
-     * @param secondPassword
-     * @return
+     * @param email Correo electronico
+     * @param username Nombre de usuario
+     * @param firstPassword Primera contraseña
+     * @param secondPassword Segunda contraseña
+     * @return True if the user is registered
      * @throws EmailException
      * @throws PasswordException
      * @throws PasswordMismatchException
@@ -49,8 +49,8 @@ public class BusinessLogicUser {
 
     /**
      * Login
-     * @param email_user
-     * @param password
+     * @param email_user User name or email
+     * @param password User password
      * @throws UsernameException
      * @throws PasswordException
      * @throws IOException
@@ -61,8 +61,8 @@ public class BusinessLogicUser {
 
     /**
      * Checks the inputs of the user
-     * @param email_user
-     * @param password
+     * @param email_user User name or email
+     * @param password User password
      * @throws UsernameException
      * @throws PasswordException
      */
@@ -79,9 +79,9 @@ public class BusinessLogicUser {
 
     /**
      * Checks if the user exists
-     * @param s
-     * @param password
-     * @return
+     * @param s User name or email
+     * @param password User password
+     * @return True if the user exists
      */
     private boolean checkUserExists(String s, String password) {
         if (s.contains("@")) {
@@ -126,8 +126,8 @@ public class BusinessLogicUser {
 
     /**
      * Deletes the user
-     * @param passwordText
-     * @return
+     * @param passwordText Password of the user
+     * @return True if the user has been deleted successfully
      */
     public boolean deleteUser(String passwordText) {
         return userDao.deleteUser(userDao.getUserNameFromFile(), passwordText);

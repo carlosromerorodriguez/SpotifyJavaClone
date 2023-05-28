@@ -31,8 +31,7 @@ public class SignUpView extends JFrame implements SignUpObserver {
     private final JButton bBack;
 
     /**
-     * Getter of the button to register a user
-     * @return JButton
+     * Constructor SignUpView
      */
     public SignUpView() {
         panelSignup = new JPanel(new GridBagLayout());

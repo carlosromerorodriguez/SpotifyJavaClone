@@ -78,7 +78,7 @@ public class DeleteUserView {
 
     /**
      * Devuelve el string del usuario
-     * @return
+     * @return String del usuario
      */
     public String getUserText() {
         return userText.getText();
@@ -86,7 +86,7 @@ public class DeleteUserView {
 
     /**
      * Devuelve el string de la contraseña
-     * @return
+     * @return String de la contraseña
      */
     public String getPasswordText() {
         return new String(passwordText.getPassword());
@@ -94,7 +94,7 @@ public class DeleteUserView {
 
     /**
      * Añade un action listener al boton de confirmar
-     * @param actionListener
+     * @param actionListener Action listener del boton de confirmar
      */
     public void setActions(ActionListener actionListener) {
         confirmButton.addActionListener(actionListener);
@@ -102,7 +102,7 @@ public class DeleteUserView {
 
     /**
      * Devuelve el panel de log out
-     * @return
+     * @return Panel de log out
      */
     public JPanel getPanelLogOut() {
         return panelLogOut;

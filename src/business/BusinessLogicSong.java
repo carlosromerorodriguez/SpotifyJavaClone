@@ -18,9 +18,9 @@ public class BusinessLogicSong {
 
     /**
      * Constructor
-     * @param songDAO
-     * @param statisticsDatabaseDAO
-     * @param userDatabaseDAO
+     * @param songDAO Song DAO
+     * @param statisticsDatabaseDAO Statistics DAO
+     * @param userDatabaseDAO User DAO
      */
     public BusinessLogicSong(SongDAO songDAO, StatisticsDatabaseDAO statisticsDatabaseDAO, UserDatabaseDAO userDatabaseDAO) {
         this.songDAO = songDAO;
@@ -30,12 +30,12 @@ public class BusinessLogicSong {
 
     /**
      * Register song
-     * @param title
-     * @param genre
-     * @param album
-     * @param author
-     * @param file
-     * @return
+     * @param title Titol de la canço
+     * @param genre Genere de la canço
+     * @param album Album de la canço
+     * @param author Autor de la canço
+     * @param file File de la canço
+     * @return True if the song is registered
      * @throws TitleException
      * @throws AuthorException
      * @throws AlbumException
@@ -59,8 +59,8 @@ public class BusinessLogicSong {
 
     /**
      * Delete song
-     * @param title
-     * @return
+     * @param title Titol de la canço
+     * @return True if the song is deleted
      * @throws TitleException
      */
     public boolean deleteSong(String title) throws TitleException {
@@ -70,7 +70,7 @@ public class BusinessLogicSong {
 
     /**
      * Get statistics
-     * @return
+     * @return Statistics
      */
     public HashMap<String, Integer> getStatistics() {
         return statisticsDatabaseDAO.getStatistics();

@@ -43,7 +43,7 @@ public class MusicStatisticsView {
 
     /**
      * Actualitza les dades de la vista.
-     * @param statistics
+     * @param statistics Dades a mostrar.
      */
     public void setData(HashMap<String, Integer> statistics) {
         data = statistics;

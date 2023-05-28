@@ -14,9 +14,9 @@ public class DeleteUserController implements ActionListener {
 
     /**
      * Delete user controller
-     * @param businessLogicUser
-     * @param deleteUserView
-     * @param viewsController
+     * @param businessLogicUser business logic user
+     * @param deleteUserView delete user view
+     * @param viewsController views controller
      */
     public DeleteUserController(BusinessLogicUser businessLogicUser, DeleteUserView deleteUserView, ViewsController viewsController){
         this.businessLogicUser = businessLogicUser;

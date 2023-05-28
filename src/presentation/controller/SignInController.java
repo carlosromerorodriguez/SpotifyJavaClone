@@ -21,9 +21,9 @@ public class SignInController implements ActionListener {
 
     /**
      * Sign in controller
-     * @param signInView
-     * @param businessLogicUser
-     * @param viewsController
+     * @param signInView sign in view
+     * @param businessLogicUser business logic user
+     * @param viewsController views controller
      */
     public SignInController(SignInView signInView, BusinessLogicUser businessLogicUser, ViewsController viewsController){
         this.signInView = signInView;

@@ -20,10 +20,10 @@ public class AddSongToPlaylistController implements MouseListener {
 
     /**
      * Add song to playlist controller
-     * @param businessLogicMusic
-     * @param businessLogicPlayList
-     * @param viewsController
-     * @param addSongToPlaylistView
+     * @param businessLogicMusic business logic music
+     * @param businessLogicPlayList business logic playlist
+     * @param viewsController views controller
+     * @param addSongToPlaylistView add song to playlist view
      */
     public AddSongToPlaylistController(BusinessLogicMusic businessLogicMusic, BusinessLogicPlayList businessLogicPlayList, ViewsController viewsController, AddSongToPlaylistView addSongToPlaylistView) {
         this.viewsController = viewsController;

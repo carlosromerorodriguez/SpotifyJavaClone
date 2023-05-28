@@ -21,7 +21,7 @@ public class DeletePlaylistView {
 
     /**
      * Getter del nombre de la playlist
-     * @return
+     * @return nombre de la playlist
      */
     public String getPlaylistName() {
         return jTFPlaylistNameText.getText();
@@ -29,7 +29,7 @@ public class DeletePlaylistView {
 
     /**
      * Getter de la vista de eliminar playlist
-     * @return
+     * @return panel de eliminar playlist
      */
     public JPanel getPanelAddSong() {
         return panelDeletePlaylist;
@@ -126,7 +126,7 @@ public class DeletePlaylistView {
 
     /**
      * Controlador de eliminar playlist
-     * @param actionListener
+     * @param actionListener controlador de eliminar playlist
      */
     public void deletePlaylistController(ActionListener actionListener) {
         buttonDelete.addActionListener(actionListener);
@@ -134,7 +134,7 @@ public class DeletePlaylistView {
 
     /**
      * Controlador de volver a la vista de playlist
-     * @param actionListener
+     * @param actionListener controlador de volver a la vista de playlist
      */
     public void backPlaylistController(ActionListener actionListener) {
         buttonBack.addActionListener(actionListener);

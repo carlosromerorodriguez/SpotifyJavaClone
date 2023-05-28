@@ -28,7 +28,7 @@ public class WelcomeView extends JFrame {
 
     /**
      * Getter of the button to register a user
-     * @return JButton
+     * JButton
      */
     public WelcomeView() {
         welcomePanel = new JPanel(new GridBagLayout());
@@ -119,14 +119,14 @@ public class WelcomeView extends JFrame {
     }
 
     /**
-     * @return the register button
+     * the register button
      */
     public void registerController(ActionListener actionListener) {
         bRegister.addActionListener(actionListener);
     }
 
     /**
-     * @return the sign in button
+     * the sign in button
      */
     public void welcomeController(ActionListener actionListener) {
         bSignIn.addActionListener(actionListener);

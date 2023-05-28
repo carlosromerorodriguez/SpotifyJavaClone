@@ -16,10 +16,10 @@ public class PlaylistController implements MouseListener, PlayListViewListener {
 
     /**
      * Playlist controller
-     * @param playlistView
-     * @param businessLogicPlayList
-     * @param viewsController
-     * @param playlistSongsController
+     * @param playlistView playlist view
+     * @param businessLogicPlayList business logic playlist
+     * @param viewsController views controller
+     * @param playlistSongsController playlist songs controller
      */
     public PlaylistController(PlaylistView playlistView, BusinessLogicPlayList businessLogicPlayList, ViewsController viewsController, PlaylistSongsController playlistSongsController) {
         this.playlistView = playlistView;

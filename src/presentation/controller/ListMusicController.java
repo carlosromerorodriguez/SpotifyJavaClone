@@ -19,11 +19,11 @@ public class ListMusicController implements MouseListener, ListMusicViewListener
 
     /**
      * List music controller
-     * @param businessLogicMusic
-     * @param viewsController
-     * @param listMusicView
-     * @param showMusicInfoView
-     * @param playMusicController
+     * @param businessLogicMusic business logic music
+     * @param viewsController views controller
+     * @param listMusicView list music view
+     * @param showMusicInfoView show music info view
+     * @param playMusicController play music controller
      */
     public ListMusicController(BusinessLogicMusic businessLogicMusic, ViewsController viewsController, ListMusicView listMusicView, ShowMusicInfoView showMusicInfoView, PlayMusicController playMusicController) {
         this.viewsController = viewsController;

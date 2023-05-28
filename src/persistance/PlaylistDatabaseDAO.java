@@ -164,7 +164,7 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
 
     /**
      * Ordena las canciones de una playlist alfabéticamente
-     * @param playlistName
+     * @param playlistName Nombre de la playlist
      * @return
      */
     public List<Song> sortSongsAlphabetically(String playlistName) {
@@ -193,7 +193,7 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
 
     /**
      * Ordena las canciones de una playlist por género
-     * @param playlistName
+     * @param playlistName Nombre de la playlist
      * @return
      */
     public List<Song> sortSongsByGenre(String playlistName) {

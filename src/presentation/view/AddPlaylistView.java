@@ -21,7 +21,7 @@ public class AddPlaylistView {
 
     /**
      * Getter del nombre de la playlist
-     * @return
+     * @return nombre de la playlist
      */
     public String getPlaylistName() {
         return jTFPlaylistNameText.getText();
@@ -29,7 +29,7 @@ public class AddPlaylistView {
 
     /**
      * Getter del panel de añadir playlist
-     * @return
+     * @return panel de añadir playlist
      */
     public JPanel getPanelAddSong() {
         return panelAddPlaylist;
@@ -124,7 +124,7 @@ public class AddPlaylistView {
 
     /**
      * Añadir controlador de la playlist
-     * @param actionListener
+     * @param actionListener controlador de la playlist
      */
     public void addPlaylistController(ActionListener actionListener) {
         buttonAdd.addActionListener(actionListener);
@@ -132,7 +132,7 @@ public class AddPlaylistView {
 
     /**
      * Añadir controlador de volver a la playlist
-     * @param actionListener
+     * @param actionListener controlador de volver a la playlist
      */
     public void backPlaylistController(ActionListener actionListener) {
         buttonBack.addActionListener(actionListener);

@@ -16,8 +16,8 @@ public class PlayMusicController implements ActionListener {
 
     /**
      * Play music controller
-     * @param playMusicView
-     * @param businessLogicMPlayer
+     * @param playMusicView play music view
+     * @param businessLogicMPlayer business logic mplayer
      */
     public PlayMusicController(PlayMusicView playMusicView, BusinessLogicMPlayer businessLogicMPlayer) {
         this.playMusicView = playMusicView;

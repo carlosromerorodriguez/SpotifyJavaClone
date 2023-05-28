@@ -48,7 +48,7 @@ public class LogOutView {
 
     /**
      * Returns the content pane of the view.
-     * @return
+     * @return Content pane of the view.
      */
     public JPanel getContentPane() {
         return contentPane;
@@ -56,7 +56,7 @@ public class LogOutView {
 
     /**
      * Returns the log-out button of the view.
-     * @return
+     * @return Log-out button of the view.
      */
     public JButton getLogOutButton() {
         return logOutButton;

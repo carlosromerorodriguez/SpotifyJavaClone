@@ -17,10 +17,10 @@ public class AddMusicController implements ActionListener {
 
     /**
      * Add music controller
-     * @param businessLogicSong
-     * @param viewsController
-     * @param addMusicView
-     * @param listMusicController
+     * @param businessLogicSong business logic song
+     * @param viewsController views controller
+     * @param addMusicView add music view
+     * @param listMusicController list music controller
      */
     public AddMusicController(BusinessLogicSong businessLogicSong, ViewsController viewsController, AddMusicView addMusicView, ListMusicController listMusicController) {
         this.businessLogicSong = businessLogicSong;

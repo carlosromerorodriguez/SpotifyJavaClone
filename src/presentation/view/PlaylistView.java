@@ -104,7 +104,7 @@ public class PlaylistView extends JFrame {
 
     /**
      * Getter de la vista.
-     * @return
+     * @return JPanel de la vista.
      */
     public JPanel getContentPane() {
         return contentPane;
@@ -112,7 +112,7 @@ public class PlaylistView extends JFrame {
 
     /**
      * Devuelve la playlist seleccionada.
-     * @return
+     * @return String con el nombre de la playlist.
      */
     public String getSelectedPlaylistName() {
         int row = table.getSelectedRow();
@@ -124,7 +124,7 @@ public class PlaylistView extends JFrame {
 
     /**
      * Setea los datos de la playlist.
-     * @param playlists
+     * @param playlists ArrayList con las playlists.
      */
     public void setData(ArrayList<Playlist> playlists) {
         data = playlists;
@@ -148,7 +148,7 @@ public class PlaylistView extends JFrame {
 
     /**
      * Getter del boton de opciones.
-     * @return
+     * @return JButton de opciones.
      */
     public JButton getOptionsButton() {
         return optionsButton;
@@ -156,7 +156,7 @@ public class PlaylistView extends JFrame {
 
     /**
      * Setea el listener de la vista.
-     * @param playListViewListener
+     * @param playListViewListener Listener de la vista.
      */
     public void setListener(PlayListViewListener playListViewListener) {
         this.playListViewListener = playListViewListener;
@@ -178,7 +178,7 @@ public class PlaylistView extends JFrame {
 
     /**
      * Getter de la tabla.
-     * @return
+     * @return JTable de la vista.
      */
     public Component getTable() {
         return table;

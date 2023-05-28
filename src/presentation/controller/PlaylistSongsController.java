@@ -18,13 +18,13 @@ public class PlaylistSongsController implements PlaylistSongsViewListener {
 
     /**
      * Playlist songs controller
-     * @param playlistSongsView
-     * @param businessLogicPlayList
-     * @param viewsController
-     * @param addSongToPlaylistView
-     * @param deleteSongFromPlaylistView
-     * @param businessLogicMusic
-     * @param playMusicController
+     * @param playlistSongsView playlist songs view
+     * @param businessLogicPlayList business logic playlist
+     * @param viewsController views controller
+     * @param addSongToPlaylistView add song to playlist view
+     * @param deleteSongFromPlaylistView delete song from playlist view
+     * @param businessLogicMusic business logic music
+     * @param playMusicController play music controller
      */
     public PlaylistSongsController(PlaylistSongsView playlistSongsView, BusinessLogicPlayList businessLogicPlayList, ViewsController viewsController, AddSongToPlaylistView addSongToPlaylistView, DeleteSongFromPlaylistView deleteSongFromPlaylistView, BusinessLogicMusic businessLogicMusic, PlayMusicController playMusicController) {
         this.playlistSongsView = playlistSongsView;
@@ -64,7 +64,7 @@ public class PlaylistSongsController implements PlaylistSongsViewListener {
 
     /**
      * Load songs from api
-     * @param playlistName
+     * @param playlistName playlist name
      */
     public void loadSongsFromApi(String playlistName) {
         playlistSongsView.setSongs(businessLogicPlayList.getSongsFromPlaylist(playlistName));
@@ -92,7 +92,7 @@ public class PlaylistSongsController implements PlaylistSongsViewListener {
 
     /**
      * Set playlist name
-     * @param selectedPlaylistName
+     * @param selectedPlaylistName selected playlist name
      */
     public void setPlaylistName(String selectedPlaylistName) {
         playlistSongsView.setPlaylistName(selectedPlaylistName);

@@ -20,7 +20,7 @@ public class DeleteSongFromPlaylistView extends JFrame {
 
     /**
      * Getter del titulo de la cancion
-     * @return
+     * @return titulo de la cancion
      */
     public String getTitle() {
         return jTFSongTitleText.getText();
@@ -28,7 +28,7 @@ public class DeleteSongFromPlaylistView extends JFrame {
 
     /**
      * Getter del panel de eliminar cancion
-     * @return
+     * @return string de la playlist
      */
     public String getPlaylistName() {
         return jTFPlaylistNameText.getText();
@@ -100,7 +100,7 @@ public class DeleteSongFromPlaylistView extends JFrame {
 
     /**
      * Setter del nombre de la playlist
-     * @param jTFPlaylistNameText
+     * @param jTFPlaylistNameText nombre de la playlist
      */
     public void setPlaylistName(String jTFPlaylistNameText) {
         this.jTFPlaylistNameText.setText(jTFPlaylistNameText);
@@ -109,7 +109,7 @@ public class DeleteSongFromPlaylistView extends JFrame {
 
     /**
      * Getter del panel de eliminar cancion
-     * @return
+     * @return panel de eliminar cancion
      */
     public JPanel getPanel() {
         return panelDeleteSong;
@@ -117,7 +117,7 @@ public class DeleteSongFromPlaylistView extends JFrame {
 
     /**
      * Setter del controlador de eliminar cancion
-     * @param deleteSongFromPlaylistController
+     * @param deleteSongFromPlaylistController controlador de eliminar cancion
      */
     public void setListener(DeleteSongFromPlaylistController deleteSongFromPlaylistController) {
         buttonDelete.addActionListener(deleteSongFromPlaylistController);

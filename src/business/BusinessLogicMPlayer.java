@@ -178,7 +178,7 @@ public class BusinessLogicMPlayer {
 
     /**
      *
-     * @return
+     * @return repeat icon index
      */
     public int getRepeatIconIndex() {
         if (isIndividualRepetition) {
@@ -223,7 +223,7 @@ public class BusinessLogicMPlayer {
 
     /**
      * Select song
-     * @param songName
+     * @param songName song name
      */
     public void selectSong(String songName) {
         for (int i = 0; i < songs.size(); i++) {
@@ -236,7 +236,7 @@ public class BusinessLogicMPlayer {
 
     /**
      * Check if is playing
-     * @return
+     * @return true if is playing
      */
     public boolean isPlaying() {
         return player != null && !player.isPaused();

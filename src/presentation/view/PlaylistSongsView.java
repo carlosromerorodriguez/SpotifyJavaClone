@@ -140,7 +140,7 @@ public class PlaylistSongsView extends JFrame {
 
     /**
      * Getter de boton
-     * @return
+     * @return Boton de opciones
      */
     public JButton getSortAlphaButton() {
         return sortAlphaButton;
@@ -148,7 +148,7 @@ public class PlaylistSongsView extends JFrame {
 
     /**
      * Getter de boton
-     * @return
+     * @return Boton de opciones
      */
     public JButton getSortByUserButton() {
         return sortByUserButton;
@@ -156,7 +156,6 @@ public class PlaylistSongsView extends JFrame {
 
     /**
      * Setter de listeners
-     * @return
      */
     public void addTableMouseListener(MouseListener mouseListener){
         table.addMouseListener(mouseListener);
@@ -190,7 +189,7 @@ public class PlaylistSongsView extends JFrame {
 
     /**
      * Método que devuelve la tabla de canciones
-     * @return
+     * @return Tabla de canciones
      */
     public JPanel getPanelList() {
         return panelList;
@@ -219,7 +218,7 @@ public class PlaylistSongsView extends JFrame {
 
     /**
      * Método que devuelve el nombre de la playlist
-     * @return
+     * @return Nombre de la playlist
      */
     public String getPlaylistName() {
         return playlistName;
@@ -227,7 +226,7 @@ public class PlaylistSongsView extends JFrame {
 
     /**
      * Método que devuelve el botón de opciones
-     * @return
+     * @return Botón de opciones
      */
     public JButton getOptionsButton() {
         return optionsButton;
@@ -235,7 +234,7 @@ public class PlaylistSongsView extends JFrame {
 
     /**
      * Método que establece el nombre de la playlist
-     * @param selectedPlaylistName
+     * @param selectedPlaylistName Nombre de la playlist
      */
     public void setPlaylistName(String selectedPlaylistName) {
         this.playlistName = selectedPlaylistName;
@@ -243,7 +242,7 @@ public class PlaylistSongsView extends JFrame {
 
     /**
      * Método que devuelve la tabla de canciones
-     * @return
+     * @return Tabla de canciones
      */
     public JTable getTable() {
         return table;
@@ -251,7 +250,7 @@ public class PlaylistSongsView extends JFrame {
 
     /**
      * Método que devuelve el modelo de la tabla
-     * @return
+     * @return Modelo de la tabla
      */
     public void deactivateAddButton(boolean b) {
         optionsButton.setEnabled(b);

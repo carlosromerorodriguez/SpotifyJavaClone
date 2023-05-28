@@ -15,9 +15,9 @@ public class SignUpController implements ActionListener {
 
     /**
      * Sign up controller
-     * @param signUpView
-     * @param businessLogicUser
-     * @param viewsController
+     * @param signUpView sign up view
+     * @param businessLogicUser business logic user
+     * @param viewsController views controller
      */
     public SignUpController(SignUpView signUpView, BusinessLogicUser businessLogicUser, ViewsController viewsController) {
         this.signUpView = signUpView;

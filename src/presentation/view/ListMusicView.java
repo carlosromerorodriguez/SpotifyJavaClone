@@ -22,7 +22,7 @@ public class ListMusicView extends JFrame {
     private ListMusicViewListener listener;
 
     /**
-     * Constructor de la la vista del repertorio de canciones
+     * Constructor de la vista del repertorio de canciones
      */
     public ListMusicView() {
         panelList = new JPanel(new GridBagLayout());
@@ -122,7 +122,7 @@ public class ListMusicView extends JFrame {
 
     /**
      * setea las canciones en la tabla
-     * @param songs
+     * @param songs lista de canciones
      */
     public void setSongs(List<Song> songs) {
         tableModel.setRowCount(0);
@@ -134,8 +134,8 @@ public class ListMusicView extends JFrame {
 
     /**
      * Crea un titulo con la primera letra de cada palabra en mayuscula
-     * @param text
-     * @return
+     * @param text texto a convertir
+     * @return texto convertido
      */
     private static String title(String text) {
         String[] words = text.split(" ");
@@ -148,7 +148,7 @@ public class ListMusicView extends JFrame {
 
     /**
      * Devuelve boton de opciones
-     * @return
+     * @return boton de opciones
      */
     public JButton getOptionsButton() {
         return optionsButton;
@@ -156,7 +156,7 @@ public class ListMusicView extends JFrame {
 
     /**
      * Devuelve el panel de la lista
-     * @return
+     * @return panel de la lista
      */
     public JPanel getPanelList() {
         return panelList;
@@ -164,7 +164,7 @@ public class ListMusicView extends JFrame {
 
     /**
      * Devuelve el texto del campo de busqueda
-     * @return
+     * @return texto del campo de busqueda
      */
     public String getSearchText() {
         return searchField.getText();
@@ -172,7 +172,6 @@ public class ListMusicView extends JFrame {
 
     /**
      * Añade el action listener al boton de opciones
-     * @return
      */
     public void actionLinker(MouseListener mouseListener){
         table.addMouseListener(mouseListener);
@@ -180,7 +179,6 @@ public class ListMusicView extends JFrame {
 
     /**
      * Añade el action listener
-     * @return
      */
     public void setListener(ListMusicViewListener listener) {
         this.listener = listener;
@@ -188,7 +186,7 @@ public class ListMusicView extends JFrame {
 
     /**
      * Setea el listener del campo de busqueda
-     * @param actionListener
+     * @param actionListener listener del campo de busqueda
      */
     public void setSearchFieldListener(ActionListener actionListener) {
         searchField.addActionListener(actionListener);

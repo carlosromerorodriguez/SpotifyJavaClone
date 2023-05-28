@@ -12,7 +12,7 @@ public class WelcomeController implements ActionListener {
 
     /**
      * Welcome controller
-     * @param viewsController
+     * @param viewsController views controller
      */
     public WelcomeController(ViewsController viewsController){
         this.viewsController = viewsController;

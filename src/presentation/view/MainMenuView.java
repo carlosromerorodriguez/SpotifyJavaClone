@@ -24,6 +24,9 @@ public class MainMenuView extends JFrame {
     private JLabel imageLabel;
     private final JLabel titulo;
 
+    /**
+     * Constructora de la clase MainMenuView.
+     */
     public MainMenuView() {
 
         menuPanel = new JPanel();
@@ -133,12 +136,22 @@ public class MainMenuView extends JFrame {
         imageLabel.setIcon(imageIcon);
     }
 
+    /**
+     * Crea un JLabel con el título de la vista.
+     * @param titulo Título de la vista.
+     * @return JLabel con el título de la vista.
+     */
     public JLabel LTitulo(String titulo) {
         JLabel label = new JLabel(titulo);
         label.setFont(Fonts.getBoldFont(50f));
         label.setForeground(UIPalette.TEXT_COLOR.getColor());
         return label;
     }
+
+    /**
+     * Devuelve el panel de la vista.
+     * @return JPanel de la vista.
+     */
     public JPanel getMenuPanel() {
         return menuPanel;
     }
@@ -150,6 +163,11 @@ public class MainMenuView extends JFrame {
         return new ImageIcon(nuevaImagen);
     }
 
+
+    /**
+     * Establece los action listeners de los botones de la vista.
+     * @param actionListener Action listener de los botones de la vista.
+     */
     public void setActionListeners(ActionListener actionListener) {
         bMusicStatistics.addActionListener(actionListener);
         bPlayMusic.addActionListener(actionListener);

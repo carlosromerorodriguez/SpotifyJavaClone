@@ -12,6 +12,13 @@ public class MainMenuController implements ActionListener {
     private final MusicStatisticsController musicStatisticsController;
     private final PlaylistController playlistController;
 
+    /**
+     * Main menu controller
+     * @param viewsController
+     * @param listMusicController
+     * @param musicStatisticsController
+     * @param playlistController
+     */
     public MainMenuController(ViewsController viewsController, ListMusicController listMusicController, MusicStatisticsController musicStatisticsController, PlaylistController playlistController) {
         this.viewsController = viewsController;
         this.listMusicController = listMusicController;

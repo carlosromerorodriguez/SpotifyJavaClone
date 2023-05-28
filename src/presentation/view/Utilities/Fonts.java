@@ -8,6 +8,11 @@ import java.io.File;
  */
 public class Fonts {
 
+    /**
+     * Getter de la fuente en negrita
+     * @param size
+     * @return
+     */
     public static Font getMediumFont(float size) {
         try {
             // Cargar el archivo de fuente (.ttf)
@@ -31,6 +36,11 @@ public class Fonts {
         }
     }
 
+    /**
+     * Getter de la fuente mas delgada
+     * @param size
+     * @return
+     */
     public static Font getLightFont(float size) {
         try {
             // Cargar el archivo de fuente (.ttf)
@@ -54,6 +64,11 @@ public class Fonts {
         }
     }
 
+    /**
+     * Getter de la fuente en negrita fuerte
+     * @param size
+     * @return
+     */
     public static Font getBoldFont(float size) {
         try {
             // Cargar el archivo de fuente (.ttf)

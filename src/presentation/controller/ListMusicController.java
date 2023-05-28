@@ -17,6 +17,14 @@ public class ListMusicController implements MouseListener, ListMusicViewListener
     private final ListMusicView listMusicView;
     private final PlayMusicController playMusicController;
 
+    /**
+     * List music controller
+     * @param businessLogicMusic
+     * @param viewsController
+     * @param listMusicView
+     * @param showMusicInfoView
+     * @param playMusicController
+     */
     public ListMusicController(BusinessLogicMusic businessLogicMusic, ViewsController viewsController, ListMusicView listMusicView, ShowMusicInfoView showMusicInfoView, PlayMusicController playMusicController) {
         this.viewsController = viewsController;
         this.businessLogicMusic = businessLogicMusic;
@@ -34,6 +42,9 @@ public class ListMusicController implements MouseListener, ListMusicViewListener
         listMusicView.setSongs(businessLogicMusic.searchMusic(listMusicView.getSearchText()));
     }
 
+    /**
+     * Load songs from api
+     */
     public void loadSongsFromApi() {
         listMusicView.setSongs(businessLogicMusic.listMusic());
         playMusicController.setSongsToMPlayer(businessLogicMusic.listMusic(), false);

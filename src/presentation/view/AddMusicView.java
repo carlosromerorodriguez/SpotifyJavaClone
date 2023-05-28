@@ -21,6 +21,9 @@ public class AddMusicView extends JFrame {
     private final JButton buttonAdd;
     private final JButton buttonBack;
 
+    /**
+     * Add music view
+     */
     public AddMusicView() {
 
         panelAddSong = new JPanel(new GridBagLayout());
@@ -163,79 +166,136 @@ public class AddMusicView extends JFrame {
         panelAddSong.add(buttonAdd, c);
     }
 
+    /**
+     * Adds action listener to the button
+     * @param actionListener
+     */
     public void addMusicController(ActionListener actionListener) {
         buttonAdd.addActionListener(actionListener);
     }
+
+    /**
+     * Adds action listener to the button
+     * @param actionListener
+     */
     public void backSongController(ActionListener actionListener) {
         buttonBack.addActionListener(actionListener);
     }
 
+    /**
+     * Returns the title of the song
+     * @return
+     */
     public String getTitle() {
         return jTFSongTitleText.getText();
     }
 
+    /**
+     * Returns the genre of the song
+     * @return
+     */
     public String getGenre() {
         return jTFSongGenreText.getText();
     }
 
+    /**
+     * Returns the album of the song
+     * @return
+     */
     public String getAlbum() {
         return jTFSongAlbumText.getText();
     }
 
+    /**
+     * Returns the author of the song
+     * @return
+     */
     public String getAuthor() {
         return jTFSongAuthorText.getText();
     }
 
+    /**
+     * Returns the file of the song
+     * @return
+     */
     public File getFile() {
         return jTFSongUrl.getSelectedFile();
     }
 
+    /**
+     * Returns the panel
+     * @return
+     */
     public JPanel getPanelAddSong() {
         return panelAddSong;
     }
 
+    /**
+     * error message for wrong url
+     */
     public void wrongUrlError() {
         JOptionPane.showMessageDialog(this,
                 "Invalid URL address. Please ensure it meets the requirements and try again.",
                 "Invalid Url Address", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * error message for wrong title
+     */
     public void wrongTitleError() {
         JOptionPane.showMessageDialog(this,
                 "The title you entered is not valid. Please ensure it meets the requirements and try again.",
                 "Invalid Title", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * error message for wrong author
+     */
     public void wrongAuthorError() {
         JOptionPane.showMessageDialog(this,
                 "The author you entered is not valid. Please ensure it meets the requirements and try again.",
                 "Invalid Author", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * error message for wrong album
+     */
     public void wrongAlbumError() {
         JOptionPane.showMessageDialog(this,
                 "The album you entered is not valid. Please ensure it meets the requirements and try again.",
                 "Invalid Album", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * error message for wrong genre
+     */
     public void wrongGenreError() {
         JOptionPane.showMessageDialog(this,
                 "The genre you entered is not valid. Please ensure it meets the requirements and try again.",
                 "Invalid Genre", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * error message for repeated song
+     */
     public void repeatedSongNameError() {
         JOptionPane.showMessageDialog(this,
                 "The song you are trying to add already exists in the library.",
                 "Song Not Added", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * success message for adding song
+     */
     public void successfulAdd() {
         JOptionPane.showMessageDialog(this,
                 "The song was successfully added to the library.",
                 "Song Added", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**
+     * error message for unsuccessful adding song
+     */
     public void unsuccessfulAdd() {
         JOptionPane.showMessageDialog(this,
                 "The song was not added to the library. Please try again.",

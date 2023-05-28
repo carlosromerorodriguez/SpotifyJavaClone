@@ -13,6 +13,13 @@ public class DeletePlaylistController implements ActionListener {
     private final DeletePlaylistView deletePlaylistView;
     private final PlaylistController playlistController;
 
+    /**
+     * Delete playlist controller
+     * @param businessLogicPlaylist
+     * @param viewsController
+     * @param deletePlaylistView
+     * @param playlistController
+     */
     public DeletePlaylistController(BusinessLogicPlayList businessLogicPlaylist, ViewsController viewsController, DeletePlaylistView deletePlaylistView, PlaylistController playlistController) {
         this.businessLogicPlaylist = businessLogicPlaylist;
         this.viewsController = viewsController;
@@ -20,6 +27,10 @@ public class DeletePlaylistController implements ActionListener {
         this.playlistController = playlistController;
     }
 
+    /**
+     * Delete playlist
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(DeletePlaylistView.DELETE_PLAYLIST_COMMAND)) {

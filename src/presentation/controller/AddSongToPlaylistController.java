@@ -18,6 +18,13 @@ public class AddSongToPlaylistController implements MouseListener {
     private final AddSongToPlaylistView addSongToPlaylistView;
     private final BusinessLogicPlayList businessLogicPlayList;
 
+    /**
+     * Add song to playlist controller
+     * @param businessLogicMusic
+     * @param businessLogicPlayList
+     * @param viewsController
+     * @param addSongToPlaylistView
+     */
     public AddSongToPlaylistController(BusinessLogicMusic businessLogicMusic, BusinessLogicPlayList businessLogicPlayList, ViewsController viewsController, AddSongToPlaylistView addSongToPlaylistView) {
         this.viewsController = viewsController;
         this.businessLogicMusic = businessLogicMusic;
@@ -30,6 +37,10 @@ public class AddSongToPlaylistController implements MouseListener {
         addSongToPlaylistView.setSongs(businessLogicMusic.listMusic());
     }
 
+    /**
+     * Add song to playlist
+     * @param e the event to be processed
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         JTable table = (JTable) e.getSource();

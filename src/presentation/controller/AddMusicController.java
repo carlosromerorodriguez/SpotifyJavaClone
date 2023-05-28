@@ -15,6 +15,13 @@ public class AddMusicController implements ActionListener {
     private final AddMusicView addMusicView;
     private final ListMusicController listMusicController;
 
+    /**
+     * Add music controller
+     * @param businessLogicSong
+     * @param viewsController
+     * @param addMusicView
+     * @param listMusicController
+     */
     public AddMusicController(BusinessLogicSong businessLogicSong, ViewsController viewsController, AddMusicView addMusicView, ListMusicController listMusicController) {
         this.businessLogicSong = businessLogicSong;
         this.viewsController = viewsController;

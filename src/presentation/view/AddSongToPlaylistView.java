@@ -18,6 +18,9 @@ public class AddSongToPlaylistView extends JFrame {
     private final DefaultTableModel tableModel;
     private String playlistName;
 
+    /**
+     * Constructor de la la vista de añadir cancion a playlist
+     */
     public AddSongToPlaylistView() {
         panelList = new JPanel(new GridBagLayout());
         panelList.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
@@ -70,6 +73,11 @@ public class AddSongToPlaylistView extends JFrame {
         table.setDefaultRenderer(Object.class, centerRenderer);
     }
 
+    /**
+     * Método para actualizar la tabla de canciones
+     *
+     * @param songs Lista de canciones
+     */
     public void setSongs(List<Song> songs) {
         tableModel.setRowCount(0);
         for (Song song : songs) {
@@ -87,30 +95,56 @@ public class AddSongToPlaylistView extends JFrame {
         return title.toString().trim();
     }
 
+    /**
+     * Método para obtener el panel de la lista de canciones
+     * @return
+     */
     public JPanel getPanelList() {
         return panelList;
     }
 
+
+    /**
+     * Link de la tabla con el controlador
+     * @param mouseListener
+     */
     public void actionLinker(MouseListener mouseListener){
         table.addMouseListener(mouseListener);
     }
 
+    /**
+     * Setter del nombre de la playlist
+     * @param playlistName
+     */
     public void setPlaylistName(String playlistName) {
         this.playlistName = playlistName;
     }
 
+    /**
+     * Getter del nombre de la playlist
+     * @return
+     */
     public String getPlaylistName() {
         return playlistName;
     }
 
+    /**
+     * Método para mostrar un error de canción duplicada
+     */
     public void showDuplicateSongError() {
         JOptionPane.showMessageDialog(this, "La canción ya está en la playlist", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Método para mostrar un mensaje de canción añadida
+     */
     public void showSongAddedToPlaylist() {
         JOptionPane.showMessageDialog(this, "Canción añadida a la playlist", "Canción añadida", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**
+     * Método para mostrar un error de canción no seleccionada
+     */
     public void showSongNotSelectedError() {
         JOptionPane.showMessageDialog(this, "Selecciona una canción", "Error", JOptionPane.ERROR_MESSAGE);
     }

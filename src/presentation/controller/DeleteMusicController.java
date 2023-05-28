@@ -14,6 +14,13 @@ public class DeleteMusicController implements ActionListener {
     private final BusinessLogicSong businessLogicSong;
     private final ListMusicController listMusicController;
 
+    /**
+     * Delete music controller
+     * @param deleteMusicView
+     * @param businessLogicSong
+     * @param viewsController
+     * @param listMusicController
+     */
     public DeleteMusicController(DeleteMusicView deleteMusicView, BusinessLogicSong businessLogicSong, ViewsController viewsController, ListMusicController listMusicController) {
         this.deleteMusicView = deleteMusicView;
         this.businessLogicSong = businessLogicSong;
@@ -22,6 +29,10 @@ public class DeleteMusicController implements ActionListener {
         deleteMusicView.backButtonListener(this);
     }
 
+    /**
+     *  Action performed
+     * @param e the event to be processed
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(DeleteMusicView.DELETE_COMMAND)) {
             String command = deleteMusicView.confirmDelete();

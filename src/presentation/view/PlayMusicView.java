@@ -30,16 +30,36 @@ public class PlayMusicView {
     private final ImageIcon[] imageIcons;
     private final ImageIcon[] imageRepeat;
 
+    /**
+     * Devuelve el boton de parar la reproducción de música.
+     *
+     * @return el boton de parar la reproducción de música.
+     */
     public JButton getPlayButton() {
         return bPlay;
     }
 
+
+    /**
+     * Barra de progreso de la reproducción de música.
+     *
+     * @return Barra de progreso de la reproducción de música.
+     */
     public JProgressBar getProgressBar() { return progressBar; }
 
+
+    /**
+     * Devuelve el boton de repetir la reproducción de música.
+     *
+     * @return el boton de repetir la reproducción de música.
+     */
     public JButton getRepetitionButton() {
         return bRepeat;
     }
 
+    /**
+     * Constructor de la vista de reproducción de música.
+     */
     public PlayMusicView() {
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -70,18 +90,37 @@ public class PlayMusicView {
         addProgressBar(gbc);
     }
 
+    /**
+     * Cambia tamaño de la imagen.
+     * @param ruta
+     * @return
+     */
     private ImageIcon imageResize(String ruta){
         return new ImageIcon(new ImageIcon(ruta).getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
     }
 
+
+    /**
+     * Get de la imagen
+     * @return
+     */
     public ImageIcon[] getImageIcons() {
         return imageIcons;
     }
 
+    /**
+     * Get de la imagen repeat
+     * @return
+     */
     public ImageIcon[] getImageRepeat() {
         return imageRepeat;
     }
 
+    /**
+     * Añade espacio en blanco
+     *
+     * @param gbc
+     */
     private void addBlankSpace(GridBagConstraints gbc) {
         JLabel blankLabel = new JLabel();
         gbc.gridx = 1;
@@ -90,6 +129,12 @@ public class PlayMusicView {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         contentPane.add(blankLabel, gbc);
     }
+
+    /**
+     * Añade espacio en blanco
+     *
+     * @param gbc
+     */
     private void addBlankSpace2(GridBagConstraints gbc) {
         JLabel blankLabel = new JLabel();
         gbc.gridx = 1;
@@ -120,10 +165,18 @@ public class PlayMusicView {
         contentPane.add(titleArtist, gbc);
     }
 
+    /**
+     * Setea el titulo de la cancion
+     * @param songName
+     */
     public void setTitleSong(String songName) {
         titleSong.setText(songName);
     }
 
+    /**
+     * Setea el titulo del artista
+     * @param artistName
+     */
     public void setTitleArtist(String artistName) {
         titleArtist.setText(artistName);
     }
@@ -156,6 +209,10 @@ public class PlayMusicView {
     }
 
 
+    /**
+     * Setea el contador del tiempo
+     * @param time
+     */
     public void setTimeCounter(String time) {
         timeCounter.setText(time);
     }
@@ -225,6 +282,10 @@ public class PlayMusicView {
         return contentPane;
     }
 
+    /**
+     * link con los controlores de la vista
+     * @param actionListener
+     */
     public void playMusicController(ActionListener actionListener) {
         bPlay.addActionListener(actionListener);
         bPrev.addActionListener(actionListener);

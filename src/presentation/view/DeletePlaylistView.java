@@ -19,19 +19,31 @@ public class DeletePlaylistView {
     private GridBagConstraints c;
     private Font fuenteTitol, fuentePetit;
 
+    /**
+     * Getter del nombre de la playlist
+     * @return
+     */
     public String getPlaylistName() {
         return jTFPlaylistNameText.getText();
     }
 
+    /**
+     * Getter de la vista de eliminar playlist
+     * @return
+     */
     public JPanel getPanelAddSong() {
         return panelDeletePlaylist;
     }
 
+    /**
+     * eliminar playlist view
+     */
     public DeletePlaylistView() {
         setupView();
         setupFonts();
         setupComponents();
     }
+
 
     private void setupView() {
         panelDeletePlaylist = new JPanel(new GridBagLayout());
@@ -41,6 +53,7 @@ public class DeletePlaylistView {
 
         c = new GridBagConstraints();
     }
+
 
     private void setupFonts() {
         fuenteTitol = Fonts.getBoldFont(40f);
@@ -111,20 +124,34 @@ public class DeletePlaylistView {
         panelDeletePlaylist.add(buttonDelete, c);
     }
 
+    /**
+     * Controlador de eliminar playlist
+     * @param actionListener
+     */
     public void deletePlaylistController(ActionListener actionListener) {
         buttonDelete.addActionListener(actionListener);
     }
 
+    /**
+     * Controlador de volver a la vista de playlist
+     * @param actionListener
+     */
     public void backPlaylistController(ActionListener actionListener) {
         buttonBack.addActionListener(actionListener);
     }
 
+    /**
+     * Mensaje exitoso de eliminar playlist
+     */
     public void successfulDeletePlaylist() {
         JOptionPane.showMessageDialog(panelDeletePlaylist,
                 "La playlist se ha eliminado correctamente.",
                 "Playlist eliminada", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**
+     * Mensaje de error de eliminar playlist
+     */
     public void notExistingPlaylistError() {
         JOptionPane.showMessageDialog(panelDeletePlaylist,
                 "La playlist no existe.",

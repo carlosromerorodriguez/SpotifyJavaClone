@@ -14,6 +14,9 @@ public class DeleteUserView {
     private final JButton confirmButton;
     public final String DELETE_COMMAND = "DELETE_COMMAND";
 
+    /**
+     * Constructor de la vista de eliminar usuario
+     */
     public DeleteUserView() {
         GridBagLayout gridLayout = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
@@ -73,25 +76,48 @@ public class DeleteUserView {
         panelLogOut.add(buttonsPanel,c);
     }
 
+    /**
+     * Devuelve el string del usuario
+     * @return
+     */
     public String getUserText() {
         return userText.getText();
     }
 
+    /**
+     * Devuelve el string de la contraseña
+     * @return
+     */
     public String getPasswordText() {
         return new String(passwordText.getPassword());
     }
 
+    /**
+     * Añade un action listener al boton de confirmar
+     * @param actionListener
+     */
     public void setActions(ActionListener actionListener) {
         confirmButton.addActionListener(actionListener);
     }
 
+    /**
+     * Devuelve el panel de log out
+     * @return
+     */
     public JPanel getPanelLogOut() {
         return panelLogOut;
     }
+
+    /**
+     * Muestra un mensaje de error
+     */
     public void setErrorMessage() {
         JOptionPane.showMessageDialog(panelLogOut, "User or password incorrect", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Muestra un mensaje de exito
+     */
     public void successfulDelete() {
         JOptionPane.showMessageDialog(panelLogOut, "User deleted", "Success", JOptionPane.INFORMATION_MESSAGE);
     }

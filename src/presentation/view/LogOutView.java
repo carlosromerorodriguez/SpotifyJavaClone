@@ -46,14 +46,26 @@ public class LogOutView {
         contentPane.add(logOutButton, c);
     }
 
+    /**
+     * Returns the content pane of the view.
+     * @return
+     */
     public JPanel getContentPane() {
         return contentPane;
     }
 
+    /**
+     * Returns the log-out button of the view.
+     * @return
+     */
     public JButton getLogOutButton() {
         return logOutButton;
     }
 
+    /**
+     * Sets the action listener for the log-out button.
+     * @param actionListener
+     */
     public void setAction(ActionListener actionListener) {
         logOutButton.addActionListener(actionListener);
     }

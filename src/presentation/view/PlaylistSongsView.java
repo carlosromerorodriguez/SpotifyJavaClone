@@ -25,6 +25,9 @@ public class PlaylistSongsView extends JFrame {
     private JButton sortAlphaButton;
     private JButton sortByUserButton;
 
+    /**
+     * Constructor de la la vista del repertorio de canciones
+     */
     public PlaylistSongsView() {
         panelList = new JPanel(new GridBagLayout());
         panelList.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
@@ -135,18 +138,34 @@ public class PlaylistSongsView extends JFrame {
         table.setDefaultRenderer(Object.class, centerRenderer);
     }
 
+    /**
+     * Getter de boton
+     * @return
+     */
     public JButton getSortAlphaButton() {
         return sortAlphaButton;
     }
 
+    /**
+     * Getter de boton
+     * @return
+     */
     public JButton getSortByUserButton() {
         return sortByUserButton;
     }
 
+    /**
+     * Setter de listeners
+     * @return
+     */
     public void addTableMouseListener(MouseListener mouseListener){
         table.addMouseListener(mouseListener);
     }
 
+    /**
+     * Método que actualiza la tabla de canciones
+     * @param songs Lista de canciones
+     */
     public void setSongs(List<Song> songs) {
         SwingUtilities.invokeLater(() -> {
             tableModel.setRowCount(0);
@@ -169,14 +188,25 @@ public class PlaylistSongsView extends JFrame {
         return title.toString().trim();
     }
 
+    /**
+     * Método que devuelve la tabla de canciones
+     * @return
+     */
     public JPanel getPanelList() {
         return panelList;
     }
 
+    /**
+     * Seter de listeners
+     * @param listener
+     */
     public void setListener(PlaylistSongsViewListener listener) {
         this.listener = listener;
     }
 
+    /**
+     * Dialogo de las opciones de la vista de las canciones
+     */
     public void showOptionsDialog() {
         String[] options = {"Add song", "Delete song"};
         int choice = JOptionPane.showOptionDialog(this, "Choose an option", "Playlist's options", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
@@ -187,22 +217,42 @@ public class PlaylistSongsView extends JFrame {
         }
     }
 
+    /**
+     * Método que devuelve el nombre de la playlist
+     * @return
+     */
     public String getPlaylistName() {
         return playlistName;
     }
 
+    /**
+     * Método que devuelve el botón de opciones
+     * @return
+     */
     public JButton getOptionsButton() {
         return optionsButton;
     }
 
+    /**
+     * Método que establece el nombre de la playlist
+     * @param selectedPlaylistName
+     */
     public void setPlaylistName(String selectedPlaylistName) {
         this.playlistName = selectedPlaylistName;
     }
 
+    /**
+     * Método que devuelve la tabla de canciones
+     * @return
+     */
     public JTable getTable() {
         return table;
     }
 
+    /**
+     * Método que devuelve el modelo de la tabla
+     * @return
+     */
     public void deactivateAddButton(boolean b) {
         optionsButton.setEnabled(b);
     }

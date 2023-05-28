@@ -13,12 +13,22 @@ public class SignUpController implements ActionListener {
     private final BusinessLogicUser businessLogicUser;
     private final ViewsController viewsController;
 
+    /**
+     * Sign up controller
+     * @param signUpView
+     * @param businessLogicUser
+     * @param viewsController
+     */
     public SignUpController(SignUpView signUpView, BusinessLogicUser businessLogicUser, ViewsController viewsController) {
         this.signUpView = signUpView;
         this.businessLogicUser = businessLogicUser;
         this.viewsController = viewsController;
     }
 
+    /**
+     * Action performed
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(SignUpView.REGISTER_COMMAND)) {

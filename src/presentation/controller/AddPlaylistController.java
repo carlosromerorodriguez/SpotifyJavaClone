@@ -14,6 +14,13 @@ public class AddPlaylistController implements ActionListener {
     private final AddPlaylistView addPlaylistView;
     private final PlaylistController playlistController;
 
+    /**
+     * Add playlist controller
+     * @param businessLogicPlaylist
+     * @param viewsController
+     * @param addPlaylistView
+     * @param playlistController
+     */
     public AddPlaylistController(BusinessLogicPlayList businessLogicPlaylist, ViewsController viewsController, AddPlaylistView addPlaylistView, PlaylistController playlistController) {
         this.businessLogicPlaylist = businessLogicPlaylist;
         this.viewsController = viewsController;
@@ -21,6 +28,10 @@ public class AddPlaylistController implements ActionListener {
         this.playlistController = playlistController;
     }
 
+    /**
+     * Action performed
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(AddPlaylistView.ADD_PLAYLIST_COMMAND)) {

@@ -19,14 +19,25 @@ public class AddPlaylistView {
     private GridBagConstraints c;
     private Font fuenteTitol, fuentePetit;
 
+    /**
+     * Getter del nombre de la playlist
+     * @return
+     */
     public String getPlaylistName() {
         return jTFPlaylistNameText.getText();
     }
 
+    /**
+     * Getter del panel de añadir playlist
+     * @return
+     */
     public JPanel getPanelAddSong() {
         return panelAddPlaylist;
     }
 
+    /**
+     * Añadir playlist view
+     */
     public AddPlaylistView() {
         setupView();
         setupFonts();
@@ -111,14 +122,25 @@ public class AddPlaylistView {
         panelAddPlaylist.add(buttonAdd, c);
     }
 
+    /**
+     * Añadir controlador de la playlist
+     * @param actionListener
+     */
     public void addPlaylistController(ActionListener actionListener) {
         buttonAdd.addActionListener(actionListener);
     }
 
+    /**
+     * Añadir controlador de volver a la playlist
+     * @param actionListener
+     */
     public void backPlaylistController(ActionListener actionListener) {
         buttonBack.addActionListener(actionListener);
     }
 
+    /**
+     * Mostrar error de nombre repetido
+     */
     public void repeatPlaylistNameError() {
         JOptionPane.showMessageDialog(panelAddPlaylist,
                 "Ya existe una playlist con ese nombre. Por favor, ingrese otro nombre.",

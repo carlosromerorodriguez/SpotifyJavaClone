@@ -21,6 +21,9 @@ public class PlaylistView extends JFrame {
     private final JButton optionsButton;
     private PlayListViewListener playListViewListener;
 
+    /**
+     * Constructor de la vista de playlists.
+     */
     public PlaylistView() {
         data = new ArrayList<>();
 
@@ -99,10 +102,18 @@ public class PlaylistView extends JFrame {
         table.setDefaultRenderer(Object.class, centerRenderer);
     }
 
+    /**
+     * Getter de la vista.
+     * @return
+     */
     public JPanel getContentPane() {
         return contentPane;
     }
 
+    /**
+     * Devuelve la playlist seleccionada.
+     * @return
+     */
     public String getSelectedPlaylistName() {
         int row = table.getSelectedRow();
         if (row == -1) {
@@ -111,6 +122,10 @@ public class PlaylistView extends JFrame {
         return (data.get(row).getName());
     }
 
+    /**
+     * Setea los datos de la playlist.
+     * @param playlists
+     */
     public void setData(ArrayList<Playlist> playlists) {
         data = playlists;
         tableModel.setRowCount(0);
@@ -130,14 +145,26 @@ public class PlaylistView extends JFrame {
         return title.toString().trim();
     }
 
+
+    /**
+     * Getter del boton de opciones.
+     * @return
+     */
     public JButton getOptionsButton() {
         return optionsButton;
     }
 
+    /**
+     * Setea el listener de la vista.
+     * @param playListViewListener
+     */
     public void setListener(PlayListViewListener playListViewListener) {
         this.playListViewListener = playListViewListener;
     }
 
+    /**
+     * Dialogo de opciones de playlist.
+     */
     public void showOptionsDialog() {
         String[] options = {"Crear playlist", "Eliminar playlist"};
         int choice = JOptionPane.showOptionDialog(contentPane, "Seleccione una opción", "Opciones Playlist", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
@@ -149,6 +176,10 @@ public class PlaylistView extends JFrame {
         }
     }
 
+    /**
+     * Getter de la tabla.
+     * @return
+     */
     public Component getTable() {
         return table;
     }

@@ -19,12 +19,22 @@ public class SignInController implements ActionListener {
 
     private final SignInView signInView;
 
+    /**
+     * Sign in controller
+     * @param signInView
+     * @param businessLogicUser
+     * @param viewsController
+     */
     public SignInController(SignInView signInView, BusinessLogicUser businessLogicUser, ViewsController viewsController){
         this.signInView = signInView;
         this.businessLogicUser = businessLogicUser;
         this.viewsController = viewsController;
     }
 
+    /**
+     * Action performed
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(SignInView.LOGIN_COMMAND)) {

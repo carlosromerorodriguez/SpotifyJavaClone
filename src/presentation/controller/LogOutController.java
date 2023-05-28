@@ -10,6 +10,11 @@ public class LogOutController implements ActionListener {
     private final LogOutView logOutView;
     private final ViewsController viewsController;
 
+    /**
+     * Log out controller
+     * @param logoutView
+     * @param viewsController
+     */
     public LogOutController(LogOutView logoutView, ViewsController viewsController){
         this.logOutView = logoutView;
         this.viewsController = viewsController;

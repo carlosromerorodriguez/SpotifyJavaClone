@@ -12,12 +12,22 @@ public class DeleteUserController implements ActionListener {
     private final DeleteUserView deleteUserView;
     private final ViewsController viewsController;
 
+    /**
+     * Delete user controller
+     * @param businessLogicUser
+     * @param deleteUserView
+     * @param viewsController
+     */
     public DeleteUserController(BusinessLogicUser businessLogicUser, DeleteUserView deleteUserView, ViewsController viewsController){
         this.businessLogicUser = businessLogicUser;
         this.deleteUserView = deleteUserView;
         this.viewsController = viewsController;
     }
 
+    /**
+     * Action performed
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(deleteUserView.DELETE_COMMAND)) {

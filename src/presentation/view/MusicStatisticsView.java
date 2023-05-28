@@ -12,6 +12,9 @@ public class MusicStatisticsView {
 
     private final JPanel contentPane;
 
+    /**
+     * Constructor de la vista de estadísticas.
+     */
     public MusicStatisticsView() {
         data = new HashMap<>();
 
@@ -38,6 +41,10 @@ public class MusicStatisticsView {
         return contentPane;
     }
 
+    /**
+     * Actualitza les dades de la vista.
+     * @param statistics
+     */
     public void setData(HashMap<String, Integer> statistics) {
         data = statistics;
         contentPane.removeAll();

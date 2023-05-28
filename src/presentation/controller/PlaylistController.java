@@ -13,6 +13,14 @@ public class PlaylistController implements MouseListener, PlayListViewListener {
     private final BusinessLogicPlayList businessLogicPlayList;
     private final ViewsController viewsController;
     private final PlaylistSongsController playlistSongsController;
+
+    /**
+     * Playlist controller
+     * @param playlistView
+     * @param businessLogicPlayList
+     * @param viewsController
+     * @param playlistSongsController
+     */
     public PlaylistController(PlaylistView playlistView, BusinessLogicPlayList businessLogicPlayList, ViewsController viewsController, PlaylistSongsController playlistSongsController) {
         this.playlistView = playlistView;
         this.businessLogicPlayList = businessLogicPlayList;
@@ -23,20 +31,33 @@ public class PlaylistController implements MouseListener, PlayListViewListener {
         playlistView.getOptionsButton().addActionListener(e -> playlistView.showOptionsDialog());
     }
 
+    /**
+     * Load playlists from API
+     */
     public void loadPlaylistsFromApi() {
         playlistView.setData(businessLogicPlayList.getPlaylistsWithTheUserFirst());
     }
 
+    /**
+     * Add playlist
+     */
     @Override
     public void onAddPlaylist() {
         viewsController.setAddPlaylistView();
     }
 
+    /**
+     * Delete playlist
+     */
     @Override
     public void onDeletePlaylist() {
         viewsController.setDeletePlaylistView();
     }
 
+    /**
+     * onMouseClick
+     * @param e the event to be processed
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 1) {

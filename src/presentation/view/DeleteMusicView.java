@@ -16,9 +16,18 @@ public class DeleteMusicView extends JFrame {
     private final JPanel panelDeleteSong;
     private final JButton buttonDelete;
     private final JButton buttonBack;
+
+    /**
+     * Getter titulo de la cancion
+     * @return
+     */
     public String getTitle() {
         return jTFSongTitle.getText();
     }
+
+    /**
+     * Constructor de la vista de eliminar cancion
+     */
     public DeleteMusicView() {
         panelDeleteSong = new JPanel(new GridBagLayout());
         panelDeleteSong.setBackground(APP_BACKGROUND.getColor());
@@ -89,34 +98,61 @@ public class DeleteMusicView extends JFrame {
         panelDeleteSong.add(new JLabel(), c);
 
     }
+
+    /**
+     * Link controlador de la vista de eliminar cancion
+     * @param actionListener
+     */
     public void deleteMusicController(ActionListener actionListener) {
         buttonDelete.addActionListener(actionListener);
     }
+
+    /**
+     * Confirmar eliminar cancion
+     * @return
+     */
     public String confirmDelete() {
         int response = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar esta canción permanentemente?");
         return (response == JOptionPane.YES_OPTION) ? CONFIRM_COMMAND : BACK_FROM_DELETE;
     }
 
+    /**
+     * Getter panel de eliminar cancion
+     * @return
+     */
     public JPanel getPanelDeleteSong() {
         return panelDeleteSong;
     }
 
+    /**
+     * Link controlador de la vista de eliminar cancion
+     * @param deleteMusicController
+     */
     public void backButtonListener(DeleteMusicController deleteMusicController) {
         buttonBack.addActionListener(deleteMusicController);
     }
 
+    /**
+     * Error de titulo de cancion
+     */
     public void wrongTitleError() {
         JOptionPane.showMessageDialog(this,
                 "The title you entered is not valid. Please ensure it meets the requirements and try again.",
                 "Invalid Title", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Exito al eliminar cancion
+     */
     public void successfulDelete() {
         JOptionPane.showMessageDialog(this,
                 "The song has been successfully deleted.",
                 "Successful Delete", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**
+     * Error al eliminar cancion
+     */
     public void unsuccessfulDelete() {
         JOptionPane.showMessageDialog(this,
                 "The song could not be deleted.",

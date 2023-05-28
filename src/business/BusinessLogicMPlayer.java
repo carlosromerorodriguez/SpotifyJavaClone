@@ -19,14 +19,25 @@ public class BusinessLogicMPlayer {
     private Thread repeatThread;
     private volatile boolean isRepeatThreadRunning;
 
+    /**
+     * get current song duration
+     * @return
+     */
     public int getDuration() {
         return player.getDuration();
     }
 
+    /**
+     * get current song time
+     * @return
+     */
     public int getSongTime() {
         return player.getSongTime();
     }
 
+    /**
+     * constructor
+     */
     public BusinessLogicMPlayer() {
         isIndividualRepetition = false;
         isGlobalRepetition = false;
@@ -38,11 +49,18 @@ public class BusinessLogicMPlayer {
         this.whichSong = whichSong;
     }
 
+    /**
+     * set songs
+     * @param songs
+     */
     public void setSongs(List<Song> songs) {
         this.songs.clear();
         this.songs.addAll(songs);
     }
 
+    /**
+     * Play pause thread
+     */
     public void playPauseMusic() {
         if (player == null) {
             isPaused = false;
@@ -72,21 +90,33 @@ public class BusinessLogicMPlayer {
         }
     }
 
+    /**
+     * No music repetition
+     */
     public void noMusicRepetition() {
         isIndividualRepetition = false;
         isGlobalRepetition = false;
     }
 
+    /**
+     * Individual music repetition
+     */
     public void individualRepeatMusic() {
         isIndividualRepetition = true;
         isGlobalRepetition = false;
     }
 
+    /**
+     * Global music repetition
+     */
     public void globalRepeatMusic() {
         isIndividualRepetition = false;
         isGlobalRepetition = true;
     }
 
+    /**
+     * Stop music
+     */
     public void stopMusic() {
         if (player != null) {
             player.stop();
@@ -94,6 +124,9 @@ public class BusinessLogicMPlayer {
         }
     }
 
+    /**
+     * Previous music
+     */
     public void previousMusic() {
         // TODO: Tener la lista de canciones y avanzar a la anterior
         this.stopMusic();
@@ -101,6 +134,9 @@ public class BusinessLogicMPlayer {
         playPauseMusic();
     }
 
+    /**
+     * Next music
+     */
     public void nextMusic() {
         // TODO: Tener la lista de canciones y avanzar a la siguiente
         this.stopMusic();
@@ -108,10 +144,17 @@ public class BusinessLogicMPlayer {
         playPauseMusic();
     }
 
+    /**
+     * Devuelve el indice del icono de play/pause
+     * @return
+     */
     public int getPlayIconIndex() {
         return isPaused ? 0 : 1;
     }
 
+    /**
+     * Check repetition
+     */
     public void checkRepetition() {
         if (player != null) {
             if (player.isFinished()) {
@@ -124,6 +167,9 @@ public class BusinessLogicMPlayer {
         }
     }
 
+    /**
+     * Update repeat mode
+     */
     public void updateRepeatMode() {
         if (isIndividualRepetition) {
             this.globalRepeatMusic();
@@ -134,6 +180,10 @@ public class BusinessLogicMPlayer {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getRepeatIconIndex() {
         if (isIndividualRepetition) {
             return 1;
@@ -153,6 +203,9 @@ public class BusinessLogicMPlayer {
         player.play(0);
     }
 
+    /**
+     * Play music
+     */
     public void playMusic() {
         if (player != null) {
             player.stop();
@@ -181,6 +234,10 @@ public class BusinessLogicMPlayer {
         player.play(0);
     }
 
+    /**
+     * Select song
+     * @param songName
+     */
     public void selectSong(String songName) {
         for (int i = 0; i < songs.size(); i++) {
             if (songs.get(i).getTitle().equalsIgnoreCase(songName)) {
@@ -190,14 +247,26 @@ public class BusinessLogicMPlayer {
         }
     }
 
+    /**
+     * Check if is playing
+     * @return
+     */
     public boolean isPlaying() {
         return player != null && !player.isPaused();
     }
 
+    /**
+     * Get song name
+     * @return
+     */
     public Object getSongName() {
         return songs.get(whichSong).getTitle();
     }
 
+    /**
+     * Get artist name
+     * @return
+     */
     public Object getArtistName() {
         return songs.get(whichSong).getAuthor();
     }

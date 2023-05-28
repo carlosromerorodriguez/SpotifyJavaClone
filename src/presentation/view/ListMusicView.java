@@ -21,6 +21,9 @@ public class ListMusicView extends JFrame {
     private final JButton optionsButton;
     private ListMusicViewListener listener;
 
+    /**
+     * Constructor de la la vista del repertorio de canciones
+     */
     public ListMusicView() {
         panelList = new JPanel(new GridBagLayout());
         panelList.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
@@ -117,6 +120,10 @@ public class ListMusicView extends JFrame {
         table.setDefaultRenderer(Object.class, centerRenderer);
     }
 
+    /**
+     * setea las canciones en la tabla
+     * @param songs
+     */
     public void setSongs(List<Song> songs) {
         tableModel.setRowCount(0);
         for (Song song : songs) {
@@ -125,6 +132,11 @@ public class ListMusicView extends JFrame {
         }
     }
 
+    /**
+     * Crea un titulo con la primera letra de cada palabra en mayuscula
+     * @param text
+     * @return
+     */
     private static String title(String text) {
         String[] words = text.split(" ");
         StringBuilder title = new StringBuilder();
@@ -134,30 +146,58 @@ public class ListMusicView extends JFrame {
         return title.toString().trim();
     }
 
+    /**
+     * Devuelve boton de opciones
+     * @return
+     */
     public JButton getOptionsButton() {
         return optionsButton;
     }
 
+    /**
+     * Devuelve el panel de la lista
+     * @return
+     */
     public JPanel getPanelList() {
         return panelList;
     }
+
+    /**
+     * Devuelve el texto del campo de busqueda
+     * @return
+     */
     public String getSearchText() {
         return searchField.getText();
     }
 
+    /**
+     * Añade el action listener al boton de opciones
+     * @return
+     */
     public void actionLinker(MouseListener mouseListener){
         table.addMouseListener(mouseListener);
     }
 
+    /**
+     * Añade el action listener
+     * @return
+     */
     public void setListener(ListMusicViewListener listener) {
         this.listener = listener;
     }
 
+    /**
+     * Setea el listener del campo de busqueda
+     * @param actionListener
+     */
     public void setSearchFieldListener(ActionListener actionListener) {
         searchField.addActionListener(actionListener);
     }
 
 
+    /**
+     * Muestra el dialogo de opciones
+     */
     public void showOptionsDialog() {
         String[] options = {"Añadir música", "Eliminar música"};
         int choice = JOptionPane.showOptionDialog(this, "Seleccione una opción", "Opciones Música", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);

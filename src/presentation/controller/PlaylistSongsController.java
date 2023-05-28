@@ -15,6 +15,17 @@ public class PlaylistSongsController implements PlaylistSongsViewListener {
     private final DeleteSongFromPlaylistView deleteSongFromPlaylistView;
     private final BusinessLogicMusic businessLogicMusic;
     private final PlayMusicController playMusicController;
+
+    /**
+     * Playlist songs controller
+     * @param playlistSongsView
+     * @param businessLogicPlayList
+     * @param viewsController
+     * @param addSongToPlaylistView
+     * @param deleteSongFromPlaylistView
+     * @param businessLogicMusic
+     * @param playMusicController
+     */
     public PlaylistSongsController(PlaylistSongsView playlistSongsView, BusinessLogicPlayList businessLogicPlayList, ViewsController viewsController, AddSongToPlaylistView addSongToPlaylistView, DeleteSongFromPlaylistView deleteSongFromPlaylistView, BusinessLogicMusic businessLogicMusic, PlayMusicController playMusicController) {
         this.playlistSongsView = playlistSongsView;
         this.businessLogicPlayList = businessLogicPlayList;
@@ -51,11 +62,18 @@ public class PlaylistSongsController implements PlaylistSongsViewListener {
         });
     }
 
+    /**
+     * Load songs from api
+     * @param playlistName
+     */
     public void loadSongsFromApi(String playlistName) {
         playlistSongsView.setSongs(businessLogicPlayList.getSongsFromPlaylist(playlistName));
         playlistSongsView.deactivateAddButton(businessLogicPlayList.isPlaylistFromUser(playlistName));
     }
 
+    /**
+     * On add song
+     */
     @Override
     public void onAddSong() {
         viewsController.setAddSongToPlaylistView();
@@ -63,12 +81,19 @@ public class PlaylistSongsController implements PlaylistSongsViewListener {
         addSongToPlaylistView.setSongs(businessLogicMusic.listMusic());
     }
 
+    /**
+     * On delete song
+     */
     @Override
     public void onDeleteSong() {
         viewsController.setDeleteSongFromPlaylistView();
         deleteSongFromPlaylistView.setPlaylistName(playlistSongsView.getPlaylistName());
     }
 
+    /**
+     * Set playlist name
+     * @param selectedPlaylistName
+     */
     public void setPlaylistName(String selectedPlaylistName) {
         playlistSongsView.setPlaylistName(selectedPlaylistName);
     }

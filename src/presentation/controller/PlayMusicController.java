@@ -14,6 +14,11 @@ public class PlayMusicController implements ActionListener {
     private final BusinessLogicMPlayer businessLogicMPlayer;
     private final Timer timer;
 
+    /**
+     * Play music controller
+     * @param playMusicView
+     * @param businessLogicMPlayer
+     */
     public PlayMusicController(PlayMusicView playMusicView, BusinessLogicMPlayer businessLogicMPlayer) {
         this.playMusicView = playMusicView;
         this.businessLogicMPlayer = businessLogicMPlayer;
@@ -39,12 +44,21 @@ public class PlayMusicController implements ActionListener {
         return String.format("%02d:%02d", minutes, seconds);
     }
 
+    /**
+     * Set songs to mplayer
+     * @param songs
+     * @param b
+     */
     public void setSongsToMPlayer(List<Song> songs, boolean b) {
         businessLogicMPlayer.setSongs(songs);
         playMusicView.getNextMusicButton().setEnabled(b);
         playMusicView.getPrevMusicButton().setEnabled(b);
     }
 
+    /**
+     * Play song
+     * @param songName
+     */
     public void playSong(String songName) {
         businessLogicMPlayer.selectSong(songName);
         businessLogicMPlayer.playMusic();
@@ -54,6 +68,10 @@ public class PlayMusicController implements ActionListener {
         this.timer.start();
     }
 
+    /**
+     * Action performed
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(PlayMusicView.PLAY_PAUSE_MUSIC_COMMAND)) {

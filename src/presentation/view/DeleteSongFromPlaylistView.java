@@ -18,14 +18,25 @@ public class DeleteSongFromPlaylistView extends JFrame {
     private final JButton buttonBack;
     private final JLabel deleteSongTitle;
 
+    /**
+     * Getter del titulo de la cancion
+     * @return
+     */
     public String getTitle() {
         return jTFSongTitleText.getText();
     }
 
+    /**
+     * Getter del panel de eliminar cancion
+     * @return
+     */
     public String getPlaylistName() {
         return jTFPlaylistNameText.getText();
     }
 
+    /**
+     * constructor de la vista de eliminar cancion
+     */
     public DeleteSongFromPlaylistView() {
         panelDeleteSong = new JPanel(new GridBagLayout());
         panelDeleteSong.setBackground(UIPalette.COLOR_PRIMARIO.getColor());
@@ -87,26 +98,46 @@ public class DeleteSongFromPlaylistView extends JFrame {
         panelDeleteSong.add(buttonBack, c);
     }
 
+    /**
+     * Setter del nombre de la playlist
+     * @param jTFPlaylistNameText
+     */
     public void setPlaylistName(String jTFPlaylistNameText) {
         this.jTFPlaylistNameText.setText(jTFPlaylistNameText);
         deleteSongTitle.setText("Delete Song From Playlist " + jTFPlaylistNameText);
     }
 
+    /**
+     * Getter del panel de eliminar cancion
+     * @return
+     */
     public JPanel getPanel() {
         return panelDeleteSong;
     }
 
+    /**
+     * Setter del controlador de eliminar cancion
+     * @param deleteSongFromPlaylistController
+     */
     public void setListener(DeleteSongFromPlaylistController deleteSongFromPlaylistController) {
         buttonDelete.addActionListener(deleteSongFromPlaylistController);
         buttonBack.addActionListener(deleteSongFromPlaylistController);
     }
 
+
+    /**
+     * Mensaje de exito
+     * */
     public void successfulDeleteSong() {
         JOptionPane.showMessageDialog(this,
                 "The song was successfully deleted from the playlist.",
                 "Successful Delete", JOptionPane.INFORMATION_MESSAGE);
     }
 
+
+    /**
+     * Mensaje de error de cancion no existente
+     */
     public void notExistingSongError() {
         JOptionPane.showMessageDialog(this,
                 "The song you entered does not exist in the playlist. Please check the song title and try again.",

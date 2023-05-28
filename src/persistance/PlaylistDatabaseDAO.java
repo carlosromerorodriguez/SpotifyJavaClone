@@ -125,6 +125,12 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
         return false;
     }
 
+    /**
+     * Añade una canción a una playlist
+     * @param playlistName
+     * @param song
+     * @throws DuplicateKeyException
+     */
     public void addSongToPlaylist(String playlistName, Song song) throws DuplicateKeyException {
         String query = "INSERT INTO playlist_cancion (playlist, cancion) VALUES ((SELECT id FROM playlist WHERE nom = ? LIMIT 1), (SELECT id FROM cancion WHERE nom = ? LIMIT 1))";
         try {
@@ -141,6 +147,12 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
         }
     }
 
+    /**
+     * Comprueba si la playlist es del mismo usuario
+     * @param playlistName
+     * @param userNameFromFile
+     * @return
+     */
     public boolean isFromSameOwner(String playlistName, String userNameFromFile) {
         String query = "SELECT * FROM playlist WHERE nom = ? AND creador = ?";
         try {
@@ -155,6 +167,11 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
         return false;
     }
 
+    /**
+     * Ordena las canciones de una playlist alfabéticamente
+     * @param playlistName
+     * @return
+     */
     public List<Song> sortSongsAlphabetically(String playlistName) {
         List<Song> songs = new ArrayList<>();
         String query = "SELECT c.* FROM cancion c INNER JOIN playlist_cancion pc ON c.id = pc.cancion INNER JOIN playlist p ON pc.playlist = p.id WHERE p.nom = ? ORDER BY c.nom ASC";
@@ -179,6 +196,11 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
         return songs;
     }
 
+    /**
+     * Ordena las canciones de una playlist por género
+     * @param playlistName
+     * @return
+     */
     public List<Song> sortSongsByGenre(String playlistName) {
         List<Song> songs = new ArrayList<>();
         String query = "SELECT c.* FROM cancion c INNER JOIN playlist_cancion pc ON c.id = pc.cancion INNER JOIN playlist p ON pc.playlist = p.id WHERE p.nom = ? ORDER BY c.genere ASC";

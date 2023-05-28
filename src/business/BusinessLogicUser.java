@@ -9,10 +9,27 @@ import java.io.IOException;
 public class BusinessLogicUser {
     private final UserDAO userDao;
 
+    /**
+     * Constructor
+     * @param userDao
+     */
     public BusinessLogicUser(UserDAO userDao) {
         this.userDao = userDao;
     }
 
+    /**
+     * Register
+     * @param email
+     * @param username
+     * @param firstPassword
+     * @param secondPassword
+     * @return
+     * @throws EmailException
+     * @throws PasswordException
+     * @throws PasswordMismatchException
+     * @throws UsernameException
+     * @throws UserAlreadyExistsException
+     */
     public boolean registerUser(String email, String username, String firstPassword, String secondPassword) throws EmailException, PasswordException, PasswordMismatchException, UsernameException, UserAlreadyExistsException {
         if (username.isEmpty() || username.isBlank()) { throw new UsernameException(); }
         if (!checkEmail(email)) { throw new EmailException(); }
@@ -30,10 +47,25 @@ public class BusinessLogicUser {
         return false;
     }
 
+    /**
+     * Login
+     * @param email_user
+     * @param password
+     * @throws UsernameException
+     * @throws PasswordException
+     * @throws IOException
+     */
     public void loginUser(String email_user, String password) throws UsernameException, PasswordException, IOException {
         validateInput(email_user, password);
     }
 
+    /**
+     * Checks the inputs of the user
+     * @param email_user
+     * @param password
+     * @throws UsernameException
+     * @throws PasswordException
+     */
     private void validateInput(String email_user, String password) throws UsernameException, PasswordException {
         if (email_user == null || email_user.trim().isEmpty() || !checkUserExists(email_user, password)) {
             throw new UsernameException();
@@ -45,6 +77,12 @@ public class BusinessLogicUser {
 
     }
 
+    /**
+     * Checks if the user exists
+     * @param s
+     * @param password
+     * @return
+     */
     private boolean checkUserExists(String s, String password) {
         if (s.contains("@")) {
             if (userDao.checkUserByEmail(s, password)) {
@@ -86,10 +124,18 @@ public class BusinessLogicUser {
         return (firstPassword.equals(secondPassword));
     }
 
+    /**
+     * Deletes the user
+     * @param passwordText
+     * @return
+     */
     public boolean deleteUser(String passwordText) {
         return userDao.deleteUser(userDao.getUserNameFromFile(), passwordText);
     }
 
+    /**
+     * Deletes the user info file
+     */
     public void cleanUserInfoFile() {
         userDao.writeUserToTxtFile("");
     }

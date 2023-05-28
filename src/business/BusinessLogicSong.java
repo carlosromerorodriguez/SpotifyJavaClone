@@ -16,11 +16,33 @@ public class BusinessLogicSong {
     private final StatisticsDatabaseDAO statisticsDatabaseDAO;
     private final UserDatabaseDAO userDatabaseDAO;
 
+    /**
+     * Constructor
+     * @param songDAO
+     * @param statisticsDatabaseDAO
+     * @param userDatabaseDAO
+     */
     public BusinessLogicSong(SongDAO songDAO, StatisticsDatabaseDAO statisticsDatabaseDAO, UserDatabaseDAO userDatabaseDAO) {
         this.songDAO = songDAO;
         this.statisticsDatabaseDAO = statisticsDatabaseDAO;
         this.userDatabaseDAO = userDatabaseDAO;
     }
+
+    /**
+     * Register song
+     * @param title
+     * @param genre
+     * @param album
+     * @param author
+     * @param file
+     * @return
+     * @throws TitleException
+     * @throws AuthorException
+     * @throws AlbumException
+     * @throws GenreException
+     * @throws UrlException
+     * @throws RepeatedSongNameException
+     */
     public boolean registerSong(String title, String genre, String album, String author, File file) throws TitleException, AuthorException, AlbumException, GenreException, UrlException, RepeatedSongNameException {
         if (title.isEmpty() || title.isBlank()) { throw new TitleException(); }
         if (author.isEmpty() || author.isBlank()) { throw new AuthorException(); }
@@ -35,11 +57,21 @@ public class BusinessLogicSong {
         return ("data/music/" + title + ".mp3");
     }
 
+    /**
+     * Delete song
+     * @param title
+     * @return
+     * @throws TitleException
+     */
     public boolean deleteSong(String title) throws TitleException {
         if (title.isEmpty() || title.isBlank()) { throw new TitleException();}
         return songDAO.deleteSong(title, userDatabaseDAO.getUserNameFromFile());
     }
 
+    /**
+     * Get statistics
+     * @return
+     */
     public HashMap<String, Integer> getStatistics() {
         return statisticsDatabaseDAO.getStatistics();
     }

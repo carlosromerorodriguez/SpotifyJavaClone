@@ -10,10 +10,18 @@ import java.awt.event.ActionListener;
 public class WelcomeController implements ActionListener {
     private final ViewsController viewsController;
 
+    /**
+     * Welcome controller
+     * @param viewsController
+     */
     public WelcomeController(ViewsController viewsController){
         this.viewsController = viewsController;
     }
 
+    /**
+     * Action performed
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals(WelcomeView.REGISTER_VIEW_COMMAND)){

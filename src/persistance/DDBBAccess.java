@@ -13,6 +13,10 @@ public class DDBBAccess {
     private static String URL;
     private Connection conn;
 
+    /**
+     * Constructor
+     * @param configDatabaseDAO Database access
+     */
     public DDBBAccess(ConfigDatabaseDAO configDatabaseDAO) {
         try {
             getInfoFromConfig(configDatabaseDAO);
@@ -29,6 +33,10 @@ public class DDBBAccess {
         URL = "jdbc:mysql://" + ddbbInfo.getHost() + "/" + ddbbInfo.getName();
     }
 
+    /**
+     * get the connection
+     * @return
+     */
     public Connection getConnection() {
         return conn;
     }

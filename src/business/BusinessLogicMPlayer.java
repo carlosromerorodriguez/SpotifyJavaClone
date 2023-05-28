@@ -21,7 +21,7 @@ public class BusinessLogicMPlayer {
 
     /**
      * get current song duration
-     * @return
+     * @return duration in seconds
      */
     public int getDuration() {
         return player.getDuration();
@@ -29,7 +29,7 @@ public class BusinessLogicMPlayer {
 
     /**
      * get current song time
-     * @return
+     * @return time in seconds
      */
     public int getSongTime() {
         return player.getSongTime();
@@ -45,13 +45,9 @@ public class BusinessLogicMPlayer {
         whichSong = 0;
     }
 
-    public void setWhichSong(int whichSong) {
-        this.whichSong = whichSong;
-    }
-
     /**
      * set songs
-     * @param songs
+     * @param songs songs to set to the player
      */
     public void setSongs(List<Song> songs) {
         this.songs.clear();
@@ -194,15 +190,6 @@ public class BusinessLogicMPlayer {
         }
     }
 
-    public void continueReproducingWithTheNewSong() {
-        if (player != null) {
-            player.stop();
-            player = null;
-        }
-        player = new MPlayer(songs.get(whichSong).getUrl());
-        player.play(0);
-    }
-
     /**
      * Play music
      */
@@ -257,7 +244,7 @@ public class BusinessLogicMPlayer {
 
     /**
      * Get song name
-     * @return
+     * @return song name of the song
      */
     public Object getSongName() {
         return songs.get(whichSong).getTitle();
@@ -265,13 +252,10 @@ public class BusinessLogicMPlayer {
 
     /**
      * Get artist name
-     * @return
+     * @return artist name of the song
      */
     public Object getArtistName() {
         return songs.get(whichSong).getAuthor();
     }
 
-    public boolean isGlobalRepetition() {
-        return isGlobalRepetition;
-    }
 }

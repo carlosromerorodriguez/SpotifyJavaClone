@@ -1,11 +1,7 @@
 package persistance;
 
-import business.entities.Music;
 import business.entities.Song;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -71,15 +67,6 @@ public class SongDatabaseDAO implements SongDAO {
         }
 
         return songList;
-    }
-
-    /**
-     * @param song Song title to search in the database
-     * @return Song from the database
-     */
-    @Override
-    public boolean updateSong(Song song) {
-        return false;
     }
 
     /**

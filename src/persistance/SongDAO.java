@@ -9,8 +9,6 @@ import java.util.List;
 public interface SongDAO {
     boolean addSong(Song song);
     List<Song> readSongList();
-    boolean updateSong(Song song);
     boolean deleteSong(String title, String owner);
-
     List<Song> searchAllMusicFromSearchText(String searchText);
 }

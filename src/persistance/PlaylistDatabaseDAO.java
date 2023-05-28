@@ -46,11 +46,6 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
     }
 
     @Override
-    public boolean removePlaylist() {
-        return false;
-    }
-
-    @Override
     public ArrayList<Playlist> getPlaylistsWithTheUserFirst(String userNameFromFile) {
         ArrayList<Playlist> playlists = new ArrayList<>();
         String query = "SELECT * FROM playlist ORDER BY CASE WHEN creador = ? THEN 0 ELSE 1 END, creador";
@@ -127,8 +122,8 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
 
     /**
      * Añade una canción a una playlist
-     * @param playlistName
-     * @param song
+     * @param playlistName Nombre de la playlist
+     * @param song Canción a añadir a la playlist
      * @throws DuplicateKeyException
      */
     public void addSongToPlaylist(String playlistName, Song song) throws DuplicateKeyException {
@@ -149,8 +144,8 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
 
     /**
      * Comprueba si la playlist es del mismo usuario
-     * @param playlistName
-     * @param userNameFromFile
+     * @param playlistName Nombre de la playlist
+     * @param userNameFromFile Nombre del usuario
      * @return
      */
     public boolean isFromSameOwner(String playlistName, String userNameFromFile) {

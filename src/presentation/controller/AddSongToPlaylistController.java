@@ -66,8 +66,11 @@ public class AddSongToPlaylistController implements MouseListener {
 
     private void addSongToPlaylist(String title, String genre, String author, String album, String owner) {
         try {
-            businessLogicPlayList.addSongToPlaylist(addSongToPlaylistView.getPlaylistName(), new Song(title, genre, author, album, owner));
-            addSongToPlaylistView.showSongAddedToPlaylist();
+           if (businessLogicPlayList.addSongToPlaylist(addSongToPlaylistView.getPlaylistName(), new Song(title, genre, author, album, owner))) {
+               addSongToPlaylistView.showSongAddedToPlaylist();
+           } else {
+               addSongToPlaylistView.showSongNotAddedToPlaylist();
+           }
         } catch (DuplicateKeyException e) {
             addSongToPlaylistView.showDuplicateSongError();
         }

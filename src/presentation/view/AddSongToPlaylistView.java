@@ -114,4 +114,8 @@ public class AddSongToPlaylistView extends JFrame {
     public void showSongNotSelectedError() {
         JOptionPane.showMessageDialog(this, "Selecciona una canción", "Error", JOptionPane.ERROR_MESSAGE);
     }
+
+    public void showSongNotAddedToPlaylist() {
+        JOptionPane.showMessageDialog(this, "No puedes añadir canciones a una playlist que no es la tuya", "Error", JOptionPane.ERROR_MESSAGE);
+    }
 }

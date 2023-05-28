@@ -31,8 +31,12 @@ public class BusinessLogicPlayList {
         return playlistDatabaseDAO.getSongsFromPlaylist(playlistName, userDatabaseDAO.getUserNameFromFile());
     }
 
-    public void addSongToPlaylist(String playlistName, Song song) throws DuplicateKeyException {
-        playlistDatabaseDAO.addSongToPlaylist(playlistName, song);
+    public boolean addSongToPlaylist(String playlistName, Song song) throws DuplicateKeyException {
+        if (playlistDatabaseDAO.isFromSameOwner(playlistName, userDatabaseDAO.getUserNameFromFile())) {
+            playlistDatabaseDAO.addSongToPlaylist(playlistName, song);
+            return true;
+        }
+        return false;
     }
 
     public boolean deletePlaylist(String playlistName) {

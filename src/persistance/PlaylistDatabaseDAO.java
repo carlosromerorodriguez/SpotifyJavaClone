@@ -68,21 +68,6 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
     }
 
     @Override
-    public boolean addSongPlaylist(Playlist playlist, Song song) {
-        return false;
-    }
-
-    @Override
-    public boolean removeSongPlaylist(Playlist playlist, Song song) {
-        return false;
-    }
-
-    @Override
-    public boolean removeSongAllPlaylist(Song song) {
-        return false;
-    }
-
-    @Override
     public List<Song> getSongsFromPlaylist(String playlistName, String userName) {
         List<Song> songs = new ArrayList<>();
         String query = "SELECT c.* FROM cancion c INNER JOIN playlist_cancion pc ON c.id = pc.cancion INNER JOIN playlist p ON pc.playlist = p.id WHERE p.nom = ? AND p.creador = ?";
@@ -115,8 +100,7 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
             PreparedStatement statement = ddbbAccess.getConnection().prepareStatement(query);
             statement.setString(1, playlistName);
             statement.setString(2, userNameFromFile);
-            statement.executeUpdate();
-            return true;
+            return (statement.executeUpdate() > 0);
         } catch (SQLException e) {
             System.err.println("Error al eliminar la playlist: " + e.getMessage());
         }
@@ -152,5 +136,19 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
                 throw new DuplicateKeyException();
             }
         }
+    }
+
+    public boolean isFromSameOwner(String playlistName, String userNameFromFile) {
+        String query = "SELECT * FROM playlist WHERE nom = ? AND creador = ?";
+        try {
+            PreparedStatement statement = ddbbAccess.getConnection().prepareStatement(query);
+            statement.setString(1, playlistName);
+            statement.setString(2, userNameFromFile);
+            ResultSet resultSet = statement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException e) {
+            System.err.println("Error al comprobar si la playlist es del mismo usuario: " + e.getMessage());
+        }
+        return false;
     }
 }

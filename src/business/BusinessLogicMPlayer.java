@@ -201,4 +201,8 @@ public class BusinessLogicMPlayer {
     public Object getArtistName() {
         return songs.get(whichSong).getAuthor();
     }
+
+    public boolean isGlobalRepetition() {
+        return isGlobalRepetition;
+    }
 }

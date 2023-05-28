@@ -232,4 +232,11 @@ public class PlayMusicView {
         bRepeat.addActionListener(actionListener);
         bStop.addActionListener(actionListener);
     }
+
+    public JButton getNextMusicButton() {
+        return bNext;
+    }
+    public JButton getPrevMusicButton() {
+        return bPrev;
+    }
 }

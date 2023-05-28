@@ -39,8 +39,10 @@ public class PlayMusicController implements ActionListener {
         return String.format("%02d:%02d", minutes, seconds);
     }
 
-    public void setSongsToMPlayer(List<Song> songs) {
+    public void setSongsToMPlayer(List<Song> songs, boolean b) {
         businessLogicMPlayer.setSongs(songs);
+        playMusicView.getNextMusicButton().setEnabled(b);
+        playMusicView.getPrevMusicButton().setEnabled(b);
     }
 
     public void playSong(String songName) {

@@ -44,7 +44,7 @@ public class PlaylistSongsController implements PlaylistSongsViewListener {
             public void mouseClicked(MouseEvent e) {
                 int selectedRow = playlistSongsView.getTable().getSelectedRow();
                 if (selectedRow != -1) {
-                    playMusicController.setSongsToMPlayer(businessLogicPlayList.getSongsFromPlaylist(playlistSongsView.getPlaylistName()));
+                    playMusicController.setSongsToMPlayer(businessLogicPlayList.getSongsFromPlaylist(playlistSongsView.getPlaylistName()), true);
                     playMusicController.playSong(playlistSongsView.getTable().getValueAt(selectedRow, 0).toString());
                 }
             }

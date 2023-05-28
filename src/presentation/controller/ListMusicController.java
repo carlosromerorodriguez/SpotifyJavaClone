@@ -36,7 +36,7 @@ public class ListMusicController implements MouseListener, ListMusicViewListener
 
     public void loadSongsFromApi() {
         listMusicView.setSongs(businessLogicMusic.listMusic());
-        playMusicController.setSongsToMPlayer(businessLogicMusic.listMusic());
+        playMusicController.setSongsToMPlayer(businessLogicMusic.listMusic(), false);
     }
 
     @Override

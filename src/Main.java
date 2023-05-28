@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-
+/**
+ * Main class
+ */
 public class Main {
     public static void main(String[] args) {
         try {
@@ -104,6 +106,9 @@ public class Main {
         }
     }
 
+    /**
+     * Metodo para limpiar el fichero de informacion de usuario
+     */
     private static void clearTxtFile() {
         try {
             Files.write(Paths.get("data/user/userInfo"), new byte[0], StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);

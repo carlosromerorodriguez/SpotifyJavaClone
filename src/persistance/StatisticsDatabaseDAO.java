@@ -8,10 +8,18 @@ import java.util.HashMap;
 
 public class StatisticsDatabaseDAO implements StatisticsDAO {
     private final DDBBAccess ddbbAccess;
+    /**
+     * Constructor
+     * @param ddbbAccess Database access
+     */
     public StatisticsDatabaseDAO(DDBBAccess ddbbAccess) {
         this.ddbbAccess = ddbbAccess;
     }
 
+    /**
+     * Get statistics from the database
+     * @return statistics
+     */
     @Override
     public HashMap<String, Integer> getStatistics() {
         HashMap<String, Integer> result = new HashMap<>();

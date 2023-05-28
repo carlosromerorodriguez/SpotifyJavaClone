@@ -101,6 +101,9 @@ public class UserDatabaseDAO implements UserDAO {
         return false;
     }
 
+    /**
+     * @param username Username to write to file
+     */
     @Override
     public void writeUserToTxtFile(String username) {
         try {
@@ -110,6 +113,9 @@ public class UserDatabaseDAO implements UserDAO {
         }
     }
 
+    /**
+     * @param emailUser Email to write to file
+     */
     @Override
     public void writeUserNameFromEmail(String emailUser) {
         String query = "SELECT nom FROM usuario WHERE email = ?";
@@ -125,6 +131,9 @@ public class UserDatabaseDAO implements UserDAO {
         }
     }
 
+    /**
+     * @return Username from file
+     */
     @Override
     public String getUserNameFromFile() {
         try {

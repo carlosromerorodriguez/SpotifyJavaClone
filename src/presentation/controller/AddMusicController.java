@@ -9,6 +9,9 @@ import presentation.view.ViewsController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Add music controller class
+ */
 public class AddMusicController implements ActionListener {
     private final BusinessLogicSong businessLogicSong;
     private final ViewsController viewsController;
@@ -29,6 +32,10 @@ public class AddMusicController implements ActionListener {
         this.listMusicController = listMusicController;
     }
 
+    /**
+     * Action performed
+     * @param e action event
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(AddMusicView.ADD_COMMAND)) {

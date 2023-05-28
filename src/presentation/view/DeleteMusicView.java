@@ -7,10 +7,21 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import static presentation.view.Utilities.UIPalette.APP_BACKGROUND;
-
+/**
+ * Delete music view
+ */
 public class DeleteMusicView extends JFrame {
+    /**
+     * Check if the user wants to delete a song
+     */
     public static final String DELETE_COMMAND = "DELETE_COMMAND";
+    /**
+     * Check if the user wants to go back
+     */
     public static final String BACK_FROM_DELETE = "BACK_FROM_DELETE";
+    /**
+     * Check if the user wants to confirm the command
+     */
     public static final String CONFIRM_COMMAND = "CONMIRM_COMMAND";
     private final JTextField jTFSongTitle;
     private final JPanel panelDeleteSong;

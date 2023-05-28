@@ -8,7 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.*;
-
+/**
+ * Play music controller class
+ */
 public class PlayMusicController implements ActionListener {
     private final PlayMusicView playMusicView;
     private final BusinessLogicMPlayer businessLogicMPlayer;
@@ -46,8 +48,8 @@ public class PlayMusicController implements ActionListener {
 
     /**
      * Set songs to mplayer
-     * @param songs
-     * @param b
+     * @param songs list of songs to be set
+     * @param b boolean to enable or disable buttons next and previous
      */
     public void setSongsToMPlayer(List<Song> songs, boolean b) {
         businessLogicMPlayer.setSongs(songs);
@@ -56,8 +58,8 @@ public class PlayMusicController implements ActionListener {
     }
 
     /**
-     * Play song
-     * @param songName
+     * Play song from mplayer
+     * @param songName song name to be played
      */
     public void playSong(String songName) {
         businessLogicMPlayer.selectSong(songName);

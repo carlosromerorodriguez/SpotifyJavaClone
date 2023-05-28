@@ -8,9 +8,17 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.File;
-
+/**
+ * Add music view
+ */
 public class AddMusicView extends JFrame {
+    /**
+     * Check if the user wants to add a song
+     */
     public static final String ADD_COMMAND = "ADD_COMMAND";
+    /**
+     * Check if the user wants to go back
+     */
     public static final String BACK_FROM_ADD = "BACK_FROM_ADD";
     private final JTextField jTFSongTitleText;
     private final JTextField jTFSongGenreText;

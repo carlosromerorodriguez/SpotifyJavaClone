@@ -6,7 +6,9 @@ import presentation.view.*;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+/**
+ * Playlist songs controller class
+ */
 public class PlaylistSongsController implements PlaylistSongsViewListener {
     private final PlaylistSongsView playlistSongsView;
     private final BusinessLogicPlayList businessLogicPlayList;

@@ -5,7 +5,9 @@ import presentation.view.ViewsController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * Main menu controller class
+ */
 public class MainMenuController implements ActionListener {
     private final ViewsController viewsController;
     private final ListMusicController listMusicController;
@@ -26,6 +28,10 @@ public class MainMenuController implements ActionListener {
         this.playlistController = playlistController;
     }
 
+    /**
+     * Action performed
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(MainMenuView.PLAY_MUSIC)) {

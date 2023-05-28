@@ -7,7 +7,9 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
-
+/**
+ * Add playlist view
+ */
 public class AddPlaylistView {
     public static final String ADD_PLAYLIST_COMMAND = "ADD_PLAYLIST_COMMAND";
     public static final String BACK_FROM_ADD_PLAYLIST = "BACK_FROM_ADD_PLAYLIST";

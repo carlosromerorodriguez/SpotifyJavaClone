@@ -5,7 +5,9 @@ import presentation.view.ViewsController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * Log out controller class
+ */
 public class LogOutController implements ActionListener {
     private final LogOutView logOutView;
     private final ViewsController viewsController;
@@ -20,6 +22,10 @@ public class LogOutController implements ActionListener {
         this.viewsController = viewsController;
     }
 
+    /**
+     * Action performed
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(logOutView.LOGOUT_COMMAND)) {

@@ -11,7 +11,9 @@ import presentation.view.ViewsController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
+/**
+ * Sign in controller class
+ */
 public class SignInController implements ActionListener {
     private final BusinessLogicUser businessLogicUser;
 

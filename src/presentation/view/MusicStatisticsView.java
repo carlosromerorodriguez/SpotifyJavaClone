@@ -6,10 +6,11 @@ import presentation.view.Utilities.UIPalette;
 import java.awt.*;
 import java.util.HashMap;
 import javax.swing.*;
-
+/**
+ * Vista de les estadístiques.
+ */
 public class MusicStatisticsView {
     private HashMap<String, Integer> data;
-
     private final JPanel contentPane;
 
     /**

@@ -8,6 +8,9 @@ import presentation.view.ViewsController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Sign up controller class
+ */
 public class SignUpController implements ActionListener {
     private final SignUpView signUpView;
     private final BusinessLogicUser businessLogicUser;

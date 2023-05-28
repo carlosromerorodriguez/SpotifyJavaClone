@@ -7,7 +7,9 @@ import presentation.view.ViewsController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * Delete music controller class
+ */
 public class DeleteMusicController implements ActionListener {
     private final DeleteMusicView deleteMusicView;
     private final ViewsController viewsController;

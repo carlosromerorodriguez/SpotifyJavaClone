@@ -6,7 +6,9 @@ import presentation.view.Utilities.UIPalette;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-
+/**
+ * LogOut view class
+ */
 public class LogOutView {
     /**
      * Content pane of the view (panel).
@@ -64,7 +66,7 @@ public class LogOutView {
 
     /**
      * Sets the action listener for the log-out button.
-     * @param actionListener
+     * @param actionListener Action listener for the log-out button.
      */
     public void setAction(ActionListener actionListener) {
         logOutButton.addActionListener(actionListener);

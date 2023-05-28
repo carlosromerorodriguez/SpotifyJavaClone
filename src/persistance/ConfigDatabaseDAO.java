@@ -12,9 +12,20 @@ import java.nio.file.Paths;
 
 public class ConfigDatabaseDAO implements ConfigDAO {
     private final String path;
+    /**
+     * Constructor
+     * @param path path of the config file
+     */
     public ConfigDatabaseDAO(String path) {
         this.path = path;
     }
+
+    /**
+     * Read the config file
+     * @return DDBBInfo with the info of the config file
+     * @throws IOException if the file is not found
+     * @throws ConfigFileNotFoundException if the file is not found
+     */
     @Override
     public DDBBInfo readConfigJson() throws IOException, ConfigFileNotFoundException {
         if (!new File(path).exists()) { throw new ConfigFileNotFoundException("File not found"); }

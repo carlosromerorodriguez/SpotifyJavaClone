@@ -1,8 +1,5 @@
 package persistance;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import persistance.exceptions.ApiServerException;
 
 import javax.net.ssl.SSLContext;
@@ -27,34 +24,6 @@ import java.security.cert.X509Certificate;
  * key part of ensuring security in the context of Internet communications
  */
 public final class APIAccess {
-
-    /*public static void main(String[] args) {
-        // Obtener la letra de una canción
-        String artist = "ed%20sheeran";
-        String song = "shape%20of%20you";
-        String apiUrl = "https://balandrau.salle.url.edu/dpoo/lyrics/";
-
-
-        try {
-            APIAccess apiAccess = new APIAccess();
-            String url = apiUrl + artist + "/" + song;
-            String jsonResponse = apiAccess.getFromUrl(url);
-
-            // Parse JSON response to get lyrics
-            Gson gson = new Gson();
-            JsonObject jsonObject = gson.fromJson(jsonResponse, JsonObject.class);
-            if (jsonObject.has("lyrics")) {
-                String lyrics = jsonObject.get("lyrics").getAsString();
-                System.out.println("Lyrics:\n" + lyrics);
-            } else if (jsonObject.has("error")) {
-                String error = jsonObject.get("error").getAsString();
-                System.out.println("Error: " + error);
-            }
-        } catch (ApiServerException e) {
-            System.err.println("Error al acceder a la API.");
-        }
-    }*/
-
     private final HttpClient client;
     private final URL url;
 

@@ -2,7 +2,9 @@ package presentation.controller;
 
 import business.BusinessLogicSong;
 import presentation.view.MusicStatisticsView;
-
+/**
+ * Music statistics controller class
+ */
 public class MusicStatisticsController {
     private final MusicStatisticsView musicStatisticsView;
     private final BusinessLogicSong businessLogicSong;
@@ -18,7 +20,7 @@ public class MusicStatisticsController {
     }
 
     /**
-     * Update data
+     * Update data in the view
      */
     public void updateData() {
         musicStatisticsView.setData(businessLogicSong.getStatistics());

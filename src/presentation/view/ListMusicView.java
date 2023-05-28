@@ -12,7 +12,9 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.List;
-
+/**
+ * ListMusicView class
+ */
 public class ListMusicView extends JFrame {
     private final JPanel panelList;
     private final JTable table;

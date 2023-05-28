@@ -4,7 +4,9 @@ import presentation.view.Utilities.UIPalette;
 
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ * Views controller.
+ */
 public class ViewsController {
     private final CardLayout cardLayout;
 

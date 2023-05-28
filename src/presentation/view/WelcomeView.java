@@ -8,13 +8,18 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+/**
+ * Clase que representa la vista de bienvenida.
+ */
 public class WelcomeView extends JFrame {
-
-
     private final JPanel welcomePanel;
+    /**
+     * Comprueba si el usuario ha pulsado el botón de registro.
+     */
     public static final String REGISTER_VIEW_COMMAND = "REGISTER_VIEW_COMMAND";
-
+    /**
+     * Comprueba si el usuario ha pulsado el botón de inicio de sesión.
+     */
     public static final String SIGNUP_VIEW_COMMAND = "SIGNUP_VIEW_COMMAND";
     /**
      * Button to register a user

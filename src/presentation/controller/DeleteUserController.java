@@ -6,7 +6,9 @@ import presentation.view.ViewsController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * Delete user controller class
+ */
 public class DeleteUserController implements ActionListener {
     private final BusinessLogicUser businessLogicUser;
     private final DeleteUserView deleteUserView;

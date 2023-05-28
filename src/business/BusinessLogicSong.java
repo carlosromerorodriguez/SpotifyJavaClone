@@ -36,12 +36,12 @@ public class BusinessLogicSong {
      * @param author Autor de la canço
      * @param file File de la canço
      * @return True if the song is registered
-     * @throws TitleException
-     * @throws AuthorException
-     * @throws AlbumException
-     * @throws GenreException
-     * @throws UrlException
-     * @throws RepeatedSongNameException
+     * @throws TitleException Title exception if the title is empty or blank
+     * @throws AuthorException Author exception if the author is empty or blank
+     * @throws AlbumException Album exception if the album is empty or blank
+     * @throws GenreException Genre exception if the genre is empty or blank
+     * @throws UrlException Url exception if the url is empty or blank
+     * @throws RepeatedSongNameException Repeated song name exception if the song name is repeated
      */
     public boolean registerSong(String title, String genre, String album, String author, File file) throws TitleException, AuthorException, AlbumException, GenreException, UrlException, RepeatedSongNameException {
         if (title.isEmpty() || title.isBlank()) { throw new TitleException(); }
@@ -59,9 +59,9 @@ public class BusinessLogicSong {
 
     /**
      * Delete song
-     * @param title Titol de la canço
+     * @param title Song title to delete
      * @return True if the song is deleted
-     * @throws TitleException
+     * @throws TitleException Title exception if the title is empty or blank
      */
     public boolean deleteSong(String title) throws TitleException {
         if (title.isEmpty() || title.isBlank()) { throw new TitleException();}

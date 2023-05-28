@@ -5,7 +5,9 @@ import presentation.view.Utilities.UIPalette;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
-
+/**
+ * Custom scroll bar UI
+ */
 public class CustomScrollBarUI extends BasicScrollBarUI {
 
     @Override

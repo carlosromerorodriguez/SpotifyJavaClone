@@ -9,7 +9,9 @@ import presentation.view.ViewsController;
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
+/**
+ * List music controller class
+ */
 public class ListMusicController implements MouseListener, ListMusicViewListener {
     private final ViewsController viewsController;
     private final ShowMusicInfoView showMusicInfoView;

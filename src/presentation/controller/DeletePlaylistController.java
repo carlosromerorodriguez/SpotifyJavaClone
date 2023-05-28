@@ -6,7 +6,9 @@ import presentation.view.ViewsController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * Delete playlist controller class
+ */
 public class DeletePlaylistController implements ActionListener {
     private final BusinessLogicPlayList businessLogicPlaylist;
     private final ViewsController viewsController;

@@ -21,8 +21,8 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
         String query = "INSERT INTO playlist (nom, creador) VALUES (?, ?)";
         try {
             PreparedStatement statement = ddbbAccess.getConnection().prepareStatement(query);
-            statement.setString(1, playlist.getName());
-            statement.setString(2, playlist.getOwner());
+            statement.setString(1, playlist.name());
+            statement.setString(2, playlist.owner());
             statement.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Error al crear la playlist: " + e.getMessage());
@@ -34,8 +34,8 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
         String query = "SELECT * FROM playlist WHERE nom = ? AND creador = ?";
         try {
             PreparedStatement statement = ddbbAccess.getConnection().prepareStatement(query);
-            statement.setString(1, playlist.getName());
-            statement.setString(2, playlist.getOwner());
+            statement.setString(1, playlist.name());
+            statement.setString(2, playlist.owner());
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 throw new TitleException();
@@ -124,7 +124,7 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
      * Añade una canción a una playlist
      * @param playlistName Nombre de la playlist
      * @param song Canción a añadir a la playlist
-     * @throws DuplicateKeyException
+     * @throws DuplicateKeyException Si la canción ya está en la playlist lanza una excepción
      */
     public void addSongToPlaylist(String playlistName, Song song) throws DuplicateKeyException {
         String query = "INSERT INTO playlist_cancion (playlist, cancion) VALUES ((SELECT id FROM playlist WHERE nom = ? LIMIT 1), (SELECT id FROM cancion WHERE nom = ? LIMIT 1))";
@@ -146,7 +146,7 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
      * Comprueba si la playlist es del mismo usuario
      * @param playlistName Nombre de la playlist
      * @param userNameFromFile Nombre del usuario
-     * @return
+     * @return Devuelve true si la playlist es del mismo usuario, false si no lo es
      */
     public boolean isFromSameOwner(String playlistName, String userNameFromFile) {
         String query = "SELECT * FROM playlist WHERE nom = ? AND creador = ?";
@@ -165,7 +165,7 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
     /**
      * Ordena las canciones de una playlist alfabéticamente
      * @param playlistName Nombre de la playlist
-     * @return
+     * @return Devuelve una lista de canciones ordenadas alfabéticamente
      */
     public List<Song> sortSongsAlphabetically(String playlistName) {
         List<Song> songs = new ArrayList<>();
@@ -194,7 +194,7 @@ public class PlaylistDatabaseDAO implements PlaylistDAO {
     /**
      * Ordena las canciones de una playlist por género
      * @param playlistName Nombre de la playlist
-     * @return
+     * @return Devuelve una lista de canciones ordenadas por género
      */
     public List<Song> sortSongsByGenre(String playlistName) {
         List<Song> songs = new ArrayList<>();

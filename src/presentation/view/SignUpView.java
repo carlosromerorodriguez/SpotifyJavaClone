@@ -8,7 +8,9 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
-
+/**
+ * Sign up view class
+ */
 public class SignUpView extends JFrame implements SignUpObserver {
     /**
      * TAG to register a user

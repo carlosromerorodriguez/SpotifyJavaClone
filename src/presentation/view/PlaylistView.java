@@ -9,12 +9,12 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
-
+/**
+ * PlaylistView class
+ */
 public class PlaylistView extends JFrame {
     private ArrayList<Playlist> data;
-
     private final JPanel contentPane;
     private final JTable table;
     private final DefaultTableModel tableModel;
@@ -119,7 +119,7 @@ public class PlaylistView extends JFrame {
         if (row == -1) {
             return null;
         }
-        return (data.get(row).getName());
+        return (data.get(row).name());
     }
 
     /**
@@ -131,7 +131,7 @@ public class PlaylistView extends JFrame {
         tableModel.setRowCount(0);
 
         for (Playlist playlist : data) {
-            Object[] rowData = {title(playlist.getName()), title(playlist.getOwner())};
+            Object[] rowData = {title(playlist.name()), title(playlist.owner())};
             tableModel.addRow(rowData);
         }
     }

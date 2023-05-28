@@ -142,7 +142,7 @@ public class BusinessLogicMPlayer {
 
     /**
      * Devuelve el indice del icono de play/pause
-     * @return
+     * @return indice del icono de play/pause
      */
     public int getPlayIconIndex() {
         return isPaused ? 0 : 1;
@@ -212,7 +212,6 @@ public class BusinessLogicMPlayer {
             while (isRepeatThreadRunning) {
                 checkRepetition();
                 try {
-                    //System.out.println("Time: " + player.getSongTime());
                     Thread.sleep(1000);
                 } catch (InterruptedException ignored) {}
             }
@@ -235,8 +234,8 @@ public class BusinessLogicMPlayer {
     }
 
     /**
-     * Check if is playing
-     * @return true if is playing
+     * Check if it is playing
+     * @return true if it is playing
      */
     public boolean isPlaying() {
         return player != null && !player.isPaused();

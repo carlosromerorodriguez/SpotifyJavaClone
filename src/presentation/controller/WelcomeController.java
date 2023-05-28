@@ -1,12 +1,13 @@
 package presentation.controller;
 
-import business.BusinessLogicUser;
 import presentation.view.ViewsController;
 import presentation.view.WelcomeView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * Welcome controller class
+ */
 public class WelcomeController implements ActionListener {
     private final ViewsController viewsController;
 

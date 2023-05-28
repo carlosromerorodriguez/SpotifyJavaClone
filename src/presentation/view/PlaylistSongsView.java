@@ -12,7 +12,9 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.List;
-
+/**
+ * ListMusicView class
+ */
 public class PlaylistSongsView extends JFrame {
     private final JPanel panelList;
     private final JTable table;
@@ -22,8 +24,8 @@ public class PlaylistSongsView extends JFrame {
     private final JButton optionsButton;
     private PlaylistSongsViewListener listener;
     private String playlistName;
-    private JButton sortAlphaButton;
-    private JButton sortByUserButton;
+    private final JButton sortAlphaButton;
+    private final JButton sortByUserButton;
 
     /**
      * Constructor de la la vista del repertorio de canciones

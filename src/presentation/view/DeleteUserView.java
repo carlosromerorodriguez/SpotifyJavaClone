@@ -6,16 +6,21 @@ import presentation.view.Utilities.UIPalette;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-
+/**
+ * Welcome view
+ */
 public class DeleteUserView {
     private final JPanel panelLogOut;
     private final JTextField userText;
     private final JPasswordField passwordText;
     private final JButton confirmButton;
+    /**
+     * Check if the user wants to delete a user
+     */
     public final String DELETE_COMMAND = "DELETE_COMMAND";
 
     /**
-     * Constructor de la vista de eliminar usuario
+     * Delete user view constructor
      */
     public DeleteUserView() {
         GridBagLayout gridLayout = new GridBagLayout();
@@ -74,14 +79,6 @@ public class DeleteUserView {
         c.gridy = 5;
         c.insets = new Insets(0, 0, 0, 0);
         panelLogOut.add(buttonsPanel,c);
-    }
-
-    /**
-     * Devuelve el string del usuario
-     * @return String del usuario
-     */
-    public String getUserText() {
-        return userText.getText();
     }
 
     /**

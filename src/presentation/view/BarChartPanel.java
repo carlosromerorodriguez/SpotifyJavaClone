@@ -6,7 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.util.stream.Collectors;
-
+/**
+ * Bar chart panel
+ */
 class BarChartPanel extends JPanel {
     /**
      * The data to display in the bar chart.

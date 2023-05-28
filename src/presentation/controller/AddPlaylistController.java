@@ -7,7 +7,9 @@ import presentation.view.ViewsController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * Add playlist controller class
+ */
 public class AddPlaylistController implements ActionListener {
     private final BusinessLogicPlayList businessLogicPlaylist;
     private final ViewsController viewsController;

@@ -7,9 +7,17 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
-
+/**
+ * Add playlist view
+ */
 public class DeletePlaylistView {
+    /**
+     * Check if the user wants to delete a playlist
+     */
     public static final String DELETE_PLAYLIST_COMMAND = "DELETE_PLAYLIST_COMMAND";
+    /**
+     * Check if the user wants to go back
+     */
     public static final String BACK_FROM_DELETE_PLAYLIST = "BACK_FROM_DELETE_PLAYLIST";
 
     private JTextField jTFPlaylistNameText;

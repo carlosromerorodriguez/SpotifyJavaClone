@@ -6,11 +6,18 @@ import presentation.view.Utilities.UIPalette;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-
+/**
+ * Add playlist view
+ */
 public class DeleteSongFromPlaylistView extends JFrame {
+    /**
+     * Check if the user wants to delete a song from a playlist
+     */
     public static final String DELETE_COMMAND = "DELETE_COMMAND";
+    /**
+     * Check if the user wants to go back
+     */
     public static final String BACK_FROM_DELETE = "BACK_FROM_DELETE";
-
     private final JTextField jTFSongTitleText;
     private final JTextField jTFPlaylistNameText;
     private final JPanel panelDeleteSong;

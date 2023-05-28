@@ -3,7 +3,6 @@ package presentation.controller;
 import business.BusinessLogicMusic;
 import business.BusinessLogicPlayList;
 import business.entities.Song;
-import business.exceptions.*;
 import persistance.exceptions.DuplicateKeyException;
 import presentation.view.AddSongToPlaylistView;
 import presentation.view.ViewsController;
@@ -11,7 +10,9 @@ import presentation.view.ViewsController;
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
+/**
+ * Add song to playlist controller class
+ */
 public class AddSongToPlaylistController implements MouseListener {
     private final ViewsController viewsController;
     private final BusinessLogicMusic businessLogicMusic;

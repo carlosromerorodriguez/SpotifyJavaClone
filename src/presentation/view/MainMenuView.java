@@ -4,28 +4,37 @@ import presentation.view.Utilities.Fonts;
 import presentation.view.Utilities.UIPalette;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.RoundRectangle2D;
 
+/**
+ * Main menu view
+ */
 public class MainMenuView extends JFrame {
-
     private final JPanel menuPanel;
     private final JButton bPlayMusic, bPlaylist, bMusicStatistics, bExit;
-
+    /**
+     * Check if the user wants to play music
+     */
     public static final String PLAY_MUSIC = "PLAY_MUSIC";
+    /**
+     * Check if the user wants to see the playlist
+     */
     public static final String PLAYLIST = "PLAYLIST";
+    /**
+     * Check if the user wants to see the music statistics
+     */
     public static final String MUSIC_STATISTICS = "MUSIC_STATISTICS";
+    /**
+     * Check if the user wants to exit
+     */
     public static final String EXIT = "EXIT";
     private JLabel imageLabel;
-    private final JLabel titulo;
 
     /**
-     * Constructora de la clase MainMenuView.
+     * Main menu view constructor
      */
     public MainMenuView() {
 
@@ -40,7 +49,7 @@ public class MainMenuView extends JFrame {
         bPlaylist = createButton("Playlist", "data/img/playlist_negre.png");
         bMusicStatistics = createButton("Music Statistics", "data/img/graph_negre.png");
         bExit = createButton("Exit", "data/img/logout_negre.png");
-        titulo = LTitulo("Spotifai");
+        JLabel titulo = LTitulo("Spotifai");
         addImage();
 
         assignCommands();
@@ -83,7 +92,7 @@ public class MainMenuView extends JFrame {
         textLabel.setFont(font);
         textLabel.setBorder(BorderFactory.createEmptyBorder(0, 40, 0, 0)); // Ajustar los márgenes según sea necesario
 
-        final ImageIcon[] icons = {imageResize(url, 35, 35), imageResize(url.replace("_negre", ""), 35, 35)};
+        final ImageIcon[] icons = {imageResize(url), imageResize(url.replace("_negre", ""))};
         final JLabel imageLabel = new JLabel(icons[0]);
         imageLabel.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 10)); // Ajustar los márgenes según sea necesario
 
@@ -156,10 +165,10 @@ public class MainMenuView extends JFrame {
         return menuPanel;
     }
 
-    private ImageIcon imageResize(String ruta, int width, int height){
+    private ImageIcon imageResize(String ruta){
         ImageIcon imagenIcono = new ImageIcon(ruta);
         Image imagenOriginal = imagenIcono.getImage();
-        Image nuevaImagen = imagenOriginal.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        Image nuevaImagen = imagenOriginal.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
         return new ImageIcon(nuevaImagen);
     }
 

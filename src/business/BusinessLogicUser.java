@@ -24,11 +24,12 @@ public class BusinessLogicUser {
      * @param firstPassword Primera contraseña
      * @param secondPassword Segunda contraseña
      * @return True if the user is registered
-     * @throws EmailException
-     * @throws PasswordException
-     * @throws PasswordMismatchException
-     * @throws UsernameException
-     * @throws UserAlreadyExistsException
+     *
+     * @throws EmailException exception for email
+     * @throws PasswordException exception for password
+     * @throws PasswordMismatchException exception for password mismatch
+     * @throws UsernameException exception for username
+     * @throws UserAlreadyExistsException exception for user already exists
      */
     public boolean registerUser(String email, String username, String firstPassword, String secondPassword) throws EmailException, PasswordException, PasswordMismatchException, UsernameException, UserAlreadyExistsException {
         if (username.isEmpty() || username.isBlank()) { throw new UsernameException(); }
@@ -51,9 +52,9 @@ public class BusinessLogicUser {
      * Login
      * @param email_user User name or email
      * @param password User password
-     * @throws UsernameException
-     * @throws PasswordException
-     * @throws IOException
+     * @throws UsernameException exception for username
+     * @throws PasswordException exception for password
+     * @throws IOException exception for input/output
      */
     public void loginUser(String email_user, String password) throws UsernameException, PasswordException, IOException {
         validateInput(email_user, password);
@@ -63,8 +64,8 @@ public class BusinessLogicUser {
      * Checks the inputs of the user
      * @param email_user User name or email
      * @param password User password
-     * @throws UsernameException
-     * @throws PasswordException
+     * @throws UsernameException exception for username
+     * @throws PasswordException exception for password
      */
     private void validateInput(String email_user, String password) throws UsernameException, PasswordException {
         if (email_user == null || email_user.trim().isEmpty() || !checkUserExists(email_user, password)) {

@@ -11,7 +11,9 @@ import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.MouseListener;
 import java.util.List;
-
+/**
+ * AddSongToPlaylistView class
+ */
 public class AddSongToPlaylistView extends JFrame {
     private final JPanel panelList;
     private final JTable table;

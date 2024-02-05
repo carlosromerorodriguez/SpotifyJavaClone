@@ -1,9 +1,0 @@
-unnamed package
-business
-business.entities
-business.exceptions
-persistance
-persistance.exceptions
-presentation.controller
-presentation.view
-presentation.view.Utilities
